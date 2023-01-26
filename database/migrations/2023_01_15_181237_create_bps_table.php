@@ -50,7 +50,7 @@ return new class extends Migration
             $table->timestamp('tmp_dob')->nullable();
             $table->timestamp('joining_date')->nullable();
             $table->timestamp('resigning_date')->nullable();
-            $table->boolean('status')->default(1);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

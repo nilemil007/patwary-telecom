@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
 use App\Http\Controllers\CompetitionInformationController;
 use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
+use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RolesController;
@@ -78,6 +80,8 @@ Route::middleware(['auth'])->group(function(){
         'rso'               => RsoController::class,
         'competition'       => CompetitionInformationController::class,
         'supervisor'        => SupervisorController::class,
+        'bp'                => BpController::class,
+        'merchadiser'       => MerchandiserController::class,
     ]);
 });
 

@@ -6,44 +6,37 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static create(array $array)
+ * @method static create()
+ * @method static insert(string[] $array)
  */
-class Bp extends Model
+class Merchandiser extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'user_id',
-        'supervisor_id',
-        'stuff_id',
         'pool_number',
         'personal_number',
         'tmp_personal_number',
-        'gender',
-        'blood_group',
-        'tmp_blood_group',
-        'education',
-        'tmp_education',
         'father_name',
         'tmp_father_name',
         'mother_name',
         'tmp_mother_name',
+        'blood_group',
+        'tmp_blood_group',
+        'bank_name',
+        'account_number',
+        'tmp_account_number',
+        'salary',
         'division',
-        'tmp_division',
         'district',
-        'tmp_district',
         'thana',
-        'tmp_thana',
         'address',
         'tmp_address',
         'nid',
         'tmp_nid',
-        'bank_name',
-        'tmp_bank_name',
-        'brunch_name',
-        'tmp_brunch_name',
-        'account_number',
-        'tmp_account_number',
+        'working_area',
+        'documents',
         'dob',
         'tmp_dob',
         'joining_date',

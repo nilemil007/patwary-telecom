@@ -35,6 +35,7 @@ return new class extends Migration
             $table->string('witness_name', 100)->nullable();
             $table->string('witness_designation', 20)->nullable();
             $table->string('image')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

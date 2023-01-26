@@ -52,7 +52,7 @@ return new class extends Migration
             $table->timestamp('tmp_dob')->nullable();
             $table->string('nid')->nullable()->unique();
             $table->string('tmp_nid')->nullable()->unique();
-            $table->boolean('status')->default(1);
+            $table->string('status')->nullable();
             $table->string('remarks')->nullable();
             $table->string('documents')->nullable();
             $table->timestamp('joining_date')->nullable();

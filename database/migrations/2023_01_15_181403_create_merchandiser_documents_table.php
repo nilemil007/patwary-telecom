@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cm_documents', function (Blueprint $table) {
+        Schema::create('merchandiser_documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('cm_id')->constrained()->cascadeOnDelete();
-            $table->string('document');
+            $table->foreignId('merchandiser_id')->constrained()->cascadeOnDelete();
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cm_documents');
+        Schema::dropIfExists('merchandiser_documents');
     }
 };

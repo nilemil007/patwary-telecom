@@ -43,7 +43,7 @@ return new class extends Migration
             $table->string('tmp_trade_license_no')->nullable();
             $table->string('image')->nullable();
             $table->string('remarks')->nullable();
-            $table->integer('status')->default(1);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

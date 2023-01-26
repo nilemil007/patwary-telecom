@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call( SupervisorSeeder::class );
         $this->call( RsoSeeder::class );
         $this->call( BpSeeder::class );
+        $this->call( MerchandiserSeeder::class );
+        $this->call( ManagerSeeder::class );
 
 
         // \App\Models\User::factory(10)->create();
