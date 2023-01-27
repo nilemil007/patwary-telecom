@@ -6,7 +6,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('PT-01.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{ asset('dist/img/logo/patwary-telecom.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
 
@@ -32,7 +32,6 @@
                     </div>
                 </div>
             </div>
-{{--            {{ dd() }}--}}
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                     <span class="avatar avatar-sm" style="background-image: url({{ asset( Auth::user()->image ) }})"></span>
@@ -46,7 +45,9 @@
                     <a href="#" class="dropdown-item">Profile & account</a>
                     <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">Settings</a>
+                    @can('super-admin')
+                        <a href="#" class="dropdown-item">Settings</a>
+                    @endcan
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault(); document.getElementById('logout').submit();"
                        class="dropdown-item">Logout</a>
