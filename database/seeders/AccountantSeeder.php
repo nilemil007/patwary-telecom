@@ -18,8 +18,8 @@ class AccountantSeeder extends Seeder
         // Accountant 01
         $accountant1 = User::create([
             'name' => 'Titu',
-            'username' => 'titu',
-            'email' => 'titu@enstudio.com.bd',
+            'username' => 'titu_account',
+            'email' => 'titu_account@enstudio.com.bd',
             'role' => 'accountant',
             'password' => 12345678,
         ]);
