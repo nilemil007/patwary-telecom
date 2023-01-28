@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('tmp_bank_name')->nullable();
             $table->string('brunch_name')->nullable();
             $table->string('tmp_brunch_name')->nullable();
+            $table->string('salary')->nullable();
             $table->string('account_number', 20)->nullable()->unique();
             $table->string('tmp_account_number', 20)->nullable()->unique();
             $table->timestamp('dob')->nullable();

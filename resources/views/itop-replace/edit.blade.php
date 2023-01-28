@@ -16,14 +16,6 @@
                     </h2>
                 </div>
 
-                @if( $errors->any() )
-                    @foreach($errors->all() as $error)
-                        <ul>
-                            <li>{{ $error }}</li>
-                        </ul>
-                    @endforeach
-                @endif
-
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">

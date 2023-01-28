@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') Itop Replace @endpush
+@push('title') BP @endpush
 
 @section('main-content')
     <div class="container-fluid">
@@ -12,34 +12,23 @@
                         Overview
                     </div>
                     <h2 class="page-title">
-                        Itop Replace
+                        BP
                     </h2>
                 </div>
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
 
-                        <!-- Create new entry [Full Button]-->
-                        @if( \Illuminate\Support\Facades\Auth::user()->role == 'super-admin' && \App\Models\ItopReplace::where('remarks','Unapproved')->count() > 0 )
+                        <!-- [Full Button]-->
+                        @if( \Illuminate\Support\Facades\Auth::user()->role == 'super-admin' && \App\Models\Bp::where('status','Unapproved')->count() > 0 )
                             <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                            Unapproved ({{ \App\Models\ItopReplace::where('remarks','Unapproved')->count() }})
+                            Unapproved ({{ \App\Models\Bp::where('status','Unapproved')->count() }})
                             </button>
-                        @elseif( \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' && \App\Models\ItopReplace::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('remarks','Unapproved')->count() > 0 )
+                        @elseif( \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' && \App\Models\Bp::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('status','Unapproved')->count() > 0 )
                             <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                                Unapproved ({{ \App\Models\ItopReplace::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('remarks','Unapproved')->count() }})
+                                Unapproved ({{ \App\Models\Bp::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('status','Unapproved')->count() }})
                             </button>
                         @endif
-
-                        <!-- Create new entry [Full Button]-->
-                        <a href="{{ route('itop-replace.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                            Create new replace
-                        </a>
-
-                        <!-- Create new entry [Icon Button]-->
-                        <a href="{{ route('itop-replace.create') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -51,33 +40,6 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <form>
-                            <div class="card-header d-flex justify-content-center">
-                                <div class="form-group row me-5">
-                                    <label class="form-label col-5 col-form-label-sm mb-0">Start Date</label>
-                                    <div class="col">
-                                        <input name="start_date"
-                                               value="{{ request()->get('start_date') }}"
-                                               type="date" class="form-control form-control-sm"
-                                               placeholder="Select a date">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row me-2">
-                                    <label class="form-label col-5 col-form-label-sm mb-0">End Date</label>
-                                    <div class="col">
-                                        <input name="end_date"
-                                               value="{{ request()->get('end_date') }}"
-                                               type="date" class="form-control form-control-sm" placeholder="Select a date">
-                                    </div>
-                                </div>
-
-                                <div>
-                                    <button type="submit" class="btn btn-sm btn-outline-primary">Search</button>
-                                </div>
-                            </div>
-                        </form>
-
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
                                 <div class="text-muted">
@@ -121,104 +83,104 @@
                                     </th>
                                     <th class="w-1">No.</th>
                                     <th>Name</th>
-                                    <th>Itop Number</th>
-                                    <th>Reason</th>
-                                    <th>Balance</th>
-                                    <th>Pay Amount</th>
-                                    <th>Status</th>
-                                    <th>Remarks</th>
-                                    <th>Requested</th>
-                                    <th>Payment Date</th>
+                                    <th>Supervisor</th>
+                                    <th>Stuff ID</th>
+                                    <th>personal number</th>
+                                    <th>father/mother name</th>
+                                    <th>education</th>
+                                    <th>division</th>
+                                    <th>district/thana</th>
+                                    <th>address</th>
+                                    <th>nid/dob</th>
+                                    <th>bank/brunch name</th>
+                                    <th>salary/account number</th>
+                                    <th>blood group</th>
+                                    <th>joining/resign date</th>
+                                    <th>status</th>
                                     <th></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse( $replaces as $sl => $replace )
-                                    @canany(['viewAny','view'], $replace)
+                                @forelse( $bps as $sl => $bp )
                                     <tr>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select invoice">
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
+
                                         <td>
-                                            <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2" style="background-image: url({{ $replace->user->image }})"></span>
-                                                <div class="flex-fill">
-                                                    <div class="font-weight-medium">{{ $replace->user->name }}</div>
-                                                    <div class="text-muted">
-                                                        <a href="#" class="text-reset">{{ $replace->user->role }}</a>
+                                            <a href="{{ route('bp.edit', $bp->id) }}"
+                                               class="text-decoration-none">
+                                                <div class="d-flex py-1 align-items-center">
+                                                <span class="avatar me-2"
+                                                      style="background-image: url({{ $bp->user->image }})"></span>
+                                                    <div class="flex-fill">
+                                                        <div class="font-weight-medium text-white">{{ $bp->user->name }}</div>
+                                                        <div class="text-muted">
+                                                            <a href="#" class="text-reset">{{ $bp->pool_number }}</a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </a>
+                                        </td>
+
+                                        <td data-label="Title">
+                                            <div>{{ $bp->supervisor->user->name }}</div>
+                                            <div class="text-muted">{{ $bp->supervisor->pool_number }}</div>
+                                        </td>
+                                        <td>{{ $bp->stuff_id }}</td>
+                                        <td>{{ $bp->personal_number }}</td>
+                                        <td data-label="Title">
+                                            <div>{{ $bp->father_name }}</div>
+                                            <div class="text-muted">{{ $bp->mother_name }}</div>
+                                        </td>
+                                        <td>{{ \Illuminate\Support\Str::upper($bp->education) }}</td>
+                                        <td>{{ $bp->division }}</td>
+                                        <td data-label="Title">
+                                            <div>{{ $bp->district }}</div>
+                                            <div class="text-muted">{{ $bp->thana }}</div>
+                                        </td>
+                                        <td title="{{ $bp->address }}">
+                                            {{ \Illuminate\Support\Str::words($bp->address, 4) }}
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $replace->itop_number }}</div>
-                                            <div class="text-muted">{{ $replace->serial_number }}</div>
+                                            <div>{{ $bp->nid }}</div>
+                                            <div class="text-muted">{{ !empty($bp->dob)?$bp->dob->toFormattedDateString():'' }}</div>
                                         </td>
-                                        <td>{{ $replace->reason }}</td>
-                                        <td>{{ $replace->balance }}</td>
-                                        <td>{{ $replace->pay_amount }}</td>
-                                        <td>
-                                            @switch( $replace->status )
-                                                @case( 'pending' )
-                                                <span class="badge bg-warning-lt me-1"></span> Pending
-                                                @break
-
-                                                @case( 'processing' )
-                                                <span class="badge bg-warning me-1"></span> Processing
-                                                @break
-
-                                                @case( 'complete' )
-                                                <span class="badge bg-blue me-1"></span> Complete
-                                                @break
-
-                                                @case( 'due' )
-                                                <span class="badge bg-danger me-1"></span> Due
-                                                @break
-
-                                                @case( 'paid' )
-                                                <span class="badge bg-success me-1"></span> Paid
-                                                @break
-                                            @endswitch
+                                        <td data-label="Title">
+                                            <div>{{ $bp->bank_name }}</div>
+                                            <div class="text-muted">{{ $bp->brunch_name }}</div>
+                                        </td>
+                                        <td data-label="Title">
+                                            <div>{{ $bp->salary }}</div>
+                                            <div class="text-muted">{{ $bp->account_number }}</div>
+                                        </td>
+                                        <td>{{ $bp->blood_group }}</td>
+                                        <td data-label="Title">
+                                            <div title="Joining Date">
+                                                {{ !empty($bp->joining_date)?$bp->joining_date->toDayDateTimeString():'' }}
+                                            </div>
+                                            <div title="Resign Date" class="text-muted">
+                                                {{ !empty($bp->resigning_date)?$bp->resigning_date->toDayDateTimeString():'' }}
+                                            </div>
                                         </td>
                                         <td>
-                                            @if( $replace->remarks )
-                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' ? 'disabled' : '' }}" data-bs-toggle="modal"
-                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'super-admin') #approve-reject-{{ $replace->id }} @endif">
-                                                    <span class="badge bg-danger me-1"></span> {{ $replace->remarks }}
-                                                </button>
+                                            @if( $bp->status )
+                                                <a href="#" class="btn btn-sm btn-pill">
+                                                    <span class="badge bg-danger me-1"></span> {{ $bp->status }}
+                                                </a>
                                             @endif
                                         </td>
                                         <td>
-                                            <div>{{ $replace->created_at->diffForHumans() }}</div>
-                                            <div class="text-muted">{{ $replace->created_at->toDayDateTimeString() }}</div>
-                                        </td>
-                                        <td>
-                                            <div>{{ isset($replace->payment_at)?$replace->payment_at->diffForHumans():'' }}</div>
-                                            <div class="text-muted">{{ isset($replace->payment_at)?$replace->payment_at->toDayDateTimeString():'' }}</div>
-
-                                        </td>
-                                        <td>
                                             <!-- Edit -->
-                                            <a href="{{ \Illuminate\Support\Facades\Auth::id() == $replace->user_id && $replace->remarks ? '#' : route('itop-replace.edit', $replace->id) }}"
-                                               class="link-primary text-decoration-none {{ \Illuminate\Support\Facades\Auth::id() == $replace->user_id && $replace->remarks ? 'disabled' : route('itop-replace.edit', $replace->id) }}">
+                                            <a href="{{ route('bp.edit', $bp->id) }}"
+                                               class="link-primary text-decoration-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
                                             </a>
-
-                                            <!-- Delete -->
-                                            @can('Replace delete')
-                                                <a href="#" class="link-danger text-decoration-none"
-                                                   data-bs-toggle="modal" data-bs-target="#del-replace-{{ $replace->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                </a>
-                                            @endcan
                                         </td>
-                                        @include('itop-replace.modals.delete')
-                                        @include('itop-replace.modals.approve')
                                     </tr>
-                                    @endcanany
                                 @empty
                                     <tr>
                                         <td>No data found</td>
@@ -229,14 +191,14 @@
                         </div>
 
                         <div class="card-footer d-flex align-items-center">
-                            {{ $replaces->links('vendor.pagination.bootstrap-5') }}
+                            {{ $bps->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
 
                     @can('Replace export')
-                        @if( count($replaces) > 0 )
+                        @if( count($bps) > 0 )
                             <div class="mt-3">
-                                <a class="btn btn-sm btn-success" href="{{ route('itop-replace.export') }}">Export Excel</a>
+                                <a class="btn btn-sm btn-success" href="{{ route('bp.export') }}">Export Excel</a>
                             </div>
                         @endif
                     @endcan

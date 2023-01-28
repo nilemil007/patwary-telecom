@@ -2,25 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class BpController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Application|Factory|View
      */
-    public function index()
+    public function index( Request $request ): Application|Factory|View
     {
-        //
+        return view('bp.index', [
+            'bps' => Bp::latest()->search( $request->search )->paginate(5),
+        ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -30,8 +40,8 @@ class BpController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -41,8 +51,8 @@ class BpController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Bp  $bp
-     * @return \Illuminate\Http\Response
+     * @param Bp $bp
+     * @return Response
      */
     public function show(Bp $bp)
     {
@@ -52,34 +62,45 @@ class BpController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Bp  $bp
-     * @return \Illuminate\Http\Response
+     * @param Bp $bp
+     * @return Application|Factory|View
      */
-    public function edit(Bp $bp)
+    public function edit(Bp $bp): View|Factory|Application
     {
-        //
+        return view('bp.edit', compact('bp'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Bp  $bp
-     * @return \Illuminate\Http\Response
+     * @param BpUpdateRequest $request
+     * @param Bp $bp
+     * @return RedirectResponse
      */
-    public function update(Request $request, Bp $bp)
+    public function update(BpUpdateRequest $request, Bp $bp): RedirectResponse
     {
-        //
+        if ( $bp->update( $request->validated() ) )
+        {
+            return redirect()->route('bp.index')->with('success','BP information updated successfully.');
+        }
+
+        return redirect()->route('bp.index')->with('error','BP information not updated.');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Bp  $bp
-     * @return \Illuminate\Http\Response
+     * @param Bp $bp
+     * @return Response
      */
     public function destroy(Bp $bp)
     {
         //
+    }
+
+    // Additional Method
+    public function export(): BinaryFileResponse
+    {
+//        return Excel::download( new ItopReplaceExport, 'itop-replaces.xlsx' );
     }
 }

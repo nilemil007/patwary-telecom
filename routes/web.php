@@ -58,7 +58,9 @@ Route::middleware(['auth'])->group(function(){
     // Export Retailer Data
     Route::get('/retailer/export', [ RetailerController::class, 'export' ])->name('retailer.export');
     // Export Competition Information Data
-    Route::get('/competition-information/export', [ CompetitionInformationController::class, 'export' ])->name('competition.information.export');
+//    Route::get('/competition-information/export', [ CompetitionInformationController::class, 'export' ])->name('competition.information.export');
+    // Export BP Data
+    Route::get('/bp/export', [ BpController::class, 'export' ])->name('bp.export');
 
     // BTS Delete All
     Route::delete('/delete-all/bts', [ BtsController::class, 'deleteAllBts' ])->name('delete.all.bts');
