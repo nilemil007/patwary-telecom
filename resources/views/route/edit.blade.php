@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Edit Route | {{ config('app.name') }}</title> @endpush
+@push('title') Edit Route @endpush
 
 @section('main-content')
     <div class="container-fluid">

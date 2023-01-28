@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Itop Replace | {{ config('app.name') }}</title> @endpush
+@push('title') Itop Replace @endpush
 
 @section('main-content')
     <div class="container-fluid">

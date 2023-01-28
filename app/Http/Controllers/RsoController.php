@@ -22,7 +22,7 @@ class RsoController extends Controller
     {
         if ( Auth::user()->role == 'super-admin' )
         {
-            $rsos = Rso::with('user')
+            $rsos = Rso::with('user','supervisor')
                 ->search( $request->search )
                 ->latest()
                 ->paginate(5);

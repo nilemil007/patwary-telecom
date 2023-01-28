@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Route List | {{ config('app.name') }}</title> @endpush
+@push('title') Route List @endpush
 
 @section('main-content')
     <div class="container-fluid">

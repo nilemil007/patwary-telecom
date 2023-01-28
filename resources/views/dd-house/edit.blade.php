@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Update House | {{ config('app.name') }}</title> @endpush
+@push('title') Update House @endpush
 
 @section('main-content')
     <div class="container-fluid">

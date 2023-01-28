@@ -105,12 +105,12 @@ class User extends Authenticatable
         return $this->hasMany( ItopReplace::class );
     }
 
-    public function supervisor()
+    public function supervisor(): HasOne
     {
         return $this->hasOne( Supervisor::class );
     }
 
-    public function rso()
+    public function rso(): HasOne
     {
         return $this->hasOne( Rso::class );
     }

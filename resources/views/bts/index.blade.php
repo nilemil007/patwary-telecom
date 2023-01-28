@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>BTS List | {{ config('app.name') }}</title> @endpush
+@push('title') BTS List @endpush
 
 @section('main-content')
     <div class="container-fluid">

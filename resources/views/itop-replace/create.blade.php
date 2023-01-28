@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Create New Replace | {{ config('app.name') }}</title> @endpush
+@push('title') Create New Replace @endpush
 
 @section('main-content')
     <div class="container-fluid">

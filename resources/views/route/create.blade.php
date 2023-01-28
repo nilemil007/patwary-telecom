@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@push('title') <title>Create New Retailer | {{ config('app.name') }}</title> @endpush
+@push('title') Create New Retailer @endpush
 
 @section('main-content')
     <div class="container-fluid">

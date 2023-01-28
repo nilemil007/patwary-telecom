@@ -97,7 +97,7 @@ class Rso extends Model
                     $query->where( 'name', 'like', $term );
                 })
                 ->orWhereHas('supervisor', function ( $query ) use ( $term ){
-                    $query->where( 'name', 'like', $term );
+                    $query->where( 'pool_number', 'like', $term );
             });
         });
     }
