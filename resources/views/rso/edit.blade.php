@@ -63,10 +63,9 @@
                                     </div>
 
                                     <!-- Itop Number -->
-{{--                                    @can('Replace delete')--}}
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="itop_number" id="itop_number" type="text" class="form-control"
+                                            <input name="itop_number" id="itop_number" type="number" class="form-control"
                                                    value="{{ old('itop_number', $rso->itop_number) }}"
                                                    placeholder="Enter Itop Number" aria-label="Itop Number">
                                             <label for="itop_number" class="form-label">Itop Number
@@ -76,12 +75,11 @@
                                             @enderror
                                         </div>
                                     </div>
-{{--                                    @endcan--}}
 
                                     <!-- Pool Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="pool_number" id="pool_number" type="text" class="form-control"
+                                            <input name="pool_number" id="pool_number" type="number" class="form-control"
                                                    value="{{ old('pool_number', $rso->pool_number) }}"
                                                    placeholder="Enter Pool Number" aria-label="Pool Number">
                                             <label for="pool_number" class="form-label">Pool Number
@@ -95,7 +93,8 @@
                                     <!-- Personal Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="personal_number" id="personal_number" type="text" class="form-control"
+                                            <input name="personal_number" id="personal_number"
+                                                   type="number" class="form-control"
                                                    value="{{ old('personal_number', $rso->personal_number) }}"
                                                    placeholder="Enter Personal Number" aria-label="Personal Number">
                                             <label for="personal_number" class="form-label">Personal Number
@@ -241,7 +240,8 @@
                                     <!-- Account Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="account_number" id="account_number" type="text" class="form-control"
+                                            <input name="account_number" id="account_number"
+                                                   type="number" class="form-control"
                                                    value="{{ old('account_number', $rso->account_number) }}"
                                                    placeholder="Enter Account Number" aria-label="Account Number">
                                             <label for="account_number" class="form-label">Account Number
@@ -269,7 +269,8 @@
                                     <!-- Routing Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="routing_number" id="routing_number" type="text" class="form-control"
+                                            <input name="routing_number" id="routing_number"
+                                                   type="number" class="form-control"
                                                    value="{{ old('routing_number', $rso->routing_number) }}"
                                                    placeholder="Enter Routing Number" aria-label="Routing Number">
                                             <label for="routing_number" class="form-label">Routing Number
@@ -297,7 +298,7 @@
                                     <!-- Salary -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="salary" id="salary" type="text" class="form-control"
+                                            <input name="salary" id="salary" type="number" class="form-control"
                                                    value="{{ old('salary', $rso->salary) }}"
                                                    placeholder="Enter Salary" aria-label="Salary">
                                             <label for="salary" class="form-label">Salary
@@ -368,7 +369,7 @@
                                     <!-- NID -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <input name="nid" id="nid" type="text" class="form-control"
+                                            <input name="nid" id="nid" type="number" class="form-control"
                                                    value="{{ old('nid', $rso->nid) }}"
                                                    placeholder="Enter NID" aria-label="NID">
                                             <label for="nid" class="form-label">NID
@@ -409,7 +410,6 @@
                                     </div>
 
                                     <!-- Status -->
-{{--                                    @can('Replace delete')--}}
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <select name="status" class="form-select" id="status">
@@ -422,11 +422,15 @@
                                                 @enderror
                                             </div>
                                         </div>
-{{--                                    @endcan--}}
                                 </div>
 
                                 <div class="form-footer">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-reload" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1.002 7.935 1.007 9.425 4.747"></path><path d="M20 4v5h-5"></path></svg>
+                                        Update
+                                    </button>
+
+                                    <button type="submit" class="btn btn-primary d-none d-md-block">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-reload" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M19.933 13.041a8 8 0 1 1 -9.925 -8.788c3.899 -1.002 7.935 1.007 9.425 4.747"></path><path d="M20 4v5h-5"></path></svg>
                                         Update
                                     </button>

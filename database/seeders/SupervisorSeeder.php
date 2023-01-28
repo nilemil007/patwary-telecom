@@ -29,6 +29,7 @@ class SupervisorSeeder extends Seeder
         Supervisor::create([
             'user_id' => $supervisor1->id,
             'pool_number' => '01923909896',
+            'joining_date' => '2019-09-01',
         ]);
 
         // Supervisor 02
@@ -44,6 +45,7 @@ class SupervisorSeeder extends Seeder
         Supervisor::create([
             'user_id' => $supervisor2->id,
             'pool_number' => '01923909897',
+            'joining_date' => '2021-03-01',
         ]);
 
         // Supervisor 03
@@ -59,6 +61,7 @@ class SupervisorSeeder extends Seeder
         Supervisor::create([
             'user_id' => $supervisor3->id,
             'pool_number' => '01911775550',
+            'joining_date' => '2012-07-01',
         ]);
     }
 }

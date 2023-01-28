@@ -28,9 +28,9 @@ class CreateNewUserController extends Controller
     public function index(Request $request): View|Factory|Application
     {
         return view('create-users.index',[
-            'users' => User::with('ddHouse','rso')
+            'users' => User::with('ddHouse','rso','supervisor','bp','merchandiser')
                 ->search( $request->search )
-                ->latest()
+                ->orderBy('dd_house_id','asc')
                 ->paginate(10),
         ]);
     }

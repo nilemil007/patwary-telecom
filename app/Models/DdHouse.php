@@ -42,4 +42,9 @@ class DdHouse extends Model
     {
         return $this->hasMany( Bts::class );
     }
+
+    public function user(): HasMany
+    {
+        return $this->hasMany( User::class );
+    }
 }

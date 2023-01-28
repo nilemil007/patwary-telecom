@@ -124,18 +124,30 @@
                                     <td>
                                         @switch( $user->role )
                                             @case('rso')
-                                            <div title="RS0 AC Number">{{ $user->rso->itop_number }}</div>
-                                            <div title="RS0 Code" class="text-muted">{{ $user->rso->code }}</div>
+                                                <div title="RS0 AC Number">{{ $user->rso->itop_number }}</div>
+                                                <div title="RS0 Code" class="text-muted">{{ $user->rso->code }}</div>
                                             @break
 
                                             @case('supervisor')
                                             {{ empty($user->supervisor->pool_number)?'Not Assign':$user->supervisor->pool_number }}
                                             @break
+
+                                            @case('bp')
+                                            {{ empty($user->bp->pool_number)?'Not Assign':$user->bp->pool_number }}
+                                            @break
+
+                                            @case('tmo')
+                                            {{ empty($user->merchandiser->pool_number)?'Not Assign':$user->merchandiser->pool_number }}
+                                            @break
+
+                                            @case('cm')
+                                            {{ empty($user->merchandiser->pool_number)?'Not Assign':$user->merchandiser->pool_number }}
+                                            @break
                                         @endswitch
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        {{ $user->ddHouse->name }}
+                                        {{ !empty($user->ddHouse->name)?$user->ddHouse->name:'' }}
                                     </td>
                                     <td>
                                         @if (!empty($user->role))

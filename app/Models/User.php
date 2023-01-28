@@ -78,10 +78,10 @@ class User extends Authenticatable
                 ->orWhereHas('rso', function ($query) use ($term){
                     $query->where('itop_number', 'like', $term)
                         ->where('code', 'like', $term);
+                })
+                ->orWhereHas('supervisor', function ($query) use ($term){
+                    $query->where('pool_number', 'like', $term);
                 });
-//                ->orWhereHas('supervisor', function ($query) use ($term){
-//                    $query->where('pool_number', 'like', $term);
-//                });
         });
     }
 
@@ -113,6 +113,16 @@ class User extends Authenticatable
     public function rso(): HasOne
     {
         return $this->hasOne( Rso::class );
+    }
+
+    public function merchandiser(): HasOne
+    {
+        return $this->hasOne( Merchandiser::class );
+    }
+
+    public function bp(): HasOne
+    {
+        return $this->hasOne( Bp::class );
     }
 
     public function ddHouse(): BelongsTo

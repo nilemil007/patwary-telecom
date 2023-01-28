@@ -37,7 +37,7 @@ class ItopReplaceController extends Controller
             $edate =  $request->input('end_date');
 
             return view('itop-replace.index',[
-                'replaces' => ItopReplace::with('user')
+                'replaces' => ItopReplace::with('user','rso')
                     ->search( $request->search )
                     ->whereBetween('created_at', [$sdate, Carbon::parse($edate)->endOfDay()])
                     ->latest()
