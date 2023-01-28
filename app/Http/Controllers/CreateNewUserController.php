@@ -23,6 +23,7 @@ class CreateNewUserController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Application|Factory|View
      */
     public function index(Request $request): View|Factory|Application
@@ -58,7 +59,7 @@ class CreateNewUserController extends Controller
     {
         ( new UserService() )->store( $request );
 
-        return redirect()->route('create-new-user.index');
+        return redirect()->route('create-new-user.index')->with('success','User created successfully.');
     }
 
     /**
@@ -98,7 +99,7 @@ class CreateNewUserController extends Controller
     {
         ( new UserService() )->update( $request, $id );
 
-        return redirect()->route('create-new-user.index');
+        return redirect()->route('create-new-user.index')->with('success','User updated successfully.');
     }
 
     /**

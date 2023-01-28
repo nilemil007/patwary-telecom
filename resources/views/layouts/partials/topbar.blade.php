@@ -41,9 +41,16 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Set status</a>
-                    <a href="#" class="dropdown-item">Profile & account</a>
-                    <a href="#" class="dropdown-item">Feedback</a>
+{{--                    <a href="#" class="dropdown-item">Set status</a>--}}
+                    @php
+                    $role = \Illuminate\Support\Facades\Auth::user()->role;
+                    $bp = \App\Models\Bp::firstWhere('user_id', \Illuminate\Support\Facades\Auth::id())->id??'';
+                    @endphp
+                    <a href="{{ $role == 'bp' ? route('bp.show', $bp) : '' }}"
+                       class="dropdown-item">
+                        Profile & account
+                    </a>
+{{--                    <a href="#" class="dropdown-item">Feedback</a>--}}
                     <div class="dropdown-divider"></div>
                     @can('super-admin')
                         <a href="#" class="dropdown-item">Settings</a>

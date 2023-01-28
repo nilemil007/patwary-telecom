@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -18,10 +22,14 @@ class BpController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function index( Request $request ): Application|Factory|View
     {
+        $this->authorize('super-admin');
+
         return view('bp.index', [
             'bps' => Bp::latest()->search( $request->search )->paginate(5),
         ]);
@@ -52,11 +60,11 @@ class BpController extends Controller
      * Display the specified resource.
      *
      * @param Bp $bp
-     * @return Response
+     * @return Application|Factory|View
      */
-    public function show(Bp $bp)
+    public function show(Bp $bp): View|Factory|Application
     {
-        //
+        return view('bp.show', compact('bp'));
     }
 
     /**
@@ -85,6 +93,39 @@ class BpController extends Controller
         }
 
         return redirect()->route('bp.index')->with('error','BP information not updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param BpProfileUpdateRequest $request
+     * @param Bp $bp
+     * @return RedirectResponse
+     */
+    public function profileUpdate(BpProfileUpdateRequest $request, Bp $bp): RedirectResponse
+    {
+        $bp = User::findOrFail( $bp->user_id );
+
+        $updateProfile = $request->validated();
+
+        if ( $request->hasFile('image') )
+        {
+            if ( File::exists( public_path($bp->image) ) )
+            {
+                File::delete( $bp->image );
+            }
+
+            $imgName = $request->image->hashname();
+            $request->image->storeAs('public/users', $imgName);
+            $updateProfile['image'] = $imgName;
+        }
+
+        if( $bp->update( $updateProfile ) )
+        {
+            return redirect()->back()->with('success','Information updated successfully.');
+        }
+
+        return redirect()->back()->with('error','Information not updated.');
     }
 
     /**

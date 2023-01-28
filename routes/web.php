@@ -67,6 +67,9 @@ Route::middleware(['auth'])->group(function(){
     // Routes Delete All
     Route::delete('/delete-all/routes', [ RouteController::class, 'deleteAllRoutes' ])->name('delete.all.routes');
 
+    // BP Profile Update
+    Route::patch('/bp/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('bp.profile.update');
+
     Route::resources([
         'dd-house'          => DdHouseController::class,
         'create-new-user'   => CreateNewUserController::class,
