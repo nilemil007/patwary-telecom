@@ -7,6 +7,7 @@ use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
 use App\Models\User;
+use App\Rules\CheckExistingPassword;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -14,7 +15,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -91,8 +94,6 @@ class BpController extends Controller
      */
     public function update(BpUpdateRequest $request, Bp $bp): RedirectResponse
     {
-        dd($request->validated());
-
         if ( $bp->update( $request->validated() ) )
         {
             return redirect()->route('bp.index')->with('success','BP information updated successfully.');
@@ -137,11 +138,50 @@ class BpController extends Controller
     /**
      * Update the specified resource in storage.
      *
+     * @param BpAdditionalUpdateRequest $request
+     * @param Bp $bp
      * @return RedirectResponse
      */
-    public function additionalUpdate( BpAdditionalUpdateRequest $request, Bp $bp)
+    public function additionalUpdate( BpAdditionalUpdateRequest $request, Bp $bp): RedirectResponse
     {
-        dd($bp);
+        $additionalData = $request->validated();
+        dd($additionalData);
+
+        if( $bp->update( $additionalData ) )
+        {
+            return redirect()->back()->with('success','Information updated successfully.');
+        }
+
+        return redirect()->back()->with('error','Information not updated.');
+    }
+
+    public function changePassword(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'current_password' => [
+                'required',
+                'min:8',
+                'max:150',
+                new CheckExistingPassword(Auth::user()),
+            ],
+            'password' => [
+                'required',
+                'min:8',
+                'max:150',
+                'confirmed',
+            ],
+        ]);
+
+        $password = Hash::check($validated['current_password'], Auth::user()->password);
+
+        if( $password )
+        {
+            User::findOrFail( Auth::id() )->update( $validated );
+
+            return redirect()->back()->with('success','Password changed successfully.');
+        }
+
+        return redirect()->back()->with('error','Password not changed.');
     }
 
     /**
