@@ -15,6 +15,7 @@
                         BP
                     </h2>
                 </div>
+
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
@@ -109,21 +110,21 @@
                                                    aria-label="Select invoice">
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
-
                                         <td>
-                                            <a href="{{ route('bp.edit', $bp->id) }}"
-                                               class="text-decoration-none">
-                                                <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2"
-                                                      style="background-image: url({{ $bp->user->image }})"></span>
-                                                    <div class="flex-fill">
-                                                        <div class="font-weight-medium text-white">{{ $bp->user->name }}</div>
-                                                        <div class="text-muted">
-                                                            <a href="#" class="text-reset">{{ $bp->pool_number }}</a>
-                                                        </div>
+                                            <div class="d-flex py-1 align-items-center">
+                                                <a href="{{ route('bp.edit', $bp->id) }}"
+                                                   class="text-decoration-none">
+                                                    <span class="avatar me-2"
+                                                  style="background-image: url({{ $bp->user->image }})">
+                                                    </span>
+                                                </a>
+                                                <div class="flex-fill">
+                                                    <div class="font-weight-medium">{{ $bp->user->name }}</div>
+                                                    <div class="text-muted">
+                                                        <a href="#" class="text-reset">{{ $bp->pool_number }}</a>
                                                     </div>
                                                 </div>
-                                            </a>
+                                            </div>
                                         </td>
 
                                         <td data-label="Title">

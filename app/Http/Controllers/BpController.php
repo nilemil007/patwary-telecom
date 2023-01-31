@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BpAdditionalUpdateRequest;
 use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
@@ -72,9 +73,12 @@ class BpController extends Controller
      *
      * @param Bp $bp
      * @return Application|Factory|View
+     * @throws AuthorizationException
      */
     public function edit(Bp $bp): View|Factory|Application
     {
+        $this->authorize('super-admin');
+
         return view('bp.edit', compact('bp'));
     }
 
@@ -87,6 +91,8 @@ class BpController extends Controller
      */
     public function update(BpUpdateRequest $request, Bp $bp): RedirectResponse
     {
+        dd($request->validated());
+
         if ( $bp->update( $request->validated() ) )
         {
             return redirect()->route('bp.index')->with('success','BP information updated successfully.');
@@ -126,6 +132,16 @@ class BpController extends Controller
         }
 
         return redirect()->back()->with('error','Information not updated.');
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @return RedirectResponse
+     */
+    public function additionalUpdate( BpAdditionalUpdateRequest $request, Bp $bp)
+    {
+        dd($bp);
     }
 
     /**

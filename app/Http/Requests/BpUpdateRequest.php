@@ -33,6 +33,7 @@ class BpUpdateRequest extends FormRequest
             ],
             'pool_number' => [
                 'required',
+                'starts_with:19',
                 'min:10',
                 'max:11',
                 'unique:bps,pool_number,'.request()->segment(2),
