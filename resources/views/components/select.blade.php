@@ -1,26 +1,22 @@
 @props([
-'name'=>'name',
 'label',
-'required'=>false,
-'disabled'=>false,
+'error',
 'star'=>'',
 ])
 
 <div class="form-floating mb-3">
 
-    <select {{ $attributes->merge(['class'=>'form-select']) }}
-            name="{{ $name }}"
-            id="{{ $name }}" {{ $required }} {{ $disabled }}>
+    <select {{ $attributes->merge(['class'=>'form-select']) }}>
         <option value="">-- Select {{ $label }} --</option>
         {{ $slot }}
     </select>
 
-    <label for="{{ $name }}">
+    <label>
         {{ $label }}
         <span class="text-danger">{{ $star }}</span>
     </label>
 
-    @error($name)
+    @error( $error ?? '' )
     <small class="text-danger">{{ $message }}</small>
     @enderror
 

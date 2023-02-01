@@ -23,11 +23,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    @if($errors->any())
-                        @foreach($errors->all() as $error)
-                            <p class="text-danger">{{ $error }}</p>
-                        @endforeach
-                    @endif
                     <div class="card">
                         <ul class="nav nav-tabs nav-fill" data-bs-toggle="tabs">
                             <!-- General -->
@@ -64,63 +59,42 @@
 
                                         <!-- Name -->
                                         <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input type="text" class="form-control"
-                                                       value="{{ $bp->user->name }}"
-                                                       placeholder="Name" disabled>
-                                                <label class="form-label">Name</label>
-                                            </div>
+                                            <x-input label="Name" value="{{ $bp->user->name }}" disabled></x-input>
                                         </div>
 
                                         <!-- Username -->
                                         <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input name="username" id="username" type="text" class="form-control"
-                                                       value="{{ old('username', $bp->user->username) }}"
-                                                       placeholder="Username">
-                                                <label for="username" class="form-label">Username
-                                                    @error('username')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
+                                            <x-input name="username"
+                                                     label="Username"
+                                                     error="username"
+                                                     value="{{ old('username', $bp->user->username) }}" placeholder>
+                                            </x-input>
                                         </div>
 
                                         <!-- Email -->
                                         <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input name="email" id="email" type="email" class="form-control"
-                                                       value="{{ old('email', $bp->user->email) }}"
-                                                       placeholder="Email">
-                                                <label for="email" class="form-label">Email
-                                                    @error('email')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
+                                            <x-input name="email" type="email"
+                                                     label="Email"
+                                                     error="email"
+                                                     value="{{ old('email', $bp->user->email) }}" placeholder></x-input>
                                         </div>
 
                                         <!-- Role -->
                                         <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <input id="role" type="text" class="form-control"
-                                                       value="{{ old('role', strtoupper($bp->user->role)) }}"
-                                                       placeholder="Role" disabled>
-                                                <label for="role" class="form-label">Role
-                                                    @error('role')
-                                                    <small class="text-danger">{{ $message }}</small>
-                                                @enderror
-                                            </div>
+                                            <x-input label="Role"
+                                                     value="{{ strtoupper($bp->user->role) }}" disabled></x-input>
                                         </div>
 
                                         <!-- Submit Button -->
                                         @if( !$bp->status )
                                             <div class="form-footer">
-                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                <x-button class="w-100 d-md-none">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
 
-                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                <x-button class="d-none d-md-block">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
                                             </div>
                                         @endif
                                     </form>
@@ -132,17 +106,162 @@
                                         @csrf
                                         @method('PATCH')
 
-                                        <livewire:bp.profile.additional :bp="$bp"/>
+                                        <div class="row">
+                                            <!-- Stuff ID -->
+                                            <div class="col-md-6">
+                                                <x-input name="stuff_id" error="stuff_id"
+                                                         value="{{ old('stuff_id', $bp->stuff_id) }}"
+                                                         label="Stuff ID" star="*" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Pool Number -->
+                                            <div class="col-md-6">
+                                                <x-input name="pool_number"
+                                                         value="{{ old('pool_number', $bp->pool_number) }}"
+                                                         error="pool_number"
+                                                         type="number"
+                                                         label="Pool Number"
+                                                         star="*" placeholder>
+                                                </x-input>
+                                            </div>
+
+                                            <!-- Personal Number -->
+                                            <div class="col-md-6">
+                                                <x-input name="personal_number"
+                                                         value="{{ old('personal_number', $bp->personal_number) }}"
+                                                         error="personal_number"
+                                                         type="number"
+                                                         label="Personal Number"
+                                                         star="*" placeholder>
+                                                </x-input>
+                                            </div>
+
+                                            <!-- Gender -->
+                                            <div class="col-md-6">
+                                                <x-select name="gender" label="Gender" error="gender" placeholder>
+                                                    <option {{ $bp->gender == 'male' ?'selected':'' }} value="male">Male</option>
+                                                    <option {{ $bp->gender == 'female' ?'selected':'' }} value="female">Female</option>
+                                                    <option {{ $bp->gender == 'others' ?'selected':'' }} value="others">Others</option>
+                                                </x-select>
+                                            </div>
+
+                                            <!-- Blood Group -->
+                                            <div class="col-md-6">
+                                                <x-select name="blood_group"
+                                                          error="blood_group"
+                                                          label="Blood Group" placeholder>
+                                                    <option {{ $bp->blood_group == 'a+'?'selected':'' }} value="a+">A+</option>
+                                                    <option {{ $bp->blood_group == 'a-'?'selected':'' }} value="a-">A-</option>
+                                                    <option {{ $bp->blood_group == 'b+'?'selected':'' }} value="b+">B+</option>
+                                                    <option {{ $bp->blood_group == 'b-'?'selected':'' }} value="b-">B-</option>
+                                                    <option {{ $bp->blood_group == 'ab+'?'selected':'' }} value="ab+">AB+</option>
+                                                    <option {{ $bp->blood_group == 'ab-'?'selected':'' }} value="ab-">AB-</option>
+                                                    <option {{ $bp->blood_group == 'o+'?'selected':'' }} value="o+">O+</option>
+                                                    <option {{ $bp->blood_group == 'o-'?'selected':'' }} value="o-">O-</option>
+                                                </x-select>
+                                            </div>
+
+                                            <!-- Education -->
+                                            <div class="col-md-6">
+                                                <x-input name="education" error="education"
+                                                         value="{{ old('education', $bp->education) }}"
+                                                         label="Education" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Father Name -->
+                                            <div class="col-md-6">
+                                                <x-input name="father_name" error="father_name"
+                                                         value="{{ old('father_name', $bp->father_name) }}"
+                                                         label="Father Name" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Mother Name -->
+                                            <div class="col-md-6">
+                                                <x-input name="mother_name" error="mother_name"
+                                                         value="{{ old('mother_name', $bp->mother_name) }}"
+                                                         label="Mother Name" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Division -->
+                                            <div class="col-md-6">
+                                                <x-input name="division" error="division"
+                                                         value="{{ old('division', $bp->division) }}"
+                                                         label="Division" placeholder></x-input>
+                                            </div>
+
+                                            <!-- District -->
+                                            <div class="col-md-6">
+                                                <x-input name="district" error="district"
+                                                         value="{{ old('district', $bp->district) }}"
+                                                         label="District" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Thana -->
+                                            <div class="col-md-6">
+                                                <x-input name="thana" error="thana"
+                                                         value="{{ old('thana', $bp->thana) }}"
+                                                         label="Thana" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Address -->
+                                            <div class="col-md-6">
+                                                <x-input name="address" error="address"
+                                                         value="{{ old('address', $bp->address) }}"
+                                                         label="Address" placeholder></x-input>
+                                            </div>
+
+                                            <!-- NID -->
+                                            <div class="col-md-6">
+                                                <x-input name="nid" error="nid" type="number"
+                                                         value="{{ old('nid', $bp->nid) }}"
+                                                         label="NID" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Bank Name -->
+                                            <div class="col-md-6">
+                                                <x-input name="bank_name" error="bank_name"
+                                                         value="{{ old('bank_name', $bp->bank_name) }}"
+                                                         label="Bank Name" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Brunch Name -->
+                                            <div class="col-md-6">
+                                                <x-input name="brunch_name" error="brunch_name"
+                                                         value="{{ old('brunch_name', $bp->brunch_name) }}"
+                                                         label="Brunch Name" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Account Number -->
+                                            <div class="col-md-6">
+                                                <x-input name="account_number" error="account_number" type="number"
+                                                         value="{{ old('account_number', $bp->account_number) }}"
+                                                         label="Account Number" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Salary -->
+                                            <div class="col-md-6">
+                                                <x-input name="salary" error="salary" type="number"
+                                                         value="{{ old('salary', $bp->salary) }}"
+                                                         label="Salary" placeholder></x-input>
+                                            </div>
+
+                                            <!-- Date Of Birth -->
+                                            <div class="col-md-6">
+                                                <x-input name="dob" error="dob" type="date"
+                                                         value="{{ old('dob', $bp->dob) }}"
+                                                         label="Date Of Birth" placeholder></x-input>
+                                            </div>
+                                        </div>
 
                                         @if( !$bp->status )
                                             <div class="form-footer">
-                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                <x-button class="w-100 d-md-none">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
 
-                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                <x-button class="d-none d-md-block">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
                                             </div>
                                         @endif
                                     </form>
@@ -152,17 +271,40 @@
                                 <div class="tab-pane" id="tabs-activity-16">
                                     <form action="{{ route('bp.change.password') }}" method="POST">
                                         @csrf
-                                        <livewire:bp.change-password/>
+                                        <div class="row">
+                                            <!-- Current Password -->
+                                            <livewire:bp.change-password/>
+
+                                            <!-- New Password -->
+                                            <div class="col-md-6">
+                                                <x-input name="password"
+                                                         label="New Password"
+                                                         type="password"
+                                                         error="password"
+                                                         star="*" placeholder>
+                                                </x-input>
+                                            </div>
+
+                                            <!-- Confirm Password -->
+                                            <div class="col-md-6">
+                                                <x-input name="password_confirmation"
+                                                         label="Confirm Password"
+                                                         type="password"
+                                                         error="password_confirmation"
+                                                         star="*" placeholder>
+                                                </x-input>
+                                            </div>
+                                        </div>
 
                                         @if( !$bp->status )
                                             <div class="form-footer">
-                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                <x-button class="w-100 d-md-none">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
 
-                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                <x-button class="d-none d-md-block">
                                                     <x-icon.save/>Save Changes
-                                                </button>
+                                                </x-button>
                                             </div>
                                         @endif
                                     </form>

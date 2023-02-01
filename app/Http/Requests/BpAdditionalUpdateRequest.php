@@ -45,9 +45,10 @@ class BpAdditionalUpdateRequest extends FormRequest
                 'unique:bps,personal_number,'.request()->segment(2),
             ],
             'gender' => [
-                'string'
+                'required',
+                'string',
             ],
-            'blood_group' => [],
+            'blood_group' => ['required'],
             'education' => [
                 'string'
             ],

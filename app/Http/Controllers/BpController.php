@@ -195,4 +195,16 @@ class BpController extends Controller
     {
 //        return Excel::download( new ItopReplaceExport, 'itop-replaces.xlsx' );
     }
+
+    // Verify
+    public function verify(Bp $bp): Factory|View|Application
+    {
+        return view('bp.verify', compact('bp'));
+    }
+
+    // Approve
+    public function approve()
+    {
+
+    }
 }

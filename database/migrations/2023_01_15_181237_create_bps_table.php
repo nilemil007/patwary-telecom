@@ -39,7 +39,7 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->longText('tmp_address')->nullable();
             $table->string('nid')->nullable()->unique();
-            $table->string('tmp_nid')->nullable()->unique();
+            $table->string('tmp_nid')->nullable();
             $table->string('bank_name')->nullable();
             $table->string('tmp_bank_name')->nullable();
             $table->string('brunch_name')->nullable();

@@ -104,7 +104,7 @@
 
                                 <tbody>
                                 @forelse( $bps as $sl => $bp )
-                                    <tr>
+                                    <tr {{ $bp->status ? 'class=bg-warning' : '' }}>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select invoice">
@@ -169,8 +169,8 @@
                                         </td>
                                         <td>
                                             @if( $bp->status )
-                                                <a href="#" class="btn btn-sm btn-pill">
-                                                    <span class="badge bg-danger me-1"></span> {{ $bp->status }}
+                                                <a href="{{ route('bp.verify', $bp->id) }}" class="btn btn-sm btn-pill">
+                                                    <span class="badge bg-danger me-1"></span>Verify
                                                 </a>
                                             @endif
                                         </td>
