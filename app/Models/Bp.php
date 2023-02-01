@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static where(string $string, string $string1)
  * @method static latest()
  * @method static firstWhere(string $string, int|string|null $id)
+ * @method static findOrFail()
  */
 class Bp extends Model
 {

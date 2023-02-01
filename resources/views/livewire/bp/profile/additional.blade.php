@@ -171,13 +171,4 @@
                  wire:model.lazy="joining_date">
         </x-input>
     </div>
-
-    <!-- Date Of Resign -->
-    <div class="col-md-6">
-        <x-input name="resigning_date"
-                 type="date"
-                 label="Date Of Resign"
-                 wire:model.lazy="resigning_date">
-        </x-input>
-    </div>
 </div>

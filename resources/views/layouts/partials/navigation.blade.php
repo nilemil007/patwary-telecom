@@ -265,4 +265,15 @@
             </div>
         </div>
     </div>
+
+    @php
+        $auth = \Illuminate\Support\Facades\Auth::user();
+        $bp = \App\Models\Bp::firstWhere( 'user_id', $auth->id );
+    @endphp
+
+    @if( $auth->role == 'bp' && $bp->status )
+        <div class="bg-warning text-center text-white">
+            <strong>{{ \Illuminate\Support\Str::ucfirst( $bp->status ) . ' request' }}</strong>
+        </div>
+    @endif
 </div>

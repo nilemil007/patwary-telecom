@@ -8,6 +8,7 @@ use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
 use App\Models\User;
 use App\Rules\CheckExistingPassword;
+use App\Services\BpAdditionalInfoService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -144,13 +145,7 @@ class BpController extends Controller
      */
     public function additionalUpdate( BpAdditionalUpdateRequest $request, Bp $bp): RedirectResponse
     {
-        $additionalData = $request->validated();
-        dd($additionalData);
-
-        if( $bp->update( $additionalData ) )
-        {
-            return redirect()->back()->with('success','Information updated successfully.');
-        }
+        (new BpAdditionalInfoService())->update($request, $bp);
 
         return redirect()->back()->with('error','Information not updated.');
     }

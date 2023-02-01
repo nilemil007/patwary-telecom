@@ -1,81 +1,111 @@
 <?php
 namespace App\Services;
 
-use App\Http\Requests\UserRegisterRequest;
-use App\Http\Requests\UserUpdateRequest;
-use App\Models\ItopReplace;
-use App\Models\User;
-use Carbon\Carbon;
+
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Session;
 
-class ItopReplaceService {
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param $request
-     * @return bool
-     */
-    public function store( $request ): bool
-    {
-        $replace = $request->validated();
-
-        if ( Auth::user()->role != 'super-admin' )
-        {
-            unset( $replace['serial_number'] );
-        }
-
-        if ( $request->filled('user_id') )
-        {
-            $replace['user_id'] = $request->input('user_id');
-        }else{
-            $replace['user_id'] = Auth::id();
-        }
-
-        if ( ItopReplace::create( $replace ) )
-        {
-            Session::flash('success', 'New entry created successfully.');
-        }else{
-            Session::flash('error', 'Entry creation failed.');
-        }
-
-        return true;
-    }
-
+class BpAdditionalInfoService {
 
     /**
      * Update the specified resource in storage.
      *
-     * @param $id
-     * @return bool
+     * @param $request
+     * @param $bp
+     * @return RedirectResponse
      */
-    public function update( $request, $itopReplace): bool
+    public function update( $request, $bp): RedirectResponse
     {
-        $update = $request->validated();
+        $additionalData = $request->validated();
 
-        if ( $request->input('status') == "paid" )
+        if ( $bp->personal_number != $request->personal_number )
         {
-            $update['payment_at'] = Carbon::now();
+            unset( $additionalData['personal_number'] );
+            $additionalData['tmp_personal_number'] = $request->personal_number;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->blood_group != $request->blood_group )
+        {
+            unset( $additionalData['blood_group'] );
+            $additionalData['tmp_blood_group'] = $request->blood_group;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->education != $request->education )
+        {
+            unset( $additionalData['education'] );
+            $additionalData['tmp_education'] = $request->education;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->father_name != $request->father_name )
+        {
+            unset( $additionalData['father_name'] );
+            $additionalData['tmp_father_name'] = $request->father_name;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->mother_name != $request->mother_name )
+        {
+            unset( $additionalData['mother_name'] );
+            $additionalData['tmp_mother_name'] = $request->mother_name;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->division != $request->division )
+        {
+            unset( $additionalData['division'] );
+            $additionalData['tmp_division'] = $request->division;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->district != $request->district )
+        {
+            unset( $additionalData['district'] );
+            $additionalData['tmp_district'] = $request->district;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->thana != $request->thana )
+        {
+            unset( $additionalData['thana'] );
+            $additionalData['tmp_thana'] = $request->thana;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->address != $request->address )
+        {
+            unset( $additionalData['address'] );
+            $additionalData['tmp_address'] = $request->address;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->nid != $request->nid )
+        {
+            unset( $additionalData['nid'] );
+            $additionalData['tmp_nid'] = $request->nid;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->bank_name != $request->bank_name )
+        {
+            unset( $additionalData['bank_name'] );
+            $additionalData['tmp_bank_name'] = $request->bank_name;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->brunch_name != $request->brunch_name )
+        {
+            unset( $additionalData['brunch_name'] );
+            $additionalData['tmp_brunch_name'] = $request->brunch_name;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->account_number != $request->account_number )
+        {
+            unset( $additionalData['account_number'] );
+            $additionalData['tmp_account_number'] = $request->account_number;
+            $additionalData['status'] = 'unapproved';
+        }
+        if ( $bp->dob != $request->dob )
+        {
+            unset( $additionalData['dob'] );
+            $additionalData['tmp_dob'] = $request->dob;
+            $additionalData['status'] = 'unapproved';
         }
 
-        if ( $itopReplace->itop_number != $request->itop_number && Auth::user()->role != 'super-admin' )
+        if( $bp->update( $additionalData ) )
         {
-            unset( $update['itop_number'] );
-            $update['tmp_itop_number'] = $request->itop_number;
-            $update['remarks'] = 'Unapproved';
+            return redirect()->back()->with('success','Information updated successfully.');
         }
-
-        if ( $itopReplace->update( $update ) )
-        {
-            Session::flash('success', 'Record updated successfully.');
-        }else{
-            Session::flash('error', 'Record update failed.');
-        }
-
-        return true;
     }
-
 }

@@ -12,7 +12,7 @@
                         Edit/Update
                     </div>
                     <h2 class="page-title">
-                        BP (<em>{{ $bp->user->name }}</em>)
+                        BP (<em>{{ $bp->user->name }}</em>) {!! $bp->status ? '-><span class="text-warning"> Approve Pending</span>':''!!}
                     </h2>
                 </div>
             </div>
@@ -112,15 +112,17 @@
                                         </div>
 
                                         <!-- Submit Button -->
-                                        <div class="col-12">
-                                            <button type="submit" class="btn btn-primary w-100 d-md-none">
-                                                <x-icon.save/>Save Changes
-                                            </button>
+                                        @if( !$bp->status )
+                                            <div class="form-footer">
+                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
 
-                                            <button type="submit" class="btn btn-primary d-none d-md-block">
-                                                <x-icon.save/>Save Changes
-                                            </button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
+                                            </div>
+                                        @endif
                                     </form>
                                 </div>
 
@@ -132,15 +134,17 @@
 
                                         <livewire:bp.profile.additional :bp="$bp"/>
 
-                                        <div class="form-footer">
-                                            <button type="submit" class="btn btn-primary w-100 d-md-none">
-                                                <x-icon.save/>Save Changes
-                                            </button>
+                                        @if( !$bp->status )
+                                            <div class="form-footer">
+                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
 
-                                            <button type="submit" class="btn btn-primary d-none d-md-block">
-                                                <x-icon.save/>Save Changes
-                                            </button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
+                                            </div>
+                                        @endif
                                     </form>
                                 </div>
 
@@ -150,15 +154,17 @@
                                         @csrf
                                         <livewire:bp.change-password/>
 
-                                        <div class="form-footer">
-                                            <button type="submit" class="btn btn-primary w-100 d-md-none">
-                                                <x-icon.key/>Change Password
-                                            </button>
+                                        @if( !$bp->status )
+                                            <div class="form-footer">
+                                                <button type="submit" class="btn btn-primary w-100 d-md-none">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
 
-                                            <button type="submit" class="btn btn-primary d-none d-md-block">
-                                                <x-icon.key/>Change Password
-                                            </button>
-                                        </div>
+                                                <button type="submit" class="btn btn-primary d-none d-md-block">
+                                                    <x-icon.save/>Save Changes
+                                                </button>
+                                            </div>
+                                        @endif
                                     </form>
                                 </div>
                             </div>
