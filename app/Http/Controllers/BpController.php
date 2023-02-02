@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BpAdditionalUpdateRequest;
+use App\Http\Requests\BpApproveRequest;
 use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
 use App\Models\User;
 use App\Rules\CheckExistingPassword;
 use App\Services\BpAdditionalInfoService;
+use App\Services\BpApproveService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -40,26 +42,6 @@ class BpController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -179,16 +161,6 @@ class BpController extends Controller
         return redirect()->back()->with('error','Password not changed.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Bp $bp
-     * @return Response
-     */
-    public function destroy(Bp $bp)
-    {
-        //
-    }
 
     // Additional Method
     public function export(): BinaryFileResponse
@@ -203,8 +175,8 @@ class BpController extends Controller
     }
 
     // Approve
-    public function approve()
+    public function approve(BpApproveRequest $request, Bp $bp)
     {
-
+        ( new BpApproveService() )->approved( $request, $bp );
     }
 }

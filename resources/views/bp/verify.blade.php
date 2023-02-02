@@ -22,12 +22,16 @@
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
+                @if($errors->any())
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                @endif
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
                             <form action="{{ route('bp.approve', $bp->id) }}" method="POST">
                                 @csrf
-                                @method('PATCH')
 
                                 <div class="row">
                                     @if( $bp->tmp_personal_number )
@@ -42,6 +46,7 @@
                                         <!-- Personal Number New -->
                                         <div class="col-md-6">
                                             <x-input name="personal_number"
+                                                     type="number"
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_personal_number }}"
                                                      label="New Personal Number"
@@ -54,18 +59,10 @@
                                     @if( $bp->tmp_blood_group )
                                         <!-- Current Blood Group -->
                                         <div class="col-md-6">
-                                            <x-select name="blood_group"
-                                                      error="blood_group"
-                                                      label="Current Blood Group" placeholder>
-                                                <option {{ $bp->blood_group == 'a+'?'selected':'' }} value="a+">A+</option>
-                                                <option {{ $bp->blood_group == 'a-'?'selected':'' }} value="a-">A-</option>
-                                                <option {{ $bp->blood_group == 'b+'?'selected':'' }} value="b+">B+</option>
-                                                <option {{ $bp->blood_group == 'b-'?'selected':'' }} value="b-">B-</option>
-                                                <option {{ $bp->blood_group == 'ab+'?'selected':'' }} value="ab+">AB+</option>
-                                                <option {{ $bp->blood_group == 'ab-'?'selected':'' }} value="ab-">AB-</option>
-                                                <option {{ $bp->blood_group == 'o+'?'selected':'' }} value="o+">O+</option>
-                                                <option {{ $bp->blood_group == 'o-'?'selected':'' }} value="o-">O-</option>
-                                            </x-select>
+                                            <x-input value="{{ $bp->blood_group }}"
+                                                     label="Current Blood Group"
+                                                     placeholder disabled>
+                                            </x-input>
                                         </div>
 
                                         <!-- New Blood Group -->
@@ -333,11 +330,7 @@
                                     @endif
                                 </div>
 
-                                <div class="form-footer d-flex justify-content-between">
-                                    <x-button class="w-100 d-md-none">
-                                        <x-icon.checks/>Approve
-                                    </x-button>
-
+                                <div class="col-12 d-flex justify-content-between">
                                     <x-button class="d-none d-md-block">
                                         <x-icon.checks/>Approve
                                     </x-button>
@@ -345,6 +338,13 @@
                                     <a href="#" class="btn btn-danger d-none d-md-block">
                                         <x-icon.ban/>Reject
                                     </a>
+                                </div>
+
+                                <div class="col-12 d-md-none">
+                                    <x-button class="w-100 d-md-none mb-3">
+                                        <x-icon.checks/>Approve
+                                    </x-button>
+
                                     <a href="#" class="btn btn-danger w-100 d-md-none">
                                         <x-icon.ban/>Reject
                                     </a>

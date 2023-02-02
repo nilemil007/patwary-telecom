@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('stuff_id', 10)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();
             $table->string('personal_number', 11)->nullable()->unique();
-            $table->string('tmp_personal_number', 11)->nullable()->unique();
+            $table->string('tmp_personal_number', 11)->nullable();
             $table->enum('gender', ['male','female','others'])->nullable();
             $table->enum('blood_group', ['a+','ab+','a-','ab-','b+','b-','o+','o-']);
             $table->string('tmp_blood_group')->nullable();

@@ -72,7 +72,7 @@ Route::middleware(['auth'])->group(function(){
     Route::patch('/bp/{bp}/additional/update', [ BpController::class, 'additionalUpdate' ])->name('bp.additional.update');
     Route::post('/bp/change-password', [ BpController::class, 'changePassword' ])->name('bp.change.password');
     Route::get('/bp/{bp}/verify', [ BpController::class, 'verify' ])->name('bp.verify');
-    Route::post('/bp/approve', [ BpController::class, 'approve' ])->name('bp.approve');
+    Route::post('/bp/{bp}', [ BpController::class, 'approve' ])->name('bp.approve');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,
