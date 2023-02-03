@@ -154,7 +154,7 @@ class ItopReplaceController extends Controller
     }
 
     // Reject Itop Number
-    public function numberReject(Request $request, $id): RedirectResponse
+    public function numberReject($id): RedirectResponse
     {
         $replace = ItopReplace::findOrFail($id)->update([
             'tmp_itop_number' => null,

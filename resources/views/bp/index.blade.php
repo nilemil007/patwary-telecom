@@ -15,23 +15,6 @@
                         BP
                     </h2>
                 </div>
-
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-
-                        <!-- [Full Button]-->
-                        @if( \Illuminate\Support\Facades\Auth::user()->role == 'super-admin' && \App\Models\Bp::where('status','Unapproved')->count() > 0 )
-                            <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                            Unapproved ({{ \App\Models\Bp::where('status','Unapproved')->count() }})
-                            </button>
-                        @elseif( \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' && \App\Models\Bp::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('status','Unapproved')->count() > 0 )
-                            <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                                Unapproved ({{ \App\Models\Bp::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('status','Unapproved')->count() }})
-                            </button>
-                        @endif
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -97,7 +80,7 @@
 
                                 <tbody>
                                 @forelse( $bps as $sl => $bp )
-                                    <tr {{ $bp->status ? 'class=bg-warning' : '' }}>
+                                    <tr {{ $bp->status ? 'class=bg-danger-lt' : '' }}>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select invoice">
@@ -169,10 +152,9 @@
                                         </td>
                                         <td>
                                             <!-- Edit -->
-                                            <a href="{{ route('bp.edit', $bp->id) }}"
-                                               class="link-primary text-decoration-none">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
-                                            </a>
+                                            <x-link href="{{ route('bp.edit', $bp->id) }}" class="link-primary">
+                                                <x-icon.edit/>
+                                            </x-link>
                                         </td>
                                     </tr>
                                 @empty
@@ -196,7 +178,6 @@
                             </div>
                         @endif
                     @endcan
-
                 </div>
             </div>
         </div>

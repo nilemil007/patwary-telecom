@@ -55,9 +55,11 @@
                     @can('super-admin')
                         <a href="#" class="dropdown-item">Settings</a>
                     @endcan
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout').submit();"
-                       class="dropdown-item">Logout</a>
+                    <x-link href="{{ route('logout') }}"
+                            class="dropdown-item"
+                            onclick="event.preventDefault(); document.getElementById('logout').submit();">
+                        {{ __('Logout') }}
+                    </x-link>
                     <form class="d-none" id="logout" method="POST" action="{{ route('logout') }}">
                         @csrf
                     </form>

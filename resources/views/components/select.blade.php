@@ -1,8 +1,4 @@
-@props([
-'label',
-'error',
-'star'=>'',
-])
+@props(['label','error','star'=>'','proposed'=>''])
 
 <div class="form-floating mb-3">
 
@@ -20,4 +16,5 @@
     <small class="text-danger">{{ $message }}</small>
     @enderror
 
+    <small class="text-warning">{{ $proposed }}</small>
 </div>

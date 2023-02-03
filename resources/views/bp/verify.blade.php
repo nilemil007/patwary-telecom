@@ -15,6 +15,21 @@
                         BP Information - {{ $bp->user->name }}
                     </h2>
                 </div>
+
+                <!-- Page title actions -->
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                        <!-- [Full Button]-->
+                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+                            <x-icon.back/>All BP
+                        </x-link>
+
+                        <!-- [Icon Button]-->
+                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon">
+                            <x-icon.back/>
+                        </x-link>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -22,17 +37,11 @@
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
-                @if($errors->any())
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                @endif
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('bp.approve', $bp->id) }}" method="POST">
+                            <form action="{{ route('bp.approve', $bp->id) }}" id="approve" method="POST">
                                 @csrf
-
                                 <div class="row">
                                     @if( $bp->tmp_personal_number )
                                         <!-- Personal Number Current -->
@@ -50,7 +59,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_personal_number }}"
                                                      label="New Personal Number"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -69,8 +78,9 @@
                                         <div class="col-md-6">
                                             <x-input value="{{ $bp->tmp_blood_group }}"
                                                      name="blood_group"
+                                                     class="bg-warning-lt"
                                                      label="New Blood Group"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -91,7 +101,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_education }}"
                                                      label="New Education"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -112,7 +122,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_father_name }}"
                                                      label="New Father Name"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -133,7 +143,7 @@
                                                          class="bg-warning-lt"
                                                          value="{{ $bp->tmp_mother_name }}"
                                                          label="New Mother Name"
-                                                         placeholder>
+                                                         placeholder readonly>
                                                 </x-input>
                                             </div>
                                             <hr>
@@ -154,7 +164,7 @@
                                                          class="bg-warning-lt"
                                                          value="{{ $bp->tmp_division }}"
                                                          label="New Division"
-                                                         placeholder>
+                                                         placeholder readonly>
                                                 </x-input>
                                             </div>
                                             <hr>
@@ -175,7 +185,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_district }}"
                                                      label="New District"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -196,7 +206,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_thana }}"
                                                      label="New Thana"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -217,7 +227,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_address }}"
                                                      label="New Address"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -238,7 +248,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_nid }}"
                                                      label="New NID"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -259,7 +269,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_bank_name }}"
                                                      label="New Bank Name"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -280,7 +290,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_brunch_name }}"
                                                      label="New Brunch Name"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -301,7 +311,7 @@
                                                      class="bg-warning-lt"
                                                      value="{{ $bp->tmp_account_number }}"
                                                      label="New Account Number"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
@@ -310,7 +320,8 @@
                                     @if( $bp->tmp_dob )
                                         <!-- Current Date Of Birth -->
                                         <div class="col-md-6">
-                                            <x-input value="{{ $bp->dob }}"
+                                            <x-input value="{{ $bp->dob->toDateString() }}"
+                                                     type="date"
                                                      label="Current Date Of Birth"
                                                      placeholder disabled>
                                             </x-input>
@@ -323,33 +334,44 @@
                                                      value="{{ $bp->tmp_dob->toDateString() }}"
                                                      label="New Date Of Birth"
                                                      type="date"
-                                                     placeholder>
+                                                     placeholder readonly>
                                             </x-input>
                                         </div>
                                         <hr>
                                     @endif
                                 </div>
-
-                                <div class="col-12 d-flex justify-content-between">
-                                    <x-button class="d-none d-md-block">
-                                        <x-icon.checks/>Approve
-                                    </x-button>
-
-                                    <a href="#" class="btn btn-danger d-none d-md-block">
-                                        <x-icon.ban/>Reject
-                                    </a>
-                                </div>
-
-                                <div class="col-12 d-md-none">
-                                    <x-button class="w-100 d-md-none mb-3">
-                                        <x-icon.checks/>Approve
-                                    </x-button>
-
-                                    <a href="#" class="btn btn-danger w-100 d-md-none">
-                                        <x-icon.ban/>Reject
-                                    </a>
-                                </div>
                             </form>
+
+                            <div class="col-12 d-flex justify-content-between">
+                                <x-button type="button"
+                                          onclick="document.getElementById('approve').submit()"
+                                          class="d-none d-md-block">
+                                    <x-icon.checks/>Approve
+                                </x-button>
+
+                                <form action="{{ route('bp.reject', $bp->id) }}" method="POST">
+                                    @csrf
+                                    <x-button class="btn-danger d-none d-md-block">
+                                        <x-icon.ban/>Reject
+                                    </x-button>
+                                </form>
+                            </div>
+
+                            <div class="col-12 d-md-none">
+                                <x-button type="button"
+                                          onclick="document.getElementById('approve').submit()"
+                                          class="w-100 d-md-none mb-3">
+                                    <x-icon.checks/>Approve
+                                </x-button>
+
+                                <form action="{{ route('bp.reject', $bp->id) }}" method="POST">
+                                    @csrf
+                                    <x-button class="btn-danger w-100 d-md-none">
+                                        <x-icon.ban/>Reject
+                                    </x-button>
+                                </form>
+                            </div>
+
                         </div>
                     </div>
                 </div>

@@ -19,17 +19,15 @@
                 <!-- Page title actions -->
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
-
                         <!-- [Full Button]-->
-                        <a href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            All BP
-                        </a>
+                        <x-link href="{{ route('bp.index') }}" class="btn-primary d-none d-sm-inline-block">
+                            <x-icon.back/>All BP
+                        </x-link>
 
                         <!-- [Icon Button]-->
-                        <a href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
+                        <x-link href="{{ route('bp.index') }}" class="btn-primary d-sm-none btn-icon">
+                            <x-icon.back/>
+                        </x-link>
                     </div>
                 </div>
             </div>

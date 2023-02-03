@@ -1,8 +1,4 @@
-    @props([
-    'label' => 'Label Name',
-    'error',
-    'star'=>'',
-    ])
+@props(['label' => 'Label Name','error','star'=>''])
 
 <div class="form-floating mb-3">
 
@@ -10,11 +6,14 @@
 
     <label class="form-label">
         {{ $label }}
-        <span class="text-danger">{{ $star }}</span>
+        @if( $star )
+            <span class="text-danger">{{ $star }}</span>
+        @endif
     </label>
 
     @error( $error ?? '' )
     <small class="text-danger">{{ $message }}</small>
     @enderror
 
+    {!! $slot !!}
 </div>

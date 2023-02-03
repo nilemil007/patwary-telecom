@@ -14,114 +14,167 @@ class BpApproveService {
      */
     public function approved( $request, $bp): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->only([
+            'personal_number',
+            'tmp_personal_number',
+            'blood_group',
+            'tmp_blood_group',
+            'education',
+            'tmp_education',
+            'father_name',
+            'tmp_father_name',
+            'mother_name',
+            'tmp_mother_name',
+            'division',
+            'tmp_division',
+            'district',
+            'tmp_district',
+            'thana',
+            'tmp_thana',
+            'address',
+            'tmp_address',
+            'nid',
+            'tmp_nid',
+            'bank_name',
+            'tmp_bank_name',
+            'brunch_name',
+            'tmp_brunch_name',
+            'account_number',
+            'tmp_account_number',
+            'dob',
+            'tmp_dob',
+            'status'
+        ]);
 
-        if ( isset( $bp->tmp_personal_number ) )
+        if ( !empty( $bp->tmp_personal_number ) )
         {
             $data['personal_number'] = $bp->tmp_personal_number;
-            $data['tmp_personal_number'] = '';
+            $data['tmp_personal_number'] = null;
+            $data['status'] = null;
         }else{
             unset( $data['personal_number'] );
         }
 
-        if ( isset(  ) )
+        if ( !empty( $bp->tmp_blood_group ) )
         {
-
+            $data['blood_group'] = $bp->tmp_blood_group;
+            $data['tmp_blood_group'] = null;
+            $data['status'] = null;
         }else{
-
+            unset( $data['blood_group'] );
         }
 
-        if ( $bp->tmp_personal_number )
+        if ( !empty( $bp->tmp_education ) )
         {
-            dd('has');
-            unset( $additionalData['personal_number'] );
-            $additionalData['tmp_personal_number'] = $request->personal_number;
-            $additionalData['status'] = 'unapproved';
+            $data['education'] = $bp->tmp_education;
+            $data['tmp_education'] = null;
+            $data['status'] = null;
         }else{
-            dd('not');
-        }
-        if ( $bp->blood_group != $request->blood_group )
-        {
-            unset( $additionalData['blood_group'] );
-            $additionalData['tmp_blood_group'] = $request->blood_group;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->education != $request->education )
-        {
-            unset( $additionalData['education'] );
-            $additionalData['tmp_education'] = $request->education;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->father_name != $request->father_name )
-        {
-            unset( $additionalData['father_name'] );
-            $additionalData['tmp_father_name'] = $request->father_name;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->mother_name != $request->mother_name )
-        {
-            unset( $additionalData['mother_name'] );
-            $additionalData['tmp_mother_name'] = $request->mother_name;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->division != $request->division )
-        {
-            unset( $additionalData['division'] );
-            $additionalData['tmp_division'] = $request->division;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->district != $request->district )
-        {
-            unset( $additionalData['district'] );
-            $additionalData['tmp_district'] = $request->district;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->thana != $request->thana )
-        {
-            unset( $additionalData['thana'] );
-            $additionalData['tmp_thana'] = $request->thana;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->address != $request->address )
-        {
-            unset( $additionalData['address'] );
-            $additionalData['tmp_address'] = $request->address;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->nid != $request->nid )
-        {
-            unset( $additionalData['nid'] );
-            $additionalData['tmp_nid'] = $request->nid;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->bank_name != $request->bank_name )
-        {
-            unset( $additionalData['bank_name'] );
-            $additionalData['tmp_bank_name'] = $request->bank_name;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->brunch_name != $request->brunch_name )
-        {
-            unset( $additionalData['brunch_name'] );
-            $additionalData['tmp_brunch_name'] = $request->brunch_name;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->account_number != $request->account_number )
-        {
-            unset( $additionalData['account_number'] );
-            $additionalData['tmp_account_number'] = $request->account_number;
-            $additionalData['status'] = 'unapproved';
-        }
-        if ( $bp->dob != $request->dob )
-        {
-            unset( $additionalData['dob'] );
-            $additionalData['tmp_dob'] = $request->dob;
-            $additionalData['status'] = 'unapproved';
+            unset( $data['education'] );
         }
 
-        if( $bp->update( $additionalData ) )
+        if ( !empty( $bp->tmp_father_name ) )
         {
-            return redirect()->back()->with('success','Information updated successfully.');
+            $data['father_name'] = $bp->tmp_father_name;
+            $data['tmp_father_name'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['father_name'] );
+        }
+
+        if ( !empty( $bp->tmp_mother_name ) )
+        {
+            $data['mother_name'] = $bp->tmp_mother_name;
+            $data['tmp_mother_name'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['mother_name'] );
+        }
+
+        if ( !empty( $bp->tmp_division ) )
+        {
+            $data['division'] = $bp->tmp_division;
+            $data['tmp_division'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['division'] );
+        }
+
+        if ( !empty( $bp->tmp_district ) )
+        {
+            $data['district'] = $bp->tmp_district;
+            $data['tmp_district'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['district'] );
+        }
+
+        if ( !empty( $bp->tmp_thana ) )
+        {
+            $data['thana'] = $bp->tmp_thana;
+            $data['tmp_thana'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['thana'] );
+        }
+
+        if ( !empty( $bp->tmp_address ) )
+        {
+            $data['address'] = $bp->tmp_address;
+            $data['tmp_address'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['address'] );
+        }
+
+        if ( !empty( $bp->tmp_nid ) )
+        {
+            $data['nid'] = $bp->tmp_nid;
+            $data['tmp_nid'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['nid'] );
+        }
+
+        if ( !empty( $bp->tmp_bank_name ) )
+        {
+            $data['bank_name'] = $bp->tmp_bank_name;
+            $data['tmp_bank_name'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['bank_name'] );
+        }
+
+        if ( !empty( $bp->tmp_brunch_name ) )
+        {
+            $data['brunch_name'] = $bp->tmp_brunch_name;
+            $data['tmp_brunch_name'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['brunch_name'] );
+        }
+
+        if ( !empty( $bp->tmp_account_number ) )
+        {
+            $data['account_number'] = $bp->tmp_account_number;
+            $data['tmp_account_number'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['account_number'] );
+        }
+
+        if ( !empty( $bp->tmp_dob ) )
+        {
+            $data['dob'] = $bp->tmp_dob;
+            $data['tmp_dob'] = null;
+            $data['status'] = null;
+        }else{
+            unset( $data['dob'] );
+        }
+
+        if( $bp->update( $data ) )
+        {
+            return redirect()->route('bp.index')->with('success','Approved successfully.');
         }
     }
 }

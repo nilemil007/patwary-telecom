@@ -28,9 +28,9 @@
                 <form action="{{ route('itop-replace.numberReject', $replace->id) }}" method="POST">
                     @csrf
                     @method('PATCH')
-                    <button type="submit" class="btn me-auto" data-bs-dismiss="modal">
-                        Reject
-                    </button>
+                    <x-button class="me-auto" data-bs-dismiss="modal">
+                        <x-icon.ban/>Reject
+                    </x-button>
                 </form>
 
                 <!-- Accept Number -->

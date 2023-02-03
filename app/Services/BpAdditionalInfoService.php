@@ -96,7 +96,7 @@ class BpAdditionalInfoService {
             $additionalData['tmp_account_number'] = $request->account_number;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $bp->dob != $request->dob )
+        if ( !empty($bp->dob) && $bp->dob->toDateString() != $request->dob )
         {
             unset( $additionalData['dob'] );
             $additionalData['tmp_dob'] = $request->dob;
@@ -105,7 +105,7 @@ class BpAdditionalInfoService {
 
         if( $bp->update( $additionalData ) )
         {
-            return redirect()->back()->with('success','Information updated successfully.');
+            return redirect()->back()->with('success','Update request sent successfully.');
         }
     }
 }

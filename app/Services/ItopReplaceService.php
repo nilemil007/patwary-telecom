@@ -49,7 +49,8 @@ class ItopReplaceService {
     /**
      * Update the specified resource in storage.
      *
-     * @param $id
+     * @param $request
+     * @param $itopReplace
      * @return bool
      */
     public function update( $request, $itopReplace): bool

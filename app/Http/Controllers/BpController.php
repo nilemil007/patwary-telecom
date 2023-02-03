@@ -38,7 +38,7 @@ class BpController extends Controller
         $this->authorize('super-admin');
 
         return view('bp.index', [
-            'bps' => Bp::latest()->search( $request->search )->paginate(5),
+            'bps' => Bp::latest('status')->search( $request->search )->paginate(5),
         ]);
     }
 
@@ -175,8 +175,38 @@ class BpController extends Controller
     }
 
     // Approve
-    public function approve(BpApproveRequest $request, Bp $bp)
+    public function approve(Request $request, Bp $bp): RedirectResponse
     {
         ( new BpApproveService() )->approved( $request, $bp );
+
+        return redirect()->route('bp.index')->with('error','Approved failed!');
+    }
+
+    // Reject
+    public function rejectReq(Bp $bp)
+    {
+        $update = $bp->update([
+            'tmp_personal_number'   => null,
+            'tmp_blood_group'       => null,
+            'tmp_education'         => null,
+            'tmp_father_name'       => null,
+            'tmp_mother_name'       => null,
+            'tmp_division'          => null,
+            'tmp_district'          => null,
+            'tmp_thana'             => null,
+            'tmp_address'           => null,
+            'tmp_nid'               => null,
+            'tmp_bank_name'         => null,
+            'tmp_brunch_name'       => null,
+            'tmp_account_number'    => null,
+            'tmp_dob'               => null,
+            'status'                => null,
+        ]);
+
+        if ( $update )
+        {
+            return redirect()->route('bp.index')->with('success','Request rejected successfully.');
+        }
+        return redirect()->route('bp.index')->with('error','Request not rejected.');
     }
 }
