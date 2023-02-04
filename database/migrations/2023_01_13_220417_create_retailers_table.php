@@ -19,13 +19,14 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('rso_id')->constrained();
             $table->foreignId('bts_id')->nullable()->constrained();
-            $table->foreignId('route_id')->constrained();
+            $table->foreignId('route_id')->nullable()->constrained();
             $table->string('retailer_code')->nullable()->unique();
             $table->string('shop_name')->nullable();
             $table->string('tmp_shop_name')->nullable();
             $table->string('retailer_type')->nullable();
             $table->string('enabled')->nullable();
             $table->string('sim_seller')->nullable();
+            $table->string('tmp_sim_seller')->nullable();
             $table->string('itop_number')->nullable()->unique();
             $table->string('service_point')->nullable();
             $table->string('owner_name')->nullable();
@@ -41,8 +42,6 @@ return new class extends Migration
             $table->string('tmp_nid')->nullable()->unique();
             $table->string('trade_license_no')->nullable();
             $table->string('tmp_trade_license_no')->nullable();
-            $table->string('image')->nullable();
-            $table->string('remarks')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

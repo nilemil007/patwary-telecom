@@ -72,11 +72,13 @@
                                     </a>
 
                                     <!-- Bp -->
-                                    <a class="dropdown-item justify-content-between"
-                                       href="{{ route('bp.index') }}">
+                                    @php
+                                    $bg_warning = \App\Models\Bp::where('status','unapproved')->get()->count() > 0 ? 'bg-danger-lt':'';
+                                    @endphp
+                                    <x-link class="dropdown-item justify-content-between" :unapproved="$bg_warning" href="{{ route('bp.index') }}">
                                         <span>Bp</span>
                                         <span>({{ \App\Models\Bp::all()->count() }})</span>
-                                    </a>
+                                    </x-link>
 
                                     <!-- Retailers -->
                                     <a class="dropdown-item justify-content-between"
@@ -247,9 +249,7 @@
                             </div>
                         </li>
                     @endif
-
                 </ul>
-
 
                 <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
                     <form action="." method="get">

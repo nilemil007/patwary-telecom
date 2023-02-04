@@ -85,10 +85,7 @@
                                         <!-- Username -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <x-input name="username"
-                                                         label="Username"
-                                                         error="username"
-                                                         value="{{ old('username', $bp->user->username) }}" placeholder>
+                                                <x-input name="username" label="Username" error="username" value="{{ old('username', $bp->user->username) }}" placeholder>
                                                 </x-input>
                                             </div>
                                         </div>
@@ -96,18 +93,14 @@
                                         <!-- Email -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <x-input name="email" type="email"
-                                                     label="Email"
-                                                     error="email"
-                                                     value="{{ old('email', $bp->user->email) }}" placeholder></x-input>
+                                                <x-input name="email" type="email" label="Email" error="email" value="{{ old('email', $bp->user->email) }}" placeholder></x-input>
                                             </div>
                                         </div>
 
                                         <!-- Role -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
-                                                <x-input label="Role"
-                                                     value="{{ strtoupper($bp->user->role) }}" disabled></x-input>
+                                                <x-input label="Role" value="{{ strtoupper($bp->user->role) }}" disabled></x-input>
                                             </div>
                                         </div>
 
@@ -136,34 +129,21 @@
                                             <!-- Stuff ID -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="stuff_id" error="stuff_id"
-                                                         value="{{ old('stuff_id', $bp->stuff_id) }}"
-                                                         label="Stuff ID" star="*" placeholder readonly></x-input>
+                                                    <x-input name="stuff_id" error="stuff_id" value="{{ old('stuff_id', $bp->stuff_id) }}" label="Stuff ID" star="*" placeholder readonly></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Pool Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="pool_number"
-                                                         value="{{ old('pool_number', $bp->pool_number) }}"
-                                                         error="pool_number"
-                                                         type="number"
-                                                         label="Pool Number"
-                                                         star="*" placeholder readonly></x-input>
+                                                    <x-input name="pool_number" value="{{ old('pool_number', $bp->pool_number) }}" error="pool_number" type="number" label="Pool Number" star="*" placeholder readonly></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Personal Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="personal_number"
-                                                             value="{{ old('personal_number', $bp->personal_number) }}"
-                                                             class="{{ $p_num_warning }}"
-                                                             error="personal_number"
-                                                             type="number"
-                                                             label="Personal Number"
-                                                             star="*" placeholder>
+                                                    <x-input name="personal_number" value="{{ old('personal_number', $bp->personal_number) }}" class="{{ $p_num_warning }}" error="personal_number" type="number" label="Personal Number" star="*" placeholder>
                                                         @if( $bp->tmp_personal_number )
                                                             <small class="text-warning">{{ $bp->tmp_personal_number }}</small>
                                                         @endif
@@ -185,11 +165,7 @@
                                             <!-- Blood Group -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-select name="blood_group"
-                                                              proposed="{{ !empty($bp->tmp_blood_group)? 'New Value: '.strtoupper($bp->tmp_blood_group):'' }}"
-                                                              class="{{ $blood_group_warning }}"
-                                                              error="blood_group"
-                                                              label="Blood Group" placeholder>
+                                                    <x-select name="blood_group" proposed="{{ !empty($bp->tmp_blood_group)? 'New Value: '.strtoupper($bp->tmp_blood_group):'' }}" class="{{ $blood_group_warning }}" error="blood_group" label="Blood Group" placeholder>
                                                         <option {{ $bp->blood_group == 'a+'?'selected':'' }} value="a+">A+</option>
                                                         <option {{ $bp->blood_group == 'a-'?'selected':'' }} value="a-">A-</option>
                                                         <option {{ $bp->blood_group == 'b+'?'selected':'' }} value="b+">B+</option>
@@ -205,10 +181,7 @@
                                             <!-- Education -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="education" error="education"
-                                                             class="{{ $edu_warning }}"
-                                                             value="{{ old('education', $bp->education) }}"
-                                                             label="Education" placeholder>
+                                                    <x-input name="education" error="education" class="{{ $edu_warning }}" value="{{ old('education', strtoupper($bp->education)) }}" label="Education" placeholder>
                                                         @if( $bp->tmp_education )
                                                             <small class="text-warning">{{ $bp->tmp_education }}</small>
                                                         @endif
@@ -219,10 +192,7 @@
                                             <!-- Father Name -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="father_name" error="father_name"
-                                                             class="{{ $father_name_warning }}"
-                                                             value="{{ old('father_name', $bp->father_name) }}"
-                                                             label="Father Name" placeholder>
+                                                    <x-input name="father_name" error="father_name" class="{{ $father_name_warning }}" value="{{ old('father_name', $bp->father_name) }}" label="Father Name" placeholder>
                                                         @if( $bp->tmp_father_name )
                                                             <small class="text-warning">{{ $bp->tmp_father_name }}</small>
                                                         @endif
@@ -233,10 +203,7 @@
                                             <!-- Mother Name -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="mother_name" error="mother_name"
-                                                             class="{{ $mother_name_warning }}"
-                                                             value="{{ old('mother_name', $bp->mother_name) }}"
-                                                             label="Mother Name" placeholder>
+                                                    <x-input name="mother_name" error="mother_name" class="{{ $mother_name_warning }}" value="{{ old('mother_name', $bp->mother_name) }}" label="Mother Name" placeholder>
                                                         @if( $bp->tmp_mother_name )
                                                             <small class="text-warning">{{ $bp->tmp_mother_name }}</small>
                                                         @endif
@@ -247,10 +214,7 @@
                                             <!-- Division -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="division" error="division"
-                                                             class="{{ $division_warning }}"
-                                                             value="{{ old('division', $bp->division) }}"
-                                                             label="Division" placeholder>
+                                                    <x-input name="division" error="division" class="{{ $division_warning }}" value="{{ old('division', $bp->division) }}" label="Division" placeholder>
                                                         @if( $bp->tmp_division )
                                                             <small class="text-warning">{{ $bp->tmp_division }}</small>
                                                         @endif
@@ -261,10 +225,7 @@
                                             <!-- District -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="district" error="district"
-                                                             class="{{ $district_warning }}"
-                                                             value="{{ old('district', $bp->district) }}"
-                                                             label="District" placeholder>
+                                                    <x-input name="district" error="district" class="{{ $district_warning }}" value="{{ old('district', $bp->district) }}" label="District" placeholder>
                                                         @if( $bp->tmp_district )
                                                             <small class="text-warning">{{ $bp->tmp_district }}</small>
                                                         @endif
@@ -275,10 +236,7 @@
                                             <!-- Thana -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="thana" error="thana"
-                                                             class="{{ $thana_warning }}"
-                                                             value="{{ old('thana', $bp->thana) }}"
-                                                             label="Thana" placeholder>
+                                                    <x-input name="thana" error="thana" class="{{ $thana_warning }}" value="{{ old('thana', $bp->thana) }}" label="Thana" placeholder>
                                                         @if( $bp->tmp_thana )
                                                             <small class="text-warning">{{ $bp->tmp_thana }}</small>
                                                         @endif
@@ -289,10 +247,7 @@
                                             <!-- Address -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="address" error="address"
-                                                             class="{{ $address_warning }}"
-                                                             value="{{ old('address', $bp->address) }}"
-                                                             label="Address" placeholder>
+                                                    <x-input name="address" error="address" class="{{ $address_warning }}" value="{{ old('address', $bp->address) }}" label="Address" placeholder>
                                                         @if( $bp->tmp_address )
                                                             <small class="text-warning">{{ $bp->tmp_address }}</small>
                                                         @endif
@@ -303,10 +258,7 @@
                                             <!-- NID -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="nid" error="nid" type="number"
-                                                             class="{{ $nid_warning }}"
-                                                             value="{{ old('nid', $bp->nid) }}"
-                                                             label="NID" placeholder>
+                                                    <x-input name="nid" error="nid" type="number" class="{{ $nid_warning }}" value="{{ old('nid', $bp->nid) }}" label="NID" placeholder>
                                                         @if( $bp->tmp_nid )
                                                             <small class="text-warning">{{ $bp->tmp_nid }}</small>
                                                         @endif
@@ -317,10 +269,7 @@
                                             <!-- Bank Name -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="bank_name" error="bank_name"
-                                                             class="{{ $bank_name_warning }}"
-                                                             value="{{ old('bank_name', $bp->bank_name) }}"
-                                                             label="Bank Name" placeholder>
+                                                    <x-input name="bank_name" error="bank_name" class="{{ $bank_name_warning }}" value="{{ old('bank_name', $bp->bank_name) }}" label="Bank Name" placeholder>
                                                         @if( $bp->tmp_bank_name )
                                                             <small class="text-warning">{{ $bp->tmp_bank_name }}</small>
                                                         @endif
@@ -331,10 +280,7 @@
                                             <!-- Brunch Name -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="brunch_name" error="brunch_name"
-                                                             class="{{ $brunch_name_warning }}"
-                                                             value="{{ old('brunch_name', $bp->brunch_name) }}"
-                                                             label="Brunch Name" placeholder>
+                                                    <x-input name="brunch_name" error="brunch_name" class="{{ $brunch_name_warning }}" value="{{ old('brunch_name', $bp->brunch_name) }}" label="Brunch Name" placeholder>
                                                         @if( $bp->tmp_brunch_name )
                                                             <small class="text-warning">{{ $bp->tmp_brunch_name }}</small>
                                                         @endif
@@ -345,10 +291,7 @@
                                             <!-- Account Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="account_number" error="account_number"
-                                                             type="number" class="{{ $account_number_warning }}"
-                                                             value="{{ old('account_number', $bp->account_number) }}"
-                                                             label="Account Number" placeholder>
+                                                    <x-input name="account_number" error="account_number" type="number" class="{{ $account_number_warning }}" value="{{ old('account_number', $bp->account_number) }}" label="Account Number" placeholder>
                                                         @if( $bp->tmp_account_number )
                                                             <small class="text-warning">{{ $bp->tmp_account_number }}</small>
                                                         @endif
@@ -359,19 +302,14 @@
                                             <!-- Salary -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="salary" error="salary" type="number"
-                                                         value="{{ old('salary', $bp->salary) }}"
-                                                         label="Salary" placeholder readonly></x-input>
+                                                    <x-input name="salary" error="salary" type="number" value="{{ old('salary', $bp->salary) }}" label="Salary" placeholder readonly></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Date Of Birth -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="dob" error="dob" type="date"
-                                                             class="{{ $dob_warning }}"
-                                                             value="{{ old('dob', !empty($bp->dob)?$bp->dob->toDateString():'') }}"
-                                                             label="Date Of Birth" placeholder>
+                                                    <x-input name="dob" error="dob" type="date" class="{{ $dob_warning }}" value="{{ old('dob', !empty($bp->dob)?$bp->dob->toDateString():'') }}" label="Date Of Birth" placeholder>
                                                         @if( $bp->tmp_dob )
                                                             <small class="text-warning">New Value: {{ \Carbon\Carbon::parse($bp->tmp_dob)->toFormattedDateString() }}</small>
                                                         @endif
@@ -405,22 +343,14 @@
                                             <!-- New Password -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="password"
-                                                         label="New Password"
-                                                         type="password"
-                                                         error="password"
-                                                         star="*" placeholder></x-input>
+                                                    <x-input name="password" label="New Password" type="password" error="password" star="*" placeholder></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Confirm Password -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="password_confirmation"
-                                                         label="Confirm Password"
-                                                         type="password"
-                                                         error="password_confirmation"
-                                                         star="*" placeholder></x-input>
+                                                    <x-input name="password_confirmation" label="Confirm Password" type="password" error="password_confirmation" star="*" placeholder></x-input>
                                                 </div>
                                             </div>
 

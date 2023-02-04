@@ -183,7 +183,7 @@ class BpController extends Controller
     }
 
     // Reject
-    public function rejectReq(Bp $bp)
+    public function reject(Bp $bp): RedirectResponse
     {
         $update = $bp->update([
             'tmp_personal_number'   => null,

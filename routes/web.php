@@ -73,7 +73,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/bp/change-password', [ BpController::class, 'changePassword' ])->name('bp.change.password');
     Route::get('/bp/{bp}/verify', [ BpController::class, 'verify' ])->name('bp.verify');
     Route::post('/bp/{bp}/approve', [ BpController::class, 'approve' ])->name('bp.approve');
-    Route::post('/bp/{bp}/reject', [ BpController::class, 'rejectReq' ])->name('bp.reject');
+    Route::post('/bp/{bp}/reject', [ BpController::class, 'reject' ])->name('bp.reject');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,
