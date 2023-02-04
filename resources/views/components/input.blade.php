@@ -1,19 +1,16 @@
-@props(['label' => 'Label Name','error','star'=>''])
+@props(['label','error','star'])
 
-<div class="form-floating mb-3">
+<input {{ $attributes->merge(['class'=>'form-control','type' => 'text']) }}>
 
-    <input {{ $attributes->merge(['class'=>'form-control','type' => 'text']) }}>
+<label class="form-label">
+    {{ $label ?? '' }}
+    @if( $star ?? '' )
+        <span class="text-danger">{{ $star }}</span>
+    @endif
+</label>
 
-    <label class="form-label">
-        {{ $label }}
-        @if( $star )
-            <span class="text-danger">{{ $star }}</span>
-        @endif
-    </label>
+@error( $error ?? '' )
+<small class="text-danger">{{ $message }}</small>
+@enderror
 
-    @error( $error ?? '' )
-    <small class="text-danger">{{ $message }}</small>
-    @enderror
-
-    {!! $slot !!}
-</div>
+{!! $slot !!}

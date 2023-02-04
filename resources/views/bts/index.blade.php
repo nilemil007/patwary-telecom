@@ -20,6 +20,11 @@
                     <form action="{{ route('bts.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group">
+{{--                            <x-input name="import_bts" type="file" accept=".xls,.xlsx" required></x-input>--}}
+{{--                            <x-button class="btn-outline-pink" >--}}
+{{--                                <x-icon.file-import/>Import BTS--}}
+{{--                            </x-button>--}}
+
                             <input name="import_bts" type="file"
                                    accept=".xls,.xlsx"
                                    aria-describedby="inputGroupFileAddon04"
@@ -49,15 +54,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                    {{--Message--}}
-                    @if( session()->has('success') )
-                        <p class="alert alert-success">{{ session('success') }}</p>
-                    @elseif( session()->has('error') )
-                        <p class="alert alert-danger">{{ session('error') }}</p>
-                    @endif
-
-
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
