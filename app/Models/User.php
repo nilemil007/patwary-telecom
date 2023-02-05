@@ -21,6 +21,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static find($id)
  * @method static findOrFail($id)
  * @method static where()
+ * @method static firstWhere(string $string, int|string|null $id)
  */
 class User extends Authenticatable
 {
