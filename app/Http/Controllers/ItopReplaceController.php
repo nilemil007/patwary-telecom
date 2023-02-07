@@ -40,7 +40,7 @@ class ItopReplaceController extends Controller
                 'replaces' => ItopReplace::with('user','rso')
                     ->search( $request->search )
                     ->whereBetween('created_at', [$sdate, Carbon::parse($edate)->endOfDay()])
-                    ->latest()
+                    ->latest('remarks')
                     ->paginate(5),
             ]);
         }else{
@@ -48,13 +48,13 @@ class ItopReplaceController extends Controller
             {
                 $replaces = ItopReplace::with('user')
                     ->search( $request->search )
-                    ->latest()
+                    ->latest('remarks')
                     ->paginate(5);
             }else{
                 $replaces = ItopReplace::with('user')
                     ->where('user_id', Auth::id())
                     ->search( $request->search )
-                    ->latest()
+                    ->latest('remarks')
                     ->paginate(5);
             }
 
@@ -85,17 +85,6 @@ class ItopReplaceController extends Controller
         ( new ItopReplaceService() )->store( $request );
 
         return redirect()->route('itop-replace.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param ItopReplace $itopReplace
-     * @return Response
-     */
-    public function show(ItopReplace $itopReplace)
-    {
-        //
     }
 
     /**

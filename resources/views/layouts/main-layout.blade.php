@@ -10,29 +10,33 @@
 <div class="wrapper">
 
     <div class="sticky-top">
-        @include('layouts.partials.topbar')
-        @include('layouts.partials.navigation')
+        <x-topbar></x-topbar>
+        <x-navigation></x-navigation>
     </div>
 
     <div class="page-wrapper">
-        {{ $slot }}
-        @yield('main-content')
+        <div class="container-fluid">
+            <!-- Page title -->
+            <div class="page-header d-print-none">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <!-- Page pre-title -->
+                        <div class="page-pretitle">
+                            {{ $pagePretitle }}
+                        </div>
+                        <h2 class="page-title">
+                            {{ $pageTitle }}
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        @include('layouts.partials.footer')
+        {{ $slot }}
+
+        <x-footer></x-footer>
     </div>
 </div>
-
-<!-- Tabler Core -->
-<script src="{{ asset('dist/js/tabler.min.js') }}"></script>
-<script src="{{ asset('dist/js/demo.min.js') }}"></script>
-
-<!-- Sweetalert -->
-@include('sweetalert::alert')
-
-<!-- Custom Scripts -->
-@stack('js')
-
-<!-- Livewire Scripts -->
-@livewireScripts
+    <x-footer-scripts></x-footer-scripts>
 </body>
 </html>

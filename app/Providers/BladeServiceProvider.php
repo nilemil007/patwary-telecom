@@ -15,7 +15,6 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function register()
     {
-//        Blade::component(MainLayout::class, 'main');
         Blade::components([
             MainLayout::class => 'main',
         ]);
