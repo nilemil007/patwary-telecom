@@ -2,25 +2,26 @@
 
 namespace App\Notifications;
 
+use App\Models\DdHouse;
+use App\Models\ItopReplace;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ItopReplaceUpdateNotification extends Notification
+class UpdateReplaceNumberNotification extends Notification
 {
     use Queueable;
 
-    public $tmpItopNumber;
-
+    private $event;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct( $replace )
+    public function __construct( $event )
     {
-        $this->tmpItopNumber = $replace['tmp_itop_number'];
+        $this->event = $event;
     }
 
     /**
@@ -33,6 +34,7 @@ class ItopReplaceUpdateNotification extends Notification
         return ['database'];
     }
 
+
     /**
      * Get the array representation of the notification.
      *
@@ -41,7 +43,12 @@ class ItopReplaceUpdateNotification extends Notification
     public function toArray(): array
     {
         return [
-            'tmp_itop_number' => $this->tmpItopNumber,
+            'name' => $this->event->currentUser['name'],
+            'image' => $this->event->currentUser['image'],
+            'role' => $this->event->currentUser['role'],
+            'dd_house' => DdHouse::firstWhere('id', $this->event->currentUser['dd_house_id'])->name,
+            'msg' => 'has updated the itop number which he gave for replacement.',
+            'tmp_itop_number' => $this->event->replace['tmp_itop_number'],
         ];
     }
 }

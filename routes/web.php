@@ -33,6 +33,35 @@ Route::middleware(['auth'])->group(function(){
         ]);
     })->name('dashboard');
 
+    //______Notifications________________________________________________//
+    // All Notification
+    Route::get('/all-notifications', function (){
+        return view('all-notifications');
+    })->name('all.notifications');
+
+    // Single Notification
+    Route::get('/single-notification/{id}', function ( $id ){
+        $notify = Auth::user()->notifications->find( $id );
+        $notify->markAsRead();
+        return view('single-notification', compact('notify'));
+    })->name('single.notification');
+
+    // Notification Mark as read
+    Route::get('/mark-as-read/{notification}', function($notification){
+        $notify = Auth::user()->notifications->find($notification);
+        if ( $notify )
+        {
+            $notify->markAsRead();
+        }
+        return redirect()->back();
+    })->name('markAsRead');
+
+    // Notification Mark all as read
+    Route::get('/mark-all-as-read', function (){
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
+    })->name('markAllAsRead');
+
     // Reject Itop Number
     Route::patch('/itop-replace/{reject}/reject', [ ItopReplaceController::class, 'numberReject' ])
         ->name('itop-replace.numberReject');

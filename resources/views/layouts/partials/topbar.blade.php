@@ -1,3 +1,7 @@
+@php
+$logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : '' )));
+@endphp
+
 <header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
 
     <div class="container-fluid">
@@ -6,7 +10,7 @@
         </button>
         <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="{{ route('dashboard') }}">
-                <img src="{{ asset('dist/img/logo/patwary-telecom.png') }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{ $logo }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
 
@@ -21,47 +25,61 @@
             <div class="nav-item dropdown d-md-flex me-3">
                 <a href="#" class="nav-link px-0" data-bs-toggle="dropdown" tabindex="-1" aria-label="Show notifications">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" /><path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
-                    <span class="badge bg-red"></span>
+                    @if( auth()->user()->unreadNotifications()->count() > 0 )
+                        <small class="badge bg-red">
+                            {{ auth()->user()->unreadNotifications()->count() > 9 ? '9+' : auth()->user()->unreadNotifications()->count() }}
+                        </small>
+                    @endif
                 </a>
-                <div class="dropdown-menu dropdown-menu-end dropdown-menu-card">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-auto"><span class="badge bg-red"></span></div>
-                                    <div class="col-auto">
-                                        <a href="#">
-                                            <span class="avatar" style="background-image: url(./static/avatars/000m.jpg)"></span>
-                                        </a>
-                                    </div>
-                                    <div class="col text-truncate">
-                                        <a href="#" class="text-body d-block">Paweł Kuna</a>
-                                        <small class="d-block text-muted text-truncate mt-n1">Change deprecated html tags to text decoration classes (#29604)</small>
-                                    </div>
-                                    <div class="col-auto">
-                                        <a href="#" class="list-group-item-actions">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path></svg>
-                                        </a>
+                <div class="dropdown-menu dropdown-menu-notification p-1">
+                    @forelse(auth()->user()->unreadNotifications->take(5) as $notify)
+                        <x-link href="{{ route('single.notification', $notify->id) }}">
+                            <div class="card mb-1">
+                                <div class="card-body p-2">
+                                    <div class="row align-items-center">
+                                        <div class="col-auto">
+                                            <span class="avatar"
+                                                  style="background-image: url({{ $notify->data['image'] }})">
+                                                <span class="badge bg-red"></span>
+                                            </span>
+                                        </div>
+                                        <div class="col">
+                                            <small>
+                                                <strong>
+                                                    {{ $notify->data['name'] }}
+                                                </strong>
+                                                {{ \Illuminate\Support\Str::words($notify->data['msg'], 7) }}
+                                                <span class="text-muted">{{ $notify->created_at->diffForHumans() }}</span>
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                        </x-link>
+                    @empty
+                        <div class="d-flex align-items-center justify-content-center">
+                            <p class="m-0">No notifications</p>
                         </div>
-                    </div>
+                    @endforelse
+
+                            <x-link href="{{ route('all.notifications') }}" class="d-flex justify-content-center p-2 {{ auth()->user()->unreadNotifications()->count() < 1 ? 'd-none' : '' }}">
+                                See all notifications
+                            </x-link>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                     <span class="avatar avatar-sm" style="background-image: url({{ asset( Auth::user()->image ) }})"></span>
                     <div class="d-none d-xl-block ps-2">
-                        <div>{{ Auth::user()->name }}</div>
-                        <div class="mt-1 small text-muted">{{ Auth::user()->username }}</div>
+                        <div>{{ auth()->user()->name }}</div>
+                        <div class="mt-1 small text-muted">{{ auth()->user()->username }}</div>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 {{--                    <a href="#" class="dropdown-item">Set status</a>--}}
                     @php
-                    $role = \Illuminate\Support\Facades\Auth::user()->role;
-                    $bp = \App\Models\Bp::firstWhere('user_id', \Illuminate\Support\Facades\Auth::id())->id??'';
+                    $role = auth()->user()->role;
+                    $bp = \App\Models\Bp::firstWhere('user_id', auth()->id())->id??'';
                     @endphp
                     <a href="{{ $role == 'bp' ? route('bp.show', $bp) : '' }}"
                        class="dropdown-item">

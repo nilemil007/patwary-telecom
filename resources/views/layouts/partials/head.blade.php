@@ -50,5 +50,9 @@
     input[type="date"]::-webkit-clear-button {
         z-index: 1;
     }
+
+    .dropdown-menu-notification {
+        left: -215px !important;
+    }
 </style>
 @livewireStyles

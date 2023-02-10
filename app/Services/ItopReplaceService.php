@@ -1,6 +1,7 @@
 <?php
 namespace App\Services;
 
+use App\Events\ItopReplaceEvent;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\ItopReplace;
@@ -9,8 +10,8 @@ use App\Notifications\ItopReplaceUpdateNotification;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 
 class ItopReplaceService {
@@ -66,13 +67,11 @@ class ItopReplaceService {
 
         if ( $itopReplace->itop_number != $request->itop_number && Auth::user()->role != 'super-admin' )
         {
-//            $superAdmin = User::firstWhere('role','super-admin');
-            $rso = User::firstWhere('username','faijul');
-
             unset( $update['itop_number'] );
             $update['tmp_itop_number'] = $request->itop_number;
             $update['remarks'] = 'Unapproved';
-            Notification::sendNow($rso, new ItopReplaceUpdateNotification($update));
+
+            Event::dispatch( new ItopReplaceEvent( $update, Auth::user() ) );
         }
 
         if ( $itopReplace->update( $update ) )
@@ -84,5 +83,4 @@ class ItopReplaceService {
 
         return true;
     }
-
 }

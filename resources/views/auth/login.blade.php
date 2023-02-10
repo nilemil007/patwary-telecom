@@ -5,7 +5,7 @@
     <div class="container-tight py-4">
         <div class="text-center mb-4">
             <a href="." class="navbar-brand navbar-brand-autodark">
-                <img src="{{ asset('dist/img/logo/patwary-telecom.png') }}" height="36" alt="">
+                <img src="{{ asset('dist/img/logo/EN.png') }}" height="36" alt="">
             </a>
         </div>
         <form class="card card-md" action="{{ route('login') }}" method="POST" autocomplete="off">

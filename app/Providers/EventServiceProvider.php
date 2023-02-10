@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+//use App\Models\ItopReplace;
+//use App\Observers\ReplaceItopNumber;
+use App\Events\ItopReplaceEvent;
+use App\Listeners\UpdateReplaceNumberListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +22,9 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        ItopReplaceEvent::class => [
+            UpdateReplaceNumberListener::class,
+        ],
     ];
 
     /**
@@ -27,7 +34,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//        ItopReplace::observe( ReplaceItopNumber::class );
     }
 
     /**

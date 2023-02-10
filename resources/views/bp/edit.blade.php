@@ -1,7 +1,7 @@
-@extends('layouts.app')
-@push('title') BP @endpush
+<x-main>
+    <!-- Main Title -->
+    <x-slot:title>BP</x-slot:title>
 
-@section('main-content')
     <div class="container-fluid">
         <!-- Page title -->
         <div class="page-header d-print-none">
@@ -20,13 +20,13 @@
                 <div class="col-auto ms-auto d-print-none">
                     <div class="btn-list">
                         <!-- [Full Button]-->
-                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+                        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-none d-sm-inline-block">
                             <x-icon.back/>All BP
                         </x-link>
 
                         <!-- [Icon Button]-->
-                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <x-icon.back/>
+                        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-sm-none btn-icon" >
+                            <x-icon.back></x-icon.back>
                         </x-link>
                     </div>
                 </div>
@@ -229,4 +229,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

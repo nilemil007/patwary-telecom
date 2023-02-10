@@ -15,22 +15,6 @@
     </div>
 
     <div class="page-wrapper">
-        <div class="container-fluid">
-            <!-- Page title -->
-            <div class="page-header d-print-none">
-                <div class="row align-items-center">
-                    <div class="col">
-                        <!-- Page pre-title -->
-                        <div class="page-pretitle">
-                            {{ $pagePretitle }}
-                        </div>
-                        <h2 class="page-title">
-                            {{ $pageTitle }}
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         {{ $slot }}
 

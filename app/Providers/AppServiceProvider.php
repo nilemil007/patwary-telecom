@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\ItopReplace;
+use App\Observers\ReplaceItopNumber;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
