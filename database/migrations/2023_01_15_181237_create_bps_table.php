@@ -47,6 +47,7 @@ return new class extends Migration
             $table->string('salary')->nullable();
             $table->string('account_number', 20)->nullable()->unique();
             $table->string('tmp_account_number', 20)->nullable()->unique();
+            $table->string('document')->nullable();
             $table->timestamp('dob')->nullable();
             $table->timestamp('tmp_dob')->nullable();
             $table->timestamp('joining_date')->nullable();

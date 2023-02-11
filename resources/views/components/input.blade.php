@@ -1,6 +1,6 @@
-@props(['label','error','star'])
+@props(['label','name','star'])
 
-<input {{ $attributes->merge(['class'=>'form-control','type' => 'text']) }}>
+<input {{ $attributes->merge(['class'=>'form-control','type' => 'text']) }} name="{{ $name ?? '' }}">
 
 <label class="form-label">
     {{ $label ?? '' }}
@@ -9,7 +9,7 @@
     @endif
 </label>
 
-@error( $error ?? '' )
+@error( $name ?? '' )
 <small class="text-danger">{{ $message }}</small>
 @enderror
 

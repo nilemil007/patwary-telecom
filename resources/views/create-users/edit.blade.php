@@ -1,56 +1,30 @@
-@extends('layouts.app')
-@push('title') Update User @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Update
-                    </div>
-                    <h2 class="page-title">
-                        User
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Update User</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Update</x-slot:page-pre-title>
 
-                        <!-- Create new entry [Full Button]-->
-                        <a href="{{ route('create-new-user.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24"
-                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-                            </svg>
-                            All users
-                        </a>
+    <!-- Page Title -->
+    <x-slot:page-title>
+        User (<em>{{ $user->name }}</em>)
+    </x-slot:page-title>
 
-                        <!-- Create new entry [Icon Button]-->
-                        <a href="{{ route('create-new-user.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24"
-                                 height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                 stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <x-link href="{{ route('create-new-user.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+            <x-icon.back/>All users
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <x-link href="{{ route('create-new-user.index') }}" class="btn btn-primary d-sm-none btn-icon" >
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -220,4 +194,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

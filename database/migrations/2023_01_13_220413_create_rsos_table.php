@@ -54,7 +54,7 @@ return new class extends Migration
             $table->string('tmp_nid')->nullable()->unique();
             $table->string('status')->nullable();
             $table->string('remarks')->nullable();
-            $table->string('documents')->nullable();
+            $table->string('document')->nullable();
             $table->timestamp('joining_date')->nullable();
             $table->timestamp('resigning_date')->nullable();
             $table->timestamps();

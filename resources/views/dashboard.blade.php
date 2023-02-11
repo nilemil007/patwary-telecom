@@ -4,7 +4,7 @@
     <x-slot:title>Dashboard</x-slot:title>
 
     <!-- Page Pre Title -->
-    <x-slot:page-pre-title>Overview</x-slot>
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>Dashboard</x-slot:page-title>

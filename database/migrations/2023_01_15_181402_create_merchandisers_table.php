@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('nid')->nullable()->unique();
             $table->string('tmp_nid')->nullable()->unique();
             $table->string('working_area')->nullable();
-            $table->string('documents')->nullable();
+            $table->string('document')->nullable();
             $table->timestamp('dob')->nullable();
             $table->timestamp('tmp_dob')->nullable();
             $table->timestamp('joining_date')->nullable();

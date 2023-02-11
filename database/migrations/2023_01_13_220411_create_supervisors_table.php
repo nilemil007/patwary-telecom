@@ -31,6 +31,7 @@ return new class extends Migration
             $table->bigInteger('nid')->nullable()->unique();
             $table->bigInteger('tmp_nid')->nullable()->unique();
             $table->string('status')->nullable();
+            $table->string('document')->nullable();
             $table->timestamp('dob')->nullable();
             $table->timestamp('tmp_dob')->nullable();
             $table->timestamp('joining_date')->nullable();

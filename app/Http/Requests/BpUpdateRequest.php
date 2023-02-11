@@ -120,6 +120,10 @@ class BpUpdateRequest extends FormRequest
                 'date',
             ],
             'status' => [],
+            'document' => [
+                'nullable',
+                'mimes:pdf'
+            ],
         ];
     }
 }

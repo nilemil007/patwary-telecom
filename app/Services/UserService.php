@@ -15,6 +15,7 @@ use App\Models\Tmo;
 use App\Models\TmoDocument;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
 
@@ -89,6 +90,11 @@ class UserService {
         if ( empty( $request->password ) )
         {
             unset( $updateUser['password'] );
+        }
+
+        if ( empty( $request->dd_house_id ) && Auth::user()->role == 'super-admin' )
+        {
+            unset( $updateUser['dd_house_id'] );
         }
 
         if ( $request->hasFile('image') )

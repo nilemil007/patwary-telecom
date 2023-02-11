@@ -77,7 +77,23 @@ class BpController extends Controller
      */
     public function update(BpUpdateRequest $request, Bp $bp): RedirectResponse
     {
-        if ( $bp->update( $request->validated() ) )
+        $information = $request->validated();
+
+        if ( $request->hasFile('document') )
+        {
+            if ( File::exists( public_path($bp->document) ) )
+            {
+                File::delete( $bp->document );
+            }
+
+            $name = $request->document->hashname();
+            $request->document->storeAs('public/bp/documents',$name);
+            $information['document'] = $name;
+        }else{
+            unset( $information['document'] );
+        }
+
+        if ( $bp->update( $information ) )
         {
             return redirect()->route('bp.index')->with('success','BP information updated successfully.');
         }

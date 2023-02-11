@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -54,8 +55,11 @@ class Bp extends Model
         'tmp_dob',
         'joining_date',
         'resigning_date',
+        'document',
         'status',
     ];
+
+    protected string $path = 'storage/bp/documents/';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -78,6 +82,13 @@ class Bp extends Model
         'joining_date'      => 'datetime',
         'resigning_date'    => 'datetime',
     ];
+
+    protected function document(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($document) => $this->path . $document,
+        );
+    }
 
     // Search
     public function scopeSearch( $query, $term )

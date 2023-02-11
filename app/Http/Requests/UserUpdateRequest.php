@@ -28,7 +28,7 @@ class UserUpdateRequest extends FormRequest
             'name'          => ['required','min:3','max:60'],
             'username'      => ['required','min:3','max:20','unique:users,username,'.request()->segment(2)],
             'email'         => ['required','email','unique:users,email,'.request()->segment(2)],
-            'dd_house_id'   => ['required'],
+            'dd_house_id'   => ['nullable'],
             'role'          => ['required'],
             'password'      => ['nullable','min:8','max:150'],
             'image'         => ['sometimes','image','mimes:jpg,png,jpeg'],
