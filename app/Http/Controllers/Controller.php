@@ -22,6 +22,9 @@ class Controller extends BaseController
             }elseif( Session::has('error') )
             {
                 Alert::error('Error!', Session::get('error'));
+            }elseif ( Session::has('warning') )
+            {
+                Alert::warning('Warning!', Session::get('warning'));
             }
 
             return $next($request);

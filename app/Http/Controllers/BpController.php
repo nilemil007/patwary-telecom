@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BpExport;
 use App\Http\Requests\BpAdditionalUpdateRequest;
 use App\Http\Requests\BpApproveRequest;
 use App\Http\Requests\BpProfileUpdateRequest;
@@ -181,7 +182,7 @@ class BpController extends Controller
     // Additional Method
     public function export(): BinaryFileResponse
     {
-//        return Excel::download( new ItopReplaceExport, 'itop-replaces.xlsx' );
+        return Excel::download( new BpExport(), 'Bp.xlsx' );
     }
 
     // Verify

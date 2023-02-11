@@ -63,6 +63,7 @@
                                     <th>salary/account number</th>
                                     <th>blood group</th>
                                     <th>joining/resign date</th>
+                                    <th>document</th>
                                     <th>status</th>
                                     <th></th>
                                 </tr>
@@ -132,6 +133,13 @@
                                             <div title="Resign Date" class="text-muted">
                                                 {{ !empty($bp->resigning_date)?$bp->resigning_date->toDayDateTimeString():'' }}
                                             </div>
+                                        </td>
+                                        <td>
+                                            @if( $bp->document )
+                                                <x-link href="{{ route('download.bp.document', $bp->id) }}">
+                                                    Download
+                                                </x-link>
+                                            @endif
                                         </td>
                                         <td>
                                             @if( $bp->status )

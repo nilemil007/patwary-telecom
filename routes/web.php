@@ -13,11 +13,15 @@ use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
 use App\Http\Controllers\SupervisorController;
+use App\Models\Bp;
 use App\Models\CompetitionInformation;
 use App\Models\ItopReplace;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -32,6 +36,21 @@ Route::middleware(['auth'])->group(function(){
             'replace' => ItopReplace::all(),
         ]);
     })->name('dashboard');
+
+
+
+
+
+    //______Download________________________________________________//
+    Route::get('/download/bp/{bp}/document', function ($id){
+        $bp = Bp::firstWhere('id', $id);
+        return Response::download(public_path( 'storage/bp/documents/' . $bp->document ), $bp->user->name);
+    })->name('download.bp.document');
+
+
+
+
+
 
     //______Notifications________________________________________________//
     // All Notification
@@ -69,6 +88,7 @@ Route::middleware(['auth'])->group(function(){
     Route::patch('/itop-replace/{accept}/accept', [ ItopReplaceController::class, 'numberAccept' ])
         ->name('itop-replace.numberAccept');
 
+    //______Import________________________________________________//
     // Import Retailers Data
     Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
     // Import BTS Data
@@ -76,6 +96,7 @@ Route::middleware(['auth'])->group(function(){
     // Import Route Data
     Route::post('/route/import', [ RouteController::class, 'import' ])->name('route.import');
 
+    //______Export________________________________________________//
     // Export Itop Replace Data
     Route::get('/itop-replace/export', [ ItopReplaceController::class, 'export' ])->name('itop-replace.export');
     // Export BTS Data
@@ -131,6 +152,6 @@ Route::get('/cleareverything', function () {
 
 })->middleware(['clear.everything']);
 
-require __DIR__.'/auth.php';
-
 Route::fallback( function () { return "<h2>Invalid Request</h2>"; } );
+
+require __DIR__.'/auth.php';

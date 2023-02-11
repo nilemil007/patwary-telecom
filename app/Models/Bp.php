@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static latest()
  * @method static firstWhere(string $string, int|string|null $id)
  * @method static findOrFail()
+ * @method static select(string $string, string $string1, string $string2, string $string3, string $string4, string $string5, string $string6, string $string7, string $string8, string $string9, string $string10, string $string11, string $string12, string $string13, string $string14, string $string15, string $string16, string $string17, string $string18, string $string19, string $string20)
  */
 class Bp extends Model
 {
@@ -20,7 +21,6 @@ class Bp extends Model
 
     protected $fillable = [
         'user_id',
-        'supervisor_id',
         'stuff_id',
         'pool_number',
         'personal_number',
@@ -59,8 +59,6 @@ class Bp extends Model
         'status',
     ];
 
-    protected string $path = 'storage/bp/documents/';
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -70,6 +68,33 @@ class Bp extends Model
         'created_at',
         'updated_at',
     ];
+
+    public static function getAllBp()
+    {
+        return Bp::select(
+            'stuff_id',
+            'user_id',
+            'pool_number',
+            'personal_number',
+            'gender',
+            'blood_group',
+            'education',
+            'father_name',
+            'mother_name',
+            'division',
+            'district',
+            'thana',
+            'address',
+            'nid',
+            'bank_name',
+            'brunch_name',
+            'account_number',
+            'salary',
+            'dob',
+            'joining_date',
+            'resigning_date',
+        )->get()->toArray();
+    }
 
     /**
      * The attributes that should be cast.
@@ -82,13 +107,6 @@ class Bp extends Model
         'joining_date'      => 'datetime',
         'resigning_date'    => 'datetime',
     ];
-
-    protected function document(): Attribute
-    {
-        return Attribute::make(
-            get: fn ($document) => $this->path . $document,
-        );
-    }
 
     // Search
     public function scopeSearch( $query, $term )
