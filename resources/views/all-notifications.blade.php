@@ -4,7 +4,7 @@
     <x-slot:title>All Notifications</x-slot:title>
 
     <!-- Page Pre Title -->
-    <x-slot:page-pretitle>all</x-slot:page-pretitle>
+    <x-slot:page-pre-title>all</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>Notifications</x-slot:page-title>

@@ -62,9 +62,9 @@ $logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : 
                         </div>
                     @endforelse
 
-                            <x-link href="{{ route('all.notifications') }}" class="d-flex justify-content-center p-2 {{ auth()->user()->unreadNotifications()->count() < 1 ? 'd-none' : '' }}">
-                                See all notifications
-                            </x-link>
+                        <x-link href="{{ route('all.notifications') }}" class="d-flex justify-content-center p-2">
+                            See all notifications
+                        </x-link>
                 </div>
             </div>
             <div class="nav-item dropdown">

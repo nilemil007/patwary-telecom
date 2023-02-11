@@ -1,38 +1,30 @@
 <x-main>
+
     <!-- Main Title -->
-    <x-slot:title>BP</x-slot:title>
+    <x-slot:title>BP Edit</x-slot:title>
 
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Edit
-                    </div>
-                    <h2 class="page-title">
-                        Information (<em>{{ $bp->user->name }}</em>)
-                    </h2>
-                </div>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Edit</x-slot>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <!-- [Full Button]-->
-                        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <x-icon.back/>All BP
-                        </x-link>
+    <!-- Page Title -->
+    <x-slot:page-title>
+        Information (<em>{{ $bp->user->name }}</em>)
+    </x-slot:page-title>
 
-                        <!-- [Icon Button]-->
-                        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-sm-none btn-icon" >
-                            <x-icon.back></x-icon.back>
-                        </x-link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+            <x-icon.back/>All BP
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon" >
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">

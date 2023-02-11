@@ -1,23 +1,13 @@
-@extends('layouts.app')
-@push('title') BP @endpush
+<x-main>
+    <!-- Main Title -->
+    <x-slot:title>BP</x-slot:title>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        BP
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot>
+
+    <!-- Page Title -->
+    <x-slot:page-title>BP</x-slot:page-title>
+
 
     <div class="page-body">
         <div class="container-fluid">
@@ -182,4 +172,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>
