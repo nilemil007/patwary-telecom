@@ -69,33 +69,6 @@ class Bp extends Model
         'updated_at',
     ];
 
-    public static function getAllBp()
-    {
-        return Bp::select(
-            'stuff_id',
-            'user_id',
-            'pool_number',
-            'personal_number',
-            'gender',
-            'blood_group',
-            'education',
-            'father_name',
-            'mother_name',
-            'division',
-            'district',
-            'thana',
-            'address',
-            'nid',
-            'bank_name',
-            'brunch_name',
-            'account_number',
-            'salary',
-            'dob',
-            'joining_date',
-            'resigning_date',
-        )->get()->toArray();
-    }
-
     /**
      * The attributes that should be cast.
      *

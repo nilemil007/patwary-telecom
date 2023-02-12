@@ -39,7 +39,7 @@ class BpController extends Controller
         $this->authorize('super-admin');
 
         return view('bp.index', [
-            'bps' => Bp::latest('status')->search( $request->search )->paginate(5),
+            'bps' => Bp::with('user')->latest('status')->search( $request->search )->paginate(5),
         ]);
     }
 
@@ -179,7 +179,7 @@ class BpController extends Controller
     }
 
 
-    // Additional Method
+    // Export
     public function export(): BinaryFileResponse
     {
         return Excel::download( new BpExport(), 'Bp.xlsx' );
