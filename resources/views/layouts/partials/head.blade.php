@@ -10,6 +10,9 @@
 <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
 
+<!-- Fontawesome kit -->
+{{--<script src="https://kit.fontawesome.com/cc2d6331a5.js" crossorigin="anonymous"></script>--}}
+
 <style>
     input[type="date"] {
         position: relative;

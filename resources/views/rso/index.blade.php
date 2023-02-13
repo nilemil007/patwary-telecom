@@ -1,39 +1,12 @@
-@extends('layouts.app')
-@push('title') All Rso @endpush
+<x-main>
+    <!-- Main Title -->
+    <x-slot:title>Rso</x-slot:title>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        All Rso
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
-                        <!-- Create new entry [Full Button]-->
-                        @if( \Illuminate\Support\Facades\Auth::user()->role == 'super-admin' && \App\Models\ItopReplace::where('remarks','Unapproved')->count() > 0 )
-                            <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                            Unapproved ({{ \App\Models\ItopReplace::where('remarks','Unapproved')->count() }})
-                            </button>
-                        @elseif( \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' && \App\Models\ItopReplace::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('remarks','Unapproved')->count() > 0 )
-                            <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                                Unapproved ({{ \App\Models\ItopReplace::where('user_id', \Illuminate\Support\Facades\Auth::id())->where('remarks','Unapproved')->count() }})
-                            </button>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page Title -->
+    <x-slot:page-title>Rso</x-slot:page-title>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -50,10 +23,14 @@
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
                                     <div class="ms-2 d-inline-block">
-                                        <form action="" method="GET">
-                                            <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control form-control-sm" aria-label="Search invoice">
+                                        <form method="GET">
+                                            <div class="input-group mb-3">
+                                                <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
+                                                <x-button class="btn-sm">
+                                                    <x-icon.search/>Search
+                                                </x-button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -130,23 +107,23 @@
                                                 @break
                                             @endswitch
                                         </td>
-{{--                                        <td>--}}
-{{--                                            @if( $rso->remarks )--}}
-{{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
-{{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'super-admin') #approve-reject-{{ $replace->id }} @endif">--}}
-{{--                                                    <span class="badge bg-danger me-1"></span> {{ $replace->remarks }}--}}
-{{--                                                </button>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
-{{--                                        <td>--}}
-{{--                                            <div>{{ $replace->created_at->diffForHumans() }}</div>--}}
-{{--                                            <div class="text-muted">{{ $replace->created_at->toDayDateTimeString() }}</div>--}}
-{{--                                        </td>--}}
-{{--                                        <td>--}}
-{{--                                            <div>{{ isset($replace->payment_at)?$replace->payment_at->diffForHumans():'' }}</div>--}}
-{{--                                            <div class="text-muted">{{ isset($replace->payment_at)?$replace->payment_at->toDayDateTimeString():'' }}</div>--}}
+                                        {{--                                        <td>--}}
+                                        {{--                                            @if( $rso->remarks )--}}
+                                        {{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
+                                        {{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'super-admin') #approve-reject-{{ $replace->id }} @endif">--}}
+                                        {{--                                                    <span class="badge bg-danger me-1"></span> {{ $replace->remarks }}--}}
+                                        {{--                                                </button>--}}
+                                        {{--                                            @endif--}}
+                                        {{--                                        </td>--}}
+                                        {{--                                        <td>--}}
+                                        {{--                                            <div>{{ $replace->created_at->diffForHumans() }}</div>--}}
+                                        {{--                                            <div class="text-muted">{{ $replace->created_at->toDayDateTimeString() }}</div>--}}
+                                        {{--                                        </td>--}}
+                                        {{--                                        <td>--}}
+                                        {{--                                            <div>{{ isset($replace->payment_at)?$replace->payment_at->diffForHumans():'' }}</div>--}}
+                                        {{--                                            <div class="text-muted">{{ isset($replace->payment_at)?$replace->payment_at->toDayDateTimeString():'' }}</div>--}}
 
-{{--                                        </td>--}}
+                                        {{--                                        </td>--}}
                                         <td>
                                             <!-- Edit -->
                                             <a href="{{ \Illuminate\Support\Facades\Auth::id() == $rso->user_id && $rso->remarks ? '#' : route('rso.edit', $rso->id) }}"
@@ -155,15 +132,15 @@
                                             </a>
 
                                             <!-- Delete -->
-{{--                                            @can('Replace delete')--}}
-                                                <a href="#" class="link-danger text-decoration-none"
-                                                   data-bs-toggle="modal" data-bs-target="#del-replace-{{ $rso->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                </a>
-{{--                                            @endcan--}}
+                                            {{--                                            @can('Replace delete')--}}
+                                            <a href="#" class="link-danger text-decoration-none"
+                                               data-bs-toggle="modal" data-bs-target="#del-replace-{{ $rso->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                            </a>
+                                            {{--                                            @endcan--}}
                                         </td>
                                         @include('rso.modals.delete')
-{{--                                        @include('rso.modals.approve')--}}
+                                        {{--                                        @include('rso.modals.approve')--}}
                                     </tr>
                                 @empty
                                     <tr>
@@ -191,4 +168,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

@@ -25,12 +25,9 @@
                                 </div>
                                 <div class="ms-auto text-muted">
                                     <div class="ms-2 d-inline-block">
-                                        <form action="" method="GET">
+                                        <form method="GET">
                                             <div class="input-group mb-3">
-                                                <input type="text" name="search"
-                                                       value="{{ request()->get('search') }}"
-                                                       class="form-control form-control-sm"
-                                                       placeholder="Type something...">
+                                                <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
                                                 <x-button class="btn-sm">
                                                     <x-icon.search/>Search
                                                 </x-button>
@@ -50,6 +47,7 @@
                                     </th>
                                     <th class="w-1">No.</th>
                                     <th>Name</th>
+                                    <th>dd house</th>
                                     <th>Supervisor</th>
                                     <th>Stuff ID</th>
                                     <th>personal number</th>
@@ -88,12 +86,12 @@
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $bp->user->name }}</div>
                                                     <div class="text-muted">
-                                                        <a href="#" class="text-reset">{{ $bp->pool_number }}</a>
+                                                        {{ $bp->pool_number }}
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-
+                                        <td>{{ $bp->ddHouse->code }}</td>
                                         <td data-label="Title">
                                             <div>{{ $bp->supervisor->user->name }}</div>
                                             <div class="text-muted">{{ $bp->supervisor->pool_number }}</div>
@@ -172,7 +170,9 @@
                     @can('Replace export')
                         @if( count($bps) > 0 )
                             <div class="mt-3">
-                                <a class="btn btn-sm btn-success" href="{{ route('bp.export') }}">Export Excel</a>
+                                <a class="btn btn-sm btn-success" href="{{ route('bp.export') }}">
+                                    Export Excel
+                                </a>
                             </div>
                         @endif
                     @endcan

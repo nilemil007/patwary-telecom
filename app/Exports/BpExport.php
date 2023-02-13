@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Bp;
+use App\Models\DdHouse;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -16,7 +17,7 @@ class BpExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection(): Collection
     {
-        return Bp::with('user')->get();
+        return Bp::with(['user','ddHouse'])->get();
     }
 
     // map what a single member row should look like
@@ -24,6 +25,9 @@ class BpExport implements FromCollection, WithHeadings, WithMapping
     public function map( $row ): array
     {
         return [
+            $row->ddHouse->cluster_name,
+            $row->ddHouse->region,
+            $row->ddHouse->code,
             $row->user->name,
             $row->stuff_id,
             $row->pool_number,
@@ -50,6 +54,9 @@ class BpExport implements FromCollection, WithHeadings, WithMapping
     public function headings(): array
     {
         return [
+            'Cluster',
+            'Region',
+            'DD Code',
             'BP Name',
             'Staff ID',
             'Pool Number',

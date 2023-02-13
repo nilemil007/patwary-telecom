@@ -104,7 +104,13 @@ class Bp extends Model
                 ->orWhere( 'status', 'like', $term )
                 ->orWhereHas('user', function ( $query ) use ( $term ){
                     $query->where( 'name', 'like', $term );
-                });
+                })
+            ->orWhereHas('supervisor', function ( $query ) use ( $term ){
+                $query->where( 'pool_number', 'like', $term );
+            })
+            ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
+                $query->where( 'code', 'like', $term );
+            });
         });
     }
 
@@ -112,6 +118,10 @@ class Bp extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo( User::class );
+    }
+    public function ddHouse(): BelongsTo
+    {
+        return $this->belongsTo( DdHouse::class );
     }
     public function supervisor(): BelongsTo
     {
