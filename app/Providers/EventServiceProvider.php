@@ -4,7 +4,10 @@ namespace App\Providers;
 
 //use App\Models\ItopReplace;
 //use App\Observers\ReplaceItopNumber;
+use App\Events\BrandPromoter\BpEvent;
 use App\Events\ItopReplaceEvent;
+use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
+use App\Listeners\BrandPromoter\ProfileInformationUpdate;
 use App\Listeners\UpdateReplaceNumberListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -24,6 +27,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         ItopReplaceEvent::class => [
             UpdateReplaceNumberListener::class,
+        ],
+        BpEvent::class => [
+            ProfileInformationUpdate::class,
+            AdditionalInformationUpdate::class,
         ],
     ];
 

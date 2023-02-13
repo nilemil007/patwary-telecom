@@ -105,7 +105,7 @@ class BpAdditionalUpdateRequest extends FormRequest
                 'max:20',
             ],
             'salary' => [
-                'required',
+                'nullable',
                 'max:5',
             ],
             'dob' => [

@@ -2,8 +2,10 @@
 namespace App\Services;
 
 
+use App\Events\BrandPromoter\BpEvent;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 
 class BpAdditionalInfoService {
 
@@ -105,6 +107,8 @@ class BpAdditionalInfoService {
 
         if( $bp->update( $additionalData ) )
         {
+            Event::dispatch( new BpEvent( Auth::user() ) );
+
             return redirect()->back()->with('success','Update request sent successfully.');
         }
     }

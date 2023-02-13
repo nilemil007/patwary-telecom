@@ -4,7 +4,7 @@
     <x-slot:title>Single Notification</x-slot:title>
 
     <!-- Page Pre Title -->
-    <x-slot:page-pre-title>Single</x-slot:page-pretitle>
+    <x-slot:page-pre-title>Single</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>Notification</x-slot:page-title>
@@ -42,7 +42,6 @@
                                                     from
                                                     <strong>{{ $notify->data['dd_house'] }}</strong>
                                                     {{ $notify->data['msg'] }}
-                                                    <span>Modified itop number is <strong><em>{{ $notify->data['tmp_itop_number'] }}</em></strong></span>
                                                 </div>
                                                 <div class="text-muted d-flex justify-content-between align-items-center">
                                                     <span>{{ $notify->created_at->diffForHumans() }}</span>
@@ -80,7 +79,6 @@
                                         from
                                         <strong>{{ $notify->data['dd_house'] }}</strong>
                                         {{ $notify->data['msg'] }}
-                                        <span>Modified itop number is <strong><em>{{ $notify->data['tmp_itop_number'] }}</em></strong></span>
                                     </div>
                                     <div class="text-muted d-flex align-items-center">
                                         <span>{{ $notify->created_at->diffForHumans() }}</span>

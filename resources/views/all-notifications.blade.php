@@ -10,17 +10,31 @@
     <x-slot:page-title>Notifications</x-slot:page-title>
 
     <!-- Page title action button -->
-    <x-slot:button>
-        <x-link href="{{ route('markAllAsRead') }}" class="btn btn-primary d-none d-sm-inline-block">
-            <x-icon.checks></x-icon.checks>Mark all as read
-        </x-link>
-    </x-slot:button>
+    @if( auth()->user()->unreadNotifications->count() > 1 )
+        <x-slot:button>
+            <x-link href="{{ route('markAllAsRead') }}" class="btn btn-primary d-none d-sm-inline-block">
+                <x-icon.checks></x-icon.checks>Mark all as read
+            </x-link>
+        </x-slot:button>
 
-    <x-slot:icon-button>
-        <x-link href="{{ route('markAllAsRead') }}" class="btn btn-primary d-sm-none btn-icon">
-            <x-icon.checks></x-icon.checks>
-        </x-link>
-    </x-slot:icon-button>
+        <x-slot:icon-button>
+            <x-link href="{{ route('markAllAsRead') }}" class="btn btn-primary d-sm-none btn-icon">
+                <x-icon.checks></x-icon.checks>
+            </x-link>
+        </x-slot:icon-button>
+    @else
+        <x-slot:button>
+            <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-none d-sm-inline-block">
+                <x-icon.home></x-icon.home>Dashboard
+            </x-link>
+        </x-slot:button>
+
+        <x-slot:icon-button>
+            <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-sm-none btn-icon">
+                <x-icon.home></x-icon.home>
+            </x-link>
+        </x-slot:icon-button>
+    @endif
 
     <div class="page-body">
         <div class="container-fluid">
@@ -29,7 +43,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="divide-y">
-                                @foreach(auth()->user()->notifications as $notify)
+                                @forelse( auth()->user()->notifications as $notify )
                                     <div class="{{ $notify->read_at ? 'text-muted' : '' }}">
                                     <div class="row">
                                         <div class="col-auto">
@@ -42,7 +56,6 @@
                                                 from
                                                 <strong>{{ $notify->data['dd_house'] }}</strong>
                                                 {{ $notify->data['msg'] }}
-                                                <span>Modified itop number is <strong><em>{{ $notify->data['tmp_itop_number'] }}</em></strong></span>
                                             </div>
                                             <div class="text-muted d-flex justify-content-between align-items-center">
                                                 <span>{{ $notify->created_at->diffForHumans() }}</span>
@@ -61,7 +74,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                @endforeach
+                                @empty
+                                    <p class="text-muted text-center">No notifications</p>
+                                @endforelse
                             </div>
                         </div>
                     </div>

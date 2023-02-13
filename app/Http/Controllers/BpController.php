@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\BrandPromoter\BpEvent;
 use App\Exports\BpExport;
 use App\Http\Requests\BpAdditionalUpdateRequest;
 use App\Http\Requests\BpApproveRequest;
@@ -20,6 +21,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -129,6 +131,8 @@ class BpController extends Controller
 
         if( $bp->update( $updateProfile ) )
         {
+            Event::dispatch( new BpEvent( Auth::user() ) );
+
             return redirect()->back()->with('success','Information updated successfully.');
         }
 

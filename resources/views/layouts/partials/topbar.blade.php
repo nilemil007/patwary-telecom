@@ -49,7 +49,7 @@ $logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : 
                                                     {{ $notify->data['name'] }}
                                                 </strong>
                                                 {{ \Illuminate\Support\Str::words($notify->data['msg'], 7) }}
-                                                <span class="text-muted">{{ $notify->created_at->diffForHumans() }}</span>
+                                                <p class="text-muted m-0">{{ $notify->created_at->diffForHumans() }}</p>
                                             </small>
                                         </div>
                                     </div>
