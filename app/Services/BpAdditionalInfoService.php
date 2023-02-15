@@ -105,6 +105,7 @@ class BpAdditionalInfoService {
             $additionalData['status'] = 'unapproved';
         }
 
+        dd($additionalData);
         if( $bp->update( $additionalData ) )
         {
             Event::dispatch( new BpAdditionalInfoUpdateEvent( Auth::user() ) );

@@ -13,6 +13,8 @@ use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
 use App\Models\User;
+use App\Notifications\BrandPromoter\ProfilePictureUpdateNotification;
+use App\Notifications\BrandPromoter\RejectAdditionalInfoNotification;
 use App\Rules\CheckExistingPassword;
 use App\Services\BpAdditionalInfoService;
 use App\Services\BpApproveService;
@@ -27,6 +29,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Notification;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
@@ -80,9 +83,12 @@ class BpController extends Controller
      * @param BpUpdateRequest $request
      * @param Bp $bp
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(BpUpdateRequest $request, Bp $bp): RedirectResponse
     {
+        $this->authorize('super-admin');
+
         $information = $request->validated();
 
         if ( $request->hasFile('document') )
@@ -236,6 +242,9 @@ class BpController extends Controller
 
         if ( $update )
         {
+            $userBp = User::firstWhere('id', $bp->user_id);
+            Notification::sendNow($userBp, new RejectAdditionalInfoNotification( Auth::user() ));
+
             return redirect()->route('bp.index')->with('success','Request rejected successfully.');
         }
         return redirect()->route('bp.index')->with('error','Request not rejected.');
