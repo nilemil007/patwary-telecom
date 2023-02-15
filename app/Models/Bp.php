@@ -21,6 +21,8 @@ class Bp extends Model
 
     protected $fillable = [
         'user_id',
+        'supervisor_id',
+        'dd_house_id',
         'stuff_id',
         'pool_number',
         'personal_number',

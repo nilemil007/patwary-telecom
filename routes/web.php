@@ -125,6 +125,11 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/bp/{bp}/approve', [ BpController::class, 'approve' ])->name('bp.approve');
     Route::post('/bp/{bp}/reject', [ BpController::class, 'reject' ])->name('bp.reject');
 
+    // Rso additional routes
+    Route::get('/rso/{rso}/profile', [ RsoController::class, 'profile' ])->name('rso.profile');
+    Route::patch('/rso/{rso}/profile/update', [ RsoController::class, 'profileUpdate' ])->name('rso.profile.update');
+    Route::patch('/rso/{rso}/additional/info/update', [ RsoController::class, 'additionalInfo' ])->name('rso.additional.info.update');
+
     Route::resources([
         'dd-house'          => DdHouseController::class,
         'create-new-user'   => CreateNewUserController::class,

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Rso;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BpAdditionalUpdateRequest extends FormRequest
+class AdditionalInfoUpdate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

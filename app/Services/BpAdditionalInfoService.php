@@ -32,7 +32,7 @@ class BpAdditionalInfoService {
             $additionalData['tmp_blood_group'] = $request->blood_group;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $bp->education != $request->education )
+        if ( $bp->education != strtolower($request->education) )
         {
             unset( $additionalData['education'] );
             $additionalData['tmp_education'] = $request->education;
@@ -105,7 +105,7 @@ class BpAdditionalInfoService {
             $additionalData['status'] = 'unapproved';
         }
 
-        dd($additionalData);
+//        dd($additionalData);
         if( $bp->update( $additionalData ) )
         {
             Event::dispatch( new BpAdditionalInfoUpdateEvent( Auth::user() ) );

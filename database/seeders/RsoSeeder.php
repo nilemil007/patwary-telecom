@@ -29,6 +29,9 @@ class RsoSeeder extends Seeder
         $rsoFaijul = Rso::create([
             'user_id' => $faijul->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1409944001',
             'code' => 'RS033510',
             'gender' => 'male',
@@ -47,6 +50,9 @@ class RsoSeeder extends Seeder
         $rsobadiuzzaman = Rso::create([
             'user_id' => $badiuzzaman->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1908441955',
             'code' => 'RS019531',
             'gender' => 'male',
@@ -65,6 +71,9 @@ class RsoSeeder extends Seeder
         $rsojoynalabedin = Rso::create([
             'user_id' => $joynalabedin->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1908441956',
             'code' => 'RS019532',
             'gender' => 'male',
@@ -83,6 +92,9 @@ class RsoSeeder extends Seeder
         $rsogolammostufa = Rso::create([
             'user_id' => $golammostufa->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270101',
             'code' => 'RS0101',
             'gender' => 'male',
@@ -101,6 +113,9 @@ class RsoSeeder extends Seeder
         $rsonazmulahmed = Rso::create([
             'user_id' => $nazmulahmed->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270102',
             'code' => 'RS0103',
             'gender' => 'male',
@@ -119,6 +134,9 @@ class RsoSeeder extends Seeder
         $rsoporosh = Rso::create([
             'user_id' => $porosh->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1937600512',
             'code' => 'RS003981',
             'gender' => 'male',
@@ -137,6 +155,9 @@ class RsoSeeder extends Seeder
         $rsoanikhasan = Rso::create([
             'user_id' => $anikhasan->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984220363',
             'code' => 'RS017269',
             'gender' => 'male',
@@ -155,6 +176,9 @@ class RsoSeeder extends Seeder
         $rsosiyamhossain = Rso::create([
             'user_id' => $siyamhossain->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984220364',
             'code' => 'RS017271',
             'gender' => 'male',
@@ -173,6 +197,9 @@ class RsoSeeder extends Seeder
         $rsohabiburrahman = Rso::create([
             'user_id' => $habiburrahman->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1986646474',
             'code' => 'RS008290',
             'gender' => 'male',
@@ -191,6 +218,9 @@ class RsoSeeder extends Seeder
         $rsomizan = Rso::create([
             'user_id' => $mizan->id,
             'supervisor_id' => 1,
+            'dd_house_id' => 1,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1986686880',
             'code' => 'RS010508',
             'gender' => 'male',
@@ -209,6 +239,9 @@ class RsoSeeder extends Seeder
         $rsorakibmia = Rso::create([
             'user_id' => $rakibmia->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1409944002',
             'code' => 'RS035430',
             'gender' => 'male',
@@ -227,6 +260,9 @@ class RsoSeeder extends Seeder
         $rsoalam = Rso::create([
             'user_id' => $alam->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270104',
             'code' => 'RS035431',
             'gender' => 'male',
@@ -245,6 +281,9 @@ class RsoSeeder extends Seeder
         $rsoshakil = Rso::create([
             'user_id' => $shakil->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270105',
             'code' => 'RS035432',
             'gender' => 'male',
@@ -263,6 +302,9 @@ class RsoSeeder extends Seeder
         $rsojubayedmia = Rso::create([
             'user_id' => $jubayedmia->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1967042950',
             'code' => 'RS035433',
             'gender' => 'male',
@@ -281,6 +323,9 @@ class RsoSeeder extends Seeder
         $rsomonirhossen = Rso::create([
             'user_id' => $monirhossen->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1986686877',
             'code' => 'RS035434',
             'gender' => 'male',
@@ -299,6 +344,9 @@ class RsoSeeder extends Seeder
         $rsoshahinmia = Rso::create([
             'user_id' => $shahinmia->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1986686878',
             'code' => 'RS035435',
             'gender' => 'male',
@@ -317,6 +365,9 @@ class RsoSeeder extends Seeder
         $rsoashiqurrahman = Rso::create([
             'user_id' => $ashiqurrahman->id,
             'supervisor_id' => 2,
+            'dd_house_id' => 2,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1986686879',
             'code' => 'RS035436',
             'gender' => 'male',
@@ -335,6 +386,9 @@ class RsoSeeder extends Seeder
         $rsosafiqulislam = Rso::create([
             'user_id' => $safiqulislam->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1409944003',
             'code' => 'RS036629',
             'gender' => 'male',
@@ -353,6 +407,9 @@ class RsoSeeder extends Seeder
         $rsosaddam = Rso::create([
             'user_id' => $saddam->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1908441954',
             'code' => 'RS036632',
             'gender' => 'male',
@@ -371,6 +428,9 @@ class RsoSeeder extends Seeder
         $rsobayazid = Rso::create([
             'user_id' => $bayazid->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270103',
             'code' => 'RS036637',
             'gender' => 'male',
@@ -389,6 +449,9 @@ class RsoSeeder extends Seeder
         $rsoraza = Rso::create([
             'user_id' => $raza->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915270106',
             'code' => 'RS036633',
             'gender' => 'male',
@@ -407,6 +470,9 @@ class RsoSeeder extends Seeder
         $rsorunulamin = Rso::create([
             'user_id' => $runulamin->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1915300196',
             'code' => 'RS036635',
             'gender' => 'male',
@@ -425,6 +491,9 @@ class RsoSeeder extends Seeder
         $rsomonayamkhan = Rso::create([
             'user_id' => $monayamkhan->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984217911',
             'code' => 'RS036630',
             'gender' => 'male',
@@ -443,6 +512,9 @@ class RsoSeeder extends Seeder
         $rsoparvej = Rso::create([
             'user_id' => $parvej->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984217912',
             'code' => 'RS036636',
             'gender' => 'male',
@@ -461,6 +533,9 @@ class RsoSeeder extends Seeder
         $rsohridoy65 = Rso::create([
             'user_id' => $hridoy65->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984220365',
             'code' => 'RS036634',
             'gender' => 'male',
@@ -479,6 +554,9 @@ class RsoSeeder extends Seeder
         $rsohridoy66 = Rso::create([
             'user_id' => $hridoy66->id,
             'supervisor_id' => 3,
+            'dd_house_id' => 3,
+            'zm_id' => 2,
+            'manager_id' => 3,
             'itop_number' => '1984220366',
             'code' => 'RS036631',
             'gender' => 'male',

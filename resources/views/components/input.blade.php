@@ -3,7 +3,7 @@
 <input {{ $attributes->merge(['class'=>'form-control','type' => 'text']) }} name="{{ $name ?? '' }}">
 
 <label class="form-label">
-    {{ $label ?? '' }}
+    {{ __($label) ?? '' }}
     @if( $star ?? '' )
         <span class="text-danger">{{ $star }}</span>
     @endif

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\Bp\Profile;
+namespace App\Http\Livewire\Rso\Profile;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -8,11 +8,11 @@ use Illuminate\Contracts\View\View;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class Image extends Component
+class Picture extends Component
 {
     use WithFileUploads;
 
-    public $bp,$image;
+    public $rso,$image;
 
     public function updatedImage()
     {
@@ -27,6 +27,6 @@ class Image extends Component
 
     public function render(): Factory|View|Application
     {
-        return view('livewire.bp.profile.image');
+        return view('livewire.rso.profile.picture');
     }
 }

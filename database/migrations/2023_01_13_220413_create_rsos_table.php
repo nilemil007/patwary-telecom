@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('rsos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('supervisor_id')->nullable()->constrained();
+            $table->foreignId('supervisor_id')->constrained();
+            $table->integer('manager_id')->nullable();
+            $table->integer('zm_id')->nullable();
+            $table->foreignId('dd_house_id')->constrained();
             $table->string('code', 10)->nullable()->unique();
             $table->string('itop_number', 11)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();
@@ -39,6 +42,8 @@ return new class extends Migration
             $table->string('tmp_account_number', 20)->nullable()->unique();
             $table->string('bank_name')->nullable();
             $table->string('tmp_bank_name')->nullable();
+            $table->string('brunch_name')->nullable();
+            $table->string('tmp_brunch_name')->nullable();
             $table->string('routing_number')->nullable();
             $table->string('tmp_routing_number')->nullable();
             $table->string('market_type')->nullable();
@@ -53,7 +58,6 @@ return new class extends Migration
             $table->string('nid')->nullable()->unique();
             $table->string('tmp_nid')->nullable()->unique();
             $table->string('status')->nullable();
-            $table->string('remarks')->nullable();
             $table->string('document')->nullable();
             $table->timestamp('joining_date')->nullable();
             $table->timestamp('resigning_date')->nullable();
