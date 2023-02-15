@@ -128,7 +128,7 @@ Route::middleware(['auth'])->group(function(){
     // Rso additional routes
     Route::get('/rso/{rso}/profile', [ RsoController::class, 'profile' ])->name('rso.profile');
     Route::patch('/rso/{rso}/profile/update', [ RsoController::class, 'profileUpdate' ])->name('rso.profile.update');
-    Route::patch('/rso/{rso}/additional/info/update', [ RsoController::class, 'additionalInfo' ])->name('rso.additional.info.update');
+    Route::patch('/rso/{rso}/additional-info-update', [ RsoController::class, 'additionalInfo' ])->name('rso.additional.info.update');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,

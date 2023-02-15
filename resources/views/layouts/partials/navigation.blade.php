@@ -7,7 +7,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('dashboard') }}" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                        <x-icon.home></x-icon.home>
                       </span>
                             <span class="nav-link-title">
                         Dashboard
@@ -267,13 +267,16 @@
     </div>
 
     @php
-        $auth = \Illuminate\Support\Facades\Auth::user();
-        $bp = \App\Models\Bp::firstWhere( 'user_id', $auth->id );
+        $bp = \App\Models\Bp::firstWhere( 'user_id', auth()->id() );
+        $rso = \App\Models\Rso::firstWhere( 'user_id', auth()->id() );
+
+        $status = auth()->user()->role == 'bp' && $bp->status ? $bp->status :
+        ( auth()->user()->role == 'rso' && $rso->status ? $rso->status : '');
     @endphp
 
-    @if( $auth->role == 'bp' && $bp->status )
+    @if( $status )
         <div class="bg-warning text-center text-white">
-            <strong>{{ \Illuminate\Support\Str::ucfirst( $bp->status ) . ' request' }}</strong>
+            <strong>{{  ucfirst( $status ) . ' request' }}</strong>
         </div>
     @endif
 </div>

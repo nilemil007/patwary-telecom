@@ -130,6 +130,13 @@
                                         @method('PATCH')
 
                                         <div class="row">
+                                            <!-- Supervisor -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <x-input value="{{ $rso->supervisor->user->name }} - {{ $rso->supervisor->pool_number }}" label="Supervisor" placeholder readonly></x-input>
+                                                </div>
+                                            </div>
+
                                             <!-- Code -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
@@ -165,7 +172,7 @@
                                             <!-- RID -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="rid" value="{{ old('rid', $rso->rid) }}" type="number" label="RID" star="*" placeholder></x-input>
+                                                    <x-input name="rid" value="{{ old('rid', $rso->rid) }}" type="number" label="RID" star="*" placeholder readonly></x-input>
                                                 </div>
                                             </div>
 
@@ -226,7 +233,7 @@
                                             <!-- Blood Group -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-select name="blood_group" proposed="{{ !empty($rso->tmp_blood_group)? 'New Value: '.strtoupper($rso->tmp_blood_group):'' }}" class="{{ $blood_group_warning }}" label="Blood Group" placeholder>
+                                                    <x-select name="blood_group" proposed="{{ !empty($rso->tmp_blood_group)? 'New: '.strtoupper($rso->tmp_blood_group):'' }}" class="{{ $blood_group_warning }}" label="Blood Group" placeholder>
                                                         <option {{ $rso->blood_group == 'a+'?'selected':'' }} value="a+">{{ __('A+') }}</option>
                                                         <option {{ $rso->blood_group == 'a-'?'selected':'' }} value="a-">{{ __('A-') }}</option>
                                                         <option {{ $rso->blood_group == 'b+'?'selected':'' }} value="b+">{{ __('B+') }}</option>
@@ -268,6 +275,17 @@
                                                 </div>
                                             </div>
 
+                                            <!-- Brunch Name -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <x-input name="brunch_name" class="{{ $brunch_name_warning }}" value="{{ old('brunch_name', $rso->brunch_name) }}" label="Brunch Name" placeholder>
+                                                        @if( $rso->tmp_brunch_name )
+                                                            <small class="text-warning">New: {{ $rso->tmp_brunch_name }}</small>
+                                                        @endif
+                                                    </x-input>
+                                                </div>
+                                            </div>
+
                                             <!-- Routing Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
@@ -282,7 +300,7 @@
                                             <!-- Market Type -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="market_type" value="{{ old('market_type', $rso->market_type) }}" label="Market Type" placeholder></x-input>
+                                                    <x-input name="market_type" value="{{ old('market_type', $rso->market_type) }}" label="Market Type" placeholder readonly></x-input>
                                                 </div>
                                             </div>
 
@@ -318,7 +336,7 @@
                                             <!-- Gender -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-select name="gender" label="Gender" placeholder>
+                                                    <x-select name="gender" label="Gender" placeholder disabled>
                                                         <option {{ $rso->gender == 'male' ?'selected':'' }} value="male">{{ __('Male') }}</option>
                                                         <option {{ $rso->gender == 'female' ?'selected':'' }} value="female">{{ __('Female') }}</option>
                                                         <option {{ $rso->gender == 'others' ?'selected':'' }} value="others">{{ __('Others') }}</option>
@@ -343,17 +361,6 @@
                                                     <x-input name="nid" type="number" class="{{ $nid_warning }}" value="{{ old('nid', $rso->nid) }}" label="NID" placeholder>
                                                         @if( $rso->tmp_nid )
                                                             <small class="text-warning">{{ $rso->tmp_nid }}</small>
-                                                        @endif
-                                                    </x-input>
-                                                </div>
-                                            </div>
-
-                                            <!-- Brunch Name -->
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <x-input name="brunch_name" class="{{ $brunch_name_warning }}" value="{{ old('brunch_name', $rso->brunch_name) }}" label="Brunch Name" placeholder>
-                                                        @if( $rso->tmp_brunch_name )
-                                                            <small class="text-warning">New: {{ $rso->tmp_brunch_name }}</small>
                                                         @endif
                                                     </x-input>
                                                 </div>

@@ -9,6 +9,7 @@ use App\Models\Rso;
 use App\Models\User;
 use App\Notifications\Rso\ChangeProfilePictureNotification;
 use App\Notifications\Rso\ChangeUsernameNotification;
+use App\Services\Rso\AdditionalInfoUpdateService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -156,7 +157,7 @@ class RsoController extends Controller
 
     public function additionalInfo( AdditionalInfoUpdate $request, Rso $rso )
     {
-
+        ( new AdditionalInfoUpdateService() )->update( $request, $rso );
     }
 
 
