@@ -4,10 +4,18 @@ namespace App\Providers;
 
 //use App\Models\ItopReplace;
 //use App\Observers\ReplaceItopNumber;
-use App\Events\BrandPromoter\BpEvent;
+use App\Events\BrandPromoter\ApproveAdditionalInfoEvent;
+use App\Events\BrandPromoter\BpAdditionalInfoUpdateEvent;
+use App\Events\BrandPromoter\ChangePasswordEvent;
+use App\Events\BrandPromoter\UpdateProfilePictureEvent;
+use App\Events\BrandPromoter\UpdateUsernameEvent;
 use App\Events\ItopReplaceEvent;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
+use App\Listeners\BrandPromoter\ApproveAdditionalInfoListener;
+use App\Listeners\BrandPromoter\ChangePasswordListener;
 use App\Listeners\BrandPromoter\ProfileInformationUpdate;
+use App\Listeners\BrandPromoter\UpdateProfilePictureListner;
+use App\Listeners\BrandPromoter\UpdateUsernameListner;
 use App\Listeners\UpdateReplaceNumberListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -28,9 +36,17 @@ class EventServiceProvider extends ServiceProvider
         ItopReplaceEvent::class => [
             UpdateReplaceNumberListener::class,
         ],
-        BpEvent::class => [
-            ProfileInformationUpdate::class,
+        BpAdditionalInfoUpdateEvent::class => [
             AdditionalInformationUpdate::class,
+        ],
+        UpdateProfilePictureEvent::class => [
+            UpdateProfilePictureListner::class,
+        ],
+        UpdateUsernameEvent::class => [
+            UpdateUsernameListner::class,
+        ],
+        ChangePasswordEvent::class => [
+            ChangePasswordListener::class,
         ],
     ];
 

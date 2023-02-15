@@ -45,8 +45,8 @@
 
                                 <div class="row">
                                     <!-- Name -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
                                             <input name="name" id="name" type="text" class="form-control"
                                                    value="{{ $user->name }}"
                                                    placeholder="Enter Name">
@@ -60,8 +60,8 @@
                                     </div>
 
                                     <!-- Username -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
                                             <input name="username" id="username" type="text" class="form-control"
                                                    value="{{ $user->username }}"
                                                    placeholder="Enter Username">
@@ -75,8 +75,8 @@
                                     </div>
 
                                     <!-- Email -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
                                             <input name="email" id="email" type="text" class="form-control"
                                                    value="{{ $user->email }}"
                                                    placeholder="Enter Email" aria-label="Email">
@@ -90,7 +90,7 @@
                                     </div>
 
                                     <!-- DD House -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-floating">
                                             <select name="dd_house_id" class="form-select" id="ddHouse">
                                                 <option selected value="">Choose DD House</option>
@@ -111,7 +111,7 @@
                                     </div>
 
                                     <!-- User Roles -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-floating">
                                             <select name="role" class="form-select" id="role">
                                                 <option selected value="">Choose User Roles</option>
@@ -129,8 +129,8 @@
                                     </div>
 
                                     <!-- Password -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-floating">
                                             <input name="password" id="password" type="password" class="form-control"
                                                    placeholder="Enter Password" aria-label="Password">
                                             <label for="password" class="form-label">Password
@@ -143,9 +143,9 @@
                                     </div>
 
                                     <!-- Upload Image -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Upload Image</label>
-                                        <div class="input-group mb-3">
+                                        <div class="input-group">
                                             <input name="image" type="file" class="form-control" id="inputGroupFile02">
                                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                                         </div>
@@ -155,7 +155,7 @@
                                     </div>
 
                                     <!-- Status -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 mb-3">
                                         <label class="form-label">Status</label>
                                         <select class="form-select" name="status">
                                             <option {{ $user->status == 1 ? 'selected' : '' }} value="1">Active</option>
@@ -164,7 +164,7 @@
                                     </div>
 
                                     <!-- Image Preview -->
-                                    <div class="col-md-12">
+                                    <div class="col-md-12  mb-3">
                                         @if( \Illuminate\Support\Facades\File::exists( public_path( $user->image ) ) )
                                             <img class="rounded-3" src="{{ asset($user->image) }}" alt="User Image" width="150">
                                         @else

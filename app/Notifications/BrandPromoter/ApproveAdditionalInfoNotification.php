@@ -8,19 +8,19 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProfilePictureUpdateNotification extends Notification
+class ApproveAdditionalInfoNotification extends Notification
 {
     use Queueable;
 
-    private $event;
+    private $user;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct( $event )
+    public function __construct( $user )
     {
-        $this->event = $event;
+        $this->user = $user->toArray();
     }
 
     /**
@@ -41,11 +41,9 @@ class ProfilePictureUpdateNotification extends Notification
     public function toArray()
     {
         return [
-            'name' => $this->event->currentUser['name'],
-            'image' => $this->event->image,
-            'role' => $this->event->currentUser['role'],
-            'dd_house' => DdHouse::firstWhere('id', $this->event->currentUser['dd_house_id'])->name,
-            'msg' => 'has updated his profile picture.',
+            'name' => $this->user['name'],
+            'image' => $this->user['image'],
+            'msg' => 'has approved your additional information update request.',
         ];
     }
 }

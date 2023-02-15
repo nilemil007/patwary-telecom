@@ -34,13 +34,17 @@
                                         <div class="row">
                                             <div class="col-auto">
                                                 <span class="avatar"
-                                                    style="background-image: url({{ $notify->data['image'] }})"></span>
+                                                    style="background-image: url({{ asset( $notify->data['image'] ) }})"></span>
                                             </div>
                                             <div class="col">
                                                 <div>
-                                                    <strong>{{ strtoupper( $notify->data['role'] ) }} - {{ $notify->data['name'] }}</strong>
-                                                    from
-                                                    <strong>{{ $notify->data['dd_house'] }}</strong>
+                                                    <strong>
+                                                        {{ strtoupper( $notify->data['role'] ?? '' ) }}
+                                                        @if( !empty( $notify->data['role'] ) ) - @endif
+                                                        {{ $notify->data['name'] }}
+                                                    </strong>
+                                                    @if( !empty( $notify->data['dd_house'] ) ) from @endif
+                                                    <strong>{{ $notify->data['dd_house'] ?? '' }}</strong>
                                                     {{ $notify->data['msg'] }}
                                                 </div>
                                                 <div class="text-muted d-flex justify-content-between align-items-center">
@@ -53,7 +57,6 @@
                                                 @else
                                                     <x-icon.checks class="text-success"></x-icon.checks>
                                                 @endif
-
                                             </div>
                                         </div>
                                     </div>
@@ -65,31 +68,31 @@
             </div>
 
             <div class="row d-md-none">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-12 mb-2">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-12 mb-2">
                                     <span class="avatar"
-                                          style="background-image: url({{ $notify->data['image'] }})"></span>
-                                </div>
-                                <div class="col">
-                                    <div>
-                                        <strong>{{ strtoupper( $notify->data['role'] ) }} - {{ $notify->data['name'] }}</strong>
-                                        from
-                                        <strong>{{ $notify->data['dd_house'] }}</strong>
-                                        {{ $notify->data['msg'] }}
-                                    </div>
-                                    <div class="text-muted d-flex align-items-center">
-                                        <span>{{ $notify->created_at->diffForHumans() }}</span>
-                                        &nbsp;
-                                        @if( !$notify->read_at )
-                                            <span class="badge bg-danger"></span>
-                                        @else
-                                            <x-icon.checks class="text-success"></x-icon.checks>
-                                        @endif
-                                    </div>
-                                </div>
+                                          style="background-image: url({{ asset( $notify->data['image'] ) }})"></span>
+                        </div>
+                        <div class="col">
+                            <div>
+                                <strong>
+                                    {{ strtoupper( $notify->data['role'] ?? '' ) }}
+                                    @if( !empty( $notify->data['role'] ) ) - @endif
+                                    {{ $notify->data['name'] }}
+                                </strong>
+                                @if( !empty( $notify->data['dd_house'] ) ) from @endif
+                                <strong>{{ $notify->data['dd_house'] ?? '' }}</strong>
+                                {{ $notify->data['msg'] }}
+                            </div>
+                            <div class="text-muted d-flex align-items-center">
+                                <span>{{ $notify->created_at->diffForHumans() }}</span>
+                                &nbsp;
+                                @if( !$notify->read_at )
+                                    <span class="badge bg-danger"></span>
+                                @else
+                                    <x-icon.checks class="text-success"></x-icon.checks>
+                                @endif
                             </div>
                         </div>
                     </div>

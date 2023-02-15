@@ -2,14 +2,14 @@
 
 namespace App\Listeners\BrandPromoter;
 
-use App\Events\BrandPromoter\BpAdditionalInfoUpdateEvent;
+use App\Events\BrandPromoter\UpdateUsernameEvent;
 use App\Models\User;
-use App\Notifications\BrandPromoter\AdditionalInformationUpdateNotification;
+use App\Notifications\BrandPromoter\UpdateUsernameNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
-class AdditionalInformationUpdate
+class UpdateUsernameListner
 {
     private $superAdmin;
     /**
@@ -25,11 +25,11 @@ class AdditionalInformationUpdate
     /**
      * Handle the event.
      *
-     * @param BpAdditionalInfoUpdateEvent $event
+     * @param UpdateUsernameEvent $event
      * @return void
      */
-    public function handle(BpAdditionalInfoUpdateEvent $event)
+    public function handle(UpdateUsernameEvent $event)
     {
-        Notification::sendNow( $this->superAdmin, new AdditionalInformationUpdateNotification( $event ) );
+        Notification::sendNow( $this->superAdmin, new UpdateUsernameNotification( $event ) );
     }
 }

@@ -48,13 +48,17 @@
                                     <div class="row">
                                         <div class="col-auto">
                                             <span class="avatar"
-                                                  style="background-image: url({{ $notify->data['image'] }})"></span>
+                                                  style="background-image: url({{ asset( $notify->data['image'] ) }})"></span>
                                         </div>
                                         <div class="col">
                                             <div>
-                                                <strong>{{ strtoupper( $notify->data['role'] ) }} - {{ $notify->data['name'] }}</strong>
-                                                from
-                                                <strong>{{ $notify->data['dd_house'] }}</strong>
+                                                <strong>
+                                                    {{ strtoupper( $notify->data['role'] ?? '' ) }}
+                                                    @if( !empty( $notify->data['role'] ) ) - @endif
+                                                    {{ $notify->data['name'] }}
+                                                </strong>
+                                                @if( !empty( $notify->data['dd_house'] ) ) from @endif
+                                                <strong>{{ $notify->data['dd_house'] ?? '' }}</strong>
                                                 {{ $notify->data['msg'] }}
                                             </div>
                                             <div class="text-muted d-flex justify-content-between align-items-center">

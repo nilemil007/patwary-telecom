@@ -8,11 +8,11 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ProfilePictureUpdateNotification extends Notification
+class UpdateUsernameNotification extends Notification
 {
     use Queueable;
 
-    private $event;
+    public $event;
     /**
      * Create a new notification instance.
      *
@@ -42,10 +42,10 @@ class ProfilePictureUpdateNotification extends Notification
     {
         return [
             'name' => $this->event->currentUser['name'],
-            'image' => $this->event->image,
+            'image' => $this->event->currentUser['image'],
             'role' => $this->event->currentUser['role'],
             'dd_house' => DdHouse::firstWhere('id', $this->event->currentUser['dd_house_id'])->name,
-            'msg' => 'has updated his profile picture.',
+            'msg' => 'has changed his username.',
         ];
     }
 }

@@ -39,7 +39,7 @@ $logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : 
                                     <div class="row align-items-center">
                                         <div class="col-auto">
                                             <span class="avatar"
-                                                  style="background-image: url({{ $notify->data['image'] }})">
+                                                  style="background-image: url({{ asset( $notify->data['image'] ) }})">
                                                 <span class="badge bg-red"></span>
                                             </span>
                                         </div>

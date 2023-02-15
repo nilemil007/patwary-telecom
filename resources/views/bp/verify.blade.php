@@ -1,38 +1,30 @@
-@extends('layouts.app')
-@push('title') Verify BP @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Verify
-                    </div>
-                    <h2 class="page-title">
-                        BP Information - {{ $bp->user->name }}
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Verify Information</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <!-- [Full Button]-->
-                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <x-icon.back/>All BP
-                        </x-link>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Verify</x-slot:page-pre-title>
 
-                        <!-- [Icon Button]-->
-                        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <x-icon.back/>
-                        </x-link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page Title -->
+    <x-slot:page-title>
+        Bp Information (<em>{{ $bp->user->name }}</em>)
+    </x-slot:page-title>
+
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+            <x-icon.back/>All BP
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <x-link href="{{ route('bp.index') }}" class="btn btn-primary d-sm-none btn-icon" >
+            <x-icon.back/>
+        </x-link>
+    </x-slot:icon-button>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -43,8 +35,8 @@
                             <form action="{{ route('bp.approve', $bp->id) }}" id="approve" method="POST">
                                 @csrf
                                 <div class="row">
-                                    @if( $bp->tmp_personal_number )
-                                        <!-- Personal Number Current -->
+                                @if( $bp->tmp_personal_number )
+                                    <!-- Personal Number Current -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->personal_number }}" label="Current Personal Number" placeholder disabled> </x-input>
@@ -58,10 +50,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_blood_group )
-                                        <!-- Current Blood Group -->
+                                @if( $bp->tmp_blood_group )
+                                    <!-- Current Blood Group -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ strtoupper($bp->blood_group) }}" label="Current Blood Group" placeholder disabled></x-input>
@@ -75,10 +67,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_education )
-                                        <!-- Current Education -->
+                                @if( $bp->tmp_education )
+                                    <!-- Current Education -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ strtoupper($bp->education) }}" label="Current Education" placeholder disabled></x-input>
@@ -92,10 +84,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_father_name )
-                                        <!-- Current Father Name -->
+                                @if( $bp->tmp_father_name )
+                                    <!-- Current Father Name -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->father_name }}" label="Current Father Name" placeholder disabled></x-input>
@@ -109,44 +101,44 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_mother_name )
-                                        <!-- Current Mother Name -->
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <x-input value="{{ $bp->mother_name }}" label="Current Mother Name" placeholder disabled></x-input>
-                                                </div>
+                                @if( $bp->tmp_mother_name )
+                                    <!-- Current Mother Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <x-input value="{{ $bp->mother_name }}" label="Current Mother Name" placeholder disabled></x-input>
                                             </div>
+                                        </div>
 
-                                            <!-- New Mother Name -->
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <x-input name="mother_name" class="bg-warning-lt" value="{{ $bp->tmp_mother_name }}" label="New Mother Name" placeholder readonly></x-input>
-                                                </div>
+                                        <!-- New Mother Name -->
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <x-input name="mother_name" class="bg-warning-lt" value="{{ $bp->tmp_mother_name }}" label="New Mother Name" placeholder readonly></x-input>
                                             </div>
-                                            <hr>
-                                    @endif
+                                        </div>
+                                        <hr>
+                                @endif
 
-                                    @if( $bp->tmp_division )
-                                        <!-- Current Division -->
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <x-input value="{{ $bp->division }}" label="Current Division" placeholder disabled></x-input>
-                                                </div>
+                                @if( $bp->tmp_division )
+                                    <!-- Current Division -->
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <x-input value="{{ $bp->division }}" label="Current Division" placeholder disabled></x-input>
                                             </div>
+                                        </div>
 
-                                            <!-- New Division -->
-                                            <div class="col-md-6">
-                                                <div class="form-floating mb-3">
-                                                    <x-input name="division" class="bg-warning-lt" value="{{ $bp->tmp_division }}" label="New Division" placeholder readonly></x-input>
-                                                </div>
+                                        <!-- New Division -->
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <x-input name="division" class="bg-warning-lt" value="{{ $bp->tmp_division }}" label="New Division" placeholder readonly></x-input>
                                             </div>
-                                            <hr>
-                                    @endif
+                                        </div>
+                                        <hr>
+                                @endif
 
-                                    @if( $bp->tmp_district )
-                                        <!-- Current District -->
+                                @if( $bp->tmp_district )
+                                    <!-- Current District -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->district }}" label="Current District" placeholder disabled></x-input>
@@ -160,10 +152,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_thana )
-                                        <!-- Current Thana -->
+                                @if( $bp->tmp_thana )
+                                    <!-- Current Thana -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->thana }}" label="Current Thana" placeholder disabled></x-input>
@@ -177,10 +169,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_address )
-                                        <!-- Current Address -->
+                                @if( $bp->tmp_address )
+                                    <!-- Current Address -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->address }}" label="Current Address" placeholder disabled></x-input>
@@ -194,10 +186,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_nid )
-                                        <!-- Current NID -->
+                                @if( $bp->tmp_nid )
+                                    <!-- Current NID -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->nid }}" label="Current NID" placeholder disabled></x-input>
@@ -211,10 +203,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_bank_name )
-                                        <!-- Current Bank Name -->
+                                @if( $bp->tmp_bank_name )
+                                    <!-- Current Bank Name -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->bank_name }}" label="Current Bank Name" placeholder disabled></x-input>
@@ -228,10 +220,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_brunch_name )
-                                        <!-- Current Brunch Name -->
+                                @if( $bp->tmp_brunch_name )
+                                    <!-- Current Brunch Name -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->brunch_name }}" label="Current Brunch Name" placeholder disabled></x-input>
@@ -245,10 +237,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_account_number )
-                                        <!-- Current Account Number -->
+                                @if( $bp->tmp_account_number )
+                                    <!-- Current Account Number -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ $bp->account_number }}" label="Current Account Number" placeholder disabled></x-input>
@@ -262,10 +254,10 @@
                                             </div>
                                         </div>
                                         <hr>
-                                    @endif
+                                @endif
 
-                                    @if( $bp->tmp_dob )
-                                        <!-- Current Date Of Birth -->
+                                @if( $bp->tmp_dob )
+                                    <!-- Current Date Of Birth -->
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
                                                 <x-input value="{{ ($bp->dob ?? '') ? $bp->dob->toDateString() : '' }}" type="date" label="Current Date Of Birth" placeholder disabled></x-input>
@@ -314,4 +306,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

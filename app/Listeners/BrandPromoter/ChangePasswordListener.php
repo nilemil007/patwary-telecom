@@ -2,14 +2,14 @@
 
 namespace App\Listeners\BrandPromoter;
 
-use App\Events\BrandPromoter\BpAdditionalInfoUpdateEvent;
+use App\Events\BrandPromoter\ChangePasswordEvent;
 use App\Models\User;
-use App\Notifications\BrandPromoter\AdditionalInformationUpdateNotification;
+use App\Notifications\BrandPromoter\ChangePasswordNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Notification;
 
-class AdditionalInformationUpdate
+class ChangePasswordListener
 {
     private $superAdmin;
     /**
@@ -25,11 +25,11 @@ class AdditionalInformationUpdate
     /**
      * Handle the event.
      *
-     * @param BpAdditionalInfoUpdateEvent $event
+     * @param ChangePasswordEvent $event
      * @return void
      */
-    public function handle(BpAdditionalInfoUpdateEvent $event)
+    public function handle(ChangePasswordEvent $event)
     {
-        Notification::sendNow( $this->superAdmin, new AdditionalInformationUpdateNotification( $event ) );
+        Notification::sendNow( $this->superAdmin, new ChangePasswordNotification( $event ) );
     }
 }

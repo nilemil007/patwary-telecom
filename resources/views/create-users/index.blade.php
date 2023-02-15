@@ -42,14 +42,6 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                    {{--Message--}}
-                    @if( session()->has('success') )
-                        <p class="alert alert-success">{{ session('success') }}</p>
-                    @elseif( session()->has('error') )
-                        <p class="alert alert-danger">{{ session('error') }}</p>
-                    @endif
-
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">

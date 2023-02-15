@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BrandPromoter\BpEvent;
+use App\Events\BrandPromoter\BpAdditionalInfoUpdateEvent;
+use App\Events\BrandPromoter\ChangePasswordEvent;
+use App\Events\BrandPromoter\UpdateProfilePictureEvent;
+use App\Events\BrandPromoter\UpdateUsernameEvent;
 use App\Exports\BpExport;
 use App\Http\Requests\BpAdditionalUpdateRequest;
 use App\Http\Requests\BpApproveRequest;
@@ -127,11 +130,16 @@ class BpController extends Controller
             $imgName = $request->image->hashname();
             $request->image->storeAs('public/users', $imgName);
             $updateProfile['image'] = $imgName;
+
+            Event::dispatch( new UpdateProfilePictureEvent( $updateProfile['image'] ) );
         }
 
         if( $bp->update( $updateProfile ) )
         {
-            Event::dispatch( new BpEvent( Auth::user() ) );
+            if ( Auth::user()->username != $updateProfile['username'] )
+            {
+                Event::dispatch( new UpdateUsernameEvent( $updateProfile['username'] ) );
+            }
 
             return redirect()->back()->with('success','Information updated successfully.');
         }
@@ -175,6 +183,8 @@ class BpController extends Controller
         if( $password )
         {
             User::findOrFail( Auth::id() )->update( $validated );
+
+            Event::dispatch( new ChangePasswordEvent() );
 
             return redirect()->back()->with('success','Password changed successfully.');
         }

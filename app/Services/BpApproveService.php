@@ -1,7 +1,14 @@
 <?php
 namespace App\Services;
 
+use App\Events\BrandPromoter\ApproveAdditionalInfoEvent;
+use App\Models\Bp;
+use App\Models\User;
+use App\Notifications\BrandPromoter\ApproveAdditionalInfoNotification;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Notification;
 
 class BpApproveService {
 
@@ -172,8 +179,12 @@ class BpApproveService {
             unset( $data['dob'] );
         }
 
+
         if( $bp->update( $data ) )
         {
+            $userBp = User::firstWhere('id', $bp->user_id);
+            Notification::sendNow($userBp, new ApproveAdditionalInfoNotification( Auth::user() ));
+
             return redirect()->route('bp.index')->with('success','Approved successfully.');
         }
     }
