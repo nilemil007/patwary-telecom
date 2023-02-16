@@ -316,7 +316,7 @@
                                                 <div class="form-floating mb-3">
                                                     <x-input name="education" class="{{ $edu_warning }}" value="{{ old('education', strtoupper($rso->education)) }}" label="Education" placeholder>
                                                         @if( $rso->tmp_education )
-                                                            <small class="text-warning">{{ $rso->tmp_education }}</small>
+                                                            <small class="text-warning">New: {{ $rso->tmp_education }}</small>
                                                         @endif
                                                     </x-input>
                                                 </div>

@@ -5,8 +5,6 @@ namespace App\Services\Rso;
 use App\Models\User;
 use App\Notifications\Rso\AdditionalInfoUpdateNotification;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Notification;
 
 class AdditionalInfoUpdateService {
@@ -94,7 +92,7 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_nid'] = $request->nid;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->marital_status != $request->marital_status )
+        if ( $rso->marital_status != strtolower($request->marital_status) )
         {
             unset( $additionalData['marital_status'] );
             $additionalData['tmp_marital_status'] = $request->marital_status;
@@ -104,6 +102,7 @@ class AdditionalInfoUpdateService {
         if( $rso->update( $additionalData ) )
         {
             $superAdmin = User::firstWhere('role', 'super-admin');
+
             Notification::sendNow( $superAdmin, new AdditionalInfoUpdateNotification( $rso ) );
 
             return redirect()->back()->with('success','Update request sent successfully.');

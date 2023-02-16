@@ -129,6 +129,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/rso/{rso}/profile', [ RsoController::class, 'profile' ])->name('rso.profile');
     Route::patch('/rso/{rso}/profile/update', [ RsoController::class, 'profileUpdate' ])->name('rso.profile.update');
     Route::patch('/rso/{rso}/additional-info-update', [ RsoController::class, 'additionalInfo' ])->name('rso.additional.info.update');
+    Route::get('/rso/{rso}/verify', [ RsoController::class, 'verify' ])->name('rso.verify');
+    Route::post('/rso/{rso}/approve', [ RsoController::class, 'approve' ])->name('rso.approve');
+    Route::post('/rso/{rso}/reject', [ RsoController::class, 'reject' ])->name('rso.reject');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,

@@ -9,7 +9,9 @@ use App\Models\Rso;
 use App\Models\User;
 use App\Notifications\Rso\ChangeProfilePictureNotification;
 use App\Notifications\Rso\ChangeUsernameNotification;
+use App\Notifications\Rso\RejectNotification;
 use App\Services\Rso\AdditionalInfoUpdateService;
+use App\Services\Rso\ApproveService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -33,13 +35,13 @@ class RsoController extends Controller
         {
             $rsos = Rso::with('user','supervisor')
                 ->search( $request->search )
-                ->latest()
+                ->latest('status')
                 ->paginate(5);
         }else{
             $rsos = Rso::with('user')
                 ->where('user_id', Auth::id())
                 ->search( $request->search )
-                ->latest()
+                ->latest('status')
                 ->paginate(5);
         }
 
@@ -158,6 +160,48 @@ class RsoController extends Controller
     public function additionalInfo( AdditionalInfoUpdate $request, Rso $rso )
     {
         ( new AdditionalInfoUpdateService() )->update( $request, $rso );
+    }
+
+    public function verify( Rso $rso ): Factory|View|Application
+    {
+        return view('rso.verify', compact('rso'));
+    }
+
+    public function approve(Request $request, Rso $rso): RedirectResponse
+    {
+        ( new ApproveService() )->approved( $request, $rso );
+
+        return redirect()->route('rso.index')->with('error','Approved failed!');
+    }
+
+    public function reject( Rso $rso ): RedirectResponse
+    {
+        $update = $rso->update([
+            'tmp_personal_number'   => null,
+            'tmp_father_name'       => null,
+            'tmp_mother_name'       => null,
+            'tmp_address'           => null,
+            'tmp_blood_group'       => null,
+            'tmp_account_number'    => null,
+            'tmp_bank_name'         => null,
+            'tmp_brunch_name'       => null,
+            'tmp_routing_number'    => null,
+            'tmp_education'         => null,
+            'tmp_marital_status'    => null,
+            'tmp_nid'               => null,
+            'tmp_dob'               => null,
+            'status'                => null,
+        ]);
+
+        if ( $update )
+        {
+            $userRso = User::firstWhere('id', $rso->user_id);
+
+            Notification::sendNow($userRso, new RejectNotification( Auth::user() ));
+
+            return redirect()->route('rso.index')->with('success','Request rejected successfully.');
+        }
+        return redirect()->route('rso.index')->with('error','Request not rejected.');
     }
 
 

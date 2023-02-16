@@ -82,6 +82,7 @@ $logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : 
                     $bp = \App\Models\Bp::firstWhere('user_id', auth()->id())->id??'';
                     $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
                     @endphp
+
                     <a href="{{ $role == 'bp' ? route('bp.show', $bp) : ( $role == 'rso' ? route('rso.profile', $rso) : '' ) }}"
                        class="dropdown-item">
                         Profile & account

@@ -21,7 +21,7 @@ class AdditionalInfoUpdate extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'personal_number' => [
@@ -81,7 +81,7 @@ class AdditionalInfoUpdate extends FormRequest
             'nid' => [
                 'required',
                 'max:17',
-                'unique:bps,nid,'.request()->segment(2),
+                'unique:rsos,nid,'.request()->segment(2),
             ],
             'resigning_date' => [
                 'nullable',

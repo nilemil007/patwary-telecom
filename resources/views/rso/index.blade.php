@@ -28,7 +28,7 @@
                                             <div class="input-group mb-3">
                                                 <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
                                                 <x-button class="btn-sm">
-                                                    <x-icon.search/>Search
+                                                    <x-icon.search></x-icon.search>Search
                                                 </x-button>
                                             </div>
                                         </form>
@@ -52,6 +52,7 @@
                                     <th>Father/Mother Name</th>
                                     <th>Thana/District</th>
                                     <th>Address</th>
+                                    <th>document</th>
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
@@ -59,7 +60,7 @@
 
                                 <tbody>
                                 @forelse( $rsos as $sl => $rso )
-                                    <tr>
+                                    <tr {{ $rso->status ? 'class=bg-danger-lt' : '' }}>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select invoice">
@@ -94,53 +95,27 @@
                                             <div class="text-muted">{{ $rso->district }}</div>
                                         </td>
                                         <td title="{{ $rso->address }}">{{ \Illuminate\Support\Str::words($rso->address,5) }}</td>
-
-
                                         <td>
-                                            @switch( $rso->status )
-                                                @case( 1 )
-                                                <span class="badge bg-success me-1"></span> Active
-                                                @break
-
-                                                @case( 2 )
-                                                <span class="badge bg-danger me-1"></span> Inactive
-                                                @break
-                                            @endswitch
+                                            @if( $rso->document )
+                                                <x-link href="{{ route('download.bp.document', $bp->id) }}">
+                                                    Download
+                                                </x-link>
+                                            @endif
                                         </td>
-                                        {{--                                        <td>--}}
-                                        {{--                                            @if( $rso->remarks )--}}
-                                        {{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'super-admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
-                                        {{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'super-admin') #approve-reject-{{ $replace->id }} @endif">--}}
-                                        {{--                                                    <span class="badge bg-danger me-1"></span> {{ $replace->remarks }}--}}
-                                        {{--                                                </button>--}}
-                                        {{--                                            @endif--}}
-                                        {{--                                        </td>--}}
-                                        {{--                                        <td>--}}
-                                        {{--                                            <div>{{ $replace->created_at->diffForHumans() }}</div>--}}
-                                        {{--                                            <div class="text-muted">{{ $replace->created_at->toDayDateTimeString() }}</div>--}}
-                                        {{--                                        </td>--}}
-                                        {{--                                        <td>--}}
-                                        {{--                                            <div>{{ isset($replace->payment_at)?$replace->payment_at->diffForHumans():'' }}</div>--}}
-                                        {{--                                            <div class="text-muted">{{ isset($replace->payment_at)?$replace->payment_at->toDayDateTimeString():'' }}</div>--}}
+                                        <td>
+                                            @if( $rso->status )
+                                                <a href="{{ route('rso.verify', $rso->id) }}" class="btn btn-sm btn-pill">
+                                                    <span class="badge bg-danger me-1"></span>Verify
+                                                </a>
+                                            @endif
+                                        </td>
 
-                                        {{--                                        </td>--}}
                                         <td>
                                             <!-- Edit -->
-                                            <a href="{{ \Illuminate\Support\Facades\Auth::id() == $rso->user_id && $rso->remarks ? '#' : route('rso.edit', $rso->id) }}"
-                                               class="link-primary text-decoration-none {{ \Illuminate\Support\Facades\Auth::id() == $rso->user_id && $rso->remarks ? 'disabled' : route('rso.edit', $rso->id) }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
-                                            </a>
-
-                                            <!-- Delete -->
-                                            {{--                                            @can('Replace delete')--}}
-                                            <a href="#" class="link-danger text-decoration-none"
-                                               data-bs-toggle="modal" data-bs-target="#del-replace-{{ $rso->id }}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                            </a>
-                                            {{--                                            @endcan--}}
+                                            <x-link href="{{ route('rso.edit', $rso->id) }}" class="link-primary">
+                                                <x-icon.edit></x-icon.edit>
+                                            </x-link>
                                         </td>
-                                        @include('rso.modals.delete')
-                                        {{--                                        @include('rso.modals.approve')--}}
                                     </tr>
                                 @empty
                                     <tr>
@@ -156,14 +131,11 @@
                         </div>
                     </div>
 
-                    @can('Replace export')
-                        @if( count($rsos) > 0 )
-                            <div class="mt-3">
-                                <a class="btn btn-sm btn-success" href="{{ route('rso.export') }}">Export Excel</a>
-                            </div>
-                        @endif
-                    @endcan
-
+                    @if( count( $rsos ) > 0 )
+                        <div class="mt-3">
+                            <a class="btn btn-sm btn-success" href="{{ route('rso.export') }}">Export Excel</a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

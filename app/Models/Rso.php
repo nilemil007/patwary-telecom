@@ -139,6 +139,10 @@ class Rso extends Model
     {
         return $this->belongsTo( User::class );
     }
+    public function ddHouse(): BelongsTo
+    {
+        return $this->belongsTo( DdHouse::class );
+    }
 
     public function supervisor(): BelongsTo
     {

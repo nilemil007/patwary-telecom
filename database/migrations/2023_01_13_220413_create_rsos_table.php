@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('itop_number', 11)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();
             $table->string('personal_number', 11)->nullable()->unique();
-            $table->string('tmp_personal_number', 11)->nullable()->unique();
+            $table->string('tmp_personal_number', 11)->nullable();
             $table->string('rid', 10)->nullable()->unique();
             $table->string('father_name', 50)->nullable();
             $table->string('tmp_father_name', 50)->nullable();
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->string('tmp_blood_group')->nullable();
             $table->string('sr_no', 5)->nullable()->unique();
             $table->string('account_number', 20)->nullable()->unique();
-            $table->string('tmp_account_number', 20)->nullable()->unique();
+            $table->string('tmp_account_number', 20)->nullable();
             $table->string('bank_name')->nullable();
             $table->string('tmp_bank_name')->nullable();
             $table->string('brunch_name')->nullable();

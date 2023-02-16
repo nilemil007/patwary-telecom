@@ -3,7 +3,7 @@
     <x-slot:title>BP</x-slot:title>
 
     <!-- Page Pre Title -->
-    <x-slot:page-pre-title>Overview</x-slot>
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>BP</x-slot:page-title>
@@ -29,7 +29,7 @@
                                             <div class="input-group mb-3">
                                                 <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
                                                 <x-button class="btn-sm">
-                                                    <x-icon.search/>Search
+                                                    <x-icon.search></x-icon.search>Search
                                                 </x-button>
                                             </div>
                                         </form>
@@ -149,7 +149,7 @@
                                         <td>
                                             <!-- Edit -->
                                             <x-link href="{{ route('bp.edit', $bp->id) }}" class="link-primary">
-                                                <x-icon.edit/>
+                                                <x-icon.edit></x-icon.edit>
                                             </x-link>
                                         </td>
                                     </tr>
@@ -167,15 +167,13 @@
                         </div>
                     </div>
 
-                    @can('Replace export')
-                        @if( count($bps) > 0 )
-                            <div class="mt-3">
-                                <a class="btn btn-sm btn-success" href="{{ route('bp.export') }}">
-                                    Export Excel
-                                </a>
-                            </div>
-                        @endif
-                    @endcan
+                    @if( count( $bps ) > 0 )
+                        <div class="mt-3">
+                            <a class="btn btn-sm btn-success" href="{{ route('bp.export') }}">
+                                Export Excel
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
