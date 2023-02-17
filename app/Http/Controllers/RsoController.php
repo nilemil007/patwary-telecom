@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Rso\AdditionalInfoUpdate;
 use App\Http\Requests\Rso\ProfileUpdate;
+use App\Http\Requests\Rso\Update;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
 use App\Models\Rso;
 use App\Models\User;
@@ -49,38 +50,6 @@ class RsoController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param Rso $rso
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Rso $rso)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param Rso $rso
@@ -94,26 +63,17 @@ class RsoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param Update $request
      * @param Rso $rso
      * @return RedirectResponse
      */
-    public function update(Request $request, Rso $rso): RedirectResponse
+    public function update(Update $request, Rso $rso): RedirectResponse
     {
-        $rso->update($request->all());
+        $rso->update($request->validated());
+
         return redirect()->route('rso.index')->with('success','Rso information updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param Rso $rso
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy( Rso $rso )
-    {
-        //
-    }
 
     public function profile( Rso $rso ): Factory|View|Application
     {

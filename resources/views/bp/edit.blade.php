@@ -202,8 +202,8 @@
                                 </div>
 
                                 <div class="form-footer">
-                                    <x-button class="w-100 d-md-none"><x-icon.reload/>Update</x-button>
-                                    <x-button class="d-none d-md-block"><x-icon.reload/>Update</x-button>
+                                    <x-button class="w-100 d-md-none"><x-icon.reload></x-icon.reload>Update</x-button>
+                                    <x-button class="d-none d-md-block"><x-icon.reload></x-icon.reload>Update</x-button>
                                 </div>
                             </form>
                         </div>

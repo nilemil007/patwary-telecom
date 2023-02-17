@@ -133,28 +133,28 @@
                                             <!-- Supervisor -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input value="{{ $rso->supervisor->user->name }} - {{ $rso->supervisor->pool_number }}" label="Supervisor" placeholder readonly></x-input>
+                                                    <x-input value="{{ $rso->supervisor->user->name }} - {{ $rso->supervisor->pool_number }}" label="Supervisor" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Code -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="code" value="{{ old('code', $rso->code) }}" label="Code" star="*" placeholder readonly></x-input>
+                                                    <x-input name="code" value="{{ old('code', $rso->code) }}" label="Code" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Itop Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="itop_number" value="{{ old('itop_number', $rso->itop_number) }}" type="number" label="Itop Number" star="*" placeholder readonly></x-input>
+                                                    <x-input name="itop_number" value="{{ old('itop_number', $rso->itop_number) }}" type="number" label="Itop Number" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Pool Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="pool_number" value="{{ old('pool_number', $rso->pool_number) }}" type="number" label="Pool Number" star="*" placeholder readonly></x-input>
+                                                    <x-input name="pool_number" value="{{ old('pool_number', $rso->pool_number) }}" type="number" label="Pool Number" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -172,7 +172,7 @@
                                             <!-- RID -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="rid" value="{{ old('rid', $rso->rid) }}" type="number" label="RID" star="*" placeholder readonly></x-input>
+                                                    <x-input name="rid" value="{{ old('rid', $rso->rid) }}" type="number" label="RID" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -300,7 +300,7 @@
                                             <!-- Market Type -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="market_type" value="{{ old('market_type', $rso->market_type) }}" label="Market Type" placeholder readonly></x-input>
+                                                    <x-input name="market_type" value="{{ old('market_type', $rso->market_type) }}" label="Market Type" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
