@@ -64,7 +64,7 @@ class Retailer extends Model
                 ->orWhere( 'address', 'like', $term )
                 ->orWhere( 'nid', 'like', $term )
                 ->orWhere( 'trade_license_no', 'like', $term )
-                ->orWhere( 'remarks', 'like', $term );
+                ->orWhere( 'status', 'like', $term );
 //                ->orWhereHas('user', function ( $query ) use ( $term ){
 //                    $query->where( 'name', 'like', $term )
 //                        ->orWhere( 'role', 'like', $term );

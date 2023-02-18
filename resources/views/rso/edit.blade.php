@@ -33,10 +33,21 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('rso.update', $rso->id) }}" method="POST">
+                            <form action="{{ route('rso.update', $rso->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
+
+                                    <!-- Supervisor -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-select name="supervisor_id" label="Supervisor">
+                                                @foreach( $supervisors as $supervisor )
+                                                    <option {{ $supervisor->id == $rso->supervisor_id?'selected':'' }} value="{{ $supervisor->id }}"> {{ $supervisor->pool_number }} - {{ $supervisor->user->name }}</option>
+                                                @endforeach
+                                            </x-select>
+                                        </div>
+                                    </div>
 
                                     <!-- Rso Code -->
                                     <div class="col-md-6">
@@ -191,8 +202,8 @@
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
                                             <x-select name="marital_status" label="Marital Status">
-                                                <option {{ $rso->marital_status == 'married'?'selected':'' }} value="married">Married</option>
-                                                <option {{ $rso->marital_status == 'unmarried'?'selected':'' }} value="unmarried">Unmarried</option>
+                                                <option {{ $rso->marital_status == 'Married'?'selected':'' }} value="married">Married</option>
+                                                <option {{ $rso->marital_status == 'Unmarried'?'selected':'' }} value="unmarried">Unmarried</option>
                                             </x-select>
                                         </div>
                                     </div>
@@ -211,7 +222,7 @@
                                     <!-- Date Of Birth -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <x-input label="Date Of Birth" name="dob" type="date" value="{{ old('dob', $rso->dob) }}" star="*" placeholder></x-input>
+                                            <x-input label="Date Of Birth" name="dob" type="date" value="{{ old('dob', !empty($rso->dob)?$rso->dob->toDateString():'') }}" star="*" placeholder></x-input>
                                         </div>
                                     </div>
 
@@ -225,15 +236,24 @@
                                     <!-- Date Of Joining -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <x-input label="Date Of Joining" name="joining_date" type="date" value="{{ old('joining_date', $rso->joining_date) }}" star="*" placeholder></x-input>
+                                            <x-input label="Date Of Joining" name="joining_date" type="date" value="{{ old('joining_date', !empty($rso->joining_date)?$rso->joining_date->toDateString():'') }}" star="*" placeholder></x-input>
                                         </div>
                                     </div>
 
                                     <!-- Date Of Resign -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <x-input label="Date Of Resign" name="resigning_date" type="date" value="{{ old('resigning_date', $rso->resigning_date) }}" star="*" placeholder></x-input>
+                                            <x-input label="Date Of Resign" name="resigning_date" type="date" value="{{ old('resigning_date', !empty($rso->resigning_date)?$rso->resigning_date->toDateString():'') }}" star="*" placeholder></x-input>
                                         </div>
+                                    </div>
+
+                                    <!-- Document Upload -->
+                                    <div class="col-md-12">
+                                        <a href="#" onclick="event.preventDefault();document.getElementById('document').click();" class="avatar avatar-upload rounded">
+                                            <x-icon.upload></x-icon.upload>
+                                            <span class="avatar-upload-text">Document</span>
+                                        </a>
+                                        <x-input id="document" name="document" type="file" hidden accept="application/pdf"></x-input>
                                     </div>
                                 </div>
 

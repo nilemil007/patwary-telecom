@@ -16,6 +16,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Models\Bp;
 use App\Models\CompetitionInformation;
 use App\Models\ItopReplace;
+use App\Models\Rso;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -36,20 +37,6 @@ Route::middleware(['auth'])->group(function(){
             'replace' => ItopReplace::all(),
         ]);
     })->name('dashboard');
-
-
-
-
-
-    //______Download________________________________________________//
-    Route::get('/download/bp/{bp}/document', function ($id){
-        $bp = Bp::firstWhere('id', $id);
-        return Response::download(public_path( 'storage/bp/documents/' . $bp->document ), $bp->user->name);
-    })->name('download.bp.document');
-
-
-
-
 
 
     //______Notifications________________________________________________//
@@ -109,8 +96,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/retailer/export', [ RetailerController::class, 'export' ])->name('retailer.export');
     // Export Competition Information Data
 //    Route::get('/competition-information/export', [ CompetitionInformationController::class, 'export' ])->name('competition.information.export');
-    // Export BP Data
-    Route::get('/bp/export', [ BpController::class, 'export' ])->name('bp.export');
 
     // BTS Delete All
     Route::delete('/delete-all/bts', [ BtsController::class, 'deleteAllBts' ])->name('delete.all.bts');
@@ -124,6 +109,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/bp/{bp}/verify', [ BpController::class, 'verify' ])->name('bp.verify');
     Route::post('/bp/{bp}/approve', [ BpController::class, 'approve' ])->name('bp.approve');
     Route::post('/bp/{bp}/reject', [ BpController::class, 'reject' ])->name('bp.reject');
+    Route::get('/bp/export', [ BpController::class, 'export' ])->name('bp.export');
+    Route::get('/download/bp/{bp}/document', function ($id){
+        $bp = Bp::firstWhere('id', $id);
+        return Response::download(public_path( 'storage/bp/documents/' . $bp->document ), $bp->user->name.'.pdf');
+    })->name('download.bp.document');
 
     // Rso additional routes
     Route::get('/rso/{rso}/profile', [ RsoController::class, 'profile' ])->name('rso.profile');
@@ -133,6 +123,11 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/rso/{rso}/approve', [ RsoController::class, 'approve' ])->name('rso.approve');
     Route::post('/rso/{rso}/reject', [ RsoController::class, 'reject' ])->name('rso.reject');
     Route::post('/rso/change-password', [ RsoController::class, 'changePassword' ])->name('rso.change.password');
+    Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
+    Route::get('/download/rso/{rso}/document', function ($id){
+        $rso = Rso::firstWhere('id', $id);
+        return Response::download( public_path( 'storage/rso/documents/' . $rso->document ), $rso->user->name.'.pdf');
+    })->name('download.rso.document');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,

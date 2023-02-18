@@ -6,6 +6,9 @@ use App\Rules\Nid;
 use Illuminate\Foundation\Http\FormRequest;
 use JetBrains\PhpStorm\ArrayShape;
 
+/**
+ * @property mixed document
+ */
 class Update extends FormRequest
 {
     /**
@@ -26,10 +29,13 @@ class Update extends FormRequest
     public function rules(): array
     {
         return [
+            'supervisor_id' => [
+                'required',
+            ],
             'code' => [
                 'required',
                 'starts_with:RS0',
-                'min:8',
+                'min:6',
                 'max:10',
             ],
             'itop_number' => [
@@ -37,26 +43,26 @@ class Update extends FormRequest
                 'starts_with:019,014',
                 'numeric',
                 'phone',
-                'unique:rsos,itop_number,',
+                'unique:rsos,itop_number,'.request()->segment(2),
             ],
             'pool_number' => [
                 'required',
                 'starts_with:019,014',
                 'numeric',
                 'phone',
-                'unique:rsos,pool_number,',
+                'unique:rsos,pool_number,'.request()->segment(2),
             ],
             'personal_number' => [
                 'required',
                 'numeric',
                 'phone',
-                'unique:rsos,personal_number,',
+                'unique:rsos,personal_number,'.request()->segment(2),
             ],
             'rid' => [
                 'required',
                 'starts_with:RGAZ',
                 'max:10',
-                'unique:rsos,rid,',
+                'unique:rsos,rid,'.request()->segment(2),
             ],
             'father_name' => [
                 'required',
@@ -99,12 +105,12 @@ class Update extends FormRequest
             'sr_no' => [
                 'required',
                 'starts_with:SR-',
-                'unique:rsos,sr_no,',
+                'unique:rsos,sr_no,'.request()->segment(2),
             ],
             'account_number' => [
                 'required',
                 'numeric',
-                'unique:rsos,account_number,',
+                'unique:rsos,account_number,'.request()->segment(2),
             ],
             'bank_name' => [
                 'required',
@@ -148,8 +154,7 @@ class Update extends FormRequest
                 'required',
                 'numeric',
                 new Nid,
-                'unique:rsos,nid,',
-
+                'unique:rsos,nid,'.request()->segment(2),
             ],
             'joining_date' => [
                 'required',
@@ -158,6 +163,10 @@ class Update extends FormRequest
             'resigning_date' => [
                 'nullable',
                 'date',
+            ],
+            'document' => [
+                'nullable',
+                'mimes:pdf',
             ],
         ];
     }

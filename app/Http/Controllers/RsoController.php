@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\Rso\RsoListExport;
 use App\Http\Requests\Rso\AdditionalInfoUpdate;
 use App\Http\Requests\Rso\ProfileUpdate;
 use App\Http\Requests\Rso\Update;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
 use App\Models\Rso;
+use App\Models\Supervisor;
 use App\Models\User;
 use App\Notifications\Rso\ChangePasswordNotification;
 use App\Notifications\Rso\ChangeProfilePictureNotification;
@@ -15,6 +17,7 @@ use App\Notifications\Rso\RejectNotification;
 use App\Rules\CheckExistingPassword;
 use App\Services\Rso\AdditionalInfoUpdateService;
 use App\Services\Rso\ApproveService;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -24,6 +27,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class RsoController extends Controller
 {
@@ -42,11 +47,12 @@ class RsoController extends Controller
                 ->latest('status')
                 ->paginate(5);
         }else{
-            $rsos = Rso::with('user')
-                ->where('user_id', Auth::id())
-                ->search( $request->search )
-                ->latest('status')
-                ->paginate(5);
+            dd('rso index method');
+//            $rsos = Rso::with('user','supervisor')
+//                ->where('user_id', Auth::id())
+//                ->search( $request->search )
+//                ->latest('status')
+//                ->paginate(5);
         }
 
         return view('rso.index', compact('rsos'));
@@ -60,7 +66,8 @@ class RsoController extends Controller
      */
     public function edit(Rso $rso): View|Factory|Application
     {
-        return view('rso.edit', compact('rso'));
+        $supervisors = Supervisor::all();
+        return view('rso.edit', compact('rso','supervisors'));
     }
 
     /**
@@ -69,10 +76,29 @@ class RsoController extends Controller
      * @param Update $request
      * @param Rso $rso
      * @return RedirectResponse
+     * @throws AuthorizationException
      */
     public function update(Update $request, Rso $rso): RedirectResponse
     {
-        $rso->update($request->validated());
+        $this->authorize('super-admin');
+
+        $information = $request->validated();
+
+        if ( $request->hasFile('document') )
+        {
+            if ( File::exists( public_path( $rso->document ) ) )
+            {
+                File::delete( $rso->document );
+            }
+
+            $name = $request->document->hashname();
+            $request->document->storeAs('public/rso/documents',$name);
+            $information['document'] = $name;
+        }else{
+            unset( $information['document'] );
+        }
+
+        $rso->update( $information );
 
         return redirect()->route('rso.index')->with('success','Rso information updated successfully.');
     }
@@ -201,11 +227,9 @@ class RsoController extends Controller
         return redirect()->back()->with('error','Password not changed.');
     }
 
-
-
     // Additional Method
-    public function export()
+    public function export(): BinaryFileResponse
     {
-//        return Excel::download( new ItopReplaceExport, 'itop-replaces.xlsx' );
+        return Excel::download( new RsoListExport(), 'rso-list.xlsx' );
     }
 }

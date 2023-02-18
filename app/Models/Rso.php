@@ -17,6 +17,7 @@ use Illuminate\Support\Str;
  * @method static find()
  * @method static findOrFail()
  * @property mixed user_id
+ * @property mixed document
  */
 class Rso extends Model
 {

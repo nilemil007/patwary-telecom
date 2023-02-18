@@ -49,6 +49,7 @@
                                     <th>Itop/Pool Number</th>
                                     <th>Personal Number</th>
                                     <th>RID</th>
+                                    <th>Supervisor</th>
                                     <th>Father/Mother Name</th>
                                     <th>Thana/District</th>
                                     <th>Address</th>
@@ -87,6 +88,10 @@
                                             <div class="text-muted">{{ $rso->sr_no }}</div>
                                         </td>
                                         <td data-label="Title">
+                                            <div>{{ $rso->supervisor->user->name }}</div>
+                                            <div class="text-muted">{{ $rso->supervisor->pool_number }}</div>
+                                        </td>
+                                        <td data-label="Title">
                                             <div>{{ $rso->father_name }}</div>
                                             <div class="text-muted">{{ $rso->mother_name }}</div>
                                         </td>
@@ -97,7 +102,7 @@
                                         <td title="{{ $rso->address }}">{{ \Illuminate\Support\Str::words($rso->address,5) }}</td>
                                         <td>
                                             @if( $rso->document )
-                                                <x-link href="{{ route('download.bp.document', $bp->id) }}">
+                                                <x-link href="{{ route('download.rso.document', $rso->id) }}">
                                                     Download
                                                 </x-link>
                                             @endif
