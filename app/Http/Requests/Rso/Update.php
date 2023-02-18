@@ -56,6 +56,7 @@ class Update extends FormRequest
                 'required',
                 'starts_with:RGAZ',
                 'max:10',
+                'unique:rsos,rid,',
             ],
             'father_name' => [
                 'required',
@@ -98,6 +99,7 @@ class Update extends FormRequest
             'sr_no' => [
                 'required',
                 'starts_with:SR-',
+                'unique:rsos,sr_no,',
             ],
             'account_number' => [
                 'required',
@@ -144,7 +146,10 @@ class Update extends FormRequest
             ],
             'nid' => [
                 'required',
+                'numeric',
                 new Nid,
+                'unique:rsos,nid,',
+
             ],
             'joining_date' => [
                 'required',

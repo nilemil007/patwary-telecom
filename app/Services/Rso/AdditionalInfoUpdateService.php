@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Notifications\Rso\AdditionalInfoUpdateNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Str;
 
 class AdditionalInfoUpdateService {
 
@@ -26,7 +27,8 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_personal_number'] = $request->personal_number;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->father_name != $request->father_name )
+
+        if ( $rso->father_name != Str::title( $request->father_name ) )
         {
             unset( $additionalData['father_name'] );
             $additionalData['tmp_father_name'] = $request->father_name;
@@ -38,7 +40,7 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_mother_name'] = $request->mother_name;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->address != $request->address )
+        if ( $rso->address != Str::title( $request->address ) )
         {
             unset( $additionalData['address'] );
             $additionalData['tmp_address'] = $request->address;
@@ -56,13 +58,13 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_account_number'] = $request->account_number;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->bank_name != $request->bank_name )
+        if ( $rso->bank_name != Str::title( $request->bank_name ) )
         {
             unset( $additionalData['bank_name'] );
             $additionalData['tmp_bank_name'] = $request->bank_name;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->brunch_name != $request->brunch_name )
+        if ( $rso->brunch_name != Str::title( $request->brunch_name ) )
         {
             unset( $additionalData['brunch_name'] );
             $additionalData['tmp_brunch_name'] = $request->brunch_name;
@@ -74,7 +76,7 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_routing_number'] = $request->routing_number;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->education != strtolower($request->education) )
+        if ( $rso->education != Str::upper( $request->education ) )
         {
             unset( $additionalData['education'] );
             $additionalData['tmp_education'] = $request->education;
@@ -92,7 +94,7 @@ class AdditionalInfoUpdateService {
             $additionalData['tmp_nid'] = $request->nid;
             $additionalData['status'] = 'unapproved';
         }
-        if ( $rso->marital_status != strtolower($request->marital_status) )
+        if ( $rso->marital_status != Str::title( $request->marital_status ) )
         {
             unset( $additionalData['marital_status'] );
             $additionalData['tmp_marital_status'] = $request->marital_status;
@@ -107,6 +109,5 @@ class AdditionalInfoUpdateService {
 
             return redirect()->back()->with('success','Update request sent successfully.');
         }
-        return redirect()->back()->with('error','Information not updated.');
     }
 }

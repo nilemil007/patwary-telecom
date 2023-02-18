@@ -132,6 +132,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/rso/{rso}/verify', [ RsoController::class, 'verify' ])->name('rso.verify');
     Route::post('/rso/{rso}/approve', [ RsoController::class, 'approve' ])->name('rso.approve');
     Route::post('/rso/{rso}/reject', [ RsoController::class, 'reject' ])->name('rso.reject');
+    Route::post('/rso/change-password', [ RsoController::class, 'changePassword' ])->name('rso.change.password');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,

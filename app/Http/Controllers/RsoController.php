@@ -8,9 +8,11 @@ use App\Http\Requests\Rso\Update;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
 use App\Models\Rso;
 use App\Models\User;
+use App\Notifications\Rso\ChangePasswordNotification;
 use App\Notifications\Rso\ChangeProfilePictureNotification;
 use App\Notifications\Rso\ChangeUsernameNotification;
 use App\Notifications\Rso\RejectNotification;
+use App\Rules\CheckExistingPassword;
 use App\Services\Rso\AdditionalInfoUpdateService;
 use App\Services\Rso\ApproveService;
 use Illuminate\Contracts\Foundation\Application;
@@ -20,6 +22,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 
 class RsoController extends Controller
@@ -74,7 +77,6 @@ class RsoController extends Controller
         return redirect()->route('rso.index')->with('success','Rso information updated successfully.');
     }
 
-
     public function profile( Rso $rso ): Factory|View|Application
     {
         return view('rso.profile', compact('rso'));
@@ -117,9 +119,11 @@ class RsoController extends Controller
         return redirect()->back()->with('error','Information not updated.');
     }
 
-    public function additionalInfo( AdditionalInfoUpdate $request, Rso $rso )
+    public function additionalInfo( AdditionalInfoUpdate $request, Rso $rso ): RedirectResponse
     {
         ( new AdditionalInfoUpdateService() )->update( $request, $rso );
+
+        return redirect()->back()->with('error','Information not updated.');
     }
 
     public function verify( Rso $rso ): Factory|View|Application
@@ -162,6 +166,39 @@ class RsoController extends Controller
             return redirect()->route('rso.index')->with('success','Request rejected successfully.');
         }
         return redirect()->route('rso.index')->with('error','Request not rejected.');
+    }
+
+    public function changePassword(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'current_password' => [
+                'required',
+                'min:8',
+                'max:150',
+                new CheckExistingPassword(Auth::user()),
+            ],
+            'password' => [
+                'required',
+                'min:8',
+                'max:150',
+                'confirmed',
+            ],
+        ]);
+
+        $password = Hash::check($validated['current_password'], Auth::user()->password);
+
+        if( $password )
+        {
+            User::findOrFail( Auth::id() )->update( $validated );
+
+            $superAdmin = User::firstWhere('role', 'super-admin');
+
+            Notification::sendNow( $superAdmin, new ChangePasswordNotification( Auth::user() ) );
+
+            return redirect()->back()->with('success','Password changed successfully.');
+        }
+
+        return redirect()->back()->with('error','Password not changed.');
     }
 
 

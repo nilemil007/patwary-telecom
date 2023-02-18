@@ -140,21 +140,21 @@
                                             <!-- Code -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="code" value="{{ old('code', $rso->code) }}" label="Code" star="*" placeholder disabled></x-input>
+                                                    <x-input name="code" value="{{ $rso->code }}" label="Code" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Itop Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="itop_number" value="{{ old('itop_number', $rso->itop_number) }}" type="number" label="Itop Number" star="*" placeholder disabled></x-input>
+                                                    <x-input name="itop_number" value="{{ $rso->itop_number }}" type="number" label="Itop Number" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Pool Number -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="pool_number" value="{{ old('pool_number', $rso->pool_number) }}" type="number" label="Pool Number" star="*" placeholder disabled></x-input>
+                                                    <x-input name="pool_number" value="{{ $rso->pool_number }}" type="number" label="Pool Number" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -172,7 +172,7 @@
                                             <!-- RID -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="rid" value="{{ old('rid', $rso->rid) }}" type="number" label="RID" star="*" placeholder disabled></x-input>
+                                                    <x-input name="rid" value="{{ $rso->rid }}" label="RID" star="*" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -201,21 +201,21 @@
                                             <!-- Division -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="division" value="{{ old('division', $rso->division) }}" label="Division" placeholder disabled></x-input>
+                                                    <x-input name="division" value="{{ $rso->division }}" label="Division" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- District -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="district" value="{{ old('district', $rso->district) }}" label="District" placeholder disabled></x-input>
+                                                    <x-input name="district" value="{{ $rso->district }}" label="District" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Thana -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="thana" value="{{ old('thana', $rso->thana) }}" label="Thana" placeholder disabled></x-input>
+                                                    <x-input name="thana" value="{{ $rso->thana }}" label="Thana" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -249,7 +249,7 @@
                                             <!-- Sr No -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="sr_no" value="{{ old('sr_no', $rso->sr_no) }}" label="Sr No" placeholder disabled></x-input>
+                                                    <x-input name="sr_no" value="{{ $rso->sr_no }}" label="Sr No" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -300,14 +300,14 @@
                                             <!-- Market Type -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="market_type" value="{{ old('market_type', $rso->market_type) }}" label="Market Type" placeholder disabled></x-input>
+                                                    <x-input name="market_type" value="{{ $rso->market_type }}" label="Market Type" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
                                             <!-- Salary -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="salary" type="number" value="{{ old('salary', $rso->salary) }}" label="Salary" placeholder disabled></x-input>
+                                                    <x-input name="salary" type="number" value="{{ $rso->salary }}" label="Salary" placeholder disabled></x-input>
                                                 </div>
                                             </div>
 
@@ -325,7 +325,7 @@
                                             <!-- Marital Status -->
                                             <div class="col-md-6">
                                                 <div class="form-floating mb-3">
-                                                    <x-input name="marital_status" class="{{ $marital_warning }}" value="{{ old('marital_status', strtoupper($rso->marital_status)) }}" label="Marital Status" placeholder>
+                                                    <x-input name="marital_status" class="{{ $marital_warning }}" value="{{ old('marital_status', $rso->marital_status) }}" label="Marital Status" placeholder>
                                                         @if( $rso->tmp_marital_status )
                                                             <small class="text-warning">New: {{ $rso->tmp_marital_status }}</small>
                                                         @endif
@@ -382,40 +382,40 @@
                                 </div>
 
                                 <!-- Change Password -->
-{{--                                <div class="tab-pane" id="tabs-activity-16">--}}
-{{--                                    <form action="{{ route('bp.change.password') }}" method="POST">--}}
-{{--                                        @csrf--}}
-{{--                                        <div class="row">--}}
-{{--                                            <!-- Current Password -->--}}
-{{--                                            <livewire:bp.change-password/>--}}
+                                <div class="tab-pane" id="tabs-activity-16">
+                                    <form action="{{ route('rso.change.password') }}" method="POST">
+                                        @csrf
+                                        <div class="row">
+                                            <!-- Current Password -->
+                                            <livewire:rso.change-password/>
 
-{{--                                            <!-- New Password -->--}}
-{{--                                            <div class="col-md-6">--}}
-{{--                                                <div class="form-floating mb-3">--}}
-{{--                                                    <x-input name="password" label="New Password" type="password" star="*" placeholder></x-input>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+                                            <!-- New Password -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <x-input name="password" label="New Password" type="password" star="*" placeholder></x-input>
+                                                </div>
+                                            </div>
 
-{{--                                            <!-- Confirm Password -->--}}
-{{--                                            <div class="col-md-6">--}}
-{{--                                                <div class="form-floating mb-3">--}}
-{{--                                                    <x-input name="password_confirmation" label="Confirm Password" type="password" star="*" placeholder></x-input>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
+                                            <!-- Confirm Password -->
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    <x-input name="password_confirmation" label="Confirm Password" type="password" star="*" placeholder></x-input>
+                                                </div>
+                                            </div>
 
-{{--                                            @if( !$bp->status )--}}
-{{--                                                <div class="form-footer">--}}
-{{--                                                    <x-button class="w-100 d-md-none">--}}
-{{--                                                        <x-icon.save/>Save Changes--}}
-{{--                                                    </x-button>--}}
+                                            @if( !$rso->status )
+                                                <div class="form-footer">
+                                                    <x-button class="w-100 d-md-none">
+                                                        <x-icon.save></x-icon.save>Save Changes
+                                                    </x-button>
 
-{{--                                                    <x-button class="d-none d-md-block">--}}
-{{--                                                        <x-icon.save/>Save Changes--}}
-{{--                                                    </x-button>--}}
-{{--                                                </div>--}}
-{{--                                        @endif--}}
-{{--                                    </form>--}}
-{{--                                </div>--}}
+                                                    <x-button class="d-none d-md-block">
+                                                        <x-icon.save></x-icon.save>Save Changes
+                                                    </x-button>
+                                                </div>
+                                        @endif
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

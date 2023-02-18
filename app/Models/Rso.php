@@ -127,6 +127,55 @@ class Rso extends Model
             set: fn( $fname ) => Str::lower( $fname ),
         );
     }
+    protected function motherName(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $mname ) => Str::title( $mname ),
+            set: fn( $mname ) => Str::lower( $mname ),
+        );
+    }
+    protected function education(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $edu ) => Str::upper( $edu ),
+            set: fn( $edu ) => Str::lower( $edu ),
+        );
+    }
+    protected function maritalStatus(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $married ) => Str::title( $married ),
+            set: fn( $married ) => Str::lower( $married ),
+        );
+    }
+    protected function address(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $address ) => Str::title( $address ),
+            set: fn( $address ) => Str::lower( $address ),
+        );
+    }
+    protected function bankName(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $bankName ) => Str::title( $bankName ),
+            set: fn( $bankName ) => Str::lower( $bankName ),
+        );
+    }
+    protected function brunchName(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $brunch ) => Str::title( $brunch ),
+            set: fn( $brunch ) => Str::lower( $brunch ),
+        );
+    }
+    protected function marketType(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $market ) => Str::title( $market ),
+            set: fn( $market ) => Str::lower( $market ),
+        );
+    }
 
 
     // Relationship
