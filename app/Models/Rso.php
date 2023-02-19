@@ -29,6 +29,7 @@ class Rso extends Model
         'manager_id',
         'zm_id',
         'dd_house_id',
+        'routes',
         'code',
         'itop_number',
         'pool_number',

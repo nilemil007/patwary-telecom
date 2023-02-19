@@ -50,6 +50,7 @@
                                     <th>Personal Number</th>
                                     <th>RID</th>
                                     <th>Supervisor</th>
+                                    <th>Routes</th>
                                     <th>Father/Mother Name</th>
                                     <th>Thana/District</th>
                                     <th>Address</th>
@@ -91,6 +92,13 @@
                                             <div>{{ $rso->supervisor->user->name }}</div>
                                             <div class="text-muted">{{ $rso->supervisor->pool_number }}</div>
                                         </td>
+                                        @if( !empty( $rso->routes ) )
+                                            <td data-label="Title">
+                                                @foreach( $routes = json_decode($rso->routes) as $id )
+                                                    <div>{{\App\Models\Route::firstWhere('id', $id)->code .' - '.\App\Models\Route::firstWhere('id', $id)->name }}</div>
+                                                @endforeach
+                                            </td>
+                                        @endif
                                         <td data-label="Title">
                                             <div>{{ $rso->father_name }}</div>
                                             <div class="text-muted">{{ $rso->mother_name }}</div>

@@ -7,6 +7,7 @@ use App\Http\Requests\Rso\AdditionalInfoUpdate;
 use App\Http\Requests\Rso\ProfileUpdate;
 use App\Http\Requests\Rso\Update;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
+use App\Models\Route;
 use App\Models\Rso;
 use App\Models\Supervisor;
 use App\Models\User;
@@ -67,7 +68,8 @@ class RsoController extends Controller
     public function edit(Rso $rso): View|Factory|Application
     {
         $supervisors = Supervisor::all();
-        return view('rso.edit', compact('rso','supervisors'));
+        $routes = Route::all();
+        return view('rso.edit', compact('rso','supervisors','routes'));
     }
 
     /**
@@ -83,6 +85,7 @@ class RsoController extends Controller
         $this->authorize('super-admin');
 
         $information = $request->validated();
+        $information['routes'] = json_encode( $information['routes'] );
 
         if ( $request->hasFile('document') )
         {

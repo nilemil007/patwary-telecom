@@ -143,21 +143,22 @@
                         </div>
                     </div>
 
-                    @if( count( $routes ) > 0 )
-                        <div class="mt-3 d-flex justify-content-between align-items-center">
-                            <div>
-                                <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
 
-                                @if( count( $routes ) > 1 )
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#delete_all_routes">Delete All</button>
-                                    @include('route.modals.delete-all')
-                                @endif
-                            </div>
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        @if( count( $routes ) > 0 )
+                        <div>
+                            <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
 
-                            <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
+                            @if( count( $routes ) > 1 )
+                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                        data-bs-target="#delete_all_routes">Delete All</button>
+                                @include('route.modals.delete-all')
+                            @endif
                         </div>
-                    @endif
+                        @endif
+
+                        <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
+                    </div>
                 </div>
             </div>
         </div>

@@ -49,6 +49,20 @@
                                         </div>
                                     </div>
 
+                                    {{ dd(json_decode($rso->routes[0])) }}
+                                    <!-- Route -->
+                                    @if( !empty($rso->routes) )
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-select name="routes[]" label="Route" multiple="multiple">
+                                                @foreach( $routes as $route )
+                                                    <option {{ in_array( $route->id, json_decode($rso->$routes) )?'selected':'' }} value="{{ $route->id }}"> {{ $route->code }} - {{ $route->name }}</option>
+                                                @endforeach
+                                            </x-select>
+                                        </div>
+                                    </div>
+                                    @endif
+
                                     <!-- Rso Code -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">

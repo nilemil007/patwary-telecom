@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('manager_id')->nullable();
             $table->integer('zm_id')->nullable();
             $table->foreignId('dd_house_id')->constrained();
+            $table->text('routes')->nullable();
             $table->string('code', 10)->nullable()->unique();
             $table->string('itop_number', 11)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();

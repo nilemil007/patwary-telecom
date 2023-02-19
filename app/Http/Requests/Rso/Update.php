@@ -38,6 +38,7 @@ class Update extends FormRequest
                 'min:6',
                 'max:10',
             ],
+            'routes' => [],
             'itop_number' => [
                 'required',
                 'starts_with:019,014',
