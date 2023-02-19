@@ -90,8 +90,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/bts/export', [ BtsController::class, 'export' ])->name('bts.export');
     // Export Route Data
     Route::get('/route/export', [ RouteController::class, 'export' ])->name('route.export');
-    // Export Rso Data
-    Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
     // Export Retailer Data
     Route::get('/retailer/export', [ RetailerController::class, 'export' ])->name('retailer.export');
     // Export Competition Information Data
@@ -125,6 +123,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/rso/{rso}/approve', [ RsoController::class, 'approve' ])->name('rso.approve');
     Route::post('/rso/{rso}/reject', [ RsoController::class, 'reject' ])->name('rso.reject');
     Route::post('/rso/change-password', [ RsoController::class, 'changePassword' ])->name('rso.change.password');
+    Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
     Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
     Route::get('/download/rso/{rso}/document', function ($id){
         $rso = Rso::firstWhere('id', $id);

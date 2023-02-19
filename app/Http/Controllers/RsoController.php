@@ -85,7 +85,6 @@ class RsoController extends Controller
         $this->authorize('super-admin');
 
         $information = $request->validated();
-        $information['routes'] = json_encode( $information['routes'] );
 
         if ( $request->hasFile('document') )
         {
@@ -233,6 +232,6 @@ class RsoController extends Controller
     // Additional Method
     public function export(): BinaryFileResponse
     {
-        return Excel::download( new RsoListExport(), 'rso-list.xlsx' );
+        return Excel::download( new RsoListExport(), 'Rso.xlsx' );
     }
 }

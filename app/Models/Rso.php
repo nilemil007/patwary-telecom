@@ -122,6 +122,14 @@ class Rso extends Model
         });
     }
 
+    protected function routes(): Attribute
+    {
+        return Attribute::make(
+            get: fn( $route ) => json_decode( $route, true ),
+            set: fn( $route ) => json_encode( $route ),
+        );
+    }
+
     protected function fatherName(): Attribute
     {
         return Attribute::make(
@@ -194,7 +202,6 @@ class Rso extends Model
     {
         return $this->belongsTo( DdHouse::class );
     }
-
     public function supervisor(): BelongsTo
     {
         return $this->belongsTo( Supervisor::class );

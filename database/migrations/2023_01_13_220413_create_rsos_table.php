@@ -13,14 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('rsos', function (Blueprint $table) {
+        Schema::create('rsos',
+            function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('supervisor_id')->constrained();
             $table->integer('manager_id')->nullable();
             $table->integer('zm_id')->nullable();
             $table->foreignId('dd_house_id')->constrained();
-            $table->text('routes')->nullable();
+            $table->json('routes')->nullable();
             $table->string('code', 10)->nullable()->unique();
             $table->string('itop_number', 11)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();

@@ -92,13 +92,15 @@
                                             <div>{{ $rso->supervisor->user->name }}</div>
                                             <div class="text-muted">{{ $rso->supervisor->pool_number }}</div>
                                         </td>
-                                        @if( !empty( $rso->routes ) )
-                                            <td data-label="Title">
-                                                @foreach( $routes = json_decode($rso->routes) as $id )
-                                                    <div>{{\App\Models\Route::firstWhere('id', $id)->code .' - '.\App\Models\Route::firstWhere('id', $id)->name }}</div>
+                                        <td data-label="Title">
+                                            @if( !empty( $rso->routes ) )
+                                                @foreach( $rso->routes as $id )
+                                                    @if(\App\Models\Route::firstWhere('id', $id) !== null)
+                                                        <div>{{ \App\Models\Route::firstWhere('id', $id)->code .' - '.\App\Models\Route::firstWhere('id', $id)->name }}</div>
+                                                    @endif
                                                 @endforeach
-                                            </td>
-                                        @endif
+                                            @endif
+                                        </td>
                                         <td data-label="Title">
                                             <div>{{ $rso->father_name }}</div>
                                             <div class="text-muted">{{ $rso->mother_name }}</div>
