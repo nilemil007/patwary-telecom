@@ -1,7 +1,3 @@
-@php
-
-@endphp
-
 <x-main>
 
     <!-- Main Title -->
@@ -58,7 +54,11 @@
                                         <div class="form-floating mb-3">
                                             <x-select name="routes[]" label="Route" multiple="multiple">
                                                 @foreach( $routes as $route )
-                                                    <option {{ in_array($route->id, $rso->routes)?'selected':'' }} value="{{ $route->id }}"> {{ $route->code }} - {{ $route->name }}</option>
+                                                    @php
+                                                        $selected = in_array($route->id, $rso->routes??[])?'selected':'';
+                                                    @endphp
+
+                                                    <option {{ $selected }} value="{{ $route->id }}"> {{ $route->code }} - {{ $route->name }}</option>
                                                 @endforeach
                                             </x-select>
                                         </div>

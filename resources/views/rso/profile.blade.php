@@ -365,6 +365,22 @@
                                                     </x-input>
                                                 </div>
                                             </div>
+
+                                            <!-- Routes -->
+                                            <div class="col-md-12">
+
+                                                    <div class="form-group mb-3">
+                                                        <label class="form-label">Routes</label>
+                                                        <div>
+                                                            @foreach($rso->routes ?? [] as $route)
+                                                            <label class="form-check">
+                                                                <input class="form-check-input" type="checkbox" checked="" disabled>
+                                                                <span class="form-check-label">{{ \App\Models\Route::firstWhere('id', $route)->code.' - '.\App\Models\Route::firstWhere('id', $route)->name }}</span>
+                                                            </label>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                            </div>
                                         </div>
 
                                         @if( !$rso->status )
