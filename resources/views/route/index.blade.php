@@ -1,63 +1,41 @@
-@extends('layouts.app')
-@push('title') Route List @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Route List
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <form action="{{ route('route.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="input-group">
-                            <input name="import_routes" type="file"
-                                   accept=".xls,.xlsx"
-                                   class="form-control"
-                                   aria-label="Upload" required>
+    <!-- Main Title -->
+    <x-slot:title>Route List</x-slot:title>
 
-                            <button class="btn btn-outline-google" type="submit">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="icon icon-tabler icon-tabler-file-import" width="24" height="24"
-                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                                    <path d="M5 13v-8a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5.5m-9.5 -2h7m-3 -3l3 3l-3 3"></path>
-                                </svg>
-                                Import Route
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
+
+    <!-- Page Title -->
+    <x-slot:page-title>Route List</x-slot:page-title>
+
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <form action="{{ route('route.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_routes" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import Route
+                </button>
             </div>
-        </div>
-    </div>
+        </form>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+
+    </x-slot:icon-button>
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                    {{--Message--}}
-                    @if( session()->has('success') )
-                        <p class="alert alert-success">{{ session('success') }}</p>
-                    @elseif( session()->has('error') )
-                        <p class="alert alert-danger">{{ session('error') }}</p>
-                    @elseif( session()->has('warning') )
-                        <p class="alert alert-warning">{{ session('warning') }}</p>
-                    @endif
-
-
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -69,11 +47,23 @@
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
                                     <div class="ms-2 d-inline-block">
                                         <form action="" method="GET">
-                                            <input type="text" name="search" value="{{ request()->get('search') }}"
-                                                   class="form-control form-control-sm">
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="search"
+                                                       value="{{ request()->get('search') }}"
+                                                       class="form-control form-control-sm"
+                                                       placeholder="Type something...">
+                                                <button class="btn btn-sm btn-primary"
+                                                        type="submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <circle cx="10" cy="10" r="7"></circle>
+                                                        <line x1="21" y1="21" x2="15" y2="15"></line>
+                                                    </svg>
+                                                    Search
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -106,7 +96,7 @@
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
 
-{{--                                        <td>{{ $route->rso->user->ddHouse->code }}</td>--}}
+                                        {{--                                        <td>{{ $route->rso->user->ddHouse->code }}</td>--}}
                                         <td>{{ $route->code }}</td>
                                         <td>{{ $route->name }}</td>
                                         <td>{{ \Illuminate\Support\Str::words($route->description,9) }}</td>
@@ -154,18 +144,22 @@
                     </div>
 
                     @if( count( $routes ) > 0 )
-                        <div class="mt-3">
-                            <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                            <div>
+                                <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
 
-                            @if( count( $routes ) > 1 )
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_routes">Delete All</button>
-                                @include('route.modals.delete-all')
-                            @endif
+                                @if( count( $routes ) > 1 )
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete_all_routes">Delete All</button>
+                                    @include('route.modals.delete-all')
+                                @endif
+                            </div>
+
+                            <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
                         </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
-@endsection
+</x-main>

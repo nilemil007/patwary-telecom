@@ -101,6 +101,8 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/delete-all/bts', [ BtsController::class, 'deleteAllBts' ])->name('delete.all.bts');
     // Routes Delete All
     Route::delete('/delete-all/routes', [ RouteController::class, 'deleteAllRoutes' ])->name('delete.all.routes');
+    Route::get('/download-bts-sample-file', [ BtsController::class, 'sampleFileDownload' ])->name('download.bts.sample.file');
+
 
     // BP Profile Update
     Route::patch('/bp/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('bp.profile.update');
@@ -128,6 +130,9 @@ Route::middleware(['auth'])->group(function(){
         $rso = Rso::firstWhere('id', $id);
         return Response::download( public_path( 'storage/rso/documents/' . $rso->document ), $rso->user->name.'.pdf');
     })->name('download.rso.document');
+
+    // Route
+    Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
     Route::resources([
         'dd-house'          => DdHouseController::class,

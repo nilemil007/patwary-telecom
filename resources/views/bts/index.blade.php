@@ -1,54 +1,37 @@
-@extends('layouts.app')
-@push('title') BTS List @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        BTS List
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <form action="{{ route('bts.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="input-group">
-{{--                            <x-input name="import_bts" type="file" accept=".xls,.xlsx" required></x-input>--}}
-{{--                            <x-button class="btn-outline-pink" >--}}
-{{--                                <x-icon.file-import/>Import BTS--}}
-{{--                            </x-button>--}}
+    <!-- Main Title -->
+    <x-slot:title>BTS List</x-slot:title>
 
-                            <input name="import_bts" type="file"
-                                   accept=".xls,.xlsx"
-                                   aria-describedby="inputGroupFileAddon04"
-                                   class="form-control"
-                                   aria-label="Upload" required>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
-                            <button class="btn btn-outline-pink" type="submit"
-                                    id="inputGroupFileAddon04" data-bs-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="icon icon-tabler icon-tabler-file-import" width="24" height="24"
-                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                                    <path d="M5 13v-8a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5.5m-9.5 -2h7m-3 -3l3 3l-3 3"></path>
-                                </svg>
-                                Import BTS
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    <!-- Page Title -->
+    <x-slot:page-title>BTS List</x-slot:page-title>
+
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <form action="{{ route('bts.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_bts" type="file"
+                       accept=".xls,.xlsx"
+                       aria-describedby="inputGroupFileAddon04"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-pink" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import BTS
+                </button>
             </div>
-        </div>
-    </div>
+        </form>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+
+    </x-slot:icon-button>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -65,10 +48,23 @@
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
                                     <div class="ms-2 d-inline-block">
                                         <form action="" method="GET">
-                                            <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control form-control-sm" aria-label="Search invoice">
+                                            <div class="input-group mb-3">
+                                                <input type="text" name="search"
+                                                       value="{{ request()->get('search') }}"
+                                                       class="form-control form-control-sm"
+                                                       placeholder="Type something...">
+                                                <button class="btn btn-sm btn-primary"
+                                                        type="submit">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <circle cx="10" cy="10" r="7"></circle>
+                                                        <line x1="21" y1="21" x2="15" y2="15"></line>
+                                                    </svg>
+                                                    Search
+                                                </button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -109,7 +105,7 @@
                                                    aria-label="Select invoice">
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
-{{--                                        <td>{{ $bts->ddHouse->code }}</td>--}}
+                                        {{--                                        <td>{{ $bts->ddHouse->code }}</td>--}}
                                         <td>{{ $bts->dd_house_id }}</td>
                                         <td data-label="Title">
                                             <div title="BTS Code">{{ $bts->bts_code }}</div>
@@ -130,7 +126,7 @@
                                             <div title="Latitude">{{ $bts->latitude }}</div>
                                             <div title="Longitude" class="text-muted">{{ $bts->longitude }}</div>
                                         </td>
-{{--                                        <td>{{ \Carbon\Carbon::parse($bts->two_g_on_air_date)->toFormattedDateString() }}</td>--}}
+                                        {{--                                        <td>{{ \Carbon\Carbon::parse($bts->two_g_on_air_date)->toFormattedDateString() }}</td>--}}
                                         <td>{{ \Carbon\Carbon::parse($bts->two_g_on_air_date)->toFormattedDateString() }}</td>
                                         <td>{{ \Carbon\Carbon::parse($bts->three_g_on_air_date)->toFormattedDateString() }}</td>
                                         <td>{{ \Carbon\Carbon::parse($bts->four_g_on_air_date)->toFormattedDateString() }}</td>
@@ -176,19 +172,24 @@
                         </div>
                     </div>
 
-                    @if( count( $allBts ) > 0 )
-                        <div class="mt-3">
-                            <a class="btn btn-sm btn-success" href="{{ route('bts.export') }}">Export Excel</a>
 
-                            @if( count( $allBts ) > 1 )
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_bts">Delete All</button>
-                                @include('bts.modals.delete-all')
-                            @endif
-                        </div>
-                    @endif
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        @if( count( $allBts ) > 0 )
+                            <div>
+                                <a class="btn btn-sm btn-success" href="{{ route('bts.export') }}">Export Excel</a>
+
+                                @if( count( $allBts ) > 1 )
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete_all_bts">Delete All</button>
+                                    @include('bts.modals.delete-all')
+                                @endif
+                            </div>
+                        @endif
+
+                        <x-link href="{{ route('download.bts.sample.file') }}">Sample file download</x-link>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-@endsection
+</x-main>

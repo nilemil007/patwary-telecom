@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Throwable;
@@ -128,5 +129,12 @@ class BtsController extends Controller
     {
         DB::table('bts')->delete();
         return redirect()->route('bts.index')->with('success', 'All BTS deleted successfully.');
+    }
+
+    // Download sample file
+    public function sampleFileDownload(): BinaryFileResponse
+    {
+        return Response::download(public_path('excel/Sample Bts List.xlsx'), 'Sample Bts List.xlsx');
+
     }
 }

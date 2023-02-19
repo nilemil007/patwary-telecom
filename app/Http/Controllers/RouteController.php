@@ -126,4 +126,11 @@ class RouteController extends Controller
         DB::table('routes')->delete();
         return redirect()->route('route.index')->with('success', 'All route deleted successfully.');
     }
+
+    // Download sample file
+    public function sampleFileDownload(): BinaryFileResponse
+    {
+        return \Illuminate\Support\Facades\Response::download(public_path('excel/Sample Route List.xlsx'), 'Sample Route List.xlsx');
+
+    }
 }
