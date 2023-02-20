@@ -113,6 +113,12 @@ class RetailerController extends Controller
         //
     }
 
+    // Download Sample File
+    public function sampleFileDownload()
+    {
+        //
+    }
+
 
     // Additional Method
     public function export()

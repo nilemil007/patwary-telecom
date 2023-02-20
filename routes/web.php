@@ -133,6 +133,10 @@ Route::middleware(['auth'])->group(function(){
     // Route
     Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
+    // Retailer
+    Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('download.retailer.sample.file');
+
+    // Resource routes
     Route::resources([
         'dd-house'          => DdHouseController::class,
         'create-new-user'   => CreateNewUserController::class,

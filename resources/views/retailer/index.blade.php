@@ -18,10 +18,10 @@
                 <input name="import_retailers" type="file"
                        accept=".xls,.xlsx"
                        aria-describedby="inputGroupFileAddon04"
-                       class="form-control"
+                       class="form-control form-control-sm"
                        aria-label="Upload" required>
 
-                <button class="btn btn-outline-google" type="submit">
+                <button class="btn btn-sm btn-outline-google" type="submit">
                     <x-icon.file-import></x-icon.file-import>Import Retailers
                 </button>
             </div>
@@ -29,21 +29,21 @@
     </x-slot:button>
 
     <x-slot:icon-button>
-        <!-- [Icon Button]-->
-        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="input-group">
-                <input name="import_retailers" type="file"
-                       accept=".xls,.xlsx"
-                       aria-describedby="inputGroupFileAddon04"
-                       class="form-control"
-                       aria-label="Upload" required>
+        <x-icon.file-import></x-icon.file-import>
+{{--        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">--}}
+{{--            @csrf--}}
+{{--            <div class="input-group">--}}
+{{--                <input name="import_retailers" type="file"--}}
+{{--                       accept=".xls,.xlsx"--}}
+{{--                       aria-describedby="inputGroupFileAddon04"--}}
+{{--                       class="form-control form-control-sm"--}}
+{{--                       aria-label="Upload" required>--}}
 
-                <button class="btn btn-outline-google" type="submit">
-                    <x-icon.file-import></x-icon.file-import>
-                </button>
-            </div>
-        </form>
+{{--                <button class="btn btn-sm btn-outline-google" type="submit">--}}
+{{--                    <x-icon.file-import></x-icon.file-import>Import Retailers--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--        </form>--}}
     </x-slot:icon-button>
 
 
@@ -54,17 +54,22 @@
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
-                                <div class="text-muted">
-                                    Show
-                                    <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                                    </div>
-                                    entries
-                                </div>
+{{--                                <div class="text-muted">--}}
+{{--                                    Show--}}
+{{--                                    <div class="mx-2 d-inline-block">--}}
+{{--                                        <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">--}}
+{{--                                    </div>--}}
+{{--                                    entries--}}
+{{--                                </div>--}}
                                 <div class="ms-auto text-muted">
-                                    <div class="ms-2 d-inline-block">
-                                        <form action="" method="GET">
-                                            <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control form-control-sm" aria-label="Search invoice">
+                                    <div class="d-inline-block">
+                                        <form method="GET">
+                                            <div class="input-group mb-3">
+                                                <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
+                                                <x-button class="btn-sm">
+                                                    <x-icon.search></x-icon.search>Search
+                                                </x-button>
+                                            </div>
                                         </form>
                                     </div>
                                 </div>
@@ -123,14 +128,6 @@
                                         <td>{{ $retailer->sim_seller }}</td>
                                         <td>{{ $retailer->service_point }}</td>
                                         <td>{{ $retailer->thana }}</td>
-                                        {{--                                        <td>--}}
-                                        {{--                                            @if( $retailer->remarks )--}}
-                                        {{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'Super Admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
-                                        {{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'Super Admin') #approve-reject-{{ $retailer->id }} @endif">--}}
-                                        {{--                                                    <span class="badge bg-danger me-1"></span> {{ $retailer->remarks }}--}}
-                                        {{--                                                </button>--}}
-                                        {{--                                            @endif--}}
-                                        {{--                                        </td>--}}
                                         <td>
                                             @switch( $retailer->status )
                                                 @case( 'pending' )
@@ -157,23 +154,18 @@
 
                                         <td>
                                             <!-- Edit -->
-                                            <a href="{{ \Illuminate\Support\Facades\Auth::id() == $retailer->user_id && $retailer->remarks ? '#' : route('retailer.edit', $retailer->id) }}"
-                                               class="link-primary text-decoration-none {{ \Illuminate\Support\Facades\Auth::id() == $retailer->user_id && $retailer->remarks ? 'disabled' : route('retailer.edit', $retailer->id) }}">
+                                            <a href="{{ route('retailer.edit', $retailer->id) }}"
+                                               class="link-primary text-decoration-none">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
                                             </a>
 
                                             <!-- Delete -->
-                                            {{--                                            @can('Retailer delete')--}}
                                             <a href="#" class="link-danger text-decoration-none"
                                                data-bs-toggle="modal" data-bs-target="#del-replace-{{ $retailer->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
                                             </a>
-                                            {{--                                            @endcan--}}
                                         </td>
-                                        {{--                                        @include('retailer.modals.delete')--}}
-                                        {{--                                        @include('retailer.modals.approve')--}}
                                     </tr>
-                                    {{--                                    @endcanany--}}
                                 @empty
                                     <tr>
                                         <td>No data found</td>
@@ -188,14 +180,21 @@
                         </div>
                     </div>
 
-                    @can('Replace export')
-                        @if( count($retailers) > 0 )
-                            <div class="mt-3">
+                    <div class="mt-3 d-flex justify-content-between align-items-center">
+                        @if( count( $retailers ) > 0 )
+                            <div>
                                 <a class="btn btn-sm btn-success" href="{{ route('retailer.export') }}">Export Excel</a>
+
+                                @if( count( $retailers ) > 1 )
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete_all_routes">Delete All</button>
+                                    @include('route.modals.delete-all')
+                                @endif
                             </div>
                         @endif
-                    @endcan
 
+                        <x-link href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
+                    </div>
                 </div>
             </div>
         </div>

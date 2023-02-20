@@ -156,20 +156,38 @@
                     </div>
 
 
-                    <div class="mt-3 d-flex justify-content-between align-items-center">
-                        @if( count( $routes ) > 0 )
-                        <div>
-                            <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
+{{--                    <div class="mt-3 d-flex justify-content-between align-items-center">--}}
+{{--                        @if( count( $routes ) > 0 )--}}
+{{--                        <div>--}}
+{{--                            <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>--}}
 
-                            @if( count( $routes ) > 1 )
-                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_routes">Delete All</button>
-                                @include('route.modals.delete-all')
-                            @endif
-                        </div>
+{{--                            @if( count( $routes ) > 1 )--}}
+{{--                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"--}}
+{{--                                        data-bs-target="#delete_all_routes">Delete All</button>--}}
+{{--                                @include('route.modals.delete-all')--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                        @endif--}}
+
+{{--                        <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>--}}
+{{--                    </div>--}}
+
+                    <div class="mt-3">
+                        @if( count( $routes ) > 0 )
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a class="btn btn-sm btn-success" href="{{ route('route.export') }}">Export Excel</a>
+
+                                @if( count( $routes ) > 1 )
+                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete_all_routes">Delete All</button>
+                                    @include('route.modals.delete-all')
+                                @endif
+                            </div>
                         @endif
 
-                        <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
+                        <div class="mt-3">
+                            <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
+                        </div>
                     </div>
                 </div>
             </div>

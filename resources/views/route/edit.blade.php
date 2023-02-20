@@ -14,15 +14,15 @@
     <!-- Page title actions -->
     <x-slot:button>
         <!-- [Full Button]-->
-        <x-link href="{{ route('route.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-            <x-icon.back/>Route List
+        <x-link href="{{ route('route.index') }}" class="btn btn-primary">
+            <x-icon.back></x-icon.back>Route List
         </x-link>
     </x-slot:button>
 
     <x-slot:icon-button>
         <!-- [Icon Button]-->
-        <x-link href="{{ route('route.index') }}" class="btn btn-primary d-sm-none btn-icon" >
-            <x-icon.back/>
+        <x-link href="{{ route('route.index') }}" class="btn btn-primary btn-icon" >
+            <x-icon.back></x-icon.back>
         </x-link>
     </x-slot:icon-button>
 
