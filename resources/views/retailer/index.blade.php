@@ -193,7 +193,7 @@
                             </div>
                         @endif
 
-                        <x-link href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
+                        <x-link class="nav-link" href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
                     </div>
                 </div>
             </div>
