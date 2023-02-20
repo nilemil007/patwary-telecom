@@ -12,7 +12,9 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class RetailerController extends Controller
 {
@@ -114,9 +116,9 @@ class RetailerController extends Controller
     }
 
     // Download Sample File
-    public function sampleFileDownload()
+    public function sampleFileDownload(): BinaryFileResponse
     {
-        //
+        return Response::download('', '');
     }
 
 

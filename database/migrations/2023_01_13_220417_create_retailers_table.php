@@ -18,13 +18,14 @@ return new class extends Migration
             $table->foreignId('dd_house_id')->constrained();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('rso_id')->constrained();
+            $table->foreignId('supervisor_id')->constrained();
             $table->foreignId('bts_id')->nullable()->constrained();
             $table->foreignId('route_id')->nullable()->constrained();
             $table->integer('manager_id')->nullable();
             $table->integer('zm_id')->nullable();
             $table->string('retailer_code')->nullable()->unique();
-            $table->string('shop_name')->nullable();
-            $table->string('tmp_shop_name')->nullable();
+            $table->string('retailer_name')->nullable();
+            $table->string('tmp_retailer_name')->nullable();
             $table->string('retailer_type')->nullable();
             $table->string('enabled')->nullable();
             $table->string('sim_seller')->nullable();
@@ -34,7 +35,7 @@ return new class extends Migration
             $table->string('owner_name')->nullable();
             $table->string('tmp_owner_name')->nullable();
             $table->string('contact_no')->nullable()->unique();
-            $table->string('tmp_contact_no')->nullable()->unique();
+            $table->string('tmp_contact_no')->nullable();
             $table->string('district')->nullable();
             $table->string('thana')->nullable();
             $table->string('tmp_thana')->nullable();
