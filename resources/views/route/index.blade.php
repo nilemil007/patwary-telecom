@@ -29,7 +29,19 @@
 
     <x-slot:icon-button>
         <!-- [Icon Button]-->
+        <form action="{{ route('route.import') }}" method="POST" enctype="multipart/form-data" hidden>
+            @csrf
+            <div class="input-group">
+                <input name="import_routes" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control"
+                       aria-label="Upload" required>
 
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>
+                </button>
+            </div>
+        </form>
     </x-slot:icon-button>
 
     <div class="page-body">

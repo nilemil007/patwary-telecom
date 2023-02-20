@@ -1,75 +1,56 @@
-@extends('layouts.app')
-@push('title') Retailer List @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        Retailer List
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
+    <!-- Main Title -->
+    <x-slot:title>Retailer List</x-slot:title>
 
-                    <!-- Unapproved [Full Button]-->
-                    @if( $role == 'Super Admin' && $retailer->where('remarks','Unapproved')->count() > 0 )
-                        <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                        Unapproved ({{ $retailer->where('remarks','Unapproved')->count() }})
-                        </button>
-                    @elseif( $role != 'Super Admin' && $retailer->where('user_id', $authId)->where('remarks','Unapproved')->count() > 0 )
-                        <button type="button" class="btn btn-danger d-none d-sm-inline-block">
-                            Unapproved ({{ $retailer->where('user_id', $authId)->where('remarks','Unapproved')->count() }})
-                        </button>
-                    @endif
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
-                    <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <div class="input-group">
-                            <input name="import_retailers" type="file"
-                                   accept=".xls,.xlsx"
-                                   aria-describedby="inputGroupFileAddon04"
-                                   class="form-control"
-                                   aria-label="Upload" required>
+    <!-- Page Title -->
+    <x-slot:page-title>Retailer List</x-slot:page-title>
 
-                            <button class="btn btn-outline-blue" type="submit"
-                                    id="inputGroupFileAddon04" data-bs-dismiss="modal">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                     class="icon icon-tabler icon-tabler-file-import" width="24" height="24"
-                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                     stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                                    <path d="M5 13v-8a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5.5m-9.5 -2h7m-3 -3l3 3l-3 3"></path>
-                                </svg>
-                                Import Retailers
-                            </button>
-                        </div>
-                    </form>
-                </div>
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_retailers" type="file"
+                       accept=".xls,.xlsx"
+                       aria-describedby="inputGroupFileAddon04"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import Retailers
+                </button>
             </div>
-        </div>
-    </div>
+        </form>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_retailers" type="file"
+                       accept=".xls,.xlsx"
+                       aria-describedby="inputGroupFileAddon04"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>
+                </button>
+            </div>
+        </form>
+    </x-slot:icon-button>
+
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                    {{--Message--}}
-                    @if( session()->has('success') )
-                        <p class="alert alert-success">{{ session('success') }}</p>
-                    @elseif( session()->has('error') )
-                        <p class="alert alert-danger">{{ session('error') }}</p>
-                    @endif
-
-
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -81,7 +62,6 @@
                                     entries
                                 </div>
                                 <div class="ms-auto text-muted">
-                                    Search:
                                     <div class="ms-2 d-inline-block">
                                         <form action="" method="GET">
                                             <input type="text" name="search" value="{{ request()->get('search') }}" class="form-control form-control-sm" aria-label="Search invoice">
@@ -115,7 +95,6 @@
 
                                 <tbody>
                                 @forelse( $retailers as $sl => $retailer )
-{{--                                    @canany(['viewAny','view'], $retailer)--}}
                                     <tr>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
@@ -144,14 +123,14 @@
                                         <td>{{ $retailer->sim_seller }}</td>
                                         <td>{{ $retailer->service_point }}</td>
                                         <td>{{ $retailer->thana }}</td>
-{{--                                        <td>--}}
-{{--                                            @if( $retailer->remarks )--}}
-{{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'Super Admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
-{{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'Super Admin') #approve-reject-{{ $retailer->id }} @endif">--}}
-{{--                                                    <span class="badge bg-danger me-1"></span> {{ $retailer->remarks }}--}}
-{{--                                                </button>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
+                                        {{--                                        <td>--}}
+                                        {{--                                            @if( $retailer->remarks )--}}
+                                        {{--                                                <button class="btn btn-sm btn-pill {{ \Illuminate\Support\Facades\Auth::user()->role != 'Super Admin' ? 'disabled' : '' }}" data-bs-toggle="modal"--}}
+                                        {{--                                                        data-bs-target="@if(\Illuminate\Support\Facades\Auth::user()->role == 'Super Admin') #approve-reject-{{ $retailer->id }} @endif">--}}
+                                        {{--                                                    <span class="badge bg-danger me-1"></span> {{ $retailer->remarks }}--}}
+                                        {{--                                                </button>--}}
+                                        {{--                                            @endif--}}
+                                        {{--                                        </td>--}}
                                         <td>
                                             @switch( $retailer->status )
                                                 @case( 'pending' )
@@ -184,17 +163,17 @@
                                             </a>
 
                                             <!-- Delete -->
-{{--                                            @can('Retailer delete')--}}
-                                                <a href="#" class="link-danger text-decoration-none"
-                                                   data-bs-toggle="modal" data-bs-target="#del-replace-{{ $retailer->id }}">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                                </a>
-{{--                                            @endcan--}}
+                                            {{--                                            @can('Retailer delete')--}}
+                                            <a href="#" class="link-danger text-decoration-none"
+                                               data-bs-toggle="modal" data-bs-target="#del-replace-{{ $retailer->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                            </a>
+                                            {{--                                            @endcan--}}
                                         </td>
-{{--                                        @include('retailer.modals.delete')--}}
-{{--                                        @include('retailer.modals.approve')--}}
+                                        {{--                                        @include('retailer.modals.delete')--}}
+                                        {{--                                        @include('retailer.modals.approve')--}}
                                     </tr>
-{{--                                    @endcanany--}}
+                                    {{--                                    @endcanany--}}
                                 @empty
                                     <tr>
                                         <td>No data found</td>
@@ -221,4 +200,5 @@
             </div>
         </div>
     </div>
-@endsection
+
+</x-main>

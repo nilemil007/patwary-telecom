@@ -69,13 +69,14 @@
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
                                         <td>
+
                                             <div class="d-flex py-1 align-items-center">
-                                                <span class="avatar me-2" style="background-image: url({{ $rso->user->image }})"></span>
+                                                <x-link href="{{ route('rso.edit', $rso->id) }}" class="link-primary">
+                                                    <span class="avatar me-2" style="background-image: url({{ $rso->user->image }})"></span>
+                                                </x-link>
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $rso->user->name }}</div>
-                                                    <div class="text-muted">
-                                                        <a href="#" class="text-reset">{{ $rso->code }}</a>
-                                                    </div>
+                                                    <div class="text-muted">{{ $rso->code }}</div>
                                                 </div>
                                             </div>
                                         </td>

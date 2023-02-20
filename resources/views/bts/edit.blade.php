@@ -1,40 +1,30 @@
-@extends('layouts.app')
-@push('title') Edit BTS @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Edit
-                    </div>
-                    <h2 class="page-title">
-                        BTS
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Edit BTS</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Edit</x-slot:page-pre-title>
 
-                        <!-- [Full Button]-->
-                        <a href="{{ route('bts.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            BTS List
-                        </a>
+    <!-- Page Title -->
+    <x-slot:page-title>
+        BTS (<em>{{ $bts->code }}</em>)
+    </x-slot:page-title>
 
-                        <!-- [Icon Button]-->
-                        <a href="{{ route('bts.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <x-link href="{{ route('bts.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+            <x-icon.back/>BTS List
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <x-link href="{{ route('bts.index') }}" class="btn btn-primary d-sm-none btn-icon" >
+            <x-icon.back/>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -324,4 +314,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

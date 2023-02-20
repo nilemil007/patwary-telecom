@@ -1,43 +1,31 @@
+<x-main>
 
+    <!-- Main Title -->
+    <x-slot:title>Edit Route</x-slot:title>
 
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Edit</x-slot:page-pre-title>
 
-@extends('layouts.app')
-@push('title') Edit Route @endpush
+    <!-- Page Title -->
+    <x-slot:page-title>
+        Route (<em>{{ $route->name }}</em>)
+    </x-slot:page-title>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Edit
-                    </div>
-                    <h2 class="page-title">
-                        Route
-                    </h2>
-                </div>
+    <!-- Page title actions -->
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <x-link href="{{ route('route.index') }}" class="btn btn-primary d-none d-sm-inline-block">
+            <x-icon.back/>Route List
+        </x-link>
+    </x-slot:button>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <x-slot:icon-button>
+        <!-- [Icon Button]-->
+        <x-link href="{{ route('route.index') }}" class="btn btn-primary d-sm-none btn-icon" >
+            <x-icon.back/>
+        </x-link>
+    </x-slot:icon-button>
 
-                        <!-- [Full Button]-->
-                        <a href="{{ route('route.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            Route List
-                        </a>
-
-                        <!-- [Icon Button]-->
-                        <a href="{{ route('route.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -154,4 +142,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>
