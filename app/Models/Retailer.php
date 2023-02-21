@@ -3,28 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static latest()
- * @method static where()
- * @method static firstWhere()
+ * @method static firstWhere()*@method static where(string$string, string$string1)
+ * @method static where(string $string, string $string1)
  */
 class Retailer extends Model
 {
-    use HasFactory;
+    use HasFactory, HasUuids;
+
+    protected $guarded = ['id'];
 
     protected $fillable = [
         'dd_house_id',
         'user_id',
-        'rso_id',
-        'supervisor_id',
+        'rso_number',
+        'supervisor_number',
         'bts_id',
         'route_id',
-        'manager_id',
-        'zm_id',
         'retailer_code',
         'retailer_name',
         'tmp_retailer_name',
@@ -52,15 +53,17 @@ class Retailer extends Model
         'others_operator',
         'tmp_others_operator',
         'longitude',
+        'tmp_longitude',
         'latitude',
         'tmp_latitude',
-        'tmp_longitude',
         'device_name',
         'tmp_device_name',
         'device',
         'tmp_device',
         'scanner',
         'tmp_scanner',
+        'document',
+        'password',
         'status',
     ];
 
@@ -70,7 +73,7 @@ class Retailer extends Model
         $term = "%$term%";
         $query->where( function ( $query ) use ( $term ){
             $query->where( 'retailer_code', 'like', $term )
-                ->orWhere( 'shop_name', 'like', $term )
+                ->orWhere( 'retailer_name', 'like', $term )
                 ->orWhere( 'retailer_type', 'like', $term )
                 ->orWhere( 'itop_number', 'like', $term )
                 ->orWhere( 'service_point', 'like', $term )
@@ -94,14 +97,7 @@ class Retailer extends Model
     protected function ddHouseId(): Attribute
     {
         return Attribute::make(
-            set: fn( $ddCode ) => empty( $ddCode ) ? null : DdHouse::firstWhere('code', $ddCode)->id,
-        );
-    }
-    // Rso Id
-    protected function rsoId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $rsoItop ) => empty( $rsoItop ) ? null : Rso::firstWhere('itop_number', $rsoItop)->id,
+            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
         );
     }
     // BTS Id

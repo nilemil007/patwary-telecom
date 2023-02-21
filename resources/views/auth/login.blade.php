@@ -24,7 +24,7 @@
                     <label class="form-label">
                         Password
                         <span class="form-label-description">
-                  <a href="#">I forgot password</a>
+                  <a class="d-none" href="#">I forgot password</a>
                 </span>
                     </label>
 

@@ -14,22 +14,20 @@ return new class extends Migration
     public function up()
     {
         Schema::create('retailers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
             $table->foreignId('dd_house_id')->constrained();
             $table->foreignId('user_id')->nullable()->constrained();
-            $table->foreignId('rso_id')->constrained();
-            $table->foreignId('supervisor_id')->constrained();
+            $table->string('rso_number')->nullable();
+            $table->string('supervisor_number')->nullable();
             $table->foreignId('bts_id')->nullable()->constrained();
             $table->foreignId('route_id')->nullable()->constrained();
-            $table->integer('manager_id')->nullable();
-            $table->integer('zm_id')->nullable();
-            $table->string('retailer_code')->nullable()->unique();
-            $table->string('retailer_name')->nullable();
+            $table->string('retailer_code')->unique();
+            $table->string('retailer_name');
             $table->string('tmp_retailer_name')->nullable();
             $table->string('retailer_type')->nullable();
             $table->string('tmp_retailer_type')->nullable();
-            $table->string('enabled')->nullable();
-            $table->string('sim_seller')->nullable();
+            $table->string('enabled');
+            $table->string('sim_seller');
             $table->string('tmp_sim_seller')->nullable();
             $table->string('itop_number')->nullable()->unique();
             $table->string('service_point')->nullable();
@@ -50,15 +48,17 @@ return new class extends Migration
             $table->json('others_operator')->nullable();
             $table->json('tmp_others_operator')->nullable();
             $table->decimal('longitude', 10, 6)->nullable();
+            $table->string('tmp_longitude')->nullable();
             $table->decimal('latitude', 10, 6)->nullable();
             $table->string('tmp_latitude')->nullable();
-            $table->string('tmp_longitude')->nullable();
             $table->string('device_name')->nullable();
             $table->string('tmp_device_name')->nullable();
             $table->string('device')->nullable()->unique();
             $table->string('tmp_device')->nullable();
             $table->string('scanner')->nullable()->unique();
             $table->string('tmp_scanner')->nullable();
+            $table->string('document')->nullable();
+            $table->string('password')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

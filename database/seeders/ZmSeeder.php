@@ -16,9 +16,9 @@ class ZmSeeder extends Seeder
     public function run()
     {
         $zm = User::create([
-            'name' => 'ZM Name',
-            'username' => 'zmname',
-            'email' => 'zmname@enstudio.com.bd',
+            'name' => 'Supan Kanti Roy',
+            'username' => 'supan',
+            'email' => 'supan@enstudio.com.bd',
             'role' => 'zm',
             'password' => 12345678,
         ]);

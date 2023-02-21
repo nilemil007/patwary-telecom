@@ -113,7 +113,7 @@
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $retailer->owner_name }}</div>
                                                     <div class="text-muted">
-                                                        <a href="#" class="text-reset">{{ $retailer->retailer_code }}</a>
+                                                        {{ $retailer->retailer_code }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -121,7 +121,7 @@
                                         <td>{{ $retailer->contact_no }}</td>
                                         <td data-label="Title">
                                             <div>{{ $retailer->itop_number }}</div>
-                                            <div class="text-muted">{{ $retailer->itop_sr_number }}</div>
+                                            <div class="text-muted">{{ $retailer->rso_number }}</div>
                                         </td>
                                         <td>{{ $retailer->ddHouse->name }}</td>
                                         <td>{{ $retailer->enabled }}</td>

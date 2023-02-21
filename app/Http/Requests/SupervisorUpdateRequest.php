@@ -29,11 +29,11 @@ class SupervisorUpdateRequest extends FormRequest
         return [
             'pool_number' => [
                 'required',
-                'digits:10',
+                'digits:11',
             ],
             'personal_number' => [
                 'required',
-                'digits:10',
+                'digits:11',
             ],
             'father_name' => [
                 'required',

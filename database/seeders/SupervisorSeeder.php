@@ -28,7 +28,7 @@ class SupervisorSeeder extends Seeder
         $supervisor1->assignRole('supervisor');
         Supervisor::create([
             'user_id' => $supervisor1->id,
-            'pool_number' => '01923909896',
+            'pool_number' => '1923909896',
             'joining_date' => '2019-09-01',
         ]);
 
@@ -44,15 +44,15 @@ class SupervisorSeeder extends Seeder
         $supervisor2->assignRole('supervisor');
         Supervisor::create([
             'user_id' => $supervisor2->id,
-            'pool_number' => '01923909897',
+            'pool_number' => '1923909897',
             'joining_date' => '2021-03-01',
         ]);
 
         // Supervisor 03
         $supervisor3 = User::create([
-            'name' => 'Mosharof Hossein',
-            'username' => 'mosharof',
-            'email' => 'mosharof@enstudio.com.bd',
+            'name' => 'Ruhul Amin',
+            'username' => 'ruhul.amin',
+            'email' => 'ruhul.amin@enstudio.com.bd',
             'role' => 'supervisor',
             'dd_house_id' => 3,
             'password' => 12345678,
@@ -60,7 +60,7 @@ class SupervisorSeeder extends Seeder
         $supervisor3->assignRole('supervisor');
         Supervisor::create([
             'user_id' => $supervisor3->id,
-            'pool_number' => '01911775550',
+            'pool_number' => '1923909899',
             'joining_date' => '2012-07-01',
         ]);
     }

@@ -1,3 +1,18 @@
+@php
+
+    if ( auth()->user()->role == 'rso' )
+    {
+        $itop_number = \App\Models\Rso::firstWhere('user_id', auth()->id())->itop_number;
+        $lso = \App\Models\Retailer::where('rso_number', $itop_number)->get();
+        $sso = \App\Models\Retailer::where('rso_number', $itop_number)->where('sim_seller', 'Y')->get();
+    }elseif( auth()->user()->role == 'super-admin' ){
+        $lso = \App\Models\Retailer::all();
+        $sso = \App\Models\Retailer::where('sim_seller', 'Y')->get();
+    }
+
+
+@endphp
+
 <x-main>
 
     <!-- Main Title -->
@@ -12,6 +27,17 @@
 
     <div class="page-body">
         <div class="container-fluid">
+            <!-- LSO/SSO -->
+            @if( isset( $lso ) && isset( $sso ) )
+                <div class="row mb-4">
+                    <div class="col-md-12">
+                        <h3>Total LSO: {{ count( $lso ) }}</h3>
+                        <h3>Total SSO: {{ count( $sso ) }}</h3>
+                    </div>
+                </div>
+            @endif
+
+
             <!-- Itop Replace -->
             <div class="row mb-4">
                 <div class="col-md-12">

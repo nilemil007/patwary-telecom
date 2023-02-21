@@ -30,16 +30,9 @@ class RetailerController extends Controller
         $authId = Auth::id();
         $retailer = Retailer::all();
 
-        if ( Auth::user()->role == 'super-admin' )
-        {
-            $retailers = Retailer::latest()
-                ->search( $request->search )
-                ->paginate(5);
-        }else{
-            $retailers = Retailer::latest()
-                ->search( $request->search )
-                ->paginate(5);
-        }
+        $retailers = Retailer::latest()
+            ->search( $request->search )
+            ->paginate(5);
 
         return view('retailer.index', compact('retailers', ['role','authId','retailer']));
     }
@@ -118,7 +111,7 @@ class RetailerController extends Controller
     // Download Sample File
     public function sampleFileDownload(): BinaryFileResponse
     {
-        return Response::download('', '');
+//        return Response::download('', '');
     }
 
 
@@ -132,6 +125,6 @@ class RetailerController extends Controller
     {
         Excel::import( new RetailersImport, $request->file('import_retailers'));
 
-        return redirect()->route('retailer.index')->with('success', 'New retailer created successfully.');
+        return redirect()->route('retailer.index')->with('success', 'New retailer imported successfully.');
     }
 }

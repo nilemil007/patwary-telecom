@@ -76,8 +76,6 @@ Route::middleware(['auth'])->group(function(){
         ->name('itop-replace.numberAccept');
 
     //______Import________________________________________________//
-    // Import Retailers Data
-    Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
     // Import BTS Data
     Route::post('/bts/import', [ BtsController::class, 'import' ])->name('bts.import');
     // Import Route Data
@@ -135,6 +133,7 @@ Route::middleware(['auth'])->group(function(){
 
     // Retailer
     Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('download.retailer.sample.file');
+    Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
 
     // Resource routes
     Route::resources([
