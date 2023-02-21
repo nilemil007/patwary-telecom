@@ -19,15 +19,16 @@ class RetailersImport implements ToModel, WithHeadingRow
     {
         return new Retailer([
             'dd_house_id'       => $row['dd'],
+            'zm_id',
+            'manager_id',
+            'supervisor_id',
             'retailer_code'     => $row['retailer_code'],
-            'shop_name'         => $row['retailer_name'],
+            'retailer_name'     => $row['retailer_name'],
             'retailer_type'     => $row['retailer_type'],
             'enabled'           => $row['enabled'],
             'sim_seller'        => $row['sim_seller'],
             'rso_id'            => $row['rso_number'],
             'itop_number'       => $row['itop_number'],
-            'bts_id'            => $row['bts'],
-            'route_id'          => $row['route'],
             'service_point'     => $row['service_point'],
             'owner_name'        => $row['owner_name'],
             'own_shop'          => $row['own_shop'],
@@ -37,6 +38,8 @@ class RetailersImport implements ToModel, WithHeadingRow
             'address'           => $row['address'],
             'nid'               => $row['nid'],
             'trade_license_no'  => $row['trade_license'],
+            'bts_id'            => $row['bts'],
+            'route_id'          => $row['route'],
         ]);
     }
 }
