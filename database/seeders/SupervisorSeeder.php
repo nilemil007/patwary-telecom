@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DdHouse;
 use App\Models\Supervisor;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -9,6 +10,14 @@ use Illuminate\Database\Seeder;
 
 class SupervisorSeeder extends Seeder
 {
+    private $patwary,$modina,$sumaya;
+
+    public function __construct()
+    {
+        $this->patwary = DdHouse::firstWhere('code','MYMVAI01')->id;
+        $this->modina = DdHouse::firstWhere('code','MYMVAI02')->id;
+        $this->sumaya = DdHouse::firstWhere('code','MYMVAI03')->id;
+    }
     /**
      * Run the database seeds.
      *
@@ -22,11 +31,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'titumia',
             'email' => 'titu@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => 1,
+            'dd_house_id' => $this->patwary,
             'password' => 12345678,
         ]);
-        $supervisor1->assignRole('supervisor');
         Supervisor::create([
+            'dd_house_id' => $supervisor1->dd_house_id,
             'user_id' => $supervisor1->id,
             'pool_number' => '1923909896',
             'joining_date' => '2019-09-01',
@@ -38,11 +47,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'ridoy',
             'email' => 'ridoy@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => 2,
+            'dd_house_id' => $this->modina,
             'password' => 12345678,
         ]);
-        $supervisor2->assignRole('supervisor');
         Supervisor::create([
+            'dd_house_id' => $supervisor2->dd_house_id,
             'user_id' => $supervisor2->id,
             'pool_number' => '1923909897',
             'joining_date' => '2021-03-01',
@@ -54,11 +63,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'ruhul.amin',
             'email' => 'ruhul.amin@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => 3,
+            'dd_house_id' => $this->sumaya,
             'password' => 12345678,
         ]);
-        $supervisor3->assignRole('supervisor');
         Supervisor::create([
+            'dd_house_id' => $supervisor3->dd_house_id,
             'user_id' => $supervisor3->id,
             'pool_number' => '1923909899',
             'joining_date' => '2012-07-01',

@@ -14,10 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bps', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('supervisor_id')->nullable()->constrained();
-            $table->foreignId('dd_house_id')->constrained();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('dd_house_id')->constrained();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('supervisor_id')->nullable()->constrained();
             $table->string('stuff_id', 10)->nullable()->unique();
             $table->string('pool_number', 11)->nullable()->unique();
             $table->string('personal_number', 11)->nullable()->unique();

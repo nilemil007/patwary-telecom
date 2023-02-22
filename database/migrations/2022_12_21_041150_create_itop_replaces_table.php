@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('itop_replaces', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('user_id')->constrained();
             $table->string('itop_number', 11);
             $table->string('tmp_itop_number', 11)->nullable();
             $table->string('serial_number', 18)->nullable()->unique();

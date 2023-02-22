@@ -14,8 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('supervisors', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+//            $table->id();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('dd_house_id')->constrained();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('pool_number', 11)->nullable()->unique();
             $table->string('personal_number', 11)->nullable()->unique();
             $table->string('tmp_personal_number', 11)->nullable()->unique();

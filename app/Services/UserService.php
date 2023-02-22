@@ -38,7 +38,6 @@ class UserService {
         }
 
         $user = User::create( $userData );
-        $user->assignRole($user->role);
 
         switch ( $user->role )
         {
@@ -105,9 +104,7 @@ class UserService {
         }
 
         $user->update($updateUser);
-        $user->syncRoles($request->role);
 
         return true;
     }
-
 }

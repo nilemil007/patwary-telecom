@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('dd_houses', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('code')->unique();
             $table->string('cluster_name')->nullable();
             $table->string('region')->nullable();

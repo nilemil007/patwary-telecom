@@ -22,6 +22,5 @@ class ManagerSeeder extends Seeder
             'role' => 'manager',
             'password' => 12345678,
         ]);
-        $manager->assignRole('manager');
     }
 }

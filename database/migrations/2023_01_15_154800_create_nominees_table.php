@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nominees', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('rso_id')->constrained()->cascadeOnDelete();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('rso_id')->constrained()->cascadeOnDelete();
             $table->string('name', 100)->nullable();
             $table->string('tmp_name', 100)->nullable();
             $table->string('relation', 20)->nullable();

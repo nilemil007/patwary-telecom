@@ -14,16 +14,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call( RolesAndPermissionsSeeder::class );
+//        $this->call( RolesAndPermissionsSeeder::class );
         $this->call( DdHouseSeeder::class );
         $this->call( SuperAdminUserCreateSeeder::class );
         $this->call( ZmSeeder::class );
         $this->call( ManagerSeeder::class );
         $this->call( SupervisorSeeder::class );
-        $this->call( RsoSeeder::class );
-        $this->call( BpSeeder::class );
-        $this->call( MerchandiserSeeder::class );
-        $this->call( AccountantSeeder::class );
+//        $this->call( RsoSeeder::class );
+//        $this->call( BpSeeder::class );
+//        $this->call( MerchandiserSeeder::class );
+//        $this->call( AccountantSeeder::class );
 
 
         // \App\Models\User::factory(10)->create();

@@ -14,13 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('retailers', function (Blueprint $table) {
-            $table->uuid('id');
-            $table->foreignId('dd_house_id')->constrained();
-            $table->foreignId('user_id')->nullable()->constrained();
-            $table->string('rso_number')->nullable();
-            $table->string('supervisor_number')->nullable();
-            $table->foreignId('bts_id')->nullable()->constrained();
-            $table->foreignId('route_id')->nullable()->constrained();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('dd_house_id')->constrained();
+            $table->foreignUuid('user_id')->nullable()->constrained();
+            $table->foreignUuid('bts_id')->nullable()->constrained();
+            $table->foreignUuid('route_id')->constrained();
+            $table->foreignUuid('rso_id')->constrained();
+            $table->foreignUuid('supervisor_id')->nullable()->constrained();
             $table->string('retailer_code')->unique();
             $table->string('retailer_name');
             $table->string('tmp_retailer_name')->nullable();

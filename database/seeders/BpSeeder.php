@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Bp;
+use App\Models\Supervisor;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,9 +27,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp1->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp1->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp1->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp1->dd_house_id,
             'stuff_id' => 'REBP-1194',
             'pool_number' => '1999969197',
@@ -47,9 +49,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp2->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp2->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp2->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp2->dd_house_id,
             'stuff_id' => 'REBP-1196',
             'joining_date' => '2019-08-01',
@@ -68,9 +71,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp3->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp3->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp3->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp3->dd_house_id,
             'stuff_id' => 'REBP-1197',
             'joining_date' => '2019-08-01',
@@ -89,9 +93,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp4->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp4->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp4->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp4->dd_house_id,
             'stuff_id' => 'REBP-5091',
             'joining_date' => '2020-12-01',
@@ -110,9 +115,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp5->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp5->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp5->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp5->dd_house_id,
             'stuff_id' => 'REBP-7651',
             'joining_date' => '2022-02-01',
@@ -131,9 +137,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp6->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp6->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp6->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp6->dd_house_id,
             'stuff_id' => 'REBP-7653',
             'joining_date' => '2022-02-01',
@@ -152,9 +159,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp7->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp7->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp7->id,
-            'supervisor_id' => 1,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp7->dd_house_id,
             'stuff_id' => 'REBP-8833',
             'joining_date' => '2022-07-01',
@@ -173,9 +181,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp8->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp8->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp8->id,
-            'supervisor_id' => 2,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp8->dd_house_id,
             'stuff_id' => 'REBP-4508',
             'joining_date' => '2020-09-01',
@@ -194,9 +203,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp9->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp9->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp9->id,
-            'supervisor_id' => 2,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp9->dd_house_id,
             'stuff_id' => 'REBP-7650',
             'joining_date' => '2022-02-01',
@@ -215,9 +225,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp10->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp10->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp10->id,
-            'supervisor_id' => 2,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp10->dd_house_id,
             'stuff_id' => 'REBP-7654',
             'joining_date' => '2022-02-01',
@@ -236,9 +247,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp11->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp11->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp11->id,
-            'supervisor_id' => 2,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp11->dd_house_id,
             'stuff_id' => 'REBP-8068',
             'joining_date' => '2022-04-01',
@@ -257,9 +269,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp12->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp12->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp12->id,
-            'supervisor_id' => 3,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp12->dd_house_id,
             'stuff_id' => 'REBP-1195',
             'joining_date' => '2019-08-01',
@@ -278,9 +291,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp13->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp13->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp13->id,
-            'supervisor_id' => 3,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp13->dd_house_id,
             'stuff_id' => 'REBP-4506',
             'joining_date' => '2020-09-01',
@@ -299,9 +313,10 @@ class BpSeeder extends Seeder
             'password' => 12345678,
         ]);
         $bp14->assignRole('bp');
+        $supervisor = Supervisor::firstWhere('dd_house_id', $bp14->dd_house_id)->id;
         Bp::create([
             'user_id' => $bp14->id,
-            'supervisor_id' => 3,
+            'supervisor_id' => $supervisor,
             'dd_house_id' => $bp14->dd_house_id,
             'stuff_id' => 'REBP-8834',
             'joining_date' => '2022-07-01',

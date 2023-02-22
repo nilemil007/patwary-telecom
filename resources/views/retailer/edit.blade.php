@@ -37,21 +37,44 @@
                                 <div class="row">
 
                                     <!-- User -->
-                                    @can('super-admin')
-                                        <div class="col-md-6">
-                                            <div class="form-floating mb-3">
-                                                <x-select name="user_id" label="User">
-                                                    @foreach( $users as $user )
-                                                        <option value="{{ $user->id }}">
-                                                            {{ $user->ddHouse->code }}
-                                                            <span class="d-flex align-items-center">.</span>
-                                                            {{ $user->name }}
-                                                        </option>
-                                                    @endforeach
-                                                </x-select>
-                                            </div>
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-select name="user_id" label="User" placeholder>
+                                                @foreach( $users as $user )
+                                                    <option value="{{ $user->id }}">
+                                                        {{ $user->ddHouse->code }} - {{ $user->name }}
+                                                    </option>
+                                                @endforeach
+                                            </x-select>
                                         </div>
-                                    @endcan
+                                    </div>
+
+                                    <!-- Supervisor -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-select name="user_id" label="Supervisor" placeholder>
+                                                @foreach( $supervisors as $supervisor )
+                                                    <option value="{{ $supervisor->id }}">
+                                                        {{ $supervisor->ddHouse->code }} - {{ $supervisor->user->name }}
+                                                    </option>
+                                                @endforeach
+                                            </x-select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Rso Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso_number) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Rso Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso_number) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="form-footer">

@@ -23,6 +23,5 @@ class SuperAdminUserCreateSeeder extends Seeder
             'role' => 'super-admin',
             'password' => 32133213,
         ]);
-        $user->assignRole('super-admin');
     }
 }

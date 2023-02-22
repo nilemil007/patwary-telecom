@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('bts', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('dd_house_id')->constrained();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('dd_house_id')->constrained();
             $table->string('site_id')->nullable()->unique();
             $table->string('bts_code')->nullable()->unique();
             $table->string('site_type')->nullable();

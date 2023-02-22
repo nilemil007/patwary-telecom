@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Retailer\UpdateRequest;
 use App\Imports\RetailersImport;
 use App\Models\Retailer;
+use App\Models\Supervisor;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
@@ -83,21 +84,17 @@ class RetailerController extends Controller
      */
     public function edit( Retailer $retailer ): Application|Factory|View
     {
-        $users = User::where('role', 'retailer')
-            ->whereHas('retailer', function ($query){
-                $query->where('user_id','');
-            })
-            ->get();
-        dd($users->toArray());
+        $ids = Retailer::whereNotNull('user_id')->pluck('user_id');
+        $supervisors = Supervisor::all();
 
         if ( Auth::user()->role == 'super-admin' )
         {
-            $users = User::where('role', 'retailer')->get();
+            $users = User::where('role','retailer')->whereNotIn('id', $ids)->get();
         }else{
-            $users = User::where('role', 'retailer')->where('dd_house_id', Auth::user()->dd_house_id)->get();
+            $users = User::where('role', 'retailer')->where('dd_house_id', Auth::user()->dd_house_id)->whereNotIn('id', $ids)->get();
         }
 
-        return view('retailer.edit', compact('retailer', 'users'));
+        return view('retailer.edit', compact('retailer', 'users','supervisors'));
     }
 
     /**

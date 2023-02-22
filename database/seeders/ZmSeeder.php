@@ -22,6 +22,5 @@ class ZmSeeder extends Seeder
             'role' => 'zm',
             'password' => 12345678,
         ]);
-        $zm->assignRole('zm');
     }
 }

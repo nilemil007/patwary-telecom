@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -20,13 +21,13 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static create(array $except)
  * @method static find($id)
  * @method static findOrFail($id)
- * @method static where()
+ * @method static where($column, $value)
  * @method static firstWhere(string $string, int|string|null $id)
  * @method static whereHas(string $string, \Closure $param)
  */
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     /**
      * The attributes that are mass assignable.

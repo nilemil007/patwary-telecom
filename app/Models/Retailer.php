@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static latest()
  * @method static firstWhere()*@method static where(string$string, string$string1)
  * @method static where(string $string, string $string1)
+ * @method static whereNotNull(string $string)
  */
 class Retailer extends Model
 {

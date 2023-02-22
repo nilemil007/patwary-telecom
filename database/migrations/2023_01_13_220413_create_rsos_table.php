@@ -15,12 +15,10 @@ return new class extends Migration
     {
         Schema::create('rsos',
             function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('supervisor_id')->constrained();
-            $table->integer('manager_id')->nullable();
-            $table->integer('zm_id')->nullable();
-            $table->foreignId('dd_house_id')->constrained();
+            $table->uuid('id')->primary()->unique();
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignUuid('supervisor_id')->constrained();
+            $table->foreignUuid('dd_house_id')->constrained();
             $table->json('routes')->nullable();
             $table->string('code', 10)->nullable()->unique();
             $table->string('itop_number', 11)->nullable()->unique();
