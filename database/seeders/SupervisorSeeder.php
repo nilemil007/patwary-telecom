@@ -10,14 +10,13 @@ use Illuminate\Database\Seeder;
 
 class SupervisorSeeder extends Seeder
 {
-    private $patwary,$modina,$sumaya;
+    protected $house;
 
-    public function __construct()
+    public function __construct( DdHouseId $ddHouseId )
     {
-        $this->patwary = DdHouse::firstWhere('code','MYMVAI01')->id;
-        $this->modina = DdHouse::firstWhere('code','MYMVAI02')->id;
-        $this->sumaya = DdHouse::firstWhere('code','MYMVAI03')->id;
+        $house = $ddHouseId;
     }
+
     /**
      * Run the database seeds.
      *
@@ -31,7 +30,7 @@ class SupervisorSeeder extends Seeder
             'username' => 'titumia',
             'email' => 'titu@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->patwary,
+            'dd_house_id' => $this->house->patwary,
             'password' => 12345678,
         ]);
         Supervisor::create([
@@ -47,7 +46,7 @@ class SupervisorSeeder extends Seeder
             'username' => 'ridoy',
             'email' => 'ridoy@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->modina,
+            'dd_house_id' => $this->house->modina,
             'password' => 12345678,
         ]);
         Supervisor::create([
@@ -63,7 +62,7 @@ class SupervisorSeeder extends Seeder
             'username' => 'ruhul.amin',
             'email' => 'ruhul.amin@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->sumaya,
+            'dd_house_id' => $this->house->sumaya,
             'password' => 12345678,
         ]);
         Supervisor::create([

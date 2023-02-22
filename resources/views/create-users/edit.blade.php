@@ -111,22 +111,22 @@
                                     </div>
 
                                     <!-- User Roles -->
-                                    <div class="col-md-6 mb-3">
-                                        <div class="form-floating">
-                                            <select name="role" class="form-select" id="role">
-                                                <option selected value="">Choose User Roles</option>
-                                                @foreach( $roles as $role )
-                                                    <option {{ $user->role == $role->name ? 'selected' : '' }} value="{{ $role->name }}">
-                                                        {{ \Illuminate\Support\Str::upper( implode(' ',explode('-',$role->name)) ) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <label for="role">User Roles</label>
-                                            @error('role')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
-                                        </div>
-                                    </div>
+{{--                                    <div class="col-md-6 mb-3">--}}
+{{--                                        <div class="form-floating">--}}
+{{--                                            <select name="role" class="form-select" id="role">--}}
+{{--                                                <option selected value="">Choose User Roles</option>--}}
+{{--                                                @foreach( $roles as $role )--}}
+{{--                                                    <option {{ $user->role == $role->name ? 'selected' : '' }} value="{{ $role->name }}">--}}
+{{--                                                        {{ \Illuminate\Support\Str::upper( implode(' ',explode('-',$role->name)) ) }}--}}
+{{--                                                    </option>--}}
+{{--                                                @endforeach--}}
+{{--                                            </select>--}}
+{{--                                            <label for="role">User Roles</label>--}}
+{{--                                            @error('role')--}}
+{{--                                            <small class="text-danger">{{ $message }}</small>--}}
+{{--                                            @enderror--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
 
                                     <!-- Password -->
                                     <div class="col-md-6 mb-3">

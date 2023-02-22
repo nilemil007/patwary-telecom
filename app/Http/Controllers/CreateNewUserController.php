@@ -83,9 +83,8 @@ class CreateNewUserController extends Controller
     {
         $user = User::find($id);
         $houses = DdHouse::all();
-        $roles = Role::all();
 
-        return view('create-users.edit', compact('user','houses','roles'));
+        return view('create-users.edit', compact('user','houses'));
     }
 
     /**

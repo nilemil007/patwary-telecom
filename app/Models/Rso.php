@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 /**
- * @method static create(string $string, $id)
+ * @method static create(array $except)
  * @method static insert(array $array)
  * @method static firstWhere(string $string, $rsoItop)
  * @method static find()

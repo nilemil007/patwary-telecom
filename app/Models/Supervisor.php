@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * @method static create(array $array)
  * @method static latest()
- * @method static firstWhere()
+ * @method static firstWhere(string $string, mixed $dd_house)
  */
 class Supervisor extends Model
 {
