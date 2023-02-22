@@ -92,6 +92,9 @@ class Retailer extends Model
         });
     }
 
+
+
+
     //_______________________________________Accessor________________________________________________
     // Dd House Id
     protected function ddHouseId(): Attribute
@@ -116,7 +119,16 @@ class Retailer extends Model
     }
     //_______________________________________End Accessor___________________________________________
 
-    // Relationship
+
+
+
+
+
+    //_______________________________________Relationship___________________________________________
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo( User::class );
+    }
     public function rso(): BelongsTo
     {
         return $this->belongsTo( Rso::class );
