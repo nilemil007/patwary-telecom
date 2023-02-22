@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Retailer\UpdateRequest;
 use App\Imports\RetailersImport;
 use App\Models\Retailer;
 use App\Models\User;
@@ -55,7 +56,7 @@ class RetailerController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -66,10 +67,10 @@ class RetailerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Retailer $retailer
+     * @return Application|Factory|View
      */
-    public function show( Retailer $retailer )
+    public function show( Retailer $retailer ): Application|Factory|View
     {
         return view('retailer.show', compact('retailer'));
     }
@@ -77,22 +78,36 @@ class RetailerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Retailer $retailer
+     * @return Application|Factory|View
      */
-    public function edit( Retailer $retailer )
+    public function edit( Retailer $retailer ): Application|Factory|View
     {
-        dd($retailer);
+        $users = User::where('role', 'retailer')
+            ->whereHas('retailer', function ($query){
+                $query->where('user_id','');
+            })
+            ->get();
+        dd($users->toArray());
+
+        if ( Auth::user()->role == 'super-admin' )
+        {
+            $users = User::where('role', 'retailer')->get();
+        }else{
+            $users = User::where('role', 'retailer')->where('dd_house_id', Auth::user()->dd_house_id)->get();
+        }
+
+        return view('retailer.edit', compact('retailer', 'users'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param UpdateRequest $request
+     * @param Retailer $retailer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, Retailer $retailer): \Illuminate\Http\Response
     {
         //
     }

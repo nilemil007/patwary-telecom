@@ -5,6 +5,7 @@ use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
 use App\Models\Bp;
 use App\Models\BpDocument;
+use App\Models\Merchandiser;
 use App\Models\Nominee;
 use App\Models\Rso;
 use App\Models\RsoDocument;
@@ -54,13 +55,11 @@ class UserService {
                 Bp::create(['user_id' => $user->id]);
             break;
 
+            case 'cm':
             case 'tmo':
-                Tmo::create(['user_id' => $user->id]);
+                Merchandiser::create(['user_id' => $user->id]);
             break;
 
-            case 'cm':
-                Cm::create(['user_id' => $user->id]);
-            break;
         }
 
         Session::flash('success', 'New user created successfully.');

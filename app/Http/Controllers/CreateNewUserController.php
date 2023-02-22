@@ -31,7 +31,7 @@ class CreateNewUserController extends Controller
         return view('create-users.index',[
             'users' => User::with('ddHouse','rso','supervisor','bp','merchandiser')
                 ->search( $request->search )
-                ->orderBy('dd_house_id','asc')
+                ->latest()
                 ->paginate(10),
         ]);
     }

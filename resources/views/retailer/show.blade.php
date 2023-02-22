@@ -13,7 +13,7 @@
     <x-slot:button>
         <!-- [Full Button]-->
         <x-link href="{{ route('retailer.index') }}" class="btn btn-primary">
-            <x-icon.back></x-icon.back>Dashboard
+            <x-icon.back></x-icon.back>All Retailers
         </x-link>
     </x-slot:button>
 

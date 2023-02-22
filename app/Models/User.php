@@ -22,6 +22,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static findOrFail($id)
  * @method static where()
  * @method static firstWhere(string $string, int|string|null $id)
+ * @method static whereHas(string $string, \Closure $param)
  */
 class User extends Authenticatable
 {
@@ -119,6 +120,11 @@ class User extends Authenticatable
     public function merchandiser(): HasOne
     {
         return $this->hasOne( Merchandiser::class );
+    }
+
+    public function retailer(): HasOne
+    {
+        return $this->hasOne( Retailer::class );
     }
 
     public function bp(): HasOne
