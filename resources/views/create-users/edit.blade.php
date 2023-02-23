@@ -15,7 +15,7 @@
     <x-slot:button>
         <!-- [Full Button]-->
         <x-link href="{{ route('create-new-user.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-            <x-icon.back/>All users
+            <x-icon.back></x-icon.back>All users
         </x-link>
     </x-slot:button>
 

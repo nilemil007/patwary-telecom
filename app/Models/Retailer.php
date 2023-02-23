@@ -108,14 +108,14 @@ class Retailer extends Model
     protected function supervisorId(): Attribute
     {
         return Attribute::make(
-            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->user_id,
+            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->id,
         );
     }
     // Rso Id
     protected function rsoId(): Attribute
     {
         return Attribute::make(
-            set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->user_id,
+            set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->id,
         );
     }
     // BTS Id

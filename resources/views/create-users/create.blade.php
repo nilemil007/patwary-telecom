@@ -130,18 +130,17 @@
                                     <!-- User Roles -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <select name="role" class="form-select" id="role">
+                                            <x-select label="User Roles" name="role">
                                                 <option selected value="">Choose User Roles</option>
-                                                @foreach( $roles as $role )
-                                                    <option value="{{ $role->name }}">
-                                                        {{ \Illuminate\Support\Str::upper( implode(' ',explode('-',$role->name)) ) }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <label for="role">User Roles</label>
-                                            @error('role')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                                <option value="zm">ZM</option>
+                                                <option value="manager">Manager</option>
+                                                <option value="supervisor">Supervisor</option>
+                                                <option value="rso">Rso</option>
+                                                <option value="bp">Bp</option>
+                                                <option value="merchandiser">Merchandiser</option>
+                                                <option value="retailer">Retailer</option>
+                                                <option value="accountant">Accountant</option>
+                                            </x-select>
                                         </div>
                                     </div>
 

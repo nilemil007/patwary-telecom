@@ -45,7 +45,6 @@ class CreateNewUserController extends Controller
     {
         return view('create-users.create',[
             'houses'    => DdHouse::all(),
-            'roles'     => Role::all(),
         ]);
     }
 

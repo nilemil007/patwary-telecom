@@ -41,7 +41,7 @@
                                         <div class="form-floating mb-3">
                                             <x-select name="user_id" label="User" placeholder>
                                                 @foreach( $users as $user )
-                                                    <option value="{{ $user->id }}">
+                                                    <option {{ $user->id == $retailer->user_id ? 'selected' : '' }} value="{{ $user->id }}">
                                                         {{ $user->ddHouse->code }} - {{ $user->name }}
                                                     </option>
                                                 @endforeach
@@ -54,7 +54,7 @@
                                         <div class="form-floating mb-3">
                                             <x-select name="user_id" label="Supervisor" placeholder>
                                                 @foreach( $supervisors as $supervisor )
-                                                    <option value="{{ $supervisor->id }}">
+                                                    <option {{ $supervisor->id == $retailer->supervisor_id ? 'selected' : '' }} value="{{ $supervisor->id }}">
                                                         {{ $supervisor->ddHouse->code }} - {{ $supervisor->user->name }}
                                                     </option>
                                                 @endforeach
@@ -62,17 +62,45 @@
                                         </div>
                                     </div>
 
-                                    <!-- Rso Number -->
+                                    <!-- Retailer Code -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso_number) }}" placeholder></x-input>
+                                            <x-input label="Retailer Code" name="retailer_code" value="{{ old('retailer_code', $retailer->retailer_code) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Retailer Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Retailer Name" name="retailer_name" value="{{ old('retailer_name', $retailer->retailer_name) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Retailer Type -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Retailer Type" name="retailer_type" value="{{ old('retailer_type', $retailer->retailer_type) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Enabled -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Enabled" name="enabled" value="{{ old('enabled', $retailer->enabled) }}" placeholder></x-input>
                                         </div>
                                     </div>
 
                                     <!-- Rso Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
-                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso_number) }}" placeholder></x-input>
+                                            <x-input label="Rso Number" name="rso_id" value="{{ old('rso_id', $retailer->rso->itop_number) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Rso Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso->itop_number) }}" placeholder></x-input>
                                         </div>
                                     </div>
                                 </div>

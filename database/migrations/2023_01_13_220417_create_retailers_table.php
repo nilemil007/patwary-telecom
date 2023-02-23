@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->nullable()->constrained();
             $table->foreignUuid('bts_id')->nullable()->constrained();
             $table->foreignUuid('route_id')->constrained();
-            $table->foreignUuid('rso_id')->nullable()->constrained();
+            $table->foreignUuid('rso_id')->constrained();
             $table->foreignUuid('supervisor_id')->nullable()->constrained();
             $table->string('retailer_code')->unique();
             $table->string('retailer_name');
