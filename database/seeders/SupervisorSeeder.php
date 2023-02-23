@@ -12,9 +12,9 @@ class SupervisorSeeder extends Seeder
 {
     protected $house;
 
-    public function __construct( DdHouseId $ddHouseId )
+    public function __construct( DdHouseSupervisorId $ddHouseSupervisorId )
     {
-        $house = $ddHouseId;
+        $house = $ddHouseSupervisorId;
     }
 
     /**
@@ -34,7 +34,7 @@ class SupervisorSeeder extends Seeder
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $supervisor1->dd_house_id,
+            'dd_house_id' => $this->house->patwary,
             'user_id' => $supervisor1->id,
             'pool_number' => '1923909896',
             'joining_date' => '2019-09-01',
@@ -50,7 +50,7 @@ class SupervisorSeeder extends Seeder
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $supervisor2->dd_house_id,
+            'dd_house_id' => $this->house->modina,
             'user_id' => $supervisor2->id,
             'pool_number' => '1923909897',
             'joining_date' => '2021-03-01',
@@ -66,7 +66,7 @@ class SupervisorSeeder extends Seeder
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $supervisor3->dd_house_id,
+            'dd_house_id' => $this->house->sumaya,
             'user_id' => $supervisor3->id,
             'pool_number' => '1923909899',
             'joining_date' => '2012-07-01',

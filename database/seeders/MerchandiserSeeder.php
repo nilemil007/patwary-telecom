@@ -3,13 +3,19 @@
 namespace Database\Seeders;
 
 use App\Models\Merchandiser;
-use App\Models\MerchandiserDocument;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class MerchandiserSeeder extends Seeder
 {
+    public $house;
+
+    public function __construct( DdHouseSupervisorId $ddHouseSupervisorId )
+    {
+        $this->house = $ddHouseSupervisorId;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -22,12 +28,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'sherali',
             'email' => 'sherali@enstudio.com.bd',
             'role' => 'tmo',
-            'dd_house_id' => 1,
+            'dd_house_id' => $this->house->patwary,
             'password' => 12345678,
         ]);
-        $user1->assignRole('tmo');
         Merchandiser::create([
             'user_id' => $user1->id,
+            'dd_house_id' => $this->house->patwary,
             'pool_number' => '1958041928',
             'personal_number' => '1715969790',
             'bank_name' => 'DBBL',
@@ -43,12 +49,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'ripon',
             'email' => 'ripon@enstudio.com.bd',
             'role' => 'cm',
-            'dd_house_id' => 2,
+            'dd_house_id' => $this->house->modina,
             'password' => 12345678,
         ]);
-        $user2->assignRole('cm');
         Merchandiser::create([
             'user_id' => $user2->id,
+            'dd_house_id' => $this->house->modina,
             'pool_number' => '1958041929',
             'personal_number' => '1915272222',
             'bank_name' => 'DBBL',
@@ -64,12 +70,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'toriqul',
             'email' => 'toriqul@enstudio.com.bd',
             'role' => 'cm',
-            'dd_house_id' => 3,
+            'dd_house_id' => $this->house->sumaya,
             'password' => 12345678,
         ]);
-        $user3->assignRole('cm');
         Merchandiser::create([
             'user_id' => $user3->id,
+            'dd_house_id' => $this->house->sumaya,
             'pool_number' => '1958041930',
             'personal_number' => '1912317878',
             'bank_name' => 'DBBL',
@@ -85,12 +91,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'anowar_cm',
             'email' => 'anowar_cm@enstudio.com.bd',
             'role' => 'cm',
-            'dd_house_id' => 1,
+            'dd_house_id' => $this->house->patwary,
             'password' => 12345678,
         ]);
-        $user4->assignRole('cm');
         Merchandiser::create([
             'user_id' => $user4->id,
+            'dd_house_id' => $this->house->patwary,
             'pool_number' => '1958041927',
             'personal_number' => '1912345399',
             'bank_name' => 'DBBL',
@@ -106,12 +112,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'mannan',
             'email' => 'mannan@enstudio.com.bd',
             'role' => 'cm',
-            'dd_house_id' => 3,
+            'dd_house_id' => $this->house->sumaya,
             'password' => 12345678,
         ]);
-        $user5->assignRole('cm');
         Merchandiser::create([
             'user_id' => $user5->id,
+            'dd_house_id' => $this->house->sumaya,
             'pool_number' => '1958052101',
             'personal_number' => '1925627822',
             'bank_name' => 'DBBL',
@@ -127,12 +133,12 @@ class MerchandiserSeeder extends Seeder
             'username' => 'masum',
             'email' => 'masum@enstudio.com.bd',
             'role' => 'cm',
-            'dd_house_id' => 2,
+            'dd_house_id' => $this->house->modina,
             'password' => 12345678,
         ]);
-        $user6->assignRole('cm');
         Merchandiser::create([
             'user_id' => $user6->id,
+            'dd_house_id' => $this->house->modina,
             'pool_number' => '',
             'personal_number' => '1915162211',
             'bank_name' => 'DBBL',

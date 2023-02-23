@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * @method static create()
+ * @method static create(array $array)
  * @method static insert(string[] $array)
  */
 class Merchandiser extends Model

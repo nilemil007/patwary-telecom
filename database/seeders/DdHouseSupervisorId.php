@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\DdHouse;
 use App\Models\Supervisor;
 
-class DdHouseId
+class DdHouseSupervisorId
 {
     public $patwary,$modina,$sumaya,$supervisor01,$supervisor02,$supervisor03;
 

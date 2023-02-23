@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         $this->call( ManagerSeeder::class );
         $this->call( SupervisorSeeder::class );
         $this->call( RsoSeeder::class );
-        $this->call( DdHouseId::class );
-//        $this->call( MerchandiserSeeder::class );
-//        $this->call( AccountantSeeder::class );
+        $this->call( BpSeeder::class );
+        $this->call( MerchandiserSeeder::class );
+        $this->call( AccountantSeeder::class );
 
 
         // \App\Models\User::factory(10)->create();

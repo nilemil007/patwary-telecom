@@ -23,6 +23,5 @@ class AccountantSeeder extends Seeder
             'role' => 'accountant',
             'password' => 12345678,
         ]);
-        $accountant1->assignRole('accountant');
     }
 }

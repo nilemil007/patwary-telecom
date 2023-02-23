@@ -14,12 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('merchandisers', function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
+            $table->uuid('id')->primary();
             $table->foreignUuid('dd_house_id')->constrained();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('pool_number', 11)->nullable()->unique();
             $table->string('personal_number', 11)->nullable()->unique();
-            $table->string('tmp_personal_number', 11)->nullable()->unique();
+            $table->string('tmp_personal_number', 11)->nullable();
             $table->string('father_name', 50)->nullable();
             $table->string('tmp_father_name', 50)->nullable();
             $table->string('mother_name', 50)->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration
             $table->enum('tmp_blood_group', ['a+','ab+','a-','ab-','b+','b-','o+','o-']);
             $table->string('bank_name', 50)->nullable();
             $table->string('account_number', 20)->nullable()->unique();
-            $table->string('tmp_account_number', 20)->nullable()->unique();
+            $table->string('tmp_account_number', 20)->nullable();
             $table->string('salary', 6)->nullable();
             $table->string('division', 20)->nullable();
             $table->string('district', 20)->nullable();
@@ -36,7 +36,7 @@ return new class extends Migration
             $table->longText('address')->nullable();
             $table->longText('tmp_address')->nullable();
             $table->string('nid')->nullable()->unique();
-            $table->string('tmp_nid')->nullable()->unique();
+            $table->string('tmp_nid')->nullable();
             $table->string('working_area')->nullable();
             $table->string('document')->nullable();
             $table->timestamp('dob')->nullable();
