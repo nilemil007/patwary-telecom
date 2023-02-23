@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('nominees', function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
+            $table->uuid('id')->primary();
             $table->foreignUuid('rso_id')->constrained()->cascadeOnDelete();
             $table->string('name', 100)->nullable();
             $table->string('tmp_name', 100)->nullable();
@@ -32,8 +32,6 @@ return new class extends Migration
             $table->timestamp('tmp_dob')->nullable();
             $table->string('nid')->nullable()->unique();
             $table->string('tmp_nid')->nullable()->unique();
-            $table->string('witness_name', 100)->nullable();
-            $table->string('witness_designation', 20)->nullable();
             $table->string('image')->nullable();
             $table->string('status')->nullable();
             $table->timestamps();

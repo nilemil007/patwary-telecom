@@ -18,10 +18,10 @@
                 <input name="import_retailers" type="file"
                        accept=".xls,.xlsx"
                        aria-describedby="inputGroupFileAddon04"
-                       class="form-control form-control-sm"
+                       class="form-control"
                        aria-label="Upload" required>
 
-                <button class="btn btn-sm btn-outline-google" type="submit">
+                <button class="btn btn-outline-google" type="submit">
                     <x-icon.file-import></x-icon.file-import>Import Retailers
                 </button>
             </div>

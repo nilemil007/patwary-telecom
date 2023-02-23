@@ -10,13 +10,6 @@ use Illuminate\Database\Seeder;
 
 class SupervisorSeeder extends Seeder
 {
-    protected $house;
-
-    public function __construct( DdHouseSupervisorId $ddHouseSupervisorId )
-    {
-        $house = $ddHouseSupervisorId;
-    }
-
     /**
      * Run the database seeds.
      *
@@ -30,11 +23,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'titumia',
             'email' => 'titu@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->house->patwary,
+            'dd_house_id' => DbTablesId::ddHouseId(),
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $this->house->patwary,
+            'dd_house_id' => DbTablesId::ddHouseId(),
             'user_id' => $supervisor1->id,
             'pool_number' => '1923909896',
             'joining_date' => '2019-09-01',
@@ -46,11 +39,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'ridoy',
             'email' => 'ridoy@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->house->modina,
+            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $this->house->modina,
+            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
             'user_id' => $supervisor2->id,
             'pool_number' => '1923909897',
             'joining_date' => '2021-03-01',
@@ -62,11 +55,11 @@ class SupervisorSeeder extends Seeder
             'username' => 'ruhul.amin',
             'email' => 'ruhul.amin@enstudio.com.bd',
             'role' => 'supervisor',
-            'dd_house_id' => $this->house->sumaya,
+            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
             'password' => 12345678,
         ]);
         Supervisor::create([
-            'dd_house_id' => $this->house->sumaya,
+            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
             'user_id' => $supervisor3->id,
             'pool_number' => '1923909899',
             'joining_date' => '2012-07-01',

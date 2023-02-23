@@ -23,8 +23,8 @@ class Retailer extends Model
     protected $fillable = [
         'dd_house_id',
         'user_id',
-        'rso_number',
-        'supervisor_number',
+        'rso_id',
+        'supervisor_id',
         'bts_id',
         'route_id',
         'retailer_code',
@@ -104,13 +104,27 @@ class Retailer extends Model
             set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
         );
     }
-    // BTS Id
-    protected function btsId(): Attribute
+    // Supervisor Id
+    protected function supervisorId(): Attribute
     {
         return Attribute::make(
-            set: fn( $btsId ) => empty( $btsId ) ? null : Bts::firstWhere('bts_code', $btsId)->id,
+            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->user_id,
         );
     }
+    // Rso Id
+    protected function rsoId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->user_id,
+        );
+    }
+    // BTS Id
+//    protected function btsId(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn( $btsId ) => empty( $btsId ) ? null : Bts::firstWhere('bts_code', $btsId)->id,
+//        );
+//    }
     // Route Id
     protected function routeId(): Attribute
     {
