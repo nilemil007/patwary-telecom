@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Retailer;
 
+use App\Rules\Nid;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
@@ -24,25 +25,94 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'dd_house_id' => [],
             'user_id' => [],
-            'retailer_code' => [],
-            'retailer_name' => [],
-            'retailer_type' => [],
-            'rso_id' => [],
-            'service_point' => [],
-            'owner_name' => [],
-            'contact_no' => [],
-            'district' => [],
-            'thana' => [],
-            'address' => [],
-            'nid' => [],
+            'supervisor_id' => [
+                'required'
+            ],
+            'rso_id' => [
+                'required'
+            ],
+            'retailer_code' => [
+                'required',
+                'starts_with:R',
+                'min:7',
+                'max:7',
+                'unique:retailers,retailer_code,'.request()->segment(2),
+            ],
+            'retailer_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+            ],
+            'retailer_type' => [
+                'required',
+                'string',
+                'max:15',
+            ],
+            'service_point' => [
+                'required',
+                'string',
+            ],
+            'owner_name' => [
+                'required',
+                'string',
+                'min:3',
+                'max:50',
+            ],
+            'contact_no' => [
+                'required',
+                'numeric',
+                'phone',
+                'unique:retailers,contact_no,'.request()->segment(2),
+            ],
+            'district' => [
+                'required',
+                'string',
+                'min:3',
+                'max:20',
+            ],
+            'thana' => [
+                'required',
+                'string',
+                'min:3',
+                'max:20',
+            ],
+            'address' => [
+                'required',
+                'string',
+                'max:150',
+            ],
+            'nid' => [
+                'required',
+                'numeric',
+                new Nid,
+                'unique:retailers,nid,'.request()->segment(2),
+            ],
             'trade_license_no' => [],
-            'latitude' => [],
-            'longitude' => [],
-            'device_name' => [],
-            'device' => [],
-            'scanner' => [],
-            'password' => [],
+            'latitude' => ['nullable','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+            'longitude' => ['nullable','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
+            'device_name' => [
+                'nullable',
+                'string',
+                'max:50',
+            ],
+            'device' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+            'scanner' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
+            'password' => [
+                'nullable',
+                'min:4',
+                'max:6',
+            ],
             'others_operator' => [],
             'enabled' => [],
             'sim_seller' => [],

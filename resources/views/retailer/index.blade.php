@@ -111,9 +111,9 @@
                                                 <span class="avatar me-2"
                                                       style="background-image: url({{ $retailer->image }})"></span>
                                                 <div class="flex-fill">
-                                                    <div class="font-weight-medium">{{ $retailer->owner_name }}</div>
+                                                    <div class="font-weight-medium">{{ $retailer->retailer_name }}</div>
                                                     <div class="text-muted">
-                                                        {{ $retailer->retailer_code }}
+                                                        {{ $retailer->itop_number }}
                                                     </div>
                                                 </div>
                                             </div>

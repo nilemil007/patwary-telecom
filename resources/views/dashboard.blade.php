@@ -2,9 +2,9 @@
 
     if ( auth()->user()->role == 'rso' )
     {
-        $itop_number = \App\Models\Rso::firstWhere('user_id', auth()->id())->itop_number;
-        $lso = \App\Models\Retailer::where('rso_number', $itop_number)->get();
-        $sso = \App\Models\Retailer::where('rso_number', $itop_number)->where('sim_seller', 'Y')->get();
+        $id = \App\Models\Rso::firstWhere('user_id', auth()->id())->id;
+        $lso = \App\Models\Retailer::where('rso_id', $id)->get();
+        $sso = \App\Models\Retailer::where('rso_id', $id)->where('sim_seller', 'Y')->get();
     }elseif( auth()->user()->role == 'super-admin' ){
         $lso = \App\Models\Retailer::all();
         $sso = \App\Models\Retailer::where('sim_seller', 'Y')->get();
@@ -23,20 +23,30 @@
 
     <!-- Page Title -->
     <x-slot:page-title>Dashboard</x-slot:page-title>
-    <hr>
+{{--    <hr>--}}
 
     <div class="page-body">
         <div class="container-fluid">
-            <!-- LSO/SSO -->
-            @if( isset( $lso ) && isset( $sso ) )
-                <div class="row mb-4">
-                    <div class="col-md-12">
-                        <h3>Total LSO: {{ count( $lso ) }}</h3>
-                        <h3>Total SSO: {{ count( $sso ) }}</h3>
+            <div class="row row-deck row-cards mb-4">
+                <!-- LSO/SSO -->
+                @if( isset( $lso ) && isset( $sso ) )
+                <div class="col-sm-6 col-lg-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center">
+                                <div class="subheader">lso</div>
+                                <div class="ms-auto lh-1">
+                                    <a class="text-muted" href="{{ route('retailer.index') }}">Retailer List</a>
+                                </div>
+                            </div>
+                            <div class="h1 mb-3">{{ count( $lso ) }}</div>
+                            <div class="subheader">sso</div>
+                            <div class="h1">{{ count( $sso ) }}</div>
+                        </div>
                     </div>
                 </div>
-            @endif
-
+                @endif
+            </div>
 
             <!-- Itop Replace -->
             <div class="row mb-4">
@@ -59,58 +69,58 @@
                         <tr class="text-center">
                             <td>
                                 <!-- Total Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->count()}}
                                 @endif
                             </td>
                             <td>
                                 <!-- Pending Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('status','pending')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('status','pending')->count() }}
+                                    {{ $replace->where('user_id', auth()->id())->where('status','pending')->count() }}
                                 @endif
                             </td>
                             <td>
                                 <!-- Processing Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('status','processing')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('status','processing')->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->where('status','processing')->count()}}
                                 @endif
                             </td>
                             <td>
                                 <!-- Completed Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('status','complete')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('status','complete')->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->where('status','complete')->count()}}
                                 @endif
                             </td>
                             <td>
                                 <!-- Paid Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('status','paid')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('status','paid')->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->where('status','paid')->count()}}
                                 @endif
                             </td>
                             <td>
                                 <!-- Due Itop Replace -->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('status','due')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('status','due')->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->where('status','due')->count()}}
                                 @endif
                             </td>
                             <td>
                                 <!-- Unapproved-->
-                                @if( $role == 'super-admin' )
+                                @if( auth()->user()->role == 'super-admin' )
                                     {{ $replace->where('remarks','Unapproved')->count()}}
                                 @else
-                                    {{ $replace->where('user_id', $authId)->where('remarks','Unapproved')->count()}}
+                                    {{ $replace->where('user_id', auth()->id())->where('remarks','Unapproved')->count()}}
                                 @endif
                             </td>
                         </tr>

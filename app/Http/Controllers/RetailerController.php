@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Retailer\UpdateRequest;
 use App\Imports\RetailersImport;
+use App\Models\DdHouse;
 use App\Models\Retailer;
+use App\Models\Rso;
 use App\Models\Supervisor;
 use App\Models\User;
+use App\Services\Retailer\RetailerUpdateService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -28,15 +31,13 @@ class RetailerController extends Controller
      */
     public function index(Request $request): View|Factory|Application
     {
-        $role = Auth::user()->role;
-        $authId = Auth::id();
         $retailer = Retailer::all();
 
         $retailers = Retailer::latest()
             ->search( $request->search )
             ->paginate(5);
 
-        return view('retailer.index', compact('retailers', ['role','authId','retailer']));
+        return view('retailer.index', compact('retailers', ['retailer']));
     }
 
     /**
@@ -86,6 +87,8 @@ class RetailerController extends Controller
     {
         $ids = Retailer::whereNotNull('user_id')->pluck('user_id');
         $supervisors = Supervisor::all();
+        $rsos = Rso::all();
+        $houses = DdHouse::all();
 
         if ( Auth::user()->role == 'super-admin' )
         {
@@ -94,7 +97,7 @@ class RetailerController extends Controller
             $users = User::where('role', 'retailer')->where('dd_house_id', Auth::user()->dd_house_id)->whereNotIn('id', $ids)->get();
         }
 
-        return view('retailer.edit', compact('retailer', 'users','supervisors'));
+        return view('retailer.edit', compact('retailer', 'users','supervisors','rsos','houses'));
     }
 
     /**
@@ -102,11 +105,11 @@ class RetailerController extends Controller
      *
      * @param UpdateRequest $request
      * @param Retailer $retailer
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Retailer $retailer)
+    public function update(UpdateRequest $request, Retailer $retailer): RedirectResponse
     {
-        dd($request->validated());
+        return ( new RetailerUpdateService() )->update( $request, $retailer );
     }
 
     /**

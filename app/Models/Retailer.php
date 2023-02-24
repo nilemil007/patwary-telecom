@@ -118,6 +118,35 @@ class Retailer extends Model
             set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->id,
         );
     }
+    // Enabled
+    protected function enabled(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Sim Seller
+    protected function simSeller(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Own Shop
+    protected function ownShop(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Others Operator
+    protected function othersOperator(): Attribute
+    {
+        return Attribute::make(
+            get: fn($othersOperator ) => json_decode( $othersOperator ),
+            set: fn($othersOperator ) => json_encode( $othersOperator ),
+        );
+    }
     // BTS Id
 //    protected function btsId(): Attribute
 //    {

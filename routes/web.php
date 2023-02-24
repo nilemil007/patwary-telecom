@@ -32,8 +32,6 @@ Route::middleware(['auth'])->group(function(){
     // Dashboard
     Route::get('/dashboard', function () {
         return view('dashboard', [
-            'role' => Auth::user()->role,
-            'authId' => Auth::id(),
             'replace' => ItopReplace::all(),
         ]);
     })->name('dashboard');
