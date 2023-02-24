@@ -37,7 +37,7 @@
                                 <div class="row">
 
                                     <!-- User -->
-                                    <div class="col-md-6">
+                                    <div class="col-md-6 {{ $users->count() < 1 ? 'd-none' : '' }}">
                                         <div class="form-floating mb-3">
                                             <x-select name="user_id" label="User" placeholder>
                                                 @foreach( $users as $user )
@@ -83,26 +83,154 @@
                                         </div>
                                     </div>
 
+                                    <!-- Rso Number -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Rso Number" name="rso_id" type="number" value="{{ old('rso_id', $retailer->rso->itop_number) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Service Point -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Service Point" name="service_point" value="{{ old('service_point', $retailer->service_point) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Owner Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Owner Name" name="owner_name" value="{{ old('owner_name', $retailer->owner_name) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Contact No -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Contact No" name="contact_no" type="number" value="{{ old('contact_no', $retailer->contact_no) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- District -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="District" name="district" value="{{ old('district', $retailer->district) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Thana -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Thana" name="thana" value="{{ old('thana', $retailer->thana) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Address -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Address" name="address" value="{{ old('address', $retailer->address) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- NID -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="NID" name="nid" type="number" value="{{ old('nid', $retailer->nid) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Trade License -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Trade License" name="trade_license_no" type="number" value="{{ old('trade_license_no', $retailer->trade_license_no) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Latitude -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Latitude" name="latitude" value="{{ old('latitude', $retailer->latitude) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Longitude -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Longitude" name="longitude" value="{{ old('longitude', $retailer->longitude) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Device Name -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Device Name" name="device_name" value="{{ old('device_name', $retailer->device_name) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Device Serial No -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Device Serial No" name="device" value="{{ old('device', $retailer->device) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Scanner Serial No -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Scanner Serial No" name="scanner" value="{{ old('scanner', $retailer->scanner) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Password -->
+                                    <div class="col-md-6">
+                                        <div class="form-floating mb-3">
+                                            <x-input label="Password (For SSO)" name="password" value="{{ old('password', $retailer->password) }}" placeholder></x-input>
+                                        </div>
+                                    </div>
+
+                                    <!-- Others Operator -->
+                                    <div class="col-md-12 my-3">
+                                        <div class="form-label">Others Operator</div>
+                                        <label class="form-check form-switch">
+                                            <input name="others_operator[]" class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Gp</span>
+                                        </label>
+                                        <label class="form-check form-switch">
+                                            <input name="others_operator[]" class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Robi</span>
+                                        </label>
+                                        <label class="form-check form-switch">
+                                            <input name="others_operator[]" class="form-check-input" type="checkbox">
+                                            <span class="form-check-label">Aritel</span>
+                                        </label>
+                                    </div>
+
+                                    <hr>
+
                                     <!-- Enabled -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <x-input label="Enabled" name="enabled" value="{{ old('enabled', $retailer->enabled) }}" placeholder></x-input>
-                                        </div>
+                                    <div class="col-md-12 my-3">
+                                        <label class="form-check form-switch">
+                                            <input name="enabled" class="form-check-input" type="checkbox" {{ $retailer->enabled == 'Y' ? 'checked' : '' }}>
+                                            <span class="form-check-label">Enabled</span>
+                                        </label>
                                     </div>
 
-                                    <!-- Rso Number -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <x-input label="Rso Number" name="rso_id" value="{{ old('rso_id', $retailer->rso->itop_number) }}" placeholder></x-input>
-                                        </div>
+                                    <!-- Sim Seller -->
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-check form-switch">
+                                            <input name="sim_seller" class="form-check-input" type="checkbox" {{ $retailer->sim_seller == 'Y' ? 'checked' : '' }}>
+                                            <span class="form-check-label">Sim Seller</span>
+                                        </label>
                                     </div>
 
-                                    <!-- Rso Number -->
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <x-input label="Rso Number" name="rso_number" value="{{ old('rso_number', $retailer->rso->itop_number) }}" placeholder></x-input>
-                                        </div>
+                                    <!-- Own Shop -->
+                                    <div class="col-md-12 mb-3">
+                                        <label class="form-check form-switch">
+                                            <input name="own_shop" class="form-check-input" type="checkbox" {{ $retailer->own_shop == 'Y' ? 'checked' : '' }}>
+                                            <span class="form-check-label">Own Shop</span>
+                                        </label>
                                     </div>
+
                                 </div>
 
                                 <div class="form-footer">

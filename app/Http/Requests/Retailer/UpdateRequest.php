@@ -21,10 +21,32 @@ class UpdateRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            //
+            'user_id' => [],
+            'retailer_code' => [],
+            'retailer_name' => [],
+            'retailer_type' => [],
+            'rso_id' => [],
+            'service_point' => [],
+            'owner_name' => [],
+            'contact_no' => [],
+            'district' => [],
+            'thana' => [],
+            'address' => [],
+            'nid' => [],
+            'trade_license_no' => [],
+            'latitude' => [],
+            'longitude' => [],
+            'device_name' => [],
+            'device' => [],
+            'scanner' => [],
+            'password' => [],
+            'others_operator' => [],
+            'enabled' => [],
+            'sim_seller' => [],
+            'own_shop' => [],
         ];
     }
 

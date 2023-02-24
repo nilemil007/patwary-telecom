@@ -104,9 +104,9 @@ class RetailerController extends Controller
      * @param Retailer $retailer
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, Retailer $retailer): \Illuminate\Http\Response
+    public function update(UpdateRequest $request, Retailer $retailer)
     {
-        //
+        dd($request->validated());
     }
 
     /**
