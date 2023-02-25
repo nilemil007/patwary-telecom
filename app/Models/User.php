@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Models\Role;
@@ -24,6 +25,8 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static where($column, $value)
  * @method static firstWhere(string $string, int|string|null $id)
  * @method static whereHas(string $string, \Closure $param)
+ * @property mixed id
+ * @property mixed role
  */
 class User extends Authenticatable
 {
@@ -65,6 +68,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     // Search
     public function scopeSearch( $query, $term )

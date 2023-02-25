@@ -49,11 +49,6 @@ class RsoController extends Controller
                 ->paginate(5);
         }else{
             dd('rso index method');
-//            $rsos = Rso::with('user','supervisor')
-//                ->where('user_id', Auth::id())
-//                ->search( $request->search )
-//                ->latest('status')
-//                ->paginate(5);
         }
 
         return view('rso.index', compact('rsos'));

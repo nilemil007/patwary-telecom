@@ -31,13 +31,23 @@ class RetailerController extends Controller
      */
     public function index(Request $request): View|Factory|Application
     {
-        $retailer = Retailer::all();
+        if ( (Auth::user()->role != 'super-admin') )
+        {
+            $rso = Rso::firstWhere('user_id', Auth::id());
+            $retailers = Retailer::where('rso_id', $rso->id)
+                ->search( $request->search )
+                ->paginate(5);
+
+            return view('retailer.index', compact('retailers'));
+        }
+
+//        $retailer = Retailer::all();
 
         $retailers = Retailer::latest()
             ->search( $request->search )
             ->paginate(5);
 
-        return view('retailer.index', compact('retailers', ['retailer']));
+        return view('retailer.index', compact('retailers'));
     }
 
     /**
@@ -107,7 +117,7 @@ class RetailerController extends Controller
      * @param Retailer $retailer
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request, Retailer $retailer): RedirectResponse
+    public function update(UpdateRequest $request, Retailer $retailer)
     {
         return ( new RetailerUpdateService() )->update( $request, $retailer );
     }

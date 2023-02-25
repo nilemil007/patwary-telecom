@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 /**
  * @method static latest()
  * @method static firstWhere()*@method static where(string$string, string$string1)
  * @method static where(string $string, string $string1)
  * @method static whereNotNull(string $string)
+ * @property mixed user_id
+ * @property mixed rso_id
  */
 class Retailer extends Model
 {
@@ -97,6 +100,56 @@ class Retailer extends Model
 
 
     //_______________________________________Accessor________________________________________________
+    // Retailer Name
+    protected function retailerName(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $retailerName ) => Str::title( $retailerName ),
+        );
+    }
+    // Retailer Type
+    protected function retailerType(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $retailerType ) => Str::title( $retailerType ),
+        );
+    }
+    // Owner Name
+    protected function ownerName(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $ownerName ) => Str::title( $ownerName ),
+        );
+    }
+    // Address
+    protected function address(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $address ) => Str::title( $address ),
+        );
+    }
+    // Device Name
+    protected function device_name(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $device_name ) => Str::title( $device_name ),
+        );
+    }
+    // Device Serial No
+    protected function device(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $device ) => Str::title( $device ),
+        );
+    }
+    // Scanner Serial No
+    protected function scanner(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $scanner ) => Str::title( $scanner ),
+        );
+    }
+
     // Dd House Id
     protected function ddHouseId(): Attribute
     {

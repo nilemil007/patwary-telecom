@@ -1,6 +1,6 @@
-@props(['label','name','star'=>'','proposed'=>''])
+@props(['label','name','star'=>'','proposed'=>'','disabled'=>''])
 
-<select {{ $attributes->merge(['class'=>'form-select']) }} name="{{ $name ?? '' }}">
+<select {{ $attributes->merge(['class'=>'form-select']) }} name="{{ $name ?? '' }}" {{ $disabled }}>
     <option value="">-- Select {{ __($label) }} --</option>
     {{ $slot }}
 </select>

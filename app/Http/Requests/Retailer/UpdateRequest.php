@@ -27,14 +27,10 @@ class UpdateRequest extends FormRequest
         return [
             'dd_house_id' => [],
             'user_id' => [],
-            'supervisor_id' => [
-                'required'
-            ],
-            'rso_id' => [
-                'required'
-            ],
+            'supervisor_id' => [],
+            'rso_id' => [],
             'retailer_code' => [
-                'required',
+                'sometimes',
                 'starts_with:R',
                 'min:7',
                 'max:7',
@@ -52,7 +48,7 @@ class UpdateRequest extends FormRequest
                 'max:15',
             ],
             'service_point' => [
-                'required',
+                'sometimes',
                 'string',
             ],
             'owner_name' => [
@@ -68,13 +64,13 @@ class UpdateRequest extends FormRequest
                 'unique:retailers,contact_no,'.request()->segment(2),
             ],
             'district' => [
-                'required',
+                'sometimes',
                 'string',
                 'min:3',
                 'max:20',
             ],
             'thana' => [
-                'required',
+                'sometimes',
                 'string',
                 'min:3',
                 'max:20',

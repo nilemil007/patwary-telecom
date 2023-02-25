@@ -10,23 +10,25 @@
     <x-slot:page-title>Retailer List</x-slot:page-title>
 
     <!-- Page title actions -->
-    <x-slot:button>
-        <!-- [Full Button]-->
-        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="input-group">
-                <input name="import_retailers" type="file"
-                       accept=".xls,.xlsx"
-                       aria-describedby="inputGroupFileAddon04"
-                       class="form-control"
-                       aria-label="Upload" required>
+    @if( auth()->user()->role == 'super-admin' )
+        <x-slot:button>
+            <!-- [Full Button]-->
+            <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="input-group">
+                    <input name="import_retailers" type="file"
+                           accept=".xls,.xlsx"
+                           aria-describedby="inputGroupFileAddon04"
+                           class="form-control"
+                           aria-label="Upload" required>
 
-                <button class="btn btn-outline-google" type="submit">
-                    <x-icon.file-import></x-icon.file-import>Import Retailers
-                </button>
-            </div>
-        </form>
-    </x-slot:button>
+                    <button class="btn btn-outline-google" type="submit">
+                        <x-icon.file-import></x-icon.file-import>Import Retailers
+                    </button>
+                </div>
+            </form>
+        </x-slot:button>
+    @endif
 
     <x-slot:icon-button>
         <x-icon.file-import></x-icon.file-import>
@@ -182,21 +184,23 @@
                         </div>
                     </div>
 
-                    <div class="mt-3 d-flex justify-content-between align-items-center">
-                        @if( count( $retailers ) > 0 )
-                            <div>
-                                <a class="btn btn-sm btn-success" href="{{ route('retailer.export') }}">Export Excel</a>
+                    @if( auth()->user()->role == 'super-admin' )
+                        <div class="mt-3 d-flex justify-content-between align-items-center">
+                            @if( count( $retailers ) > 0 )
+                                <div>
+                                    <a class="btn btn-sm btn-success" href="{{ route('retailer.export') }}">Export Excel</a>
 
-                                @if( count( $retailers ) > 1 )
-                                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                            data-bs-target="#delete_all_routes">Delete All</button>
-                                    @include('route.modals.delete-all')
-                                @endif
-                            </div>
-                        @endif
+                                    @if( count( $retailers ) > 1 )
+                                        <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#delete_all_routes">Delete All</button>
+                                        @include('route.modals.delete-all')
+                                    @endif
+                                </div>
+                            @endif
 
-                        <x-link class="nav-link" href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
-                    </div>
+                            <x-link class="nav-link" href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
