@@ -111,7 +111,7 @@ class Retailer extends Model
     protected function retailerType(): Attribute
     {
         return Attribute::make(
-            set: fn( $retailerType ) => Str::title( $retailerType ),
+            set: fn( $retailerType ) => Str::upper( $retailerType ),
         );
     }
     // Owner Name

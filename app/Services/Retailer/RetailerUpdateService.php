@@ -19,7 +19,7 @@ class RetailerUpdateService {
      * @param $retailer
      * @return RedirectResponse
      */
-    public function update( $request, $retailer)
+    public function update( $request, $retailer): RedirectResponse
     {
         $information = $request->validated();
 
@@ -61,7 +61,7 @@ class RetailerUpdateService {
             $information['tmp_retailer_name'] = $request->retailer_name;
             $information['status'] = 'unapproved';
         }
-        if ( $retailer->retailer_type != Str::title( $request->retailer_type ) )
+        if ( $retailer->retailer_type != Str::upper( $request->retailer_type ) )
         {
             unset( $information['retailer_type'] );
             $information['tmp_retailer_type'] = $request->retailer_type;
@@ -122,6 +122,7 @@ class RetailerUpdateService {
             $information['status'] = 'unapproved';
         }
 
+//        dd($information);
         $retailer->update( $information );
 
 //        $superAdmin = User::firstWhere('role', 'super-admin');

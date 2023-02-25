@@ -102,7 +102,7 @@
 
                                 <tbody>
                                 @forelse( $retailers as $sl => $retailer )
-                                    <tr>
+                                    <tr {{ $retailer->status ? 'class=bg-danger-lt' : '' }}>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
                                                    aria-label="Select invoice">
@@ -132,27 +132,13 @@
                                         <td>{{ $retailer->thana }}</td>
                                         <td>{{ $retailer->password }}</td>
                                         <td>
-                                            @switch( $retailer->status )
-                                                @case( 'pending' )
-                                                <span class="badge bg-warning-lt me-1"></span> Pending
-                                                @break
-
-                                                @case( 'processing' )
-                                                <span class="badge bg-warning me-1"></span> Processing
-                                                @break
-
-                                                @case( 'complete' )
-                                                <span class="badge bg-blue me-1"></span> Complete
-                                                @break
-
-                                                @case( 'due' )
-                                                <span class="badge bg-danger me-1"></span> Due
-                                                @break
-
-                                                @case( 'paid' )
-                                                <span class="badge bg-success me-1"></span> Paid
-                                                @break
-                                            @endswitch
+                                            @if( $retailer->status && auth()->user()->role == 'super-admin' )
+                                                <a href="{{ route('rso.verify', $retailer->id) }}" class="btn btn-sm btn-pill">
+                                                    <span class="badge bg-danger me-1"></span>Verify
+                                                </a>
+                                            @elseif( $retailer->status )
+                                                <span class="badge bg-danger me-1"></span>Pending
+                                            @endif
                                         </td>
 
                                         <td>

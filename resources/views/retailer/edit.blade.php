@@ -123,14 +123,22 @@
                             <!-- Retailer Name -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Retailer Name" class="{{ $retailer_name }}" star="*" name="retailer_name" value="{{ old('retailer_name', $retailer->retailer_name) }}" placeholder required></x-input>
+                                    <x-input label="Retailer Name" class="{{ $retailer_name }}" star="*" name="retailer_name" value="{{ old('retailer_name', $retailer->retailer_name) }}" placeholder required>
+                                        @if( $retailer->tmp_retailer_name )
+                                            <small class="text-warning">New: {{ $retailer->tmp_retailer_name }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Retailer Type -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Retailer Type" class="{{ $retailer_type }}" star="*" name="retailer_type" value="{{ old('retailer_type', $retailer->retailer_type) }}" placeholder required></x-input>
+                                    <x-input label="Retailer Type" class="{{ $retailer_type }}" star="*" name="retailer_type" value="{{ old('retailer_type', $retailer->retailer_type) }}" placeholder required>
+                                        @if( $retailer->tmp_retailer_type )
+                                            <small class="text-warning">New: {{ $retailer->tmp_retailer_type }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
@@ -144,14 +152,22 @@
                             <!-- Owner Name -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Owner Name" class="{{ $owner_name }}" star="*" name="owner_name" value="{{ old('owner_name', $retailer->owner_name) }}" placeholder required></x-input>
+                                    <x-input label="Owner Name" class="{{ $owner_name }}" star="*" name="owner_name" value="{{ old('owner_name', $retailer->owner_name) }}" placeholder required>
+                                        @if( $retailer->tmp_owner_name )
+                                            <small class="text-warning">New: {{ $retailer->tmp_owner_name }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Contact No -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Contact No" class="{{ $contact_no }}" star="*" name="contact_no" type="number" value="{{ old('contact_no', $retailer->contact_no) }}" placeholder required></x-input>
+                                    <x-input label="Contact No" class="{{ $contact_no }}" star="*" name="contact_no" type="number" value="{{ old('contact_no', $retailer->contact_no) }}" placeholder required>
+                                        @if( $retailer->tmp_contact_no )
+                                            <small class="text-warning">New: {{ $retailer->tmp_contact_no }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
@@ -172,56 +188,88 @@
                             <!-- Address -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Address" class="{{ $address }}" star="*" name="address" value="{{ old('address', $retailer->address) }}" placeholder required></x-input>
+                                    <x-input label="Address" class="{{ $address }}" star="*" name="address" value="{{ old('address', $retailer->address) }}" placeholder required>
+                                        @if( $retailer->tmp_address )
+                                            <small class="text-warning">New: {{ $retailer->tmp_address }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- NID -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="NID" name="nid" star="*" type="number" value="{{ old('nid', $retailer->nid) }}" placeholder required></x-input>
+                                    <x-input label="NID" name="nid" star="*" type="number" value="{{ old('nid', $retailer->nid) }}" placeholder required>
+                                        @if( $retailer->tmp_nid )
+                                            <small class="text-warning">New: {{ $retailer->tmp_nid }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Trade License -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Trade License" class="{{ $trade_license_no }}" name="trade_license_no" type="number" value="{{ old('trade_license_no', $retailer->trade_license_no) }}" placeholder></x-input>
+                                    <x-input label="Trade License" class="{{ $trade_license_no }}" name="trade_license_no" type="number" value="{{ old('trade_license_no', $retailer->trade_license_no) }}" placeholder>
+                                        @if( $retailer->tmp_trade_license_no )
+                                            <small class="text-warning">New: {{ $retailer->tmp_trade_license_no }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Latitude -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Latitude" class="{{ $latitude }}" name="latitude" type="number" value="{{ old('latitude', $retailer->latitude) }}" placeholder></x-input>
+                                    <x-input label="Latitude" class="{{ $latitude }}" name="latitude" value="{{ old('latitude', $retailer->latitude) }}" placeholder>
+                                        @if( $retailer->tmp_latitude )
+                                            <small class="text-warning">New: {{ $retailer->tmp_latitude }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Longitude -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Longitude" class="{{ $longitude }}" name="longitude" type="number" value="{{ old('longitude', $retailer->longitude) }}" placeholder></x-input>
+                                    <x-input label="Longitude" class="{{ $longitude }}" name="longitude" value="{{ old('longitude', $retailer->longitude) }}" placeholder>
+                                        @if( $retailer->tmp_longitude )
+                                            <small class="text-warning">New: {{ $retailer->tmp_longitude }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Device Name -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Device Name" class="{{ $device_name }}" name="device_name" value="{{ old('device_name', $retailer->device_name) }}" placeholder></x-input>
+                                    <x-input label="Device Name" class="{{ $device_name }}" name="device_name" value="{{ old('device_name', $retailer->device_name) }}" placeholder>
+                                        @if( $retailer->tmp_device_name )
+                                            <small class="text-warning">New: {{ $retailer->tmp_device_name }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Device Serial No -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Device Serial No" class="{{ $device }}" name="device" value="{{ old('device', $retailer->device) }}" placeholder></x-input>
+                                    <x-input label="Device Serial No" class="{{ $device }}" name="device" value="{{ old('device', $retailer->device) }}" placeholder>
+                                        @if( $retailer->tmp_device )
+                                            <small class="text-warning">New: {{ $retailer->tmp_device }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
                             <!-- Scanner Serial No -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Scanner Serial No" class="{{ $scanner }}" name="scanner" value="{{ old('scanner', $retailer->scanner) }}" placeholder></x-input>
+                                    <x-input label="Scanner Serial No" class="{{ $scanner }}" name="scanner" value="{{ old('scanner', $retailer->scanner) }}" placeholder>
+                                        @if( $retailer->tmp_scanner )
+                                            <small class="text-warning">New: {{ $retailer->tmp_scanner }}</small>
+                                        @endif
+                                    </x-input>
                                 </div>
                             </div>
 
@@ -276,10 +324,12 @@
                             </div>
                         </div>
 
-                        <div class="form-footer">
-                            <x-button class="w-100 d-md-none"><x-icon.reload></x-icon.reload>Update</x-button>
-                            <x-button class="d-none d-md-block"><x-icon.reload></x-icon.reload>Update</x-button>
-                        </div>
+                        @if( !$retailer->status )
+                            <div class="form-footer">
+                                <x-button class="w-100 d-md-none"><x-icon.reload></x-icon.reload>Update</x-button>
+                                <x-button class="d-none d-md-block"><x-icon.reload></x-icon.reload>Update</x-button>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </form>

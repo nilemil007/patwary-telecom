@@ -41,9 +41,7 @@ class RetailerController extends Controller
             return view('retailer.index', compact('retailers'));
         }
 
-//        $retailer = Retailer::all();
-
-        $retailers = Retailer::latest()
+        $retailers = Retailer::latest('status')
             ->search( $request->search )
             ->paginate(5);
 
