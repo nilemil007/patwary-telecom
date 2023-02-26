@@ -1,40 +1,26 @@
-@extends('layouts.app')
-@push('title') Create New Replace @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Create
-                    </div>
-                    <h2 class="page-title">
-                        New Replace Entry
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Create New Replace</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Create</x-slot:page-pre-title>
 
-                        <!-- [Full Button]-->
-                        <a href="{{ route('itop-replace.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            All Replaces
-                        </a>
+    <!-- Page Title -->
+    <x-slot:page-title>New Replace Entry</x-slot:page-title>
 
-                        <!-- [Icon Button]-->
-                        <a href="{{ route('itop-replace.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('itop-replace.index') }}" class="btn btn-primary">
+            <x-icon.back></x-icon.back>All Replaces
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <x-link href="{{ route('itop-replace.index') }}" class="btn btn-primary btn-icon">
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -48,23 +34,23 @@
                                 <div class="row">
                                     <!-- User -->
                                     @can('delete replace')
-                                    <div class="col-md-6">
-                                        <div class="form-floating mb-3">
-                                            <select name="user_id" class="form-select" id="user_id">
+                                        <div class="col-md-6">
+                                            <div class="form-floating mb-3">
+                                                <select name="user_id" class="form-select" id="user_id">
                                                     <option value="">-- Select User --</option>
-                                                @foreach( $users as $user )
-                                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            <label for="user_id">User</label>
-                                            @error('user_id')
-                                            <small class="text-danger">{{ $message }}</small>
-                                            @enderror
+                                                    @foreach( $users as $user )
+                                                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                                <label for="user_id">User</label>
+                                                @error('user_id')
+                                                <small class="text-danger">{{ $message }}</small>
+                                                @enderror
+                                            </div>
                                         </div>
-                                    </div>
                                     @endcan
 
-                                    <!-- Replace Number -->
+                                <!-- Replace Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
                                             <input name="itop_number" id="itop_number" type="number" class="form-control"
@@ -91,9 +77,9 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                    @endcan
+                                @endcan
 
-                                    <!-- Balance -->
+                                <!-- Balance -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
                                             <input name="balance" id="balance" type="number" class="form-control"
@@ -163,4 +149,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

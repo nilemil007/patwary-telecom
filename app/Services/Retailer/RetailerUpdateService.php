@@ -2,9 +2,9 @@
 namespace App\Services\Retailer;
 
 
+use App\Models\Rso;
 use App\Models\User;
 use App\Notifications\Retailer\RetailerUpdateNotification;
-use App\Notifications\Rso\AdditionalInfoUpdateNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -128,12 +128,13 @@ class RetailerUpdateService {
             $information['status'] = 'unapproved';
         }
 
-//        dd($information);
         $retailer->update( $information );
 
-//        $superAdmin = User::firstWhere('role', 'super-admin');
+        $superAdmin = User::firstWhere('role', 'super-admin');
+        $rso = Rso::firstWhere( 'user_id', Auth::id());
 
-//        Notification::sendNow( $superAdmin, new RetailerUpdateNotification( $retailer ) );
+
+        Notification::sendNow( $superAdmin, new RetailerUpdateNotification( $retailer, $rso ) );
 
         return redirect()->back()->with('success','Update request sent successfully.');
 

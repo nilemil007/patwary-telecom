@@ -1,39 +1,26 @@
-@extends('layouts.app')
-@push('title') Edit Supervisor @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Edit
-                    </div>
-                    <h2 class="page-title">
-                        Supervisor Information
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Edit Supervisor</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Edit</x-slot:page-pre-title>
 
-                        <!-- [Full Button]-->
-                        <x-link href="{{ route('supervisor.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <x-icon.back/>All Supervisors
-                        </x-link>
+    <!-- Page Title -->
+    <x-slot:page-title>Supervisor Information</x-slot:page-title>
 
-                        <!-- [Icon Button]-->
-                        <x-link href="{{ route('supervisor.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <x-icon.back/>
-                        </x-link>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('supervisor.index') }}" class="btn btn-primary">
+            <x-icon.back></x-icon.back>All Supervisors
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <x-link href="{{ route('supervisor.index') }}" class="btn btn-primary btn-icon">
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -234,4 +221,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

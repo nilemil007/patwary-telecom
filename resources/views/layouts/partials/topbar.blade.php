@@ -37,7 +37,7 @@ $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
                 </a>
                 <div class="dropdown-menu dropdown-menu-notification p-1">
                     @forelse(auth()->user()->unreadNotifications->take(5) as $notify)
-                        <x-link href="{{ route('single.notification', $notify->id) }}">
+                        <x-link href="{{ route('single.notification', $notify->id) }}" class="nav-link">
                             <div class="card mb-1">
                                 <div class="card-body p-2">
                                     <div class="row align-items-center">

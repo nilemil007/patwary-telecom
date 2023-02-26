@@ -1,40 +1,26 @@
-@extends('layouts.app')
-@push('title') Edit Replace @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Edit
-                    </div>
-                    <h2 class="page-title">
-                        Replace Information
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Edit Replace</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Edit</x-slot:page-pre-title>
 
-                        <!-- [Full Button]-->
-                        <a href="{{ route('itop-replace.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            All Replace
-                        </a>
+    <!-- Page Title -->
+    <x-slot:page-title>Replace Information</x-slot:page-title>
 
-                        <!-- [Icon Button]-->
-                        <a href="{{ route('itop-replace.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('itop-replace.index') }}" class="btn btn-primary">
+            <x-icon.back></x-icon.back>All Replace
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <x-link href="{{ route('itop-replace.index') }}" class="btn btn-primary btn-icon">
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -67,7 +53,7 @@
                                         </div>
                                     @endcan
 
-                                    <!-- Replace Number -->
+                                <!-- Replace Number -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
                                             <input name="itop_number" id="itop_number" type="number" class="form-control"
@@ -97,7 +83,7 @@
                                         </div>
                                     @endcan
 
-                                    <!-- Balance -->
+                                <!-- Balance -->
                                     <div class="col-md-6">
                                         <div class="form-floating mb-3">
                                             <input name="balance" id="balance" type="number" class="form-control"
@@ -156,7 +142,7 @@
                                         </div>
                                     @endcan
 
-                                    <!-- Status -->
+                                <!-- Status -->
                                     @can('delete replace')
                                         <div class="col-md-6">
                                             <div class="form-floating mb-3">
@@ -187,4 +173,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

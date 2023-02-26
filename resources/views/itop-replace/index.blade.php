@@ -14,14 +14,14 @@
     <!-- Page title actions -->
     <x-slot:button>
         <!-- [Full Button]-->
-        <x-link href="{{ route('itop-replace.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+        <x-link href="{{ route('itop-replace.create') }}" class="btn btn-primary">
             <x-icon.plus></x-icon.plus>Create new replace
         </x-link>
     </x-slot:button>
 
     <x-slot:icon-button>
         <!-- [Icon Button]-->
-        <x-link href="{{ route('itop-replace.create') }}" class="btn btn-primary d-sm-none btn-icon" >
+        <x-link href="{{ route('itop-replace.create') }}" class="btn btn-primary btn-icon" >
             <x-icon.plus></x-icon.plus>
         </x-link>
     </x-slot:icon-button>

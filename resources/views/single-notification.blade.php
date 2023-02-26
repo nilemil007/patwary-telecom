@@ -11,13 +11,13 @@
 
     <!-- Page title action button -->
     <x-slot:button>
-        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-none d-sm-inline-block">
+        <x-link href="{{ route('dashboard') }}" class="btn btn-primary">
             <x-icon.home></x-icon.home>Dashboard
         </x-link>
     </x-slot:button>
 
     <x-slot:icon-button>
-        <x-link href="{{ route('dashboard') }}" class="btn btn-primary d-sm-none btn-icon">
+        <x-link href="{{ route('dashboard') }}" class="btn btn-primary btn-icon">
             <x-icon.home></x-icon.home>
         </x-link>
     </x-slot:icon-button>
@@ -45,12 +45,16 @@
                                                     </strong>
                                                     @if( !empty( $notify->data['dd_house'] ) ) from @endif
                                                     <strong>{{ $notify->data['dd_house'] ?? '' }}</strong>
-                                                    {{ $notify->data['msg'] }}
+                                                    {!! $notify->data['msg'] !!}
+
+                                                    <p class="mt-2 mb-0">@isset( $notify->data['retailer_code'] ) Retailer Code: {{ $notify->data['retailer_code'] }}@endisset</p>
+                                                    <p>@isset( $notify->data['retailer_itop'] ) Retailer Itop: {{ $notify->data['retailer_itop'] }}@endisset</p>
                                                 </div>
                                                 <div class="text-muted d-flex justify-content-between align-items-center">
                                                     <span>{{ $notify->created_at->diffForHumans() }}</span>
                                                 </div>
                                             </div>
+
                                             <div class="col-auto align-self-center">
                                                 @if( !$notify->read_at )
                                                     <div class="badge bg-danger"></div>
@@ -84,6 +88,9 @@
                                 @if( !empty( $notify->data['dd_house'] ) ) from @endif
                                 <strong>{{ $notify->data['dd_house'] ?? '' }}</strong>
                                 {{ $notify->data['msg'] }}
+
+                                <p class="mt-2 mb-0">@isset( $notify->data['retailer_code'] ) Retailer Code: {{ $notify->data['retailer_code'] }}@endisset</p>
+                                <p>@isset( $notify->data['retailer_itop'] ) Retailer Itop: {{ $notify->data['retailer_itop'] }}@endisset</p>
                             </div>
                             <div class="text-muted d-flex align-items-center">
                                 <span>{{ $notify->created_at->diffForHumans() }}</span>

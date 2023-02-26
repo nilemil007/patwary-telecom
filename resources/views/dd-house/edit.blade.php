@@ -1,39 +1,26 @@
-@extends('layouts.app')
-@push('title') Update House @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Update
-                    </div>
-                    <h2 class="page-title">
-                        DD House
-                    </h2>
-                </div>
+    <!-- Main Title -->
+    <x-slot:title>Update House</x-slot:title>
 
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
-                        <!-- [Full Button]-->
-                        <a href="{{ route('dd-house.index') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                            All Houses
-                        </a>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Update</x-slot:page-pre-title>
 
-                        <!-- Create new entry [Icon Button]-->
-                        <a href="{{ route('dd-house.index') }}" class="btn btn-primary d-sm-none btn-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page Title -->
+    <x-slot:page-title>DD House</x-slot:page-title>
+
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('dd-house.index') }}" class="btn btn-primary">
+            <x-icon.back></x-icon.back>All Houses
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <x-link href="{{ route('dd-house.index') }}" class="btn btn-primary btn-icon">
+            <x-icon.back></x-icon.back>
+        </x-link>
+    </x-slot:icon-button>
 
     <!-- Page Body -->
     <div class="page-body">
@@ -253,4 +240,5 @@
             </div>
         </div>
     </div>
-@endsection
+
+</x-main>

@@ -140,7 +140,6 @@ class RetailerController extends Controller
         return Response::download(public_path('excel/Sample Retailer List.xlsx'), 'Sample Retailer List.xlsx');
     }
 
-
     // Additional Method
     public function export()
     {
@@ -163,9 +162,15 @@ class RetailerController extends Controller
     // Approve
     public function approve( Request $request, Retailer $retailer ): RedirectResponse
     {
-        ( new ApproveService() )->approved( $request, $retailer );
+        $request->validate([
+            'contact_no' => ['unique:retailers,contact_no'],
+            'nid' => ['unique:retailers,nid'],
+            'trade_license_no' => ['unique:retailers,trade_license_no'],
+            'device_sn' => ['unique:retailers,device_sn'],
+            'scanner_sn' => ['unique:retailers,scanner_sn'],
+        ]);
 
-        return redirect()->route('rso.index')->with('error','Approved failed!');
+        return ( new ApproveService() )->approved( $request, $retailer );
     }
 
     // Reject

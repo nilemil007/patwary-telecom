@@ -161,5 +161,7 @@ class ApproveService {
 
             return redirect()->route('rso.index')->with('success','Approved successfully.');
         }
+
+        return redirect()->route('rso.index')->with('error','Approved failed!');
     }
 }

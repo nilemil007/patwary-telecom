@@ -1,3 +1,6 @@
+
+
+
 @extends('layouts.app')
 @push('title') Create New Retailer @endpush
 

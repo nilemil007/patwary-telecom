@@ -1,42 +1,26 @@
-@extends('layouts.app')
-@push('title') All User's @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        All User's
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Main Title -->
+    <x-slot:title>All User's</x-slot:title>
 
-                        <!-- Create new user [Full Button]-->
-                        <a href="{{ route('create-new-user.create') }}" class="btn btn-primary d-none d-sm-inline-block">
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                            Create new user
-                        </a>
+    <!-- Page Title -->
+    <x-slot:page-title>All User's</x-slot:page-title>
 
-                        <!-- Create new user [Icon Button]-->
-                        <a href="{{ route('create-new-user.create') }}"
-                           class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal">
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('create-new-user.create') }}" class="btn btn-primary">
+            <x-icon.plus></x-icon.plus>Create new user
+        </x-link>
+    </x-slot:button>
 
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-slot:icon-button>
+        <x-link href="{{ route('create-new-user.create') }}" class="btn btn-primary btn-icon">
+            <x-icon.plus></x-icon.plus>
+        </x-link>
+    </x-slot:icon-button>
 
     <div class="page-body">
         <div class="container-fluid">
@@ -197,4 +181,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

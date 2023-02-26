@@ -156,9 +156,13 @@ class RsoController extends Controller
 
     public function approve(Request $request, Rso $rso): RedirectResponse
     {
-        ( new ApproveService() )->approved( $request, $rso );
+        $request->validate([
+            'personal_number' => ['unique:rsos,personal_number'],
+            'account_number' => ['unique:rsos,account_number'],
+            'nid' => ['unique:rsos,nid'],
+        ]);
 
-        return redirect()->route('rso.index')->with('error','Approved failed!');
+        return ( new ApproveService() )->approved( $request, $rso );
     }
 
     public function reject( Rso $rso ): RedirectResponse

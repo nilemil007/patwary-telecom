@@ -111,7 +111,7 @@
                                         <td>
                                             <div class="d-flex py-1 align-items-center">
                                                 <span class="avatar me-2"
-                                                      style="background-image: url({{ $retailer->image }})"></span>
+                                                      style="background-image: url({{ $retailer->user->image ?? '' !== null }})"></span>
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $retailer->retailer_name }}</div>
                                                     <div class="text-muted">

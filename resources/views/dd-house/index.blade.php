@@ -1,54 +1,31 @@
-@extends('layouts.app')
-@push('title') All House's @endpush
+<x-main>
 
-@section('main-content')
-    <div class="container-fluid">
-        <!-- Page title -->
-        <div class="page-header d-print-none">
-            <div class="row align-items-center">
-                <div class="col">
-                    <!-- Page pre-title -->
-                    <div class="page-pretitle">
-                        Overview
-                    </div>
-                    <h2 class="page-title">
-                        All House's
-                    </h2>
-                </div>
-                <!-- Page title actions -->
-                <div class="col-auto ms-auto d-print-none">
-                    <div class="btn-list">
+    <!-- Main Title -->
+    <x-slot:title>All House's</x-slot:title>
 
-                        <!-- Create new house [Full Button]-->
-                        <a href="{{ route('dd-house.create') }}" class="btn btn-primary d-none d-sm-inline-block">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                            Create new house
-                        </a>
+    <!-- Page Pre Title -->
+    <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
-                        <!-- Create new house [Icon Button]-->
-                        <a href="{{ route('dd-house.create') }}" class="btn btn-primary d-sm-none btn-icon" data-bs-toggle="modal" data-bs-target="#modal-report" aria-label="Create new report">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="12" y1="5" x2="12" y2="19" /><line x1="5" y1="12" x2="19" y2="12" /></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Page Title -->
+    <x-slot:page-title>All House's</x-slot:page-title>
+
+    <!-- Page title action button -->
+    <x-slot:button>
+        <x-link href="{{ route('dd-house.create') }}" class="btn btn-primary">
+            <x-icon.plus></x-icon.plus>Create new house
+        </x-link>
+    </x-slot:button>
+
+    <x-slot:icon-button>
+        <x-link href="{{ route('dd-house.create') }}" class="btn btn-primary btn-icon">
+            <x-icon.plus></x-icon.plus>
+        </x-link>
+    </x-slot:icon-button>
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-
-                    {{--Message--}}
-                    @if( session()->has('success') )
-                        <p class="alert alert-success">{{ session('success') }}</p>
-                    @elseif( session()->has('error') )
-                        <p class="alert alert-danger">{{ session('error') }}</p>
-                    @endif
-
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <div class="d-flex">
@@ -87,56 +64,56 @@
 
                                 <tbody>
                                 @forelse( $dds as $sl => $dd )
-                                <tr>
-                                    <td>
-                                        <input class="form-check-input m-0 align-middle" type="checkbox"
-                                               aria-label="Select invoice">
-                                    </td>
-                                    <td><span class="text-muted">{{ ++$sl }}</span></td>
-                                    <td data-label="Title">
-                                        <div>{{ $dd->cluster_name }}</div>
-                                        <div class="text-muted">{{ $dd->region }}</div>
-                                    </td>
-                                    <td>{{ $dd->email }}</td>
-                                    <td data-label="Title">
-                                        <div>{{ $dd->name }}</div>
-                                        <div class="text-muted">{{ $dd->code }}</div>
-                                    </td>
-                                    <td data-label="Title">
-                                        <div>{{ $dd->proprietor_name }}</div>
-                                        <div class="text-muted">{{ $dd->proprietor_number }}</div>
-                                    </td>
-                                    <td data-label="Title">
-                                        <div>{{ $dd->latitude }}</div>
-                                        <div class="text-muted">{{ $dd->longitude }}</div>
-                                    </td>
-                                    <td>{{ $dd->bts_code }}</td>
-                                    <td>{{ $dd->established_year }}</td>
-                                    <td>
-                                        @switch( $dd->status )
-                                            @case( 1 )
-                                            <span class="badge bg-success me-1"></span> Active
-                                            @break
+                                    <tr>
+                                        <td>
+                                            <input class="form-check-input m-0 align-middle" type="checkbox"
+                                                   aria-label="Select invoice">
+                                        </td>
+                                        <td><span class="text-muted">{{ ++$sl }}</span></td>
+                                        <td data-label="Title">
+                                            <div>{{ $dd->cluster_name }}</div>
+                                            <div class="text-muted">{{ $dd->region }}</div>
+                                        </td>
+                                        <td>{{ $dd->email }}</td>
+                                        <td data-label="Title">
+                                            <div>{{ $dd->name }}</div>
+                                            <div class="text-muted">{{ $dd->code }}</div>
+                                        </td>
+                                        <td data-label="Title">
+                                            <div>{{ $dd->proprietor_name }}</div>
+                                            <div class="text-muted">{{ $dd->proprietor_number }}</div>
+                                        </td>
+                                        <td data-label="Title">
+                                            <div>{{ $dd->latitude }}</div>
+                                            <div class="text-muted">{{ $dd->longitude }}</div>
+                                        </td>
+                                        <td>{{ $dd->bts_code }}</td>
+                                        <td>{{ $dd->established_year }}</td>
+                                        <td>
+                                            @switch( $dd->status )
+                                                @case( 1 )
+                                                <span class="badge bg-success me-1"></span> Active
+                                                @break
 
-                                            @case( 0 )
-                                            <span class="badge bg-danger me-1"></span> Inactive
-                                            @break
-                                        @endswitch
-                                    </td>
-                                    <td>
-                                        <!-- Edit -->
-                                        <a href="{{ route('dd-house.edit', $dd->id) }}" class="link-primary text-decoration-none">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
-                                        </a>
+                                                @case( 0 )
+                                                <span class="badge bg-danger me-1"></span> Inactive
+                                                @break
+                                            @endswitch
+                                        </td>
+                                        <td>
+                                            <!-- Edit -->
+                                            <a href="{{ route('dd-house.edit', $dd->id) }}" class="link-primary text-decoration-none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3" /><path d="M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3" /><line x1="16" y1="5" x2="19" y2="8" /></svg>
+                                            </a>
 
-                                        <!-- Delete -->
-                                        <a href="#" class="link-danger text-decoration-none"
-                                           data-bs-toggle="modal" data-bs-target="#del-house-{{ $dd->id }}">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
-                                        </a>
-                                    </td>
-                                    @include('dd-house.modals.delete')
-                                </tr>
+                                            <!-- Delete -->
+                                            <a href="#" class="link-danger text-decoration-none"
+                                               data-bs-toggle="modal" data-bs-target="#del-house-{{ $dd->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><line x1="4" y1="7" x2="20" y2="7" /><line x1="10" y1="11" x2="10" y2="17" /><line x1="14" y1="11" x2="14" y2="17" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg>
+                                            </a>
+                                        </td>
+                                        @include('dd-house.modals.delete')
+                                    </tr>
                                 @empty
                                     <tr>
                                         <td>No data found</td>
@@ -154,4 +131,4 @@
             </div>
         </div>
     </div>
-@endsection
+</x-main>

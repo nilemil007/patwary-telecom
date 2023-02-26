@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RetailerUpdateNotification extends Notification
+class ApprovedNotification extends Notification
 {
     use Queueable;
 
-    private $retailer, $rso;
+    private $retailer, $superAdmin;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct( $retailer, $rso )
+    public function __construct( $retailer, $superAdmin )
     {
         $this->retailer = $retailer;
-        $this->rso = $rso;
+        $this->superAdmin = $superAdmin;
     }
 
     /**
@@ -41,13 +41,11 @@ class RetailerUpdateNotification extends Notification
     public function toArray()
     {
         return [
-            'name' => $this->rso->user->name,
-            'image' => $this->rso->user->image,
-            'role' => $this->rso->user->role,
-            'dd_house' => $this->rso->ddHouse->name,
+            'name' => $this->superAdmin->name,
+            'image' => $this->superAdmin->image,
             'retailer_code' => $this->retailer->retailer_code,
             'retailer_itop' => $this->retailer->itop_number,
-            'msg' => "has updated ".$this->retailer->retailer_name."'s"." information.",
+            'msg' => "has approved ".$this->retailer->retailer_name."'s"." information update request.",
         ];
     }
 }
