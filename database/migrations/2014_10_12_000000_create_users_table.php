@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
             $table->foreignUuid('dd_house_id')->nullable()->constrained();
-            $table->string('name');
-            $table->string('username')->nullable()->unique();
-            $table->string('email')->unique();
+            $table->string('name')->nullable();
+            $table->string('username')->unique();
+            $table->string('email')->nullable()->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('role');
             $table->string('password');

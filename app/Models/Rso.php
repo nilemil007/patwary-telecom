@@ -27,8 +27,6 @@ class Rso extends Model
     protected $fillable = [
         'user_id',
         'supervisor_id',
-        'manager_id',
-        'zm_id',
         'dd_house_id',
         'routes',
         'code',
@@ -123,6 +121,18 @@ class Rso extends Model
         });
     }
 
+    protected function userId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $acNumber ) => User::firstWhere('username', $acNumber)->id,
+        );
+    }
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
     protected function routes(): Attribute
     {
         return Attribute::make(
@@ -130,7 +140,6 @@ class Rso extends Model
             set: fn( $route ) => json_encode( $route ),
         );
     }
-
     protected function fatherName(): Attribute
     {
         return Attribute::make(

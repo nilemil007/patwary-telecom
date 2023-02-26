@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DdHouseStoreRequest;
 use App\Http\Requests\DdHouseUpdateRequest;
+use App\Imports\House\HouseImport;
 use App\Models\DdHouse;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DdHouseController extends Controller
 {
@@ -114,5 +116,13 @@ class DdHouseController extends Controller
         }
 
         return redirect()->route('dd-house.index');
+    }
+
+    // Import
+    public function import( Request $request ): RedirectResponse
+    {
+        Excel::import( new HouseImport(), $request->file('import_houses'));
+
+        return redirect()->route('dd-house.index')->with('success', 'New house created successfully.');
     }
 }

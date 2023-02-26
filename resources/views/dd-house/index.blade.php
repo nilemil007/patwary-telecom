@@ -11,6 +11,22 @@
 
     <!-- Page title action button -->
     <x-slot:button>
+        <!-- Import button -->
+        <form action="{{ route('house.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_houses" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import
+                </button>
+            </div>
+        </form>
+
+        <!-- Create new button -->
         <x-link href="{{ route('dd-house.create') }}" class="btn btn-primary">
             <x-icon.plus></x-icon.plus>Create new house
         </x-link>

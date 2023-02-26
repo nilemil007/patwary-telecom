@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('rsos',
             function (Blueprint $table) {
-            $table->uuid('id')->primary()->unique();
+            $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignUuid('supervisor_id')->constrained();
+            $table->foreignUuid('supervisor_id')->nullable()->constrained();
             $table->foreignUuid('dd_house_id')->constrained();
             $table->json('routes')->nullable();
             $table->string('code', 10)->nullable()->unique();
@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('thana', 20)->nullable();
             $table->longText('address')->nullable();
             $table->longText('tmp_address')->nullable();
-            $table->enum('blood_group', ['a+','ab+','a-','ab-','b+','b-','o+','o-']);
+            $table->enum('blood_group', ['a+','ab+','a-','ab-','b+','b-','o+','o-'])->nullable();
             $table->string('tmp_blood_group')->nullable();
             $table->string('sr_no', 5)->nullable()->unique();
             $table->string('account_number', 20)->nullable()->unique();

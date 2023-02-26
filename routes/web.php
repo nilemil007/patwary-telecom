@@ -119,7 +119,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/rso/{rso}/approve', [ RsoController::class, 'approve' ])->name('rso.approve');
     Route::post('/rso/{rso}/reject', [ RsoController::class, 'reject' ])->name('rso.reject');
     Route::post('/rso/change-password', [ RsoController::class, 'changePassword' ])->name('rso.change.password');
-    Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
+    Route::post('/rso/import', [ RsoController::class, 'import' ])->name('rso.import');
     Route::get('/rso/export', [ RsoController::class, 'export' ])->name('rso.export');
     Route::get('/download/rso/{rso}/document', function ($id){
         $rso = Rso::firstWhere('id', $id);
@@ -135,6 +135,13 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/retailer/{retailer}/verify', [ RetailerController::class, 'verify' ])->name('retailer.verify');
     Route::post('/retailer/{retailer}/approve', [ RetailerController::class, 'approve' ])->name('retailer.approve');
     Route::post('/retailer/{retailer}/reject', [ RetailerController::class, 'reject' ])->name('retailer.reject');
+
+    // Dd House additional routes
+    Route::post('/house/import', [ DdHouseController::class, 'import' ])->name('house.import');
+
+    // User additional routes
+    Route::post('/user/import', [ CreateNewUserController::class, 'import' ])->name('user.import');
+
 
     // Resource routes
     Route::resources([

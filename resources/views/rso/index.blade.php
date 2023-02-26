@@ -8,6 +8,28 @@
     <!-- Page Title -->
     <x-slot:page-title>Rso</x-slot:page-title>
 
+    <!-- Page title action button -->
+    <x-slot:button>
+        <!-- Import button -->
+        <form action="{{ route('rso.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_rsos" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import
+                </button>
+            </div>
+        </form>
+    </x-slot:button>
+
+{{--    <x-slot:icon-button>--}}
+
+{{--    </x-slot:icon-button>--}}
+
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">

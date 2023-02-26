@@ -92,6 +92,13 @@ class User extends Authenticatable
         });
     }
 
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn ( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
+
     protected function password(): Attribute
     {
         return Attribute::make(

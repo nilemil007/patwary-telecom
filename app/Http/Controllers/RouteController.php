@@ -106,7 +106,7 @@ class RouteController extends Controller
     }
 
 
-    // Import BTS Data
+    // Import
     public function import( Request $request ): RedirectResponse
     {
         Excel::import( new RouteImport, $request->file('import_routes'));

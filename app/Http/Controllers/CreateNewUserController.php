@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Imports\User\UsersImport;
 use App\Models\DdHouse;
 use App\Models\ItopReplace;
 use App\Models\User;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 use Spatie\Permission\Models\Role;
 
 class CreateNewUserController extends Controller
@@ -121,5 +123,13 @@ class CreateNewUserController extends Controller
         }
 
         return redirect()->route('create-new-user.index');
+    }
+
+    // Import
+    public function import( Request $request ): RedirectResponse
+    {
+        Excel::import( new UsersImport(), $request->file('import_users'));
+
+        return redirect()->route('create-new-user.index')->with('success', 'New user created successfully.');
     }
 }

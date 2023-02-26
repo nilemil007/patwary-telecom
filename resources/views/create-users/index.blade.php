@@ -11,6 +11,21 @@
 
     <!-- Page title action button -->
     <x-slot:button>
+        <!-- Import button -->
+        <form action="{{ route('user.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_users" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control"
+                       aria-label="Upload" required>
+
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import
+                </button>
+            </div>
+        </form>
+
         <x-link href="{{ route('create-new-user.create') }}" class="btn btn-primary">
             <x-icon.plus></x-icon.plus>Create new user
         </x-link>
@@ -100,8 +115,8 @@
                                     <td>
                                         @switch( $user->role )
                                             @case('rso')
-                                                <div title="RS0 AC Number">{{ $user->rso->itop_number }}</div>
-                                                <div title="RS0 Code" class="text-muted">{{ $user->rso->code }}</div>
+                                                <div title="RS0 AC Number">{{ $user->rso->itop_number ?? '' }}</div>
+                                                <div title="RS0 Code" class="text-muted">{{ $user->rso->code ?? '' }}</div>
                                             @break
 
                                             @case('supervisor')

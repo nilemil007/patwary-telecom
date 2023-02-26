@@ -6,6 +6,7 @@ use App\Exports\Rso\RsoListExport;
 use App\Http\Requests\Rso\AdditionalInfoUpdate;
 use App\Http\Requests\Rso\ProfileUpdate;
 use App\Http\Requests\Rso\Update;
+use App\Imports\Rso\RsosImport;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
 use App\Models\Route;
 use App\Models\Rso;
@@ -232,5 +233,13 @@ class RsoController extends Controller
     public function export(): BinaryFileResponse
     {
         return Excel::download( new RsoListExport(), 'Rso.xlsx' );
+    }
+
+    // Import
+    public function import( Request $request ): RedirectResponse
+    {
+        Excel::import( new RsosImport(), $request->file('import_rsos'));
+
+        return redirect()->route('create-new-user.index')->with('success', 'New user created successfully.');
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->string('cluster_name')->nullable();
             $table->string('region')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('market_status')->nullable();
             $table->string('email')->nullable()->unique();
             $table->string('district')->nullable();
