@@ -5,6 +5,7 @@
     $owner_name = !empty($retailer->tmp_owner_name)?'bg-warning-lt':'';
     $contact_no = !empty($retailer->tmp_contact_no)?'bg-warning-lt':'';
     $address = !empty($retailer->tmp_address)?'bg-warning-lt':'';
+    $nid = !empty($retailer->tmp_nid)?'bg-warning-lt':'';
     $trade_license_no = !empty($retailer->tmp_trade_license_no)?'bg-warning-lt':'';
     $latitude = !empty($retailer->tmp_latitude)?'bg-warning-lt':'';
     $longitude = !empty($retailer->tmp_longitude)?'bg-warning-lt':'';
@@ -199,7 +200,7 @@
                             <!-- NID -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="NID" name="nid" star="*" type="number" value="{{ old('nid', $retailer->nid) }}" placeholder required>
+                                    <x-input label="NID" name="nid" class="{{ $nid }}" star="*" type="number" value="{{ old('nid', $retailer->nid) }}" placeholder required>
                                         @if( $retailer->tmp_nid )
                                             <small class="text-warning">New: {{ $retailer->tmp_nid }}</small>
                                         @endif

@@ -133,7 +133,7 @@
                                         <td>{{ $retailer->password }}</td>
                                         <td>
                                             @if( $retailer->status && auth()->user()->role == 'super-admin' )
-                                                <a href="{{ route('rso.verify', $retailer->id) }}" class="btn btn-sm btn-pill">
+                                                <a href="{{ route('retailer.verify', $retailer->id) }}" class="btn btn-sm btn-pill">
                                                     <span class="badge bg-danger me-1"></span>Verify
                                                 </a>
                                             @elseif( $retailer->status )

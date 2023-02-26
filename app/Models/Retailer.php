@@ -21,7 +21,7 @@ class Retailer extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = ['id'];
+//    protected $guarded = ['id'];
 
     protected $fillable = [
         'dd_house_id',
@@ -62,10 +62,10 @@ class Retailer extends Model
         'tmp_latitude',
         'device_name',
         'tmp_device_name',
-        'device',
-        'tmp_device',
-        'scanner',
-        'tmp_scanner',
+        'device_sn',
+        'tmp_device_sn',
+        'scanner_sn',
+        'tmp_scanner_sn',
         'document',
         'password',
         'status',

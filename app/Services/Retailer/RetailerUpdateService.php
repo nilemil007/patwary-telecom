@@ -79,6 +79,12 @@ class RetailerUpdateService {
             $information['tmp_contact_no'] = $request->contact_no;
             $information['status'] = 'unapproved';
         }
+        if ( $retailer->nid != $request->nid )
+        {
+            unset( $information['nid'] );
+            $information['tmp_nid'] = $request->nid;
+            $information['status'] = 'unapproved';
+        }
         if ( $retailer->address != Str::title( $request->address ) )
         {
             unset( $information['address'] );

@@ -10,6 +10,7 @@ use App\Models\Rso;
 use App\Models\Supervisor;
 use App\Models\User;
 use App\Services\Retailer\RetailerUpdateService;
+use App\Services\Retailer\ApproveService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -17,6 +18,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Response;
 use Maatwebsite\Excel\Facades\Excel;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -36,6 +38,7 @@ class RetailerController extends Controller
             $rso = Rso::firstWhere('user_id', Auth::id());
             $retailers = Retailer::where('rso_id', $rso->id)
                 ->search( $request->search )
+                ->latest('status')
                 ->paginate(5);
 
             return view('retailer.index', compact('retailers'));
@@ -134,7 +137,7 @@ class RetailerController extends Controller
     // Download Sample File
     public function sampleFileDownload(): BinaryFileResponse
     {
-//        return Response::download('', '');
+        return Response::download(public_path('excel/Sample Retailer List.xlsx'), 'Sample Retailer List.xlsx');
     }
 
 
@@ -149,5 +152,51 @@ class RetailerController extends Controller
         Excel::import( new RetailersImport, $request->file('import_retailers'));
 
         return redirect()->route('retailer.index')->with('success', 'New retailer imported successfully.');
+    }
+
+    // Verify page
+    public function verify( Retailer $retailer ): Factory|View|Application
+    {
+        return view('retailer.verify', compact('retailer'));
+    }
+
+    // Approve
+    public function approve( Request $request, Retailer $retailer ): RedirectResponse
+    {
+        ( new ApproveService() )->approved( $request, $retailer );
+
+        return redirect()->route('rso.index')->with('error','Approved failed!');
+    }
+
+    // Reject
+    public function reject( Retailer $retailer ): RedirectResponse
+    {
+        $update = $retailer->update([
+            'tmp_retailer_name'     => null,
+            'tmp_retailer_type'     => null,
+            'tmp_owner_name'        => null,
+            'tmp_sim_seller'        => null,
+            'tmp_contact_no'        => null,
+            'tmp_address'           => null,
+            'tmp_nid'               => null,
+            'tmp_trade_license_no'  => null,
+            'tmp_others_operator'   => null,
+            'tmp_longitude'         => null,
+            'tmp_latitude'          => null,
+            'tmp_device_name'       => null,
+            'tmp_device_sn'         => null,
+            'tmp_scanner_sn'        => null,
+            'status'                => null,
+        ]);
+
+        if ( $update )
+        {
+//            $userRso = User::firstWhere('id', $retailer->user_id);
+//
+//            Notification::sendNow($userRso, new RejectNotification( Auth::user() ));
+
+            return redirect()->route('retailer.index')->with('success','Request rejected successfully.');
+        }
+        return redirect()->route('retailer.index')->with('error','Request not rejected.');
     }
 }

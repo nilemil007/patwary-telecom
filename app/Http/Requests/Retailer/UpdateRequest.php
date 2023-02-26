@@ -94,12 +94,12 @@ class UpdateRequest extends FormRequest
                 'string',
                 'max:50',
             ],
-            'device' => [
+            'device_sn' => [
                 'nullable',
                 'string',
                 'max:100',
             ],
-            'scanner' => [
+            'scanner_sn' => [
                 'nullable',
                 'string',
                 'max:100',

@@ -98,7 +98,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/download-bts-sample-file', [ BtsController::class, 'sampleFileDownload' ])->name('download.bts.sample.file');
 
 
-    // BP Profile Update
+    // BP additional routes
     Route::patch('/bp/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('bp.profile.update');
     Route::patch('/bp/{bp}/additional/update', [ BpController::class, 'additionalUpdate' ])->name('bp.additional.update');
     Route::post('/bp/change-password', [ BpController::class, 'changePassword' ])->name('bp.change.password');
@@ -129,9 +129,12 @@ Route::middleware(['auth'])->group(function(){
     // Route
     Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
-    // Retailer
+    // Retailer additional routes
     Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('download.retailer.sample.file');
     Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
+    Route::get('/retailer/{retailer}/verify', [ RetailerController::class, 'verify' ])->name('retailer.verify');
+    Route::post('/retailer/{retailer}/approve', [ RetailerController::class, 'approve' ])->name('retailer.approve');
+    Route::post('/retailer/{retailer}/reject', [ RetailerController::class, 'reject' ])->name('retailer.reject');
 
     // Resource routes
     Route::resources([
