@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,6 +58,13 @@ class Merchandiser extends Model
         'joining_date'      => 'datetime',
         'resigning_date'    => 'datetime',
     ];
+
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn ( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
 
     // Relations
     public function user(): BelongsTo

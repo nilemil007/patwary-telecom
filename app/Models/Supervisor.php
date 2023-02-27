@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -43,6 +44,13 @@ class Supervisor extends Model
         'resigning_date' => 'datetime',
         'dob' => 'datetime',
     ];
+
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn ( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
 
     public function rso(): HasMany
     {

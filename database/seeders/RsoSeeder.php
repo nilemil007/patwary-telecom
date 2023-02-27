@@ -21,16 +21,16 @@ class RsoSeeder extends Seeder
     {
         $faijul = User::create([
             'name' => 'Faijul Islam',
-            'username' => 'faijul',
+            'username' => '1409944001',
             'email' => 'faijul@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsoFaijul = Rso::create([
-            'user_id' => $faijul->id,
+            'user_id' => $faijul->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1409944001',
             'code' => 'RS033510',
             'gender' => 'male',
@@ -39,16 +39,16 @@ class RsoSeeder extends Seeder
 
         $badiuzzaman = User::create([
             'name' => 'Badiuzzaman',
-            'username' => 'badiuzzaman',
+            'username' => '1908441955',
             'email' => 'badiuzzaman@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsobadiuzzaman = Rso::create([
-            'user_id' => $badiuzzaman->id,
+            'user_id' => $badiuzzaman->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1908441955',
             'code' => 'RS019531',
             'gender' => 'male',
@@ -57,16 +57,16 @@ class RsoSeeder extends Seeder
 
         $joynalabedin = User::create([
             'name' => 'Md. Joynal Abedin',
-            'username' => 'joynalabedin',
+            'username' => '1908441956',
             'email' => 'joynalabedin@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsojoynalabedin = Rso::create([
-            'user_id' => $joynalabedin->id,
+            'user_id' => $joynalabedin->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1908441956',
             'code' => 'RS019532',
             'gender' => 'male',
@@ -75,16 +75,16 @@ class RsoSeeder extends Seeder
 
         $golammostufa = User::create([
             'name' => 'Md. Golam Mostufa',
-            'username' => 'golammostufa',
+            'username' => '1915270101',
             'email' => 'golammostufa@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsogolammostufa = Rso::create([
-            'user_id' => $golammostufa->id,
+            'user_id' => $golammostufa->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1915270101',
             'code' => 'RS0101',
             'gender' => 'male',
@@ -93,16 +93,16 @@ class RsoSeeder extends Seeder
 
         $nazmulahmed = User::create([
             'name' => 'Nazmul Ahmed',
-            'username' => 'nazmulahmed',
+            'username' => '1915270102',
             'email' => 'nazmulahmed@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsonazmulahmed = Rso::create([
-            'user_id' => $nazmulahmed->id,
+            'user_id' => $nazmulahmed->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1915270102',
             'code' => 'RS0103',
             'gender' => 'male',
@@ -111,16 +111,16 @@ class RsoSeeder extends Seeder
 
         $porosh = User::create([
             'name' => 'Porosh',
-            'username' => 'porosh',
+            'username' => '1937600512',
             'email' => 'porosh@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsoporosh = Rso::create([
-            'user_id' => $porosh->id,
+            'user_id' => $porosh->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1937600512',
             'code' => 'RS003981',
             'gender' => 'male',
@@ -129,16 +129,16 @@ class RsoSeeder extends Seeder
 
         $anikhasan = User::create([
             'name' => 'Md. Anik Hasan',
-            'username' => 'anikhasan',
+            'username' => '1984220363',
             'email' => 'anikhasan@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsoanikhasan = Rso::create([
-            'user_id' => $anikhasan->id,
+            'user_id' => $anikhasan->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1984220363',
             'code' => 'RS017269',
             'gender' => 'male',
@@ -147,16 +147,16 @@ class RsoSeeder extends Seeder
 
         $siyamhossain = User::create([
             'name' => 'Md. Siyam Hossain',
-            'username' => 'siyamhossain',
+            'username' => '1984220364',
             'email' => 'siyamhossain@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsosiyamhossain = Rso::create([
-            'user_id' => $siyamhossain->id,
+            'user_id' => $siyamhossain->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1984220364',
             'code' => 'RS017271',
             'gender' => 'male',
@@ -165,16 +165,16 @@ class RsoSeeder extends Seeder
 
         $habiburrahman = User::create([
             'name' => 'Habibur Rahman',
-            'username' => 'habiburrahman',
+            'username' => '1986646474',
             'email' => 'habiburrahman@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsohabiburrahman = Rso::create([
-            'user_id' => $habiburrahman->id,
+            'user_id' => $habiburrahman->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1986646474',
             'code' => 'RS008290',
             'gender' => 'male',
@@ -183,16 +183,16 @@ class RsoSeeder extends Seeder
 
         $mizan = User::create([
             'name' => 'Mizan',
-            'username' => 'mizan',
+            'username' => '1986686880',
             'email' => 'mizan@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'password' => 12345678,
         ]);
         $rsomizan = Rso::create([
-            'user_id' => $mizan->id,
+            'user_id' => $mizan->username,
             'supervisor_id' => DbTablesId::supervisorId(),
-            'dd_house_id' => DbTablesId::ddHouseId(),
+            'dd_house_id' => 'MYMVAI01',
             'itop_number' => '1986686880',
             'code' => 'RS010508',
             'gender' => 'male',
@@ -201,16 +201,16 @@ class RsoSeeder extends Seeder
 
         $rakibmia = User::create([
             'name' => 'Rakib Mia',
-            'username' => 'rakibmia',
+            'username' => '1409944002',
             'email' => 'rakibmia@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsorakibmia = Rso::create([
-            'user_id' => $rakibmia->id,
+            'user_id' => $rakibmia->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1409944002',
             'code' => 'RS035430',
             'gender' => 'male',
@@ -219,16 +219,16 @@ class RsoSeeder extends Seeder
 
         $alam = User::create([
             'name' => 'Abdullah Al Alam',
-            'username' => 'alam',
+            'username' => '1915270104',
             'email' => 'alam@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsoalam = Rso::create([
-            'user_id' => $alam->id,
+            'user_id' => $alam->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1915270104',
             'code' => 'RS035431',
             'gender' => 'male',
@@ -237,16 +237,16 @@ class RsoSeeder extends Seeder
 
         $shakil = User::create([
             'name' => 'Shakil',
-            'username' => 'shakil',
+            'username' => '1915270105',
             'email' => 'shakil@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsoshakil = Rso::create([
-            'user_id' => $shakil->id,
+            'user_id' => $shakil->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1915270105',
             'code' => 'RS035432',
             'gender' => 'male',
@@ -255,16 +255,16 @@ class RsoSeeder extends Seeder
 
         $jubayedmia = User::create([
             'name' => 'Md. Jubayed Mia',
-            'username' => 'jubayedmia',
+            'username' => '1967042950',
             'email' => 'jubayedmia@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsojubayedmia = Rso::create([
-            'user_id' => $jubayedmia->id,
+            'user_id' => $jubayedmia->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1967042950',
             'code' => 'RS035433',
             'gender' => 'male',
@@ -273,16 +273,16 @@ class RsoSeeder extends Seeder
 
         $monirhossen = User::create([
             'name' => 'Md. Monir Hossen',
-            'username' => 'monirhossen',
+            'username' => '1986686877',
             'email' => 'monirhossen@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsomonirhossen = Rso::create([
-            'user_id' => $monirhossen->id,
+            'user_id' => $monirhossen->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1986686877',
             'code' => 'RS035434',
             'gender' => 'male',
@@ -291,16 +291,16 @@ class RsoSeeder extends Seeder
 
         $shahinmia = User::create([
             'name' => 'Md. Shahin mia',
-            'username' => 'shahinmia',
+            'username' => '1986686878',
             'email' => 'shahinmia@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsoshahinmia = Rso::create([
-            'user_id' => $shahinmia->id,
+            'user_id' => $shahinmia->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1986686878',
             'code' => 'RS035435',
             'gender' => 'male',
@@ -309,16 +309,16 @@ class RsoSeeder extends Seeder
 
         $ashiqurrahman = User::create([
             'name' => 'Ashiqur Rahman',
-            'username' => 'ashiqurrahman',
+            'username' => '1986686879',
             'email' => 'ashiqurrahman@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'password' => 12345678,
         ]);
         $rsoashiqurrahman = Rso::create([
-            'user_id' => $ashiqurrahman->id,
+            'user_id' => $ashiqurrahman->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI02'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI02'),
+            'dd_house_id' => 'MYMVAI02',
             'itop_number' => '1986686879',
             'code' => 'RS035436',
             'gender' => 'male',
@@ -327,16 +327,16 @@ class RsoSeeder extends Seeder
 
         $safiqulislam = User::create([
             'name' => 'Safiqul Islam',
-            'username' => 'safiqulislam',
+            'username' => '1409944003',
             'email' => 'safiqulislam@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsosafiqulislam = Rso::create([
-            'user_id' => $safiqulislam->id,
+            'user_id' => $safiqulislam->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1409944003',
             'code' => 'RS036629',
             'gender' => 'male',
@@ -345,16 +345,16 @@ class RsoSeeder extends Seeder
 
         $saddam = User::create([
             'name' => 'Saddam Mia',
-            'username' => 'saddam',
+            'username' => '1908441954',
             'email' => 'saddam@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsosaddam = Rso::create([
-            'user_id' => $saddam->id,
+            'user_id' => $saddam->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1908441954',
             'code' => 'RS036632',
             'gender' => 'male',
@@ -363,16 +363,16 @@ class RsoSeeder extends Seeder
 
         $bayazid = User::create([
             'name' => 'Md. Bayazid',
-            'username' => 'bayazid',
+            'username' => '1915270103',
             'email' => 'bayazid@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsobayazid = Rso::create([
-            'user_id' => $bayazid->id,
+            'user_id' => $bayazid->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1915270103',
             'code' => 'RS036637',
             'gender' => 'male',
@@ -381,16 +381,16 @@ class RsoSeeder extends Seeder
 
         $raza = User::create([
             'name' => 'Saikoutz Zaman Raza',
-            'username' => 'raza',
+            'username' => '1915270106',
             'email' => 'raza@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsoraza = Rso::create([
-            'user_id' => $raza->id,
+            'user_id' => $raza->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1915270106',
             'code' => 'RS036633',
             'gender' => 'male',
@@ -399,16 +399,16 @@ class RsoSeeder extends Seeder
 
         $runulamin = User::create([
             'name' => 'Ruhul Amin',
-            'username' => 'runulamin',
+            'username' => '1915300196',
             'email' => 'runulamin@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsorunulamin = Rso::create([
-            'user_id' => $runulamin->id,
+            'user_id' => $runulamin->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1915300196',
             'code' => 'RS036635',
             'gender' => 'male',
@@ -417,16 +417,16 @@ class RsoSeeder extends Seeder
 
         $monayamkhan = User::create([
             'name' => 'Monayam Khan',
-            'username' => 'monayamkhan',
+            'username' => '1984217911',
             'email' => 'monayamkhan@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsomonayamkhan = Rso::create([
-            'user_id' => $monayamkhan->id,
+            'user_id' => $monayamkhan->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1984217911',
             'code' => 'RS036630',
             'gender' => 'male',
@@ -435,16 +435,16 @@ class RsoSeeder extends Seeder
 
         $parvej = User::create([
             'name' => 'Parvej Mia',
-            'username' => 'parvej',
+            'username' => '1984217912',
             'email' => 'parvej@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsoparvej = Rso::create([
-            'user_id' => $parvej->id,
+            'user_id' => $parvej->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1984217912',
             'code' => 'RS036636',
             'gender' => 'male',
@@ -453,16 +453,16 @@ class RsoSeeder extends Seeder
 
         $hridoy65 = User::create([
             'name' => 'Hridoy Mia',
-            'username' => 'hridoy65',
+            'username' => '1984220365',
             'email' => 'hridoy65@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsohridoy65 = Rso::create([
-            'user_id' => $hridoy65->id,
+            'user_id' => $hridoy65->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1984220365',
             'code' => 'RS036634',
             'gender' => 'male',
@@ -471,16 +471,16 @@ class RsoSeeder extends Seeder
 
         $hridoy66 = User::create([
             'name' => 'Hridoy Mia',
-            'username' => 'hridoy66',
+            'username' => '1984220366',
             'email' => 'hridoy66@enstudio.com.bd',
             'role' => 'rso',
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'password' => 12345678,
         ]);
         $rsohridoy66 = Rso::create([
-            'user_id' => $hridoy66->id,
+            'user_id' => $hridoy66->username,
             'supervisor_id' => DbTablesId::supervisorId('MYMVAI03'),
-            'dd_house_id' => DbTablesId::ddHouseId('MYMVAI03'),
+            'dd_house_id' => 'MYMVAI03',
             'itop_number' => '1984220366',
             'code' => 'RS036631',
             'gender' => 'male',

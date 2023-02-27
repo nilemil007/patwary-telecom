@@ -16,7 +16,7 @@ class DdHouseSeeder extends Seeder
     public function run()
     {
         DdHouse::create([
-            'cluster_name' => 'Central Cluster',
+            'cluster_name' => 'Central',
             'region' => 'Gazipur',
             'code' => 'MYMVAI01',
             'name' => 'Patwary Telecom',
@@ -34,7 +34,7 @@ class DdHouseSeeder extends Seeder
             'status' => 1,
         ]);
         DdHouse::create([
-            'cluster_name' => 'Central Cluster',
+            'cluster_name' => 'Central',
             'region' => 'Gazipur',
             'code' => 'MYMVAI02',
             'name' => 'M/S Modina Store',
@@ -52,7 +52,7 @@ class DdHouseSeeder extends Seeder
             'status' => 1,
         ]);
         DdHouse::create([
-            'cluster_name' => 'Central Cluster',
+            'cluster_name' => 'Central',
             'region' => 'Gazipur',
             'code' => 'MYMVAI03',
             'name' => 'Sumaya Enterprise',

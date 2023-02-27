@@ -118,6 +118,13 @@ class Bp extends Model
         });
     }
 
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn ( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
+
     // Relations
     public function user(): BelongsTo
     {
