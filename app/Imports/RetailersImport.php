@@ -36,6 +36,7 @@ class RetailersImport implements ToModel, WithHeadingRow
             'address'           => $row['address'],
             'nid'               => $row['nid'],
             'trade_license_no'  => $row['trade_license'],
+            'bts_id'            => $row['bts_code'],
             'route_id'          => $row['route_code'],
             'password'          => $row['password'],
         ]);

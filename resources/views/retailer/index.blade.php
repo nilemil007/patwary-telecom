@@ -123,9 +123,12 @@
                                         <td>{{ $retailer->contact_no }}</td>
                                         <td data-label="Title">
                                             <div>{{ $retailer->itop_number }}</div>
-                                            <div class="text-muted">{{ $retailer->rso_number }}</div>
+                                            <div class="text-muted">{{ $retailer->rso->itop_number }}</div>
                                         </td>
-                                        <td>{{ $retailer->ddHouse->name }}</td>
+                                        <td data-label="Title">
+                                            <div>{{ $retailer->ddHouse->name }}</div>
+                                            <div class="text-muted">{{ $retailer->ddHouse->code }}</div>
+                                        </td>
                                         <td>{{ $retailer->enabled }}</td>
                                         <td>{{ $retailer->sim_seller }}</td>
                                         <td>{{ $retailer->service_point }}</td>

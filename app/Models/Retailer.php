@@ -21,7 +21,7 @@ class Retailer extends Model
 {
     use HasFactory, HasUuids;
 
-//    protected $guarded = ['id'];
+    protected $guarded = ['id'];
 
     protected $fillable = [
         'dd_house_id',
@@ -154,14 +154,14 @@ class Retailer extends Model
     protected function ddHouseId(): Attribute
     {
         return Attribute::make(
-            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+            set: fn( $ddCode ) => empty( $ddCode ) ? null : DdHouse::firstWhere('code', $ddCode)->id,
         );
     }
     // Supervisor Id
     protected function supervisorId(): Attribute
     {
         return Attribute::make(
-            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->id,
+            set: fn( $poolNumber ) => empty( $poolNumber ) ? null : Supervisor::firstWhere('pool_number', $poolNumber)->id ?? null,
         );
     }
     // Rso Id
@@ -201,17 +201,17 @@ class Retailer extends Model
         );
     }
     // BTS Id
-//    protected function btsId(): Attribute
-//    {
-//        return Attribute::make(
-//            set: fn( $btsId ) => empty( $btsId ) ? null : Bts::firstWhere('bts_code', $btsId)->id,
-//        );
-//    }
+    protected function btsId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $btsId ) => empty( $btsId ) ? null : Bts::firstWhere('bts_code', $btsId)->id ?? null,
+        );
+    }
     // Route Id
     protected function routeId(): Attribute
     {
         return Attribute::make(
-            set: fn( $routeId ) => empty( $routeId ) ? null : Route::firstWhere('code', $routeId)->id,
+            set: fn( $routeId ) => empty( $routeId ) ? null : Route::firstWhere('code', $routeId)->id ?? null,
         );
     }
     //_______________________________________End Accessor___________________________________________
