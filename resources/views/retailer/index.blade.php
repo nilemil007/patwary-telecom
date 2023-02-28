@@ -18,15 +18,17 @@
                 <div class="input-group">
                     <input name="import_retailers" type="file"
                            accept=".xls,.xlsx"
-                           aria-describedby="inputGroupFileAddon04"
-                           class="form-control"
-                           aria-label="Upload" required>
+                           class="form-control" required>
 
                     <button class="btn btn-outline-google" type="submit">
                         <x-icon.file-import></x-icon.file-import>Import Retailers
                     </button>
                 </div>
             </form>
+
+            <x-link href="{{ route('retailer.create') }}" class="btn btn-primary">
+                <x-icon.plus></x-icon.plus>Create new retailer
+            </x-link>
         </x-slot:button>
     @endif
 
@@ -187,7 +189,7 @@
                                 </div>
                             @endif
 
-                            <x-link class="nav-link" href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
+                            <x-link class="nav-link" href="{{ route('retailer.sample.file.download') }}">Sample file download</x-link>
                         </div>
                     @endif
                 </div>

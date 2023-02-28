@@ -240,6 +240,6 @@ class RsoController extends Controller
     {
         Excel::import( new RsosImport(), $request->file('import_rsos'));
 
-        return redirect()->route('create-new-user.index')->with('success', 'New user created successfully.');
+        return redirect()->route('rso.index')->with('success', 'New user created successfully.');
     }
 }

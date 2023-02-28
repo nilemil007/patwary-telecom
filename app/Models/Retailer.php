@@ -11,9 +11,10 @@ use Illuminate\Support\Str;
 
 /**
  * @method static latest()
- * @method static firstWhere()*@method static where(string$string, string$string1)
+ * @method static firstWhere(string $string, mixed $mixed)
  * @method static where(string $string, string $string1)
  * @method static whereNotNull(string $string)
+ * @method static create(array $all)
  * @property mixed user_id
  * @property mixed rso_id
  */
@@ -21,12 +22,17 @@ class Retailer extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = ['id'];
+    protected $primaryKey = 'id';
+
+    // In Laravel 6.0+ make sure to also set $keyType
+    protected $keyType = 'string';
 
     protected $fillable = [
-        'dd_house_id',
+//        'dd_house_id',
+        'dd_code',
         'user_id',
-        'rso_id',
+//        'rso_id',
+        'rso_number',
         'supervisor_id',
         'bts_id',
         'route_id',
@@ -151,12 +157,12 @@ class Retailer extends Model
     }
 
     // Dd House Id
-    protected function ddHouseId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $ddCode ) => empty( $ddCode ) ? null : DdHouse::firstWhere('code', $ddCode)->id,
-        );
-    }
+//    protected function ddHouseId(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+//        );
+//    }
     // Supervisor Id
     protected function supervisorId(): Attribute
     {
@@ -165,12 +171,12 @@ class Retailer extends Model
         );
     }
     // Rso Id
-    protected function rsoId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->id,
-        );
-    }
+//    protected function rsoId(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn( $itopNumber ) => Rso::firstWhere('itop_number', $itopNumber)->id,
+//        );
+//    }
     // Enabled
     protected function enabled(): Attribute
     {
@@ -230,17 +236,14 @@ class Retailer extends Model
     {
         return $this->belongsTo( Rso::class );
     }
-
     public function bts(): BelongsTo
     {
         return $this->belongsTo( Bts::class );
     }
-
     public function route(): BelongsTo
     {
         return $this->belongsTo( Route::class );
     }
-
     public function ddHouse(): BelongsTo
     {
         return $this->belongsTo( DdHouse::class );

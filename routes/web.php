@@ -130,11 +130,14 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
     // Retailer additional routes
-    Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('download.retailer.sample.file');
-    Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
-    Route::get('/retailer/{retailer}/verify', [ RetailerController::class, 'verify' ])->name('retailer.verify');
-    Route::post('/retailer/{retailer}/approve', [ RetailerController::class, 'approve' ])->name('retailer.approve');
-    Route::post('/retailer/{retailer}/reject', [ RetailerController::class, 'reject' ])->name('retailer.reject');
+    Route::prefix('retailer')->name('retailer.')->group( function () {
+        Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('sample.file.download');
+        Route::post('/import', [ RetailerController::class, 'import' ])->name('import');
+        Route::get('/{retailer}/verify', [ RetailerController::class, 'verify' ])->name('verify');
+        Route::post('/{retailer}/approve', [ RetailerController::class, 'approve' ])->name('approve');
+        Route::post('/{retailer}/reject', [ RetailerController::class, 'reject' ])->name('reject');
+    } );
+
 
     // Dd House additional routes
     Route::post('/house/import', [ DdHouseController::class, 'import' ])->name('house.import');

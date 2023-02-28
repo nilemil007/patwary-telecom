@@ -115,8 +115,8 @@
                                     <td>
                                         @switch( $user->role )
                                             @case('rso')
-                                                <div title="RS0 AC Number">{{ $user->rso->itop_number ?? '' }}</div>
-                                                <div title="RS0 Code" class="text-muted">{{ $user->rso->code ?? '' }}</div>
+                                                <div title="RS0 AC Number">{{ $user->rso->itop_number ?? 'Not Assign' }}</div>
+                                                <div title="RS0 Code" class="text-muted">{{ $user->rso->code ?? 'Not Assign' }}</div>
                                             @break
 
                                             @case('supervisor')
@@ -138,7 +138,7 @@
                                     </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
-                                        {{ !empty($user->ddHouse->name)?$user->ddHouse->name:'' }}
+                                        {{ $user->ddHouse->name ?? 'Not Assign' }}
                                     </td>
                                     <td>
                                         @if (!empty($user->role))

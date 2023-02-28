@@ -17,8 +17,7 @@
             <div class="input-group">
                 <input name="import_houses" type="file"
                        accept=".xls,.xlsx"
-                       class="form-control"
-                       aria-label="Upload" required>
+                       class="form-control" required>
 
                 <button class="btn btn-outline-google" type="submit">
                     <x-icon.file-import></x-icon.file-import>Import

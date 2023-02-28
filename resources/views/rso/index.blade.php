@@ -112,8 +112,8 @@
                                             <div class="text-muted">{{ $rso->sr_no }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $rso->supervisor->user->name }}</div>
-                                            <div class="text-muted">{{ $rso->supervisor->pool_number }}</div>
+                                            <div>{{ $rso->supervisor->user->name ?? 'Not Assign' }}</div>
+                                            <div class="text-muted">{{ $rso->supervisor->pool_number ?? 'Not Assign' }}</div>
                                         </td>
                                         <td data-label="Title">
                                             @if( !empty( $rso->routes ) )

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Retailer\UpdateRequest;
-use App\Imports\RetailersImport;
+use App\Imports\Retailer\RetailerListImport;
 use App\Models\DdHouse;
 use App\Models\Retailer;
 use App\Models\Rso;
@@ -58,23 +58,31 @@ class RetailerController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        return view('retailer.create', [
-            'users' => User::all(),
-            'allBts' => [],
-            'routes' => [],
-            'houses' => [],
-        ]);
+        $ids = Retailer::whereNotNull('user_id')->pluck('user_id');
+        $supervisors = Supervisor::all();
+        $rsos = Rso::all();
+        $houses = DdHouse::all();
+
+        if ( Auth::user()->role == 'super-admin' )
+        {
+            $users = User::where('role','retailer')->whereNotIn('id', $ids)->get();
+        }else{
+            $users = User::where('role', 'retailer')->where('dd_house_id', Auth::user()->dd_house_id)->whereNotIn('id', $ids)->get();
+        }
+
+        return view('retailer.create', compact('users','supervisors','rsos','houses'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        Retailer::create( $request->all() );
+        return redirect()->route('retailer.index');
     }
 
     /**
@@ -148,7 +156,7 @@ class RetailerController extends Controller
 
     public function import( Request $request ): RedirectResponse
     {
-        Excel::import( new RetailersImport, $request->file('import_retailers'));
+        Excel::import( new RetailerListImport, $request->file('import_retailers'));
 
         return redirect()->route('retailer.index')->with('success', 'New retailer imported successfully.');
     }

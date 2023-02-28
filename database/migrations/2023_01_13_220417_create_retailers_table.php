@@ -15,11 +15,13 @@ return new class extends Migration
     {
         Schema::create('retailers', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('dd_house_id')->constrained();
+//            $table->foreignUuid('dd_house_id')->constrained();
+            $table->string('dd_code');
             $table->foreignUuid('user_id')->nullable()->constrained();
             $table->foreignUuid('bts_id')->nullable()->constrained();
             $table->foreignUuid('route_id')->nullable()->constrained();
-            $table->foreignUuid('rso_id')->constrained();
+//            $table->foreignUuid('rso_id')->constrained();
+            $table->string('rso_number');
             $table->foreignUuid('supervisor_id')->nullable()->constrained();
             $table->string('retailer_code')->unique();
             $table->string('retailer_name')->nullable();
@@ -29,7 +31,7 @@ return new class extends Migration
             $table->string('enabled')->nullable();
             $table->string('sim_seller')->nullable();
             $table->string('tmp_sim_seller')->nullable();
-            $table->string('itop_number')->nullable()->unique();
+            $table->string('itop_number')->unique();
             $table->string('service_point')->nullable();
             $table->string('owner_name')->nullable();
             $table->string('tmp_owner_name')->nullable();
@@ -43,7 +45,7 @@ return new class extends Migration
             $table->string('tmp_address')->nullable();
             $table->string('nid')->nullable()->unique();
             $table->string('tmp_nid')->nullable();
-            $table->string('trade_license_no')->nullable();
+            $table->string('trade_license_no')->nullable()->unique();
             $table->string('tmp_trade_license_no')->nullable();
             $table->json('others_operator')->nullable();
             $table->json('tmp_others_operator')->nullable();
