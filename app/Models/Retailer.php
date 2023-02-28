@@ -21,8 +21,6 @@ class Retailer extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $guarded = ['id'];
-
     protected $fillable = [
         'dd_house_id',
         'user_id',
@@ -154,21 +152,21 @@ class Retailer extends Model
     protected function ddHouseId(): Attribute
     {
         return Attribute::make(
-            set: fn( $ddCode ) => empty( $ddCode ) ? null : DdHouse::firstWhere('code', $ddCode)->id,
+            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
         );
     }
     // Supervisor Id
     protected function supervisorId(): Attribute
     {
         return Attribute::make(
-            set: fn( $poolNumber ) => empty( $poolNumber ) ? null : Supervisor::firstWhere('pool_number', $poolNumber)->id ?? null,
+            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->id,
         );
     }
     // Rso Id
     protected function rsoId(): Attribute
     {
         return Attribute::make(
-            set: fn( $itopNumber ) => empty( $itopNumber ) ? null : Rso::firstWhere('itop_number', $itopNumber)->id,
+            set: fn( $itopNumber ) => Rso::firstWhere('itop_number', $itopNumber)->id,
         );
     }
     // Enabled
@@ -204,14 +202,14 @@ class Retailer extends Model
     protected function btsId(): Attribute
     {
         return Attribute::make(
-            set: fn( $btsId ) => empty( $btsId ) ? null : Bts::firstWhere('bts_code', $btsId)->id ?? null,
+            set: fn( $btsId ) => Bts::firstWhere('bts_code', $btsId)->id,
         );
     }
     // Route Id
     protected function routeId(): Attribute
     {
         return Attribute::make(
-            set: fn( $routeId ) => empty( $routeId ) ? null : Route::firstWhere('code', $routeId)->id ?? null,
+            set: fn( $routeId ) => Route::firstWhere('code', $routeId)->id,
         );
     }
     //_______________________________________End Accessor___________________________________________

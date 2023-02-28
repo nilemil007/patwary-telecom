@@ -16,6 +16,7 @@ use App\Http\Controllers\SupervisorController;
 use App\Models\Bp;
 use App\Models\CompetitionInformation;
 use App\Models\ItopReplace;
+use App\Models\Others\OthersOperatorInformation;
 use App\Models\Rso;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -99,17 +100,20 @@ Route::middleware(['auth'])->group(function(){
 
 
     // BP additional routes
-    Route::patch('/bp/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('bp.profile.update');
-    Route::patch('/bp/{bp}/additional/update', [ BpController::class, 'additionalUpdate' ])->name('bp.additional.update');
-    Route::post('/bp/change-password', [ BpController::class, 'changePassword' ])->name('bp.change.password');
-    Route::get('/bp/{bp}/verify', [ BpController::class, 'verify' ])->name('bp.verify');
-    Route::post('/bp/{bp}/approve', [ BpController::class, 'approve' ])->name('bp.approve');
-    Route::post('/bp/{bp}/reject', [ BpController::class, 'reject' ])->name('bp.reject');
-    Route::get('/bp/export', [ BpController::class, 'export' ])->name('bp.export');
-    Route::get('/download/bp/{bp}/document', function ($id){
-        $bp = Bp::firstWhere('id', $id);
-        return Response::download(public_path( 'storage/bp/documents/' . $bp->document ), $bp->user->name.'.pdf');
-    })->name('download.bp.document');
+    Route::prefix('bp')->name('bp')->group( function(){
+        Route::patch('/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('profile.update');
+        Route::patch('/{bp}/additional/update', [ BpController::class, 'additionalUpdate' ])->name('additional.update');
+        Route::post('/change-password', [ BpController::class, 'changePassword' ])->name('change.password');
+        Route::get('/{bp}/verify', [ BpController::class, 'verify' ])->name('verify');
+        Route::post('/{bp}/approve', [ BpController::class, 'approve' ])->name('approve');
+        Route::post('/{bp}/reject', [ BpController::class, 'reject' ])->name('reject');
+        Route::get('/export', [ BpController::class, 'export' ])->name('export');
+        Route::get('/download/bp/{bp}/document', function ($id){
+            $bp = Bp::firstWhere('id', $id);
+            return Response::download(public_path( 'storage/bp/documents/' . $bp->document ), $bp->user->name.'.pdf');
+        })->name('download.bp.document');
+    } );
+
 
     // Rso additional routes
     Route::get('/rso/{rso}/profile', [ RsoController::class, 'profile' ])->name('rso.profile');
@@ -158,6 +162,7 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
+        'others-operator-information' => \App\Http\Controllers\Other\OthersOperatorInformationController::class,
     ]);
 });
 

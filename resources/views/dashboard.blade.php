@@ -1,5 +1,5 @@
 @php
-/*
+
     if ( auth()->user()->role == 'rso' )
     {
         $id = \App\Models\Rso::firstWhere('user_id', auth()->id())->id;
@@ -9,7 +9,6 @@
         $lso = \App\Models\Retailer::all();
         $sso = \App\Models\Retailer::where('sim_seller', 'Y')->get();
     }
-*/
 
 @endphp
 

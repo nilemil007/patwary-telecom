@@ -1,5 +1,5 @@
 @php
-$logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : '' ))))));
+$logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : asset('dist/img/logo/EN.png') ))))));
 
 $role = auth()->user()->role;
 $bp = \App\Models\Bp::firstWhere('user_id', auth()->id())->id??'';
@@ -82,13 +82,13 @@ $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
 {{--                    <a href="#" class="dropdown-item">Set status</a>--}}
 
-                    <a href="{{ $role == 'bp' ? route('bp.show', $bp) : ( $role == 'rso' ? route('rso.profile', $rso) : '' ) }}"
-                       class="dropdown-item">
-                        Profile & account
-                    </a>
+{{--                    <a href="{{ $role == 'bp' ? route('bp.show', $bp) : ( $role == 'rso' ? route('rso.profile', $rso) : '' ) }}"--}}
+{{--                       class="dropdown-item">--}}
+{{--                        Profile & account--}}
+{{--                    </a>--}}
 {{--                    <a href="#" class="dropdown-item">Feedback</a>--}}
                     <div class="dropdown-divider"></div>
-                    <x-link href="#" class="dropdown-item">Settings</x-link>
+{{--                    <x-link href="#" class="dropdown-item">Settings</x-link>--}}
                     <x-link href="{{ route('logout') }}"
                             class="dropdown-item"
                             onclick="event.preventDefault(); document.getElementById('logout').submit();">
