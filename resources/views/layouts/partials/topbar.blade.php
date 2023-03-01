@@ -1,6 +1,8 @@
 @php
 $logo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/patwary-telecom.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise.png') : asset('dist/img/logo/EN.png') ))))));
 
+$smallLogo = auth()->user()->role == 'super-admin' ? asset('dist/img/logo/EN.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/Patwary-Telecom-SM.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store-SM.png') : ( auth()->user()->role == 'rso' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise-SM.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI01' ? asset('dist/img/logo/Patwary-Telecom-SM.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI02' ? asset('dist/img/logo/MS-Modina-Store-SM.png') : ( auth()->user()->role == 'bp' && \App\Models\DdHouse::firstWhere('id', auth()->user()->dd_house_id)->code == 'MYMVAI03' ? asset('dist/img/logo/Sumaya-Enterprise-SM.png') : asset('dist/img/logo/EN.png') ))))));
+
 $role = auth()->user()->role;
 $bp = \App\Models\Bp::firstWhere('user_id', auth()->id())->id??'';
 $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
@@ -12,11 +14,21 @@ $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <h1 class="navbar-brand navbar-brand-autodark d-sm-none pe-0 pe-md-3">
+            <a href="{{ route('dashboard') }}">
+                <img src="{{ $smallLogo }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            </a>
+        </h1>
+
+        <h1 class="navbar-brand navbar-brand-autodark d-none d-sm-block pe-0 pe-md-3">
             <a href="{{ route('dashboard') }}">
                 <img src="{{ $logo }}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
+
+
+{{--        <x-button class="w-100 d-md-none"><x-icon.save></x-icon.save>Save</x-button>--}}
+{{--        <x-button class="d-none d-md-block"><x-icon.save></x-icon.save>Save</x-button>--}}
 
         <div class="navbar-nav flex-row order-md-last">
             <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">

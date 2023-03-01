@@ -7,6 +7,7 @@ use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
 use App\Http\Controllers\MerchandiserController;
+use App\Http\Controllers\Other\OthersOperatorInformationController;
 use App\Http\Controllers\PermissionsController;
 use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RolesController;
@@ -146,6 +147,12 @@ Route::middleware(['auth'])->group(function(){
     // User additional routes
     Route::post('/user/import', [ CreateNewUserController::class, 'import' ])->name('user.import');
 
+    // Others Operator Information
+    Route::get('/others-operator-information/export', [ OthersOperatorInformationController::class, 'export' ])->name('ooi.info.export');
+    Route::delete('/others-operator-information/delete-all', [ OthersOperatorInformationController::class, 'deleteAll' ])->name('others-operator-information.delete.all');
+
+
+
 
     // Resource routes
     Route::resources([
@@ -162,7 +169,7 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
-        'others-operator-information' => \App\Http\Controllers\Other\OthersOperatorInformationController::class,
+        'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });
 

@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 
 /**
  * @method static latest()
- * @method static firstWhere()*@method static where(string$string, string$string1)
+ * @method static firstWhere(string $string, mixed $dd_house)
  * @method static where(string $string, string $string1)
  * @method static whereNotNull(string $string)
  * @property mixed user_id

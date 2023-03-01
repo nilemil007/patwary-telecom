@@ -48,29 +48,4 @@ class CompetitionInformation extends Model
                 ->orWhere( 'retailer_number', 'like', $term );
         });
     }
-
-    public static function getAllCompetition()
-    {
-        return CompetitionInformation::select(
-            'cluster',
-            'region',
-            'dd_code',
-            'retailer_code',
-            'rso_number',
-            'retailer_number',
-            'bl_c2s',
-            'gp_c2s',
-            'robi_c2s',
-            'airtel_c2s',
-            'bl_ga',
-            'gp_ga',
-            'robi_ga',
-            'airtel_ga',)->get()->toArray();
-    }
-
-  //_______________________________________Accessor_____________________________________________________
-
-
-
- //_______________________________________End Accessor__________________________________________________
 }

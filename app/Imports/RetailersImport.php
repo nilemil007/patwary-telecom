@@ -20,6 +20,7 @@ class RetailersImport implements ToModel, WithHeadingRow
         return new Retailer([
             'dd_house_id'       => $row['dd_code'],
             'retailer_code'     => $row['retailer_code'],
+            'sim_seller'        => $row['sim_seller'],
             'rso_id'            => $row['rso_number'],
             'itop_number'       => $row['itop_number'],
         ]);

@@ -34,7 +34,7 @@ class CreateNewUserController extends Controller
             'users' => User::with('ddHouse','rso','supervisor','bp','merchandiser')
                 ->search( $request->search )
                 ->latest()
-                ->paginate(10),
+                ->paginate(5),
         ]);
     }
 

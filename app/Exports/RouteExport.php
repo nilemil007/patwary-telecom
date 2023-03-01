@@ -14,7 +14,6 @@ class RouteExport implements FromCollection, WithHeadings
     */
     public function collection(): Collection
     {
-//        return Route::all();
         return collect( Route::getAllRoutes() );
     }
 
