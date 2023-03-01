@@ -85,7 +85,7 @@ class LoginRequest extends FormRequest
         throw ValidationException::withMessages([
             'login' => trans('auth.throttle', [
                 'seconds' => $seconds,
-                'minutes' => ceil($seconds / 300),
+                'minutes' => ceil($seconds / 120),
             ]),
         ]);
     }
