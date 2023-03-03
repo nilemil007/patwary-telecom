@@ -244,11 +244,12 @@
                             <!-- Device Name -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <x-input label="Device Name" class="{{ $device_name }}" name="device_name" value="{{ old('device_name', $retailer->device_name) }}" placeholder>
-                                        @if( $retailer->tmp_device_name )
-                                            <small class="text-warning">New: {{ $retailer->tmp_device_name }}</small>
-                                        @endif
-                                    </x-input>
+                                    <x-select label="Device Name" class="{{ $device_name }}" name="device_name" placeholder>
+                                        <option {{ $retailer->device_name == 'twinmos' ? 'selected' : '' }} value="twinmos">TwinMOS</option>
+                                    </x-select>
+                                    @if( $retailer->tmp_device_name )
+                                        <small class="text-warning">New: {{ $retailer->tmp_device_name }}</small>
+                                    @endif
                                 </div>
                             </div>
 

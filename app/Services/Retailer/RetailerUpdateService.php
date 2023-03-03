@@ -109,7 +109,7 @@ class RetailerUpdateService {
             $information['tmp_longitude'] = $request->longitude;
             $information['status'] = 'unapproved';
         }
-        if ( $retailer->device_name != Str::title( $request->device_name ) )
+        if ( $retailer->device_name != $request->device_name )
         {
             unset( $information['device_name'] );
             $information['tmp_device_name'] = $request->device_name;
@@ -132,7 +132,6 @@ class RetailerUpdateService {
 
         $superAdmin = User::firstWhere('role', 'super-admin');
         $rso = Rso::firstWhere( 'user_id', Auth::id());
-
 
         Notification::sendNow( $superAdmin, new RetailerUpdateNotification( $retailer, $rso ) );
 

@@ -33,11 +33,12 @@
                         </a>
                     </li>
 
+                    <!-- Define -->
                     @if( auth()->user()->role == 'super-admin' )
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" /><line x1="12" y1="12" x2="20" y2="7.5" /><line x1="12" y1="12" x2="12" y2="21" /><line x1="12" y1="12" x2="4" y2="7.5" /><line x1="16" y1="5.25" x2="8" y2="9.75" /></svg>
+                          <x-icon.target-arrow></x-icon.target-arrow>
                       </span>
                             <span class="nav-link-title">
                         Define
@@ -110,20 +111,12 @@
                     </li>
                     @endif
 
+                    <!-- Services -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                            data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" />
-                                    <line x1="12" y1="12" x2="20" y2="7.5" />
-                                    <line x1="12" y1="12" x2="12" y2="21" />
-                                    <line x1="12" y1="12" x2="4" y2="7.5" />
-                                    <line x1="16" y1="5.25" x2="8" y2="9.75" />
-                                </svg>
+                                <x-icon.tool></x-icon.tool>
                             </span>
                             <span class="nav-link-title">
                                 Services
@@ -161,111 +154,124 @@
                         </div>
                     </li>
 
+                    <!-- Uploads -->
                     @if( \Illuminate\Support\Facades\Auth::user()->role == 'super-admin' )
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
                                data-bs-auto-close="outside" role="button" aria-expanded="false" >
-                            <span class="nav-link-icon d-md-none d-lg-inline-block">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
-                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                     stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                    <polyline points="12 3 20 7.5 20 16.5 12 21 4 16.5 4 7.5 12 3" />
-                                    <line x1="12" y1="12" x2="20" y2="7.5" />
-                                    <line x1="12" y1="12" x2="12" y2="21" />
-                                    <line x1="12" y1="12" x2="4" y2="7.5" />
-                                    <line x1="16" y1="5.25" x2="8" y2="9.75" />
-                                </svg>
-                            </span>
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <x-icon.upload></x-icon.upload>
+                                </span>
                                 <span class="nav-link-title">
-                                Roles & Permissions
-                            </span>
+                                    Uploads
+                                </span>
                             </a>
 
                             <div class="dropdown-menu">
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
-                                        <a class="dropdown-item" href="{{ route('permission.index') }}" >
-                                            Permissions
+                                        <div class="dropend">
+                                            <a class="dropdown-item dropdown-toggle" href="{{ route('permission.index') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                                Activation
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="#" class="dropdown-item">Core Activation</a>
+                                                <a href="#" class="dropdown-item">Live Activation</a>
+                                            </div>
+                                        </div>
+                                        <a class="dropdown-item" href="#" >
+                                            C2C
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('role.index') }}" >
-                                            Roles
+                                        <a class="dropdown-item" href="#" >
+                                            C2S
+                                        </a>
+                                        <a class="dropdown-item" href="#" >
+                                            Sim Issue
+                                        </a>
+                                        <a class="dropdown-item" href="#" >
+                                            Balance
+                                        </a>
+                                        <a class="dropdown-item" href="#" >
+                                            BSO
+                                        </a>
+                                        <a class="dropdown-item" href="#" >
+                                            DSO
                                         </a>
                                     </div>
-                                    {{--                                <div class="dropdown-menu-column">--}}
-                                    {{--                                    <a class="dropdown-item" href="./navigation.html" >--}}
-                                    {{--                                        Navigation--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./charts.html" >--}}
-                                    {{--                                        Charts--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./pagination.html" >--}}
-                                    {{--                                        Pagination--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./skeleton.html" >--}}
-                                    {{--                                        Skeleton--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./tabs.html" >--}}
-                                    {{--                                        Tabs--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./tables.html" >--}}
-                                    {{--                                        Tables--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./carousel.html" >--}}
-                                    {{--                                        Carousel--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./lists.html" >--}}
-                                    {{--                                        Lists--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./typography.html" >--}}
-                                    {{--                                        Typography--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./offcanvas.html" >--}}
-                                    {{--                                        Offcanvas--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <a class="dropdown-item" href="./markdown.html" >--}}
-                                    {{--                                        Markdown--}}
-                                    {{--                                    </a>--}}
-                                    {{--                                    <div class="dropend">--}}
-                                    {{--                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
-                                    {{--                                            Authentication--}}
-                                    {{--                                        </a>--}}
-                                    {{--                                        <div class="dropdown-menu">--}}
-                                    {{--                                            <a href="./sign-in.html" class="dropdown-item">Sign in</a>--}}
-                                    {{--                                            <a href="./sign-up.html" class="dropdown-item">Sign up</a>--}}
-                                    {{--                                            <a href="./forgot-password.html" class="dropdown-item">Forgot password</a>--}}
-                                    {{--                                            <a href="./terms-of-service.html" class="dropdown-item">Terms of service</a>--}}
-                                    {{--                                            <a href="./auth-lock.html" class="dropdown-item">Lock screen</a>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                    <div class="dropend">--}}
-                                    {{--                                        <a class="dropdown-item dropdown-toggle" href="#sidebar-error" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
-                                    {{--                                            Error pages--}}
-                                    {{--                                        </a>--}}
-                                    {{--                                        <div class="dropdown-menu">--}}
-                                    {{--                                            <a href="./error-404.html" class="dropdown-item">404 page</a>--}}
-                                    {{--                                            <a href="./error-500.html" class="dropdown-item">500 page</a>--}}
-                                    {{--                                            <a href="./error-maintenance.html" class="dropdown-item">Maintenance page</a>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
-                                    {{--                                </div>--}}
+
+{{--                                    <div class="dropdown-menu-column">--}}
+{{--                                        <a class="dropdown-item" href="./navigation.html" >--}}
+{{--                                            Navigation--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./charts.html" >--}}
+{{--                                            Charts--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./pagination.html" >--}}
+{{--                                            Pagination--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./skeleton.html" >--}}
+{{--                                            Skeleton--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./tabs.html" >--}}
+{{--                                            Tabs--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./tables.html" >--}}
+{{--                                            Tables--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./carousel.html" >--}}
+{{--                                            Carousel--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./lists.html" >--}}
+{{--                                            Lists--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./typography.html" >--}}
+{{--                                            Typography--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./offcanvas.html" >--}}
+{{--                                            Offcanvas--}}
+{{--                                        </a>--}}
+{{--                                        <a class="dropdown-item" href="./markdown.html" >--}}
+{{--                                            Markdown--}}
+{{--                                        </a>--}}
+{{--                                        <div class="dropend">--}}
+{{--                                            <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
+{{--                                                Authentication--}}
+{{--                                            </a>--}}
+{{--                                            <div class="dropdown-menu">--}}
+{{--                                                <a href="./sign-in.html" class="dropdown-item">Sign in</a>--}}
+{{--                                                <a href="./sign-up.html" class="dropdown-item">Sign up</a>--}}
+{{--                                                <a href="./forgot-password.html" class="dropdown-item">Forgot password</a>--}}
+{{--                                                <a href="./terms-of-service.html" class="dropdown-item">Terms of service</a>--}}
+{{--                                                <a href="./auth-lock.html" class="dropdown-item">Lock screen</a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="dropend">--}}
+{{--                                            <a class="dropdown-item dropdown-toggle" href="#sidebar-error" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
+{{--                                                Error pages--}}
+{{--                                            </a>--}}
+{{--                                            <div class="dropdown-menu">--}}
+{{--                                                <a href="./error-404.html" class="dropdown-item">404 page</a>--}}
+{{--                                                <a href="./error-500.html" class="dropdown-item">500 page</a>--}}
+{{--                                                <a href="./error-maintenance.html" class="dropdown-item">Maintenance page</a>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </li>
                     @endif
                 </ul>
 
-                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">
-                    <form action="." method="get">
-                        <div class="input-icon">
-                      <span class="input-icon-addon">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/search -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>
-                      </span>
-                            <input type="text" class="form-control" placeholder="Search…" aria-label="Search in website">
-                        </div>
-                    </form>
-                </div>
+{{--                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">--}}
+{{--                    <form action="." method="get">--}}
+{{--                        <div class="input-icon">--}}
+{{--                      <span class="input-icon-addon">--}}
+{{--                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="10" cy="10" r="7" /><line x1="21" y1="21" x2="15" y2="15" /></svg>--}}
+{{--                      </span>--}}
+{{--                            <input type="text" class="form-control" placeholder="Search…" aria-label="Search in website">--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
