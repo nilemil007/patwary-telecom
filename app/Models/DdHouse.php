@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Reports\Activation;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -57,5 +58,10 @@ class DdHouse extends Model
     public function bp(): HasMany
     {
         return $this->hasMany( Bp::class );
+    }
+
+    public function activation(): HasMany
+    {
+        return $this->hasMany( Activation::class );
     }
 }

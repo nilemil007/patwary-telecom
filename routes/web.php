@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
 use App\Http\Controllers\CompetitionInformationController;
@@ -169,6 +170,7 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
+        'activation'        => ActivationController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

@@ -171,11 +171,11 @@
                                 <div class="dropdown-menu-columns">
                                     <div class="dropdown-menu-column">
                                         <div class="dropend">
-                                            <a class="dropdown-item dropdown-toggle" href="{{ route('permission.index') }}" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                                                 Activation
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="#" class="dropdown-item">Core Activation</a>
+                                                <a href="{{ route('activation.index') }}" class="dropdown-item">Core Activation</a>
                                                 <a href="#" class="dropdown-item">Live Activation</a>
                                             </div>
                                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Reports\Activation;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -65,5 +66,10 @@ class Supervisor extends Model
     public function ddHouse(): BelongsTo
     {
         return $this->belongsTo(DdHouse::class);
+    }
+
+    public function activation(): HasMany
+    {
+        return $this->hasMany(Activation::class);
     }
 }

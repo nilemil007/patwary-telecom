@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Reports\Activation;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -215,5 +216,9 @@ class Rso extends Model
     public function supervisor(): BelongsTo
     {
         return $this->belongsTo( Supervisor::class );
+    }
+    public function activation(): HasMany
+    {
+        return $this->hasMany( Activation::class );
     }
 }
