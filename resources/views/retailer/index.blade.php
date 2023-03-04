@@ -181,13 +181,13 @@
 
                                     @if( count( $retailers ) > 1 )
                                         <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                                data-bs-target="#delete_all_routes">Delete All</button>
-                                        @include('route.modals.delete-all')
+                                                data-bs-target="#delete_all_retailers">Delete All</button>
+                                        @include('retailer.modals.delete-all')
                                     @endif
                                 </div>
                             @endif
 
-                            <x-link class="nav-link" href="{{ route('download.retailer.sample.file') }}">Sample file download</x-link>
+                            <x-link class="nav-link" href="{{ route('retailer.sample.file.download') }}">Sample file download</x-link>
                         </div>
                     @endif
                 </div>

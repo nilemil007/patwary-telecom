@@ -44,31 +44,38 @@ class Activation extends Model
     {
         $term = "%$term%";
         $query->where( function ( $query ) use ( $term ){
-            $query->where( 'code', 'like', $term )
-                ->orWhere( 'itop_number', 'like', $term )
-                ->orWhere( 'pool_number', 'like', $term );
-//                ->orWhereHas('user', function ( $query ) use ( $term ){
-//                    $query->where( 'name', 'like', $term );
+            $query->where( 'retailer_code', 'like', $term )
+                ->orWhere( 'product_code', 'like', $term )
+                ->orWhere( 'product_name', 'like', $term )
+                ->orWhere( 'sim_serial', 'like', $term )
+                ->orWhere( 'msisdn', 'like', $term )
+                ->orWhere( 'activation_date', 'like', $term )
+                ->orWhere( 'bio_date', 'like', $term );
+//                ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
+//                    $query->where( 'code', 'like', $term );
 //                })
 //                ->orWhereHas('supervisor', function ( $query ) use ( $term ){
 //                    $query->where( 'pool_number', 'like', $term );
+//                })
+//                ->orWhereHas('rso', function ( $query ) use ( $term ){
+//                    $query->where( 'itop_number', 'like', $term );
 //                });
         });
     }
 
-    protected function marketType(): Attribute
-    {
-        return Attribute::make(
-            get: fn( $market ) => Str::title( $market ),
-            set: fn( $market ) => Str::lower( $market ),
-        );
-    }
+//    protected function marketType(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn( $market ) => Str::title( $market ),
+//            set: fn( $market ) => Str::lower( $market ),
+//        );
+//    }
 
 
-    public function ddHouse(): BelongsTo
-    {
-        return $this->belongsTo( DdHouse::class );
-    }
+//    public function ddHouse(): BelongsTo
+//    {
+//        return $this->belongsTo( DdHouse::class );
+//    }
 
     public function supervisor(): BelongsTo
     {

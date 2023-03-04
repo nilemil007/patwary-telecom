@@ -136,17 +136,23 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
     // Retailer additional routes
-    Route::get('/download-retailer-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('download.retailer.sample.file');
-    Route::post('/retailers/import', [ RetailerController::class, 'import' ])->name('retailer.import');
-    Route::get('/retailer/{retailer}/verify', [ RetailerController::class, 'verify' ])->name('retailer.verify');
-    Route::post('/retailer/{retailer}/approve', [ RetailerController::class, 'approve' ])->name('retailer.approve');
-    Route::post('/retailer/{retailer}/reject', [ RetailerController::class, 'reject' ])->name('retailer.reject');
+    Route::prefix('retailer')->name('retailer.')->group( function() {
+        Route::get('/download-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('sample.file.download');
+        Route::post('/import', [ RetailerController::class, 'import' ])->name('import');
+        Route::get('{retailer}/verify', [ RetailerController::class, 'verify' ])->name('verify');
+        Route::post('{retailer}/approve', [ RetailerController::class, 'approve' ])->name('approve');
+        Route::post('{retailer}/reject', [ RetailerController::class, 'reject' ])->name('reject');
+//        Route::delete('/delete-all', [ RetailerController::class, 'deleteAllRetailers' ])->name('delete.all');
+    });
 
     // Dd House additional routes
     Route::post('/house/import', [ DdHouseController::class, 'import' ])->name('house.import');
 
     // User additional routes
     Route::post('/user/import', [ CreateNewUserController::class, 'import' ])->name('user.import');
+
+    // Activation additional routes
+    Route::post('/activation/import', [ ActivationController::class, 'import' ])->name('activation.import');
 
     // Others Operator Information
     Route::get('/others-operator-information/export', [ OthersOperatorInformationController::class, 'export' ])->name('ooi.info.export');

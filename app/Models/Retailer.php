@@ -14,6 +14,7 @@ use Illuminate\Support\Str;
  * @method static firstWhere(string $string, mixed $dd_house)
  * @method static where(string $string, string $string1)
  * @method static whereNotNull(string $string)
+ * @method static truncate()
  * @property mixed user_id
  * @property mixed rso_id
  */

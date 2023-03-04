@@ -127,11 +127,13 @@ class RetailerController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return RedirectResponse
      */
-    public function destroy($id)
+    public function destroy($id): RedirectResponse
     {
-        //
+        Retailer::truncate();
+
+        return redirect()->route('retailer.index')->with('success', 'All retailer deleted successfully.');
     }
 
     // Download Sample File
