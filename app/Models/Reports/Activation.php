@@ -3,6 +3,7 @@
 namespace App\Models\Reports;
 
 use App\Models\DdHouse;
+use App\Models\Retailer;
 use App\Models\Rso;
 use App\Models\Supervisor;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -19,6 +20,7 @@ class Activation extends Model
         'dd_house_id',
         'supervisor_id',
         'rso_id',
+        'retailer_id',
         'retailer_code',
         'product_code',
         'product_name',
@@ -44,22 +46,26 @@ class Activation extends Model
     {
         $term = "%$term%";
         $query->where( function ( $query ) use ( $term ){
-            $query->where( 'retailer_code', 'like', $term )
-                ->orWhere( 'product_code', 'like', $term )
+            $query->where( 'product_code', 'like', $term )
                 ->orWhere( 'product_name', 'like', $term )
                 ->orWhere( 'sim_serial', 'like', $term )
                 ->orWhere( 'msisdn', 'like', $term )
                 ->orWhere( 'activation_date', 'like', $term )
-                ->orWhere( 'bio_date', 'like', $term );
-//                ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
-//                    $query->where( 'code', 'like', $term );
-//                })
-//                ->orWhereHas('supervisor', function ( $query ) use ( $term ){
-//                    $query->where( 'pool_number', 'like', $term );
-//                })
-//                ->orWhereHas('rso', function ( $query ) use ( $term ){
-//                    $query->where( 'itop_number', 'like', $term );
-//                });
+                ->orWhere( 'bio_date', 'like', $term )
+                ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
+                    $query->where( 'code', 'like', $term )
+                        ->orWhere( 'name', 'like', $term );
+                })
+                ->orWhereHas('supervisor', function ( $query ) use ( $term ){
+                    $query->where( 'pool_number', 'like', $term );
+                })
+                ->orWhereHas('retailer', function ( $query ) use ( $term ){
+                    $query->where( 'retailer_code', 'like', $term )
+                        ->orWhere('retailer_name', 'like', $term);
+                })
+                ->orWhereHas('rso', function ( $query ) use ( $term ){
+                    $query->where( 'itop_number', 'like', $term );
+                });
         });
     }
 
@@ -72,10 +78,10 @@ class Activation extends Model
 //    }
 
 
-//    public function ddHouse(): BelongsTo
-//    {
-//        return $this->belongsTo( DdHouse::class );
-//    }
+    public function ddHouse(): BelongsTo
+    {
+        return $this->belongsTo( DdHouse::class );
+    }
 
     public function supervisor(): BelongsTo
     {
@@ -85,5 +91,10 @@ class Activation extends Model
     public function rso(): BelongsTo
     {
         return $this->belongsTo( Rso::class );
+    }
+
+    public function retailer(): BelongsTo
+    {
+        return $this->belongsTo( Retailer::class );
     }
 }

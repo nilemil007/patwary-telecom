@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignUuid('dd_house_id');
             $table->foreignUuid('supervisor_id');
             $table->foreignUuid('rso_id');
-            $table->string('retailer_code');
+            $table->foreignUuid('retailer_id');
             $table->string('product_code');
             $table->string('product_name');
             $table->string('sim_serial');

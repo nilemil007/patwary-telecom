@@ -18,6 +18,7 @@ class ActivationController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Application|Factory|View
      */
     public function index( Request $request ): Application|Factory|View
@@ -27,29 +28,29 @@ class ActivationController extends Controller
             $sdate =  $request->input('start_date');
             $edate =  $request->input('end_date');
 
-            return view('activation.index',[
-                'activations' => Activation::with('user','rso')
+            return view('reports.back.activation.index',[
+                'activations' => Activation::with('ddHouse','rso','supervisor','retailer')
                     ->search( $request->search )
-                    ->whereBetween('created_at', [$sdate, Carbon::parse( $edate )->endOfDay()])
+                    ->whereBetween('activation_date', [$sdate, Carbon::parse( $edate )->endOfDay()])
                     ->latest()
                     ->paginate(5),
             ]);
         }else{
             if ( Auth::user()->role == 'super-admin' )
             {
-                $activations = Activation::with('user')
+                $activations = Activation::with('ddHouse','rso','supervisor','retailer')
                     ->search( $request->search )
                     ->latest()
                     ->paginate(5);
             }else{
-                $activations = Activation::with('user')
+                $activations = Activation::with('ddHouse','rso','supervisor','retailer')
                     ->where('user_id', Auth::id())
                     ->search( $request->search )
                     ->latest()
                     ->paginate(5);
             }
 
-            return view('reports.back.index', compact('activations'));
+            return view('reports.back.activation.index', compact('activations'));
         }
     }
 

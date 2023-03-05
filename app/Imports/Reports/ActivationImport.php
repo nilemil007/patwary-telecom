@@ -21,7 +21,7 @@ class ActivationImport implements ToModel, WithHeadingRow
             'dd_house_id' => Retailer::firstWhere('retailer_code', $row['retailercode'])->dd_house_id,
             'supervisor_id' => Retailer::firstWhere('retailer_code', $row['retailercode'])->supervisor_id,
             'rso_id' => Retailer::firstWhere('retailer_code', $row['retailercode'])->rso_id,
-            'retailer_code' => $row['retailercode'],
+            'retailer_id' => Retailer::firstWhere('retailer_code', $row['retailercode'])->id,
             'product_code' => $row['productcode'],
             'product_name' => $row['productname'],
             'sim_serial' => $row['simno'],

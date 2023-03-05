@@ -186,7 +186,7 @@
                         @endif
 
                         <div class="mt-3">
-                            <x-link href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
+                            <x-link class="nav-link" href="{{ route('download.route.sample.file') }}">Sample file download</x-link>
                         </div>
                     </div>
                 </div>
