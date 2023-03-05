@@ -23,15 +23,15 @@ class ActivationController extends Controller
      */
     public function index( Request $request ): Application|Factory|View
     {
-        if ( !empty($request->input('start_date')) && !empty($request->input('end_date')) )
+        if ( !empty($request->input('from')) && !empty($request->input('to')) )
         {
-            $sdate =  $request->input('start_date');
-            $edate =  $request->input('end_date');
+            $from = Carbon::parse( $request->input('from') )->toDateString();
+            $to = Carbon::parse( $request->input('to') )->endOfDay();
 
             return view('reports.back.activation.index',[
                 'activations' => Activation::with('ddHouse','rso','supervisor','retailer')
                     ->search( $request->search )
-                    ->whereBetween('activation_date', [$sdate, Carbon::parse( $edate )->endOfDay()])
+                    ->whereBetween('activation_date', [$from, $to])
                     ->latest()
                     ->paginate(5),
             ]);

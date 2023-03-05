@@ -9,6 +9,7 @@
 <link href="{{ asset('dist/css/tabler.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 
 <!-- Fontawesome kit -->
 {{--<script src="https://kit.fontawesome.com/cc2d6331a5.js" crossorigin="anonymous"></script>--}}

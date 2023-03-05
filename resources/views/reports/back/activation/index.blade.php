@@ -29,7 +29,6 @@
     @endif
 
     <x-slot:icon-button>
-        <x-icon.file-import></x-icon.file-import>
 {{--        <form action="{{ route('activation.import') }}" method="POST" enctype="multipart/form-data">--}}
 {{--            @csrf--}}
 {{--            <div class="input-group">--}}
@@ -52,86 +51,71 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-{{--                        <form>--}}
-{{--                            <div class="card-header d-flex justify-content-center">--}}
-{{--                                <div class="form-group row me-5">--}}
-{{--                                    <label class="form-label col-5 col-form-label-sm mb-0">Start Date</label>--}}
-{{--                                    <div class="col">--}}
-{{--                                        <input name="start_date"--}}
-{{--                                               value="{{ request()->get('start_date') }}"--}}
-{{--                                               type="date" class="form-control form-control-sm"--}}
-{{--                                               placeholder="Select a date">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div class="form-group row me-2">--}}
-{{--                                    <label class="form-label col-5 col-form-label-sm mb-0">End Date</label>--}}
-{{--                                    <div class="col">--}}
-{{--                                        <input name="end_date"--}}
-{{--                                               value="{{ request()->get('end_date') }}"--}}
-{{--                                               type="date" class="form-control form-control-sm" placeholder="Select a date">--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-
-{{--                                <div>--}}
-{{--                                    <button type="submit" class="btn btn-sm btn-outline-primary">Search</button>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </form>--}}
-
                         <div class="card-body border-bottom py-3">
-                            <form method="GET">
-                                {{--                                            <div class="card-header d-flex justify-content-center">--}}
-                                {{--                                                <div class="form-group row me-5">--}}
-                                {{--                                                    <label class="form-label col-5 col-form-label-sm mb-0">Start Date</label>--}}
-                                {{--                                                    <div class="col">--}}
-                                {{--                                                        <input name="start_date"--}}
-                                {{--                                                               value="{{ request()->get('start_date') }}"--}}
-                                {{--                                                               type="date" class="form-control form-control-sm"--}}
-                                {{--                                                               placeholder="Select a date">--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-
-                                {{--                                                <div class="form-group row me-2">--}}
-                                {{--                                                    <label class="form-label col-5 col-form-label-sm mb-0">End Date</label>--}}
-                                {{--                                                    <div class="col">--}}
-                                {{--                                                        <input name="end_date"--}}
-                                {{--                                                               value="{{ request()->get('end_date') }}"--}}
-                                {{--                                                               type="date" class="form-control form-control-sm" placeholder="Select a date">--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-
-                                {{--                                                <div>--}}
-                                {{--                                                    <button type="submit" class="btn btn-sm btn-outline-primary">Search</button>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </div>--}}
-
-                                <div>
-                                    <div class="input-group input-group-sm mb-3">
-                                        <span class="input-group-text">Start Date</span>
-                                        <input type="date" class="form-control">
+                            <form class="row" autocomplete="off">
+                                <!-- Date Search -->
+                                <div class="col-md-6">
+                                    <!-- Large Screen -->
+                                    <div class="d-none d-md-block">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text">Start Date</span>
+                                            <input type="text" id="from" name="from" class="form-control">
+                                            <span class="input-group-text">End Date</span>
+                                            <input type="text" id="to" name="to" class="form-control">
+                                            <x-button class="input-group-text btn-sm">
+                                                <x-icon.search></x-icon.search>Search
+                                            </x-button>
+                                        </div>
                                     </div>
 
-                                    <div class="input-group input-group-sm mb-3">
-                                        <span class="input-group-text">End Date</span>
-                                        <input type="date" class="form-control">
+                                    <!-- Small Screen -->
+                                    <div class="d-md-none">
+                                        <div class="input-group input-group-sm mb-2">
+                                            <span class="input-group-text">Start Date</span>
+                                            <input type="text" id="from" name="from" class="form-control">
+                                        </div>
+                                        <div class="input-group input-group-sm mb-2">
+                                            <span class="input-group-text">End Date</span>
+                                            <input type="text" id="to" name="to" class="form-control">
+                                        </div>
+                                        <x-button class="input-group-text btn-sm w-100">
+                                            <x-icon.search></x-icon.search>Search
+                                        </x-button>
                                     </div>
                                 </div>
 
-                                <div class="input-group">
-                                    <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
-                                    <x-button class="btn-sm">
-                                        <x-icon.search></x-icon.search>Search
-                                    </x-button>
+                                <div class="hr d-md-none"></div>
+                                <!-- Text Search -->
+                                <div class="col-lg-4 col-md-5 offset-md-1 offset-lg-2">
+                                    <!-- Large Screen -->
+                                    <div class="d-none d-md-block">
+                                        <div class="input-group">
+                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
+                                            <x-button class="btn-sm">
+                                                <x-icon.search></x-icon.search>Search
+                                            </x-button>
+
+                                            <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info">
+                                                <x-icon.refresh></x-icon.refresh>Reset
+                                            </x-link>
+                                        </div>
+                                    </div>
+
+                                    <!-- Small Screen -->
+                                    <div class="d-md-none">
+                                        <div class="input-group">
+                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
+                                        </div>
+                                        <x-button class="btn-sm w-100 mb-2">
+                                            <x-icon.search></x-icon.search>Search
+                                        </x-button>
+
+                                        <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info w-100">
+                                            <x-icon.refresh></x-icon.refresh>Reset
+                                        </x-link>
+                                    </div>
                                 </div>
                             </form>
-{{--                            <div class="d-flex">--}}
-{{--                                <div class="ms-auto text-muted">--}}
-{{--                                    <div class="d-inline-block">--}}
-{{--                                        --}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
                         </div>
                         <div class="table-responsive">
                             <table class="table table-sm card-table table-vcenter text-nowrap datatable">
@@ -242,4 +226,41 @@
         </div>
     </div>
 
+    @push('js')
+        <script>
+            $( function() {
+                var to = $( "#to" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1
+                })
+                    .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    });
+                var dateFormat = "mm/dd/yy",
+                    from = $("#from")
+                        .datepicker({
+                            defaultDate: "+1w",
+                            changeMonth: true,
+                            changeYear: true,
+                            numberOfMonths: 1
+                        })
+                        .on("change", function () {
+                            to.datepicker("option", "minDate", getDate(this));
+                        });
+
+                function getDate( element ) {
+                    var date;
+                    try {
+                        date = $.datepicker.parseDate( dateFormat, element.value );
+                    } catch( error ) {
+                        date = null;
+                    }
+
+                    return date;
+                }
+            } );
+        </script>
+    @endpush
 </x-main>

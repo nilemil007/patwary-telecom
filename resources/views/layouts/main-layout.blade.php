@@ -33,7 +33,7 @@
                     <div class="col-auto ms-auto d-print-none">
                         <div class="btn-list">
                             <!-- [Full Button]-->
-                            <div class="d-none d-sm-inline-block">
+                            <div class="d-none d-sm-block">
                                 {{ $button ?? '' }}
                             </div>
 
