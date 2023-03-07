@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\Reports\LiveActivationImport;
-use App\Models\Reports\Activation;
+use App\Models\Reports\LiveActivation;
 use App\Models\Rso;
 use App\Models\Supervisor;
 use Carbon\Carbon;
@@ -14,10 +14,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Traits\ActivationTrait;
 
-
-class ActivationController extends Controller
+class LiveActivationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,15 +23,15 @@ class ActivationController extends Controller
      * @param Request $request
      * @return Application|Factory|View
      */
-    public function index( Request $request ): View|Factory|Application
+    public function index( Request $request ): Application|Factory|View
     {
+//        dd($request->all());
         if ( !empty($request->input('from')) && !empty($request->input('to')) )
         {
-            dd($request->all());
             $from = Carbon::parse( $request->input('from') )->toDateString();
             $to = Carbon::parse( $request->input('to') )->endOfDay();
 
-            return view('reports.back.activation.index',[
+            return view('reports.back.live-activation.index',[
                 'activations' => \App\Models\Reports\Activation::with('ddHouse','rso','supervisor','retailer')
 //                    ->search( $request->search )
                     ->whereBetween('activation_date', [$from, $to])
@@ -43,7 +41,7 @@ class ActivationController extends Controller
         }else{
             switch ( Auth::user()->role ){
                 case 'super-admin';
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $activations = LiveActivation::with('ddHouse','rso','supervisor','retailer')
                         ->search( $request->search )
                         ->latest()
                         ->paginate(5);
@@ -51,7 +49,7 @@ class ActivationController extends Controller
 
                 case 'supervisor';
                     $supervisorId = Supervisor::firstWhere('user_id', Auth::id())->id;
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $activations = LiveActivation::with('ddHouse','rso','supervisor','retailer')
                         ->where('supervisor_id', $supervisorId)
                         ->search( $request->search )
                         ->latest()
@@ -60,7 +58,7 @@ class ActivationController extends Controller
 
                 case 'rso';
                     $rsoId = Rso::firstWhere('user_id', Auth::id())->id;
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $activations = LiveActivation::with('ddHouse','rso','supervisor','retailer')
                         ->where('supervisor_id', $rsoId)
                         ->search( $request->search )
                         ->latest()
@@ -68,18 +66,17 @@ class ActivationController extends Controller
                     break;
             }
 
-            return view('reports.back.activation.index', compact('activations'));
+            return view('reports.back.live-activation.index', compact('activations'));
         }
     }
-
 
     /**
      * Display the specified resource.
      *
-     * @param Activation $activation
+     * @param  \App\Models\Reports\LiveActivation  $liveActivation
      * @return \Illuminate\Http\Response
      */
-    public function show(Activation $activation)
+    public function show(LiveActivation $liveActivation)
     {
         //
     }
@@ -92,8 +89,8 @@ class ActivationController extends Controller
      */
     public function destroy(): RedirectResponse
     {
-        Activation::truncate();
-        return redirect()->route('activation.index')->with('success', 'All activations deleted successfully.');
+        LiveActivation::truncate();
+        return redirect()->route('live-activation.index')->with('success', 'All activations deleted successfully.');
     }
 
     // Import
@@ -101,6 +98,6 @@ class ActivationController extends Controller
     {
         Excel::import( new LiveActivationImport, $request->file('import_activation'));
 
-        return redirect()->route('activation.index')->with('success', 'Activation imported successfully.');
+        return redirect()->route('live-activation.index')->with('success', 'Activation imported successfully.');
     }
 }

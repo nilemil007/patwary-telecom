@@ -7,6 +7,7 @@ use App\Http\Controllers\CompetitionInformationController;
 use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
+use App\Http\Controllers\LiveActivationController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
 use App\Http\Controllers\PermissionsController;
@@ -153,6 +154,7 @@ Route::middleware(['auth'])->group(function(){
 
     // Activation additional routes
     Route::post('/activation/import', [ ActivationController::class, 'import' ])->name('activation.import');
+    Route::post('/live-activation/import', [ LiveActivationController::class, 'import' ])->name('activation.live.import');
 
     // Others Operator Information
     Route::get('/others-operator-information/export', [ OthersOperatorInformationController::class, 'export' ])->name('ooi.info.export');
@@ -177,6 +179,7 @@ Route::middleware(['auth'])->group(function(){
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
         'activation'        => ActivationController::class,
+        'live-activation'   => LiveActivationController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

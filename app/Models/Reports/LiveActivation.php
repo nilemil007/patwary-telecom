@@ -6,8 +6,6 @@ use App\Models\DdHouse;
 use App\Models\Retailer;
 use App\Models\Rso;
 use App\Models\Supervisor;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @method static truncate()
  */
-class Activation extends Model
+class LiveActivation extends Model
 {
     use HasFactory, HasUuids;
 
@@ -73,7 +71,7 @@ class Activation extends Model
         });
     }
 
-
+    // Relations
     public function ddHouse(): BelongsTo
     {
         return $this->belongsTo( DdHouse::class );

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Reports\Activation;
+use App\Models\Reports\LiveActivation;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -250,5 +251,10 @@ class Retailer extends Model
     public function activation(): HasMany
     {
         return $this->hasMany( Activation::class );
+    }
+
+    public function liveActivation(): HasMany
+    {
+        return $this->hasMany( LiveActivation::class );
     }
 }

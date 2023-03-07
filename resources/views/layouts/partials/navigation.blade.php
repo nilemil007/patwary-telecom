@@ -176,7 +176,7 @@
                                             </a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('activation.index') }}" class="dropdown-item">Core Activation</a>
-                                                <a href="#" class="dropdown-item">Live Activation</a>
+                                                <a href="{{ route('live-activation.index') }}" class="dropdown-item">Live Activation</a>
                                             </div>
                                         </div>
                                         <a class="dropdown-item" href="#" >

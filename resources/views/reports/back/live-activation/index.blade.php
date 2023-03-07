@@ -1,19 +1,19 @@
 <x-main>
 
     <!-- Main Title -->
-    <x-slot:title>Activation</x-slot:title>
+    <x-slot:title>Live Activation</x-slot:title>
 
     <!-- Page Pre Title -->
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
-    <x-slot:page-title>Activation</x-slot:page-title>
+    <x-slot:page-title>Live Activation</x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('activation.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('activation.live.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
                     <input name="import_activation" type="file"
@@ -68,9 +68,6 @@
                                 </div>
 
                                 <div class="hr d-md-none"></div>
-                            </form>
-
-                            <form>
                                 <!-- Text Search -->
                                 <div class="col-lg-4 col-md-5 offset-md-1 offset-lg-2">
                                     <!-- Large Screen -->
@@ -180,7 +177,7 @@
                             @if( $activations->count() > 1 )
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete_all_activation">Delete All</button>
-                                @include('reports.back.activation.modals.delete-all')
+                                @include('reports.back.live-activation.modals.delete-all')
                             @endif
                         </div>
                     @endif
