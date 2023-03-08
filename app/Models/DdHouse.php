@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use App\Models\Reports\Activation;
+use App\Models\Reports\C2C;
+use App\Models\Reports\C2S;
 use App\Models\Reports\LiveActivation;
+use App\Models\Reports\SimIssue;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -69,5 +72,20 @@ class DdHouse extends Model
     public function liveActivation(): HasMany
     {
         return $this->hasMany( LiveActivation::class );
+    }
+
+    public function c2c(): HasMany
+    {
+        return $this->hasMany( C2C::class );
+    }
+
+    public function c2s(): HasMany
+    {
+        return $this->hasMany( C2S::class );
+    }
+
+    public function simIssue(): HasMany
+    {
+        return $this->hasMany( SimIssue::class );
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\Reports\LiveActivationImport;
+use App\Models\Reports\Activation;
 use App\Models\Reports\LiveActivation;
 use App\Models\Rso;
 use App\Models\Supervisor;
@@ -25,18 +26,21 @@ class LiveActivationController extends Controller
      */
     public function index( Request $request ): Application|Factory|View
     {
-//        dd($request->all());
         if ( !empty($request->input('from')) && !empty($request->input('to')) )
         {
             $from = Carbon::parse( $request->input('from') )->toDateString();
             $to = Carbon::parse( $request->input('to') )->endOfDay();
 
             return view('reports.back.live-activation.index',[
-                'activations' => \App\Models\Reports\Activation::with('ddHouse','rso','supervisor','retailer')
-//                    ->search( $request->search )
+                'activations' => LiveActivation::with('ddHouse','rso','supervisor','retailer')
                     ->whereBetween('activation_date', [$from, $to])
-//                    ->latest()
-                    ->paginate(5),
+                    ->paginate(10000),
+            ]);
+        }elseif( $request->input('search') ){
+            return view('reports.back.live-activation.index',[
+                'activations' => LiveActivation::with('ddHouse','rso','supervisor','retailer')
+                    ->search( $request->search )
+                    ->paginate(10000),
             ]);
         }else{
             switch ( Auth::user()->role ){

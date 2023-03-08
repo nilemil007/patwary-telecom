@@ -7,7 +7,9 @@
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
-    <x-slot:page-title>Live Activation</x-slot:page-title>
+    <x-slot:page-title>
+        Live Activation ({{ $activations->total() }})
+    </x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
@@ -36,41 +38,23 @@
                     <div class="card">
                         <div class="card-body border-bottom py-3">
                             <form class="row" autocomplete="off">
-                                <!-- Date Search -->
                                 <div class="col-md-6">
-                                    <!-- Large Screen -->
+                                    <!-- Date Search Large Screen -->
                                     <div class="d-none d-md-block">
                                         <div class="input-group input-group-sm">
                                             <span class="input-group-text">Start Date</span>
-                                            <input type="text" id="from" name="from" class="form-control">
+                                            <input type="text" id="from" name="from" value="{{ request()->get('from') }}" class="form-control">
                                             <span class="input-group-text">End Date</span>
-                                            <input type="text" id="to" name="to" class="form-control">
+                                            <input type="text" id="to" name="to" value="{{ request()->get('to') }}" class="form-control">
                                             <x-button class="input-group-text btn-sm">
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
                                         </div>
                                     </div>
-
-                                    <!-- Small Screen -->
-                                    <div class="d-md-none">
-                                        <div class="input-group input-group-sm mb-2">
-                                            <span class="input-group-text">Start Date</span>
-                                            <input type="text" id="from" name="from" class="form-control">
-                                        </div>
-                                        <div class="input-group input-group-sm mb-2">
-                                            <span class="input-group-text">End Date</span>
-                                            <input type="text" id="to" name="to" class="form-control">
-                                        </div>
-                                        <x-button class="input-group-text btn-sm w-100">
-                                            <x-icon.search></x-icon.search>Search
-                                        </x-button>
-                                    </div>
                                 </div>
 
-                                <div class="hr d-md-none"></div>
-                                <!-- Text Search -->
                                 <div class="col-lg-4 col-md-5 offset-md-1 offset-lg-2">
-                                    <!-- Large Screen -->
+                                    <!-- Text Search Large Screen -->
                                     <div class="d-none d-md-block">
                                         <div class="input-group">
                                             <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
@@ -78,26 +62,47 @@
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
 
-                                            <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info">
+                                            <x-link href="{{ route('live-activation.index') }}" class="btn btn-sm btn-info">
                                                 <x-icon.refresh></x-icon.refresh>Reset
                                             </x-link>
                                         </div>
                                     </div>
-
-                                    <!-- Small Screen -->
-                                    <div class="d-md-none">
-                                        <div class="input-group">
-                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
-                                        </div>
-                                        <x-button class="btn-sm w-100 mb-2">
-                                            <x-icon.search></x-icon.search>Search
-                                        </x-button>
-
-                                        <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info w-100">
-                                            <x-icon.refresh></x-icon.refresh>Reset
-                                        </x-link>
-                                    </div>
                                 </div>
+                            </form>
+
+                            <!-- Small Screen -->
+                            <form class="row" autocomplete="off">
+                                <!-- Date Search Small Screen -->
+                                <div class="d-md-none">
+                                    <div class="input-group input-group-sm mb-2">
+                                        <span class="input-group-text">Start Date</span>
+                                        <input type="text" id="from_ss" name="from" value="{{ request()->get('from') }}" class="form-control">
+                                    </div>
+                                    <div class="input-group input-group-sm mb-2">
+                                        <span class="input-group-text">End Date</span>
+                                        <input type="text" id="to_ss" name="to" value="{{ request()->get('to') }}" class="form-control">
+                                    </div>
+                                    <x-button class="input-group-text btn-sm w-100">
+                                        <x-icon.search></x-icon.search>Search
+                                    </x-button>
+                                </div>
+
+                                <div class="hr d-md-none"></div>
+
+                                <!-- Text Search Small Screen -->
+                                <div class="d-md-none">
+                                    <div class="input-group">
+                                        <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
+                                    </div>
+                                    <x-button class="btn-sm w-100 mb-2">
+                                        <x-icon.search></x-icon.search>Search
+                                    </x-button>
+
+                                    <x-link href="{{ route('live-activation.index') }}" class="btn btn-sm btn-info w-100">
+                                        <x-icon.refresh></x-icon.refresh>Reset
+                                    </x-link>
+                                </div>
+
                             </form>
                         </div>
                         <div class="table-responsive">
@@ -200,6 +205,43 @@
                     });
                 var dateFormat = "mm/dd/yy",
                     from = $("#from")
+                        .datepicker({
+                            defaultDate: "+1w",
+                            changeMonth: true,
+                            changeYear: true,
+                            numberOfMonths: 1
+                        })
+                        .on("change", function () {
+                            to.datepicker("option", "minDate", getDate(this));
+                        });
+
+                function getDate( element ) {
+                    var date;
+                    try {
+                        date = $.datepicker.parseDate( dateFormat, element.value );
+                    } catch( error ) {
+                        date = null;
+                    }
+
+                    return date;
+                }
+            } );
+        </script>
+
+
+        <script>
+            $( function() {
+                var to = $( "#to_ss" ).datepicker({
+                    defaultDate: "+1w",
+                    changeMonth: true,
+                    changeYear: true,
+                    numberOfMonths: 1
+                })
+                    .on( "change", function() {
+                        from.datepicker( "option", "maxDate", getDate( this ) );
+                    });
+                var dateFormat = "mm/dd/yy",
+                    from = $("#from_ss")
                         .datepicker({
                             defaultDate: "+1w",
                             changeMonth: true,

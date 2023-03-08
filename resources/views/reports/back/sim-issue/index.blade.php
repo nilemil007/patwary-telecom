@@ -1,29 +1,29 @@
 <x-main>
 
     <!-- Main Title -->
-    <x-slot:title>Activation</x-slot:title>
+    <x-slot:title>Sim Issue</x-slot:title>
 
     <!-- Page Pre Title -->
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>
-        Activation ({{ $activations->total() }})
+        Sim Issue ({{ $simIssues->total() }})
     </x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('activation.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('sim-issue.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
-                    <input name="import_activation" type="file"
+                    <input name="issue_sim" type="file"
                            accept=".xls,.xlsx"
                            class="form-control" required>
 
                     <button class="btn btn-outline-google" type="submit">
-                        <x-icon.file-import></x-icon.file-import>Import Activation
+                        <x-icon.file-import></x-icon.file-import>Import Sim Issue
                     </button>
                 </div>
             </form>
@@ -119,16 +119,15 @@
                                     <th>rso</th>
                                     <th>retailer</th>
                                     <th>product code | name</th>
-                                    <th>msisdn | sim serial</th>
+                                    <th>sim serial</th>
                                     <th>selling price</th>
-                                    <th>activation date</th>
-                                    <th>bio date</th>
+                                    <th>issue date</th>
                                     <th></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse( $activations as $sl => $activation )
+                                @forelse( $simIssues as $sl => $simIssue )
                                     <tr>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
@@ -136,36 +135,32 @@
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->ddHouse->name }}</div>
-                                            <div class="text-muted">{{ $activation->ddHouse->code }}</div>
+                                            <div>{{ $simIssue->ddHouse->name }}</div>
+                                            <div class="text-muted">{{ $simIssue->ddHouse->code }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->supervisor->user->name }}</div>
-                                            <div class="text-muted">{{ $activation->supervisor->pool_number }}</div>
+                                            <div>{{ $simIssue->supervisor->user->name }}</div>
+                                            <div class="text-muted">{{ $simIssue->supervisor->pool_number }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->rso->user->name }}</div>
-                                            <div class="text-muted">{{ $activation->rso->itop_number }}</div>
+                                            <div>{{ $simIssue->rso->user->name }}</div>
+                                            <div class="text-muted">{{ $simIssue->rso->itop_number }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->retailer->retailer_name }}</div>
-                                            <div class="text-muted">{{ $activation->retailer->retailer_code }}</div>
+                                            <div>{{ $simIssue->retailer->retailer_name }}</div>
+                                            <div class="text-muted">{{ $simIssue->retailer->retailer_code }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->product_name }}</div>
-                                            <div class="text-muted">{{ $activation->product_code }}</div>
+                                            <div>{{ $simIssue->product_name }}</div>
+                                            <div class="text-muted">{{ $simIssue->product_code }}</div>
                                         </td>
-                                        <td data-label="Title">
-                                            <div>{{ $activation->msisdn }}</div>
-                                            <div class="text-muted">{{ $activation->sim_serial }}</div>
-                                        </td>
-                                        <td>{{ $activation->selling_price }}</td>
-                                        <td>{{ $activation->activation_date->toFormattedDateString() }}</td>
-                                        <td>{{ $activation->bio_date->toFormattedDateString() }}</td>
+                                        <td data-label="Title">{{ $simIssue->sim_serial }}</td>
+                                        <td>{{ $simIssue->selling_price }}</td>
+                                        <td>{{ $simIssue->issue_date->toFormattedDateString() }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>No activation data found</td>
+                                        <td>No Sim Issue data found</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
@@ -173,16 +168,16 @@
                         </div>
 
                         <div class="card-footer d-flex align-items-center">
-                            {{ $activations->links('vendor.pagination.bootstrap-5') }}
+                            {{ $simIssues->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
 
                     @if( auth()->user()->role == 'super-admin' )
                         <div class="mt-3 d-flex justify-content-between align-items-center">
-                            @if( $activations->count() > 1 )
+                            @if( $simIssues->count() > 1 )
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_activation">Delete All</button>
-                                @include('reports.back.activation.modals.delete-all')
+                                        data-bs-target="#delete_all_sim_issue">Delete All</button>
+                                @include('reports.back.sim-issue.modals.delete-all')
                             @endif
                         </div>
                     @endif

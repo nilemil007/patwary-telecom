@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\Reports\ActivationImport;
-use App\Models\Reports\Activation;
+use App\Imports\Reports\SimIssueImport;
+use App\Models\Reports\SimIssue;
 use App\Models\Rso;
 use App\Models\Supervisor;
 use Carbon\Carbon;
@@ -15,8 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
-
-class ActivationController extends Controller
+class SimIssueController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,21 +30,21 @@ class ActivationController extends Controller
             $from = Carbon::parse( $request->input('from') )->toDateString();
             $to = Carbon::parse( $request->input('to') )->endOfDay();
 
-            return view('reports.back.activation.index',[
-                'activations' => Activation::with('ddHouse','rso','supervisor','retailer')
-                    ->whereBetween('activation_date', [$from, $to])
+            return view('reports.back.sim-issue.index',[
+                'simIssues' => SimIssue::with('ddHouse','rso','supervisor','retailer')
+                    ->whereBetween('issue_date', [$from, $to])
                     ->paginate(1000),
             ]);
         }elseif( $request->input('search') ){
-            return view('reports.back.activation.index',[
-                'activations' => Activation::with('ddHouse','rso','supervisor','retailer')
+            return view('reports.back.sim-issue.index',[
+                'simIssues' => SimIssue::with('ddHouse','rso','supervisor','retailer')
                     ->search( $request->search )
                     ->paginate(1000),
             ]);
         }else{
             switch ( Auth::user()->role ){
                 case 'super-admin';
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $simIssues = SimIssue::with('ddHouse','rso','supervisor','retailer')
 //                        ->search( $request->search )
                         ->latest()
                         ->paginate(5);
@@ -53,7 +52,7 @@ class ActivationController extends Controller
 
                 case 'supervisor';
                     $supervisorId = Supervisor::firstWhere('user_id', Auth::id())->id;
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $simIssues = SimIssue::with('ddHouse','rso','supervisor','retailer')
                         ->where('supervisor_id', $supervisorId)
 //                        ->search( $request->search )
                         ->latest()
@@ -62,7 +61,7 @@ class ActivationController extends Controller
 
                 case 'rso';
                     $rsoId = Rso::firstWhere('user_id', Auth::id())->id;
-                    $activations = Activation::with('ddHouse','rso','supervisor','retailer')
+                    $simIssues = SimIssue::with('ddHouse','rso','supervisor','retailer')
                         ->where('supervisor_id', $rsoId)
 //                        ->search( $request->search )
                         ->latest()
@@ -70,7 +69,7 @@ class ActivationController extends Controller
                     break;
             }
 
-            return view('reports.back.activation.index', compact('activations'));
+            return view('reports.back.sim-issue.index', compact('simIssues'));
         }
     }
 
@@ -78,14 +77,13 @@ class ActivationController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Activation $activation
+     * @param SimIssue $simIssue
      * @return \Illuminate\Http\Response
      */
-    public function show(Activation $activation)
+    public function show(SimIssue $simIssue)
     {
         //
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -94,15 +92,15 @@ class ActivationController extends Controller
      */
     public function destroy(): RedirectResponse
     {
-        Activation::truncate();
-        return redirect()->route('activation.index')->with('success', 'All activations deleted successfully.');
+        SimIssue::truncate();
+        return redirect()->route('sim-issue.index')->with('success', 'All Sim Issue data deleted successfully.');
     }
 
     // Import
     public function import( Request $request ): RedirectResponse
     {
-        Excel::import( new ActivationImport, $request->file('import_activation'));
+        Excel::import( new SimIssueImport, $request->file('issue_sim'));
 
-        return redirect()->route('activation.index')->with('success', 'Activation imported successfully.');
+        return redirect()->route('sim-issue.index')->with('success', 'Sim Issue data imported successfully.');
     }
 }

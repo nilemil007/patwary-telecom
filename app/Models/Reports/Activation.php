@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static truncate()
+ * @method static distinct(string $string)
  */
 class Activation extends Model
 {
@@ -25,7 +26,6 @@ class Activation extends Model
         'supervisor_id',
         'rso_id',
         'retailer_id',
-        'retailer_code',
         'product_code',
         'product_name',
         'sim_serial',
