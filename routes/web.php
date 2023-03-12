@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
 use App\Http\Controllers\C2CController;
@@ -157,7 +156,6 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/user/import', [ CreateNewUserController::class, 'import' ])->name('user.import');
 
     // Activation additional routes
-    Route::post('/activation/import', [ ActivationController::class, 'import' ])->name('activation.import');
     Route::post('/live-activation/import', [ LiveActivationController::class, 'import' ])->name('activation.live.import');
 
     // C2C additional routes
@@ -173,6 +171,8 @@ Route::middleware(['auth'])->group(function(){
     Route::controller( CoreDataImportController::class )->name('raw.')->group(function (){
         // Activation
         Route::get('/activation', 'activationIndex')->name('activation.index');
+        Route::get('/activation/import', 'activationImport')->name('activation.import');
+        Route::delete('/activation/destroy', 'activationDestroy')->name('activation.destroy');
     });
 
     // Others Operator Information
