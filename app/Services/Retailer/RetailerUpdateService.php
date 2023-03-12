@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Retailer;
+namespace import\Retailer;
 
 
 use App\Models\Rso;

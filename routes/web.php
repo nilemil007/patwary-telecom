@@ -4,6 +4,7 @@ use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
 use App\Http\Controllers\CompetitionInformationController;
+use App\Http\Controllers\CoreDataImportController;
 use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
@@ -154,6 +155,12 @@ Route::middleware(['auth'])->group(function(){
     // Activation additional routes
     Route::post('/activation/import', [ ActivationController::class, 'import' ])->name('activation.import');
 
+    // Core data import routes
+    Route::controller( CoreDataImportController::class )->name('raw.')->group(function (){
+        // Activation
+        Route::get('/activation', 'activationIndex')->name('activation.index');
+    });
+
     // Others Operator Information
     Route::get('/others-operator-information/export', [ OthersOperatorInformationController::class, 'export' ])->name('ooi.info.export');
     Route::delete('/others-operator-information/delete-all', [ OthersOperatorInformationController::class, 'deleteAll' ])->name('others-operator-information.delete.all');
@@ -176,7 +183,7 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
-        'activation'        => ActivationController::class,
+//        'activation'        => ActivationController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

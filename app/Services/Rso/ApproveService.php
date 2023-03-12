@@ -1,5 +1,5 @@
 <?php
-namespace App\Services\Rso;
+namespace import\Rso;
 
 use App\Models\User;
 use App\Notifications\Rso\ApproveNotification;
