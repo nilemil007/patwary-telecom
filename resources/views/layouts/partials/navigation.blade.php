@@ -176,16 +176,16 @@
                                             </a>
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('raw.activation.index') }}" class="dropdown-item">Core Activation</a>
-                                                <a href="#" class="dropdown-item">Live Activation</a>
+                                                <a href="{{ route('live-activation.index') }}" class="dropdown-item">Live Activation</a>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="#" >
+                                        <a class="dropdown-item" href="{{ route('c2c.index') }}" >
                                             C2C
                                         </a>
-                                        <a class="dropdown-item" href="#" >
+                                        <a class="dropdown-item" href="{{ route('c2s.index') }}" >
                                             C2S
                                         </a>
-                                        <a class="dropdown-item" href="#" >
+                                        <a class="dropdown-item" href="{{ route('sim-issue.index') }}" >
                                             Sim Issue
                                         </a>
                                         <a class="dropdown-item" href="#" >

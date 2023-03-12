@@ -3,11 +3,14 @@
 use App\Http\Controllers\ActivationController;
 use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
+use App\Http\Controllers\C2CController;
+use App\Http\Controllers\C2SController;
 use App\Http\Controllers\CompetitionInformationController;
 use App\Http\Controllers\CoreDataImportController;
 use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
+use App\Http\Controllers\LiveActivationController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
 use App\Http\Controllers\PermissionsController;
@@ -15,11 +18,12 @@ use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
+use App\Http\Controllers\SimIssueController;
 use App\Http\Controllers\SupervisorController;
 use App\Models\Bp;
 use App\Models\CompetitionInformation;
 use App\Models\ItopReplace;
-use App\Models\Others\OthersOperatorInformation;
+use App\Models\OthersOperatorInformation;
 use App\Models\Rso;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
@@ -154,6 +158,16 @@ Route::middleware(['auth'])->group(function(){
 
     // Activation additional routes
     Route::post('/activation/import', [ ActivationController::class, 'import' ])->name('activation.import');
+    Route::post('/live-activation/import', [ LiveActivationController::class, 'import' ])->name('activation.live.import');
+
+    // C2C additional routes
+    Route::post('/c2c/import', [ C2CController::class, 'import' ])->name('c2c.import');
+
+    // C2S additional routes
+    Route::post('/c2s/import', [ C2SController::class, 'import' ])->name('c2s.import');
+
+    // Sim Issue additional routes
+    Route::post('/sim-issue/import', [ SimIssueController::class, 'import' ])->name('sim-issue.import');
 
     // Core data import routes
     Route::controller( CoreDataImportController::class )->name('raw.')->group(function (){
@@ -183,7 +197,10 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
-//        'activation'        => ActivationController::class,
+        'live-activation'   => LiveActivationController::class,
+        'c2c'               => C2CController::class,
+        'c2s'               => C2SController::class,
+        'sim-issue'         => SimIssueController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

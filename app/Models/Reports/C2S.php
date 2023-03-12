@@ -6,8 +6,6 @@ use App\Models\DdHouse;
 use App\Models\Retailer;
 use App\Models\Rso;
 use App\Models\Supervisor;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,9 +13,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static truncate()
- * @method static distinct(string $string)
  */
-class Activation extends Model
+class C2S extends Model
 {
     use HasFactory, HasUuids;
 
@@ -26,13 +23,8 @@ class Activation extends Model
         'supervisor_id',
         'rso_id',
         'retailer_id',
-        'product_code',
-        'product_name',
-        'sim_serial',
-        'msisdn',
-        'selling_price',
-        'activation_date',
-        'bio_date',
+        'date',
+        'amount',
     ];
 
     /**
@@ -41,8 +33,7 @@ class Activation extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'activation_date' => 'datetime',
-        'bio_date' => 'datetime',
+        'date' => 'datetime',
     ];
 
     // Search
@@ -50,12 +41,8 @@ class Activation extends Model
     {
         $term = "%$term%";
         $query->where( function ( $query ) use ( $term ){
-            $query->where( 'product_code', 'like', $term )
-                ->orWhere( 'product_name', 'like', $term )
-                ->orWhere( 'sim_serial', 'like', $term )
-                ->orWhere( 'msisdn', 'like', $term )
-                ->orWhere( 'activation_date', 'like', $term )
-                ->orWhere( 'bio_date', 'like', $term )
+            $query->where( 'amount', 'like', $term )
+                ->orWhere( 'date', 'like', $term )
                 ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
                     $query->where( 'code', 'like', $term )
                         ->orWhere( 'name', 'like', $term );
@@ -72,7 +59,6 @@ class Activation extends Model
                 });
         });
     }
-
 
     public function ddHouse(): BelongsTo
     {

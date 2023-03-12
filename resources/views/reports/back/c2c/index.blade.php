@@ -1,29 +1,29 @@
 <x-main>
 
     <!-- Main Title -->
-    <x-slot:title>Activation</x-slot:title>
+    <x-slot:title>C2C - Secondary</x-slot:title>
 
     <!-- Page Pre Title -->
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>
-        Activation ({{ $activations->total() }})
+        C2C ({{ $c2cs->total() }})
     </x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('activation.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('c2c.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
-                    <input name="import_activation" type="file"
+                    <input name="import_c2c" type="file"
                            accept=".xls,.xlsx"
                            class="form-control" required>
 
                     <button class="btn btn-outline-google" type="submit">
-                        <x-icon.file-import></x-icon.file-import>Import Activation
+                        <x-icon.file-import></x-icon.file-import>Import C2C
                     </button>
                 </div>
             </form>
@@ -62,28 +62,11 @@
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
 
-                                            <x-link href="{{ route('raw.activation.index') }}" class="btn btn-sm btn-info">
+                                            <x-link href="{{ route('c2c.index') }}" class="btn btn-sm btn-info">
                                                 <x-icon.refresh></x-icon.refresh>Reset
                                             </x-link>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-
-                                    <!-- Small Screen -->
-                                    <div class="d-md-none">
-                                        <div class="input-group">
-                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
-                                        </div>
-                                        <x-button class="btn-sm w-100 mb-2">
-                                            <x-icon.search></x-icon.search>Search
-                                        </x-button>
-
-                                        <x-link href="{{ route('raw.activation.index') }}" class="btn btn-sm btn-info w-100">
-                                            <x-icon.refresh></x-icon.refresh>Reset
-                                        </x-link>
-                                    </div>
-=======
->>>>>>> 299129fbab721afc86a4442fc4fb6950b990a3a5
                                 </div>
                             </form>
 
@@ -115,7 +98,7 @@
                                         <x-icon.search></x-icon.search>Search
                                     </x-button>
 
-                                    <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info w-100">
+                                    <x-link href="{{ route('c2c.index') }}" class="btn btn-sm btn-info w-100">
                                         <x-icon.refresh></x-icon.refresh>Reset
                                     </x-link>
                                 </div>
@@ -135,17 +118,14 @@
                                     <th>supervisor</th>
                                     <th>rso</th>
                                     <th>retailer</th>
-                                    <th>product code | name</th>
-                                    <th>msisdn | sim serial</th>
-                                    <th>selling price</th>
-                                    <th>activation date</th>
-                                    <th>bio date</th>
+                                    <th>date</th>
+                                    <th>amount</th>
                                     <th></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
-                                @forelse( $activations as $sl => $activation )
+                                @forelse( $c2cs as $sl => $c2c )
                                     <tr>
                                         <td>
                                             <input class="form-check-input m-0 align-middle" type="checkbox"
@@ -153,36 +133,27 @@
                                         </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->ddHouse->name }}</div>
-                                            <div class="text-muted">{{ $activation->ddHouse->code }}</div>
+                                            <div>{{ $c2c->ddHouse->name }}</div>
+                                            <div class="text-muted">{{ $c2c->ddHouse->code }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->supervisor->user->name }}</div>
-                                            <div class="text-muted">{{ $activation->supervisor->pool_number }}</div>
+                                            <div>{{ $c2c->supervisor->user->name }}</div>
+                                            <div class="text-muted">{{ $c2c->supervisor->pool_number }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->rso->user->name }}</div>
-                                            <div class="text-muted">{{ $activation->rso->itop_number }}</div>
+                                            <div>{{ $c2c->rso->user->name }}</div>
+                                            <div class="text-muted">{{ $c2c->rso->itop_number }}</div>
                                         </td>
                                         <td data-label="Title">
-                                            <div>{{ $activation->retailer->retailer_name }}</div>
-                                            <div class="text-muted">{{ $activation->retailer->retailer_code }}</div>
+                                            <div>{{ $c2c->retailer->retailer_name }}</div>
+                                            <div class="text-muted">{{ $c2c->retailer->retailer_code }}</div>
                                         </td>
-                                        <td data-label="Title">
-                                            <div>{{ $activation->product_name }}</div>
-                                            <div class="text-muted">{{ $activation->product_code }}</div>
-                                        </td>
-                                        <td data-label="Title">
-                                            <div>{{ $activation->msisdn }}</div>
-                                            <div class="text-muted">{{ $activation->sim_serial }}</div>
-                                        </td>
-                                        <td>{{ $activation->selling_price }}</td>
-                                        <td>{{ $activation->activation_date->toFormattedDateString() }}</td>
-                                        <td>{{ $activation->bio_date->toFormattedDateString() }}</td>
+                                        <td>{{ $c2c->date->toFormattedDateString() }}</td>
+                                        <td>{{ $c2c->amount }}</td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>No activation data found</td>
+                                        <td>No C2C data found</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
@@ -190,16 +161,16 @@
                         </div>
 
                         <div class="card-footer d-flex align-items-center">
-                            {{ $activations->links('vendor.pagination.bootstrap-5') }}
+                            {{ $c2cs->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
 
                     @if( auth()->user()->role == 'super-admin' )
                         <div class="mt-3 d-flex justify-content-between align-items-center">
-                            @if( $activations->count() > 1 )
+                            @if( $c2cs->count() > 1 )
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_activation">Delete All</button>
-                                @include('reports.back.activation.modals.delete-all')
+                                        data-bs-target="#delete_all_c2c">Delete All</button>
+                                @include('reports.back.c2c.modals.delete-all')
                             @endif
                         </div>
                     @endif

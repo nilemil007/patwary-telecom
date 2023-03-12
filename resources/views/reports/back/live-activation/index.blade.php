@@ -1,21 +1,21 @@
 <x-main>
 
     <!-- Main Title -->
-    <x-slot:title>Activation</x-slot:title>
+    <x-slot:title>Live Activation</x-slot:title>
 
     <!-- Page Pre Title -->
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>
-        Activation ({{ $activations->total() }})
+        Live Activation ({{ $activations->total() }})
     </x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('activation.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('activation.live.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
                     <input name="import_activation" type="file"
@@ -62,28 +62,11 @@
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
 
-                                            <x-link href="{{ route('raw.activation.index') }}" class="btn btn-sm btn-info">
+                                            <x-link href="{{ route('live-activation.index') }}" class="btn btn-sm btn-info">
                                                 <x-icon.refresh></x-icon.refresh>Reset
                                             </x-link>
                                         </div>
                                     </div>
-<<<<<<< HEAD
-
-                                    <!-- Small Screen -->
-                                    <div class="d-md-none">
-                                        <div class="input-group">
-                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
-                                        </div>
-                                        <x-button class="btn-sm w-100 mb-2">
-                                            <x-icon.search></x-icon.search>Search
-                                        </x-button>
-
-                                        <x-link href="{{ route('raw.activation.index') }}" class="btn btn-sm btn-info w-100">
-                                            <x-icon.refresh></x-icon.refresh>Reset
-                                        </x-link>
-                                    </div>
-=======
->>>>>>> 299129fbab721afc86a4442fc4fb6950b990a3a5
                                 </div>
                             </form>
 
@@ -115,7 +98,7 @@
                                         <x-icon.search></x-icon.search>Search
                                     </x-button>
 
-                                    <x-link href="{{ route('activation.index') }}" class="btn btn-sm btn-info w-100">
+                                    <x-link href="{{ route('live-activation.index') }}" class="btn btn-sm btn-info w-100">
                                         <x-icon.refresh></x-icon.refresh>Reset
                                     </x-link>
                                 </div>
@@ -199,7 +182,7 @@
                             @if( $activations->count() > 1 )
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                         data-bs-target="#delete_all_activation">Delete All</button>
-                                @include('reports.back.activation.modals.delete-all')
+                                @include('reports.back.live-activation.modals.delete-all')
                             @endif
                         </div>
                     @endif
@@ -245,7 +228,7 @@
             } );
         </script>
 
-        <!-- Small Screen -->
+
         <script>
             $( function() {
                 var to = $( "#to_ss" ).datepicker({
