@@ -170,9 +170,20 @@ Route::middleware(['auth'])->group(function(){
     // Core data import routes
     Route::controller( CoreDataImportController::class )->name('raw.')->group(function (){
         // Activation
-        Route::get('/activation', 'activationIndex')->name('activation.index');
-        Route::get('/activation/import', 'activationImport')->name('activation.import');
+        Route::get('/activation', 'activationIndex')->name('activation');
+        Route::get('/live/activation', 'liveActivationIndex')->name('live.activation');
+        Route::post('/activation/import', 'activationImport')->name('activation.import');
+        Route::post('/live/activation/import', 'liveActivationImport')->name('live.activation.import');
         Route::delete('/activation/destroy', 'activationDestroy')->name('activation.destroy');
+        Route::delete('/live/activation/destroy', 'liveActivationDestroy')->name('live.activation.destroy');
+
+        // C2C
+        Route::get('/c2c', 'c2cIndex')->name('c2c');
+        Route::get('/live/c2c', 'liveC2cIndex')->name('live.c2c');
+        Route::post('/c2c/import', 'c2cImport')->name('c2c.import');
+        Route::post('/live/c2c/import', 'liveC2cImport')->name('live.c2c.import');
+        Route::delete('/c2c/destroy', 'c2cDestroy')->name('c2c.destroy');
+        Route::delete('/live/c2c/destroy', 'liveC2cDestroy')->name('live.c2c.destroy');
     });
 
     // Others Operator Information
@@ -198,7 +209,6 @@ Route::middleware(['auth'])->group(function(){
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
         'live-activation'   => LiveActivationController::class,
-        'c2c'               => C2CController::class,
         'c2s'               => C2SController::class,
         'sim-issue'         => SimIssueController::class,
         'others-operator-information' => OthersOperatorInformationController::class,

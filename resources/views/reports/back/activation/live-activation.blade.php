@@ -1,21 +1,21 @@
 <x-main>
 
     <!-- Main Title -->
-    <x-slot:title>Activation</x-slot:title>
+    <x-slot:title>Live Activation</x-slot:title>
 
     <!-- Page Pre Title -->
     <x-slot:page-pre-title>Overview</x-slot:page-pre-title>
 
     <!-- Page Title -->
     <x-slot:page-title>
-        Activation ({{ $activations->total() }})
+        Live Activation ({{ $activations->total() }})
     </x-slot:page-title>
 
     <!-- Page title actions -->
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('raw.activation.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('raw.live.activation.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
                     <input name="import_activation" type="file"
@@ -62,7 +62,7 @@
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
 
-                                            <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info">
+                                            <x-link href="{{ route('raw.live.activation') }}" class="btn btn-sm btn-info">
                                                 <x-icon.refresh></x-icon.refresh>Reset
                                             </x-link>
                                         </div>
@@ -98,7 +98,7 @@
                                         <x-icon.search></x-icon.search>Search
                                     </x-button>
 
-                                    <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info w-100">
+                                    <x-link href="{{ route('raw.live.activation') }}" class="btn btn-sm btn-info w-100">
                                         <x-icon.refresh></x-icon.refresh>Reset
                                     </x-link>
                                 </div>
@@ -165,7 +165,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>No activation data found</td>
+                                        <td>No live activation data found</td>
                                     </tr>
                                 @endforelse
                                 </tbody>
@@ -181,8 +181,8 @@
                         <div class="mt-3 d-flex justify-content-between align-items-center">
                             @if( $activations->count() > 1 )
                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_all_activation">Delete All</button>
-                                @include('reports.back.activation.modals.delete-all')
+                                        data-bs-target="#delete_all_live_activation">Delete All</button>
+                                @include('reports.back.activation.modals.live-activation-delete-all')
                             @endif
                         </div>
                     @endif

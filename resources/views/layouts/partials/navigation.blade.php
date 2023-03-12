@@ -175,13 +175,20 @@
                                                 Activation
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="{{ route('raw.activation.index') }}" class="dropdown-item">Core Activation</a>
-                                                <a href="{{ route('live-activation.index') }}" class="dropdown-item">Live Activation</a>
+                                                <a href="{{ route('raw.activation') }}" class="dropdown-item">Activation</a>
+                                                <a href="{{ route('raw.live.activation') }}" class="dropdown-item">Live Activation</a>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="{{ route('c2c.index') }}" >
-                                            C2C
-                                        </a>
+
+                                        <div class="dropend">
+                                            <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                                C2C
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ route('raw.c2c') }}" class="dropdown-item">C2C</a>
+                                                <a href="{{ route('raw.live.c2c') }}" class="dropdown-item">Live C2C</a>
+                                            </div>
+                                        </div>
                                         <a class="dropdown-item" href="{{ route('c2s.index') }}" >
                                             C2S
                                         </a>

@@ -1,4 +1,4 @@
-<div class="modal modal-blur fade" id="delete_all_c2c" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-blur fade" id="delete_all_live_activation" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body">
@@ -9,11 +9,11 @@
                 <button type="button" class="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-danger"
                         data-bs-dismiss="modal"
-                        onclick="document.getElementById('deleteAllC2c').submit();">
+                        onclick="document.getElementById('deleteAllActivations').submit();">
                     Yes, delete all
                 </button>
 
-                <form action="{{ route('raw.c2c.destroy','deleteAll') }}" id="deleteAllC2c" method="POST">@csrf @method('DELETE')</form>
+                <form action="{{ route('raw.live.activation.destroy') }}" id="deleteAllActivations" method="POST">@csrf @method('DELETE')</form>
             </div>
         </div>
     </div>

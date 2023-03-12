@@ -15,7 +15,7 @@
     @if( auth()->user()->role == 'super-admin' )
         <x-slot:button>
             <!-- [Full Button]-->
-            <form action="{{ route('c2c.import') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('raw.c2c.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="input-group">
                     <input name="import_c2c" type="file"
@@ -62,7 +62,7 @@
                                                 <x-icon.search></x-icon.search>Search
                                             </x-button>
 
-                                            <x-link href="{{ route('c2c.index') }}" class="btn btn-sm btn-info">
+                                            <x-link href="{{ route('raw.c2c') }}" class="btn btn-sm btn-info">
                                                 <x-icon.refresh></x-icon.refresh>Reset
                                             </x-link>
                                         </div>
@@ -98,7 +98,7 @@
                                         <x-icon.search></x-icon.search>Search
                                     </x-button>
 
-                                    <x-link href="{{ route('c2c.index') }}" class="btn btn-sm btn-info w-100">
+                                    <x-link href="{{ route('raw.c2c') }}" class="btn btn-sm btn-info w-100">
                                         <x-icon.refresh></x-icon.refresh>Reset
                                     </x-link>
                                 </div>

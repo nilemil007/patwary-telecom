@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('c2_s', function (Blueprint $table) {
+        Schema::create('live_c2cs', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('dd_house_id');
             $table->foreignUuid('supervisor_id');
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('c2_s');
+        Schema::dropIfExists('live_c2cs');
     }
 };
