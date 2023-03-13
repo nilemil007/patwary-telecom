@@ -13,7 +13,7 @@
                     Yes, delete all
                 </button>
 
-                <form action="{{ route('raw.c2c.destroy','deleteAll') }}" id="deleteAllC2c" method="POST">@csrf @method('DELETE')</form>
+                <form action="{{ route('raw.c2c.destroy') }}" id="deleteAllC2c" method="POST">@csrf @method('DELETE')</form>
             </div>
         </div>
     </div>

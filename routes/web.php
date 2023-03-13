@@ -2,14 +2,11 @@
 
 use App\Http\Controllers\BpController;
 use App\Http\Controllers\BtsController;
-use App\Http\Controllers\C2CController;
-use App\Http\Controllers\C2SController;
 use App\Http\Controllers\CompetitionInformationController;
 use App\Http\Controllers\CoreDataImportController;
 use App\Http\Controllers\CreateNewUserController;
 use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
-use App\Http\Controllers\LiveActivationController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
 use App\Http\Controllers\PermissionsController;
@@ -17,7 +14,6 @@ use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
-use App\Http\Controllers\SimIssueController;
 use App\Http\Controllers\SupervisorController;
 use App\Models\Bp;
 use App\Models\CompetitionInformation;
@@ -146,7 +142,6 @@ Route::middleware(['auth'])->group(function(){
         Route::get('{retailer}/verify', [ RetailerController::class, 'verify' ])->name('verify');
         Route::post('{retailer}/approve', [ RetailerController::class, 'approve' ])->name('approve');
         Route::post('{retailer}/reject', [ RetailerController::class, 'reject' ])->name('reject');
-//        Route::delete('/delete-all', [ RetailerController::class, 'deleteAllRetailers' ])->name('delete.all');
     });
 
     // Dd House additional routes
@@ -155,17 +150,6 @@ Route::middleware(['auth'])->group(function(){
     // User additional routes
     Route::post('/user/import', [ CreateNewUserController::class, 'import' ])->name('user.import');
 
-    // Activation additional routes
-    Route::post('/live-activation/import', [ LiveActivationController::class, 'import' ])->name('activation.live.import');
-
-    // C2C additional routes
-    Route::post('/c2c/import', [ C2CController::class, 'import' ])->name('c2c.import');
-
-    // C2S additional routes
-    Route::post('/c2s/import', [ C2SController::class, 'import' ])->name('c2s.import');
-
-    // Sim Issue additional routes
-    Route::post('/sim-issue/import', [ SimIssueController::class, 'import' ])->name('sim-issue.import');
 
     // Core data import routes
     Route::controller( CoreDataImportController::class )->name('raw.')->group(function (){
@@ -208,9 +192,6 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
-        'live-activation'   => LiveActivationController::class,
-        'c2s'               => C2SController::class,
-        'sim-issue'         => SimIssueController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

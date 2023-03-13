@@ -2,7 +2,7 @@
 
 namespace App\Imports\Reports;
 
-use App\Models\Reports\Activation;
+use App\Models\Activation;
 use App\Models\Retailer;
 use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\ToModel;

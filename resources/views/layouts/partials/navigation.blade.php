@@ -189,10 +189,10 @@
                                                 <a href="{{ route('raw.live.c2c') }}" class="dropdown-item">Live C2C</a>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="{{ route('c2s.index') }}" >
+                                        <a class="dropdown-item" href="" >
                                             C2S
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('sim-issue.index') }}" >
+                                        <a class="dropdown-item" href="" >
                                             Sim Issue
                                         </a>
                                         <a class="dropdown-item" href="#" >

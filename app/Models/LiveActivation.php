@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Reports;
+namespace App\Models;
 
 use App\Models\DdHouse;
 use App\Models\Retailer;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @method static truncate()
  */
-class SimIssue extends Model
+class LiveActivation extends Model
 {
     use HasFactory, HasUuids;
 
@@ -25,9 +25,11 @@ class SimIssue extends Model
         'retailer_id',
         'product_code',
         'product_name',
-        'selling_price',
         'sim_serial',
-        'issue_date',
+        'msisdn',
+        'selling_price',
+        'activation_date',
+        'bio_date',
     ];
 
     /**
@@ -36,7 +38,8 @@ class SimIssue extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'issue_date' => 'datetime',
+        'activation_date' => 'datetime',
+        'bio_date' => 'datetime',
     ];
 
     // Search
@@ -47,7 +50,9 @@ class SimIssue extends Model
             $query->where( 'product_code', 'like', $term )
                 ->orWhere( 'product_name', 'like', $term )
                 ->orWhere( 'sim_serial', 'like', $term )
-                ->orWhere( 'issue_date', 'like', $term )
+                ->orWhere( 'msisdn', 'like', $term )
+                ->orWhere( 'activation_date', 'like', $term )
+                ->orWhere( 'bio_date', 'like', $term )
                 ->orWhereHas('ddHouse', function ( $query ) use ( $term ){
                     $query->where( 'code', 'like', $term )
                         ->orWhere( 'name', 'like', $term );
@@ -65,6 +70,7 @@ class SimIssue extends Model
         });
     }
 
+    // Relations
     public function ddHouse(): BelongsTo
     {
         return $this->belongsTo( DdHouse::class );
