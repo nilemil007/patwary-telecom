@@ -102,7 +102,7 @@ Route::middleware(['auth'])->group(function(){
 
 
     // BP additional routes
-    Route::prefix('bp')->name('bp')->group( function(){
+    Route::prefix('bp')->name('bp.')->group( function(){
         Route::patch('/{bp}/profile/update', [ BpController::class, 'profileUpdate' ])->name('profile.update');
         Route::patch('/{bp}/additional/update', [ BpController::class, 'additionalUpdate' ])->name('additional.update');
         Route::post('/change-password', [ BpController::class, 'changePassword' ])->name('change.password');

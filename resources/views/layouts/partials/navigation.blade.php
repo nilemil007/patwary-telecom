@@ -16,7 +16,7 @@
                     </li>
 
                     <!-- Competition information -->
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="{{ route('others-operator-information.index') }}" >
                       <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-radar-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,7 +31,7 @@
                         Other's Operator Information
                       </span>
                         </a>
-                    </li>
+                    </li> --}}
 
                     <!-- Define -->
                     @if( auth()->user()->role == 'super-admin' )

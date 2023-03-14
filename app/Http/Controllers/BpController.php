@@ -2,29 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\BrandPromoter\BpAdditionalInfoUpdateEvent;
 use App\Events\BrandPromoter\ChangePasswordEvent;
 use App\Events\BrandPromoter\UpdateProfilePictureEvent;
 use App\Events\BrandPromoter\UpdateUsernameEvent;
 use App\Exports\BpExport;
 use App\Http\Requests\BpAdditionalUpdateRequest;
-use App\Http\Requests\BpApproveRequest;
 use App\Http\Requests\BpProfileUpdateRequest;
 use App\Http\Requests\BpUpdateRequest;
 use App\Models\Bp;
 use App\Models\User;
-use App\Notifications\BrandPromoter\ProfilePictureUpdateNotification;
 use App\Notifications\BrandPromoter\RejectAdditionalInfoNotification;
 use App\Rules\CheckExistingPassword;
-use import\BpAdditionalInfoService;
-use import\BpApproveService;
+use App\Services\BpAdditionalInfoService;
+use App\Services\BpApproveService;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
@@ -44,8 +40,6 @@ class BpController extends Controller
      */
     public function index( Request $request ): Application|Factory|View
     {
-        $this->authorize('super-admin');
-
         return view('bp.index', [
             'bps' => Bp::with('user')->latest('status')->search( $request->search )->paginate(5),
         ]);

@@ -26,10 +26,6 @@ $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
             </a>
         </h1>
 
-
-{{--        <x-button class="w-100 d-md-none"><x-icon.save></x-icon.save>Save</x-button>--}}
-{{--        <x-button class="d-none d-md-block"><x-icon.save></x-icon.save>Save</x-button>--}}
-
         <div class="navbar-nav flex-row order-md-last">
             <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Enable dark mode" data-bs-toggle="tooltip" data-bs-placement="bottom">
                 <x-icon.moon></x-icon.moon>
