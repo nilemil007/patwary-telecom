@@ -229,6 +229,10 @@ class Rso extends Model
     {
         return $this->hasMany( LiveActivation::class );
     }
+    public function fcdGa(): HasMany
+    {
+        return $this->hasMany( FcdGa::class );
+    }
     public function c2c(): HasMany
     {
         return $this->hasMany( \App\Models\C2c::class );

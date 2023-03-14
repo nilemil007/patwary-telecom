@@ -10,73 +10,27 @@
     <x-slot:page-title>Retailer List</x-slot:page-title>
 
     <!-- Page title actions -->
-    @if( auth()->user()->role == 'super-admin' )
-        <x-slot:button>
-            <!-- [Full Button]-->
-            <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="input-group">
-                    <input name="import_retailers" type="file"
-                           accept=".xls,.xlsx"
-                           aria-describedby="inputGroupFileAddon04"
-                           class="form-control"
-                           aria-label="Upload" required>
+    <x-slot:button>
+        <!-- [Full Button]-->
+        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="input-group">
+                <input name="import_retailers" type="file"
+                       accept=".xls,.xlsx"
+                       class="form-control" required>
 
-                    <button class="btn btn-outline-google" type="submit">
-                        <x-icon.file-import></x-icon.file-import>Import Retailers
-                    </button>
-                </div>
-            </form>
-        </x-slot:button>
-    @endif
-
-    <x-slot:icon-button>
-        <x-icon.file-import></x-icon.file-import>
-{{--        <form action="{{ route('retailer.import') }}" method="POST" enctype="multipart/form-data">--}}
-{{--            @csrf--}}
-{{--            <div class="input-group">--}}
-{{--                <input name="import_retailers" type="file"--}}
-{{--                       accept=".xls,.xlsx"--}}
-{{--                       aria-describedby="inputGroupFileAddon04"--}}
-{{--                       class="form-control form-control-sm"--}}
-{{--                       aria-label="Upload" required>--}}
-
-{{--                <button class="btn btn-sm btn-outline-google" type="submit">--}}
-{{--                    <x-icon.file-import></x-icon.file-import>Import Retailers--}}
-{{--                </button>--}}
-{{--            </div>--}}
-{{--        </form>--}}
-    </x-slot:icon-button>
-
+                <button class="btn btn-outline-google" type="submit">
+                    <x-icon.file-import></x-icon.file-import>Import Retailers
+                </button>
+            </div>
+        </form>
+    </x-slot:button>
 
     <div class="page-body">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body border-bottom py-3">
-                            <div class="d-flex">
-{{--                                <div class="text-muted">--}}
-{{--                                    Show--}}
-{{--                                    <div class="mx-2 d-inline-block">--}}
-{{--                                        <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">--}}
-{{--                                    </div>--}}
-{{--                                    entries--}}
-{{--                                </div>--}}
-                                <div class="ms-auto text-muted">
-                                    <div class="d-inline-block">
-                                        <form method="GET">
-                                            <div class="input-group mb-3">
-                                                <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
-                                                <x-button class="btn-sm">
-                                                    <x-icon.search></x-icon.search>Search
-                                                </x-button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table class="table table-sm card-table table-vcenter text-nowrap datatable">
                                 <thead>
@@ -161,7 +115,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td>No data found</td>
+                                        <td>No retailer found</td>
                                     </tr>
                                 @endforelse
                                 </tbody>

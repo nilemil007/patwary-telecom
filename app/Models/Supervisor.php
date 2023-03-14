@@ -82,9 +82,14 @@ class Supervisor extends Model
         return $this->hasMany( LiveActivation::class );
     }
 
+    public function fcdGa(): HasMany
+    {
+        return $this->hasMany( FcdGa::class );
+    }
+
     public function c2c(): HasMany
     {
-        return $this->hasMany( \App\Models\C2c::class );
+        return $this->hasMany( C2c::class );
     }
     public function liveC2c(): HasMany
     {

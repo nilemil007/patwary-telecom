@@ -10,7 +10,7 @@ use App\Models\Activation;
 use App\Models\C2c;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
-use App\Services\LiveC2cService;
+use App\Services\ActivationService;
 use App\Services\LiveActivationService;
 use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
@@ -26,7 +26,7 @@ class CoreDataImportController extends Controller
     // Activation Index
     public function activationIndex(Request $request): Application|Factory|View
     {
-        return (new LiveC2cService)->index($request);
+        return (new ActivationService)->index($request);
     }
 
     // Live Activation Index

@@ -20,7 +20,7 @@ class RouteImport implements ToModel, WithHeadingRow
             'code'          => $row['route_code'],
             'name'          => $row['route_name'],
             'description'   => $row['description'],
-            'weekdays'      => $row['week_day'],
+            'weekdays'      => $row['weekday'],
             'length'        => $row['route_length'],
         ]);
     }

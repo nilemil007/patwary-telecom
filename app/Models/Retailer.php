@@ -4,9 +4,7 @@ namespace App\Models;
 
 use App\Models\Activation;
 use App\Models\C2C;
-use App\Models\C2S;
 use App\Models\LiveActivation;
-use App\Models\SimIssue;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -154,28 +152,6 @@ class Retailer extends Model
             set: fn( $scanner ) => Str::title( $scanner ),
         );
     }
-
-    // Dd House Id
-    protected function ddHouseId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
-        );
-    }
-    // Supervisor Id
-    protected function supervisorId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->id,
-        );
-    }
-    // Rso Id
-    protected function rsoId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $itopNumber ) => Rso::firstWhere('itop_number', $itopNumber)->id,
-        );
-    }
     // Enabled
     protected function enabled(): Attribute
     {
@@ -261,22 +237,12 @@ class Retailer extends Model
         return $this->hasMany( LiveActivation::class );
     }
 
-    public function c2c(): HasMany
-    {
-        return $this->hasMany( \App\Models\C2c::class );
-    }
-    public function liveC2c(): HasMany
-    {
-        return $this->hasMany( LiveC2c::class );
-    }
-
-    public function c2s(): HasMany
-    {
-        return $this->hasMany( C2S::class );
-    }
-
-    public function simIssue(): HasMany
-    {
-        return $this->hasMany( SimIssue::class );
-    }
+//    public function c2c(): HasMany
+//    {
+//        return $this->hasMany( C2c::class );
+//    }
+//    public function liveC2c(): HasMany
+//    {
+//        return $this->hasMany( LiveC2c::class );
+//    }
 }
