@@ -69,7 +69,7 @@
                                                 <div class="flex-fill">
                                                     <div class="font-weight-medium">{{ $retailer->retailer_name }}</div>
                                                     <div class="text-muted">
-                                                        {{ $retailer->itop_number }}
+                                                        {{ $retailer->retailer_code }}
                                                     </div>
                                                 </div>
                                             </div>

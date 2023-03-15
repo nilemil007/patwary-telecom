@@ -1,4 +1,4 @@
-<div class="modal modal-blur fade" id="del-replace-{{ $retailer->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal modal-blur fade" id="del-retailer-{{ $retailer->id }}" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
         <div class="modal-content">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -18,12 +18,12 @@
                             </button>
                         </div>
                         <div class="col">
-                            <a href="#" onclick="event.preventDefault(); document.getElementById('delReplaceEntry{{ $retailer->id }}').submit();"
+                            <a href="#" onclick="event.preventDefault(); document.getElementById('delRetailer{{ $retailer->id }}').submit();"
                                class="btn btn-danger w-100" data-bs-dismiss="modal">
                                 Delete entry
                             </a>
-                            <form action="{{ route('itop-replace.destroy',$retailer->id) }}" method="POST"
-                                  id="delReplaceEntry{{ $retailer->id }}" class="d-none">
+                            <form action="{{ route('retailer.delete',$retailer->id) }}" method="POST"
+                                  id="delRetailer{{ $retailer->id }}" class="d-none">
                                 @csrf
                                 @method('DELETE')
                             </form>

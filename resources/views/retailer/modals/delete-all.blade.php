@@ -13,7 +13,7 @@
                     Yes, delete all
                 </button>
 
-                <form action="{{ route('retailer.destroy', 'deleteAll') }}" id="deleteAllRetailers" method="POST">@csrf @method('DELETE')</form>
+                <form action="{{ route('retailer.delete.all') }}" id="deleteAllRetailers" method="POST">@csrf @method('DELETE')</form>
             </div>
         </div>
     </div>

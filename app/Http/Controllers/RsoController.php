@@ -78,8 +78,6 @@ class RsoController extends Controller
      */
     public function update(Update $request, Rso $rso): RedirectResponse
     {
-        $this->authorize('super-admin');
-
         $information = $request->validated();
 
         if ( $request->hasFile('document') )

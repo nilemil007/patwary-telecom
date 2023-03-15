@@ -17,11 +17,11 @@ class UsersImport implements ToModel, WithHeadingRow
     public function model(array $row): Model|User|null
     {
         return new User([
-            'name' => $row['name'],
-            'username' => $row['username'],
-            'dd_house_id' => $row['dd_code'],
-            'role' => $row['role'],
-            'password' => $row['password'],
+            'name'          => $row['name'],
+            'username'      => $row['username'],
+            'dd_house_id'   => $row['dd_code'],
+            'role'          => $row['role'],
+            'password'      => $row['password'],
         ]);
     }
 }

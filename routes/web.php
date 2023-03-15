@@ -9,9 +9,9 @@ use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
-use App\Http\Controllers\PermissionsController;
+//use App\Http\Controllers\PermissionsController;
+//use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RetailerController;
-use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
 use App\Http\Controllers\SupervisorController;
@@ -22,10 +22,8 @@ use App\Models\OthersOperatorInformation;
 use App\Models\Rso;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -69,12 +67,17 @@ Route::middleware(['auth'])->group(function(){
         return redirect()->back();
     })->name('markAllAsRead');
 
-    // Reject Itop Number
-    Route::patch('/itop-replace/{reject}/reject', [ ItopReplaceController::class, 'numberReject' ])
-        ->name('itop-replace.numberReject');
-    // Accept Itop Number
-    Route::patch('/itop-replace/{accept}/accept', [ ItopReplaceController::class, 'numberAccept' ])
-        ->name('itop-replace.numberAccept');
+    // Itop Replace
+    Route::controller( ItopReplaceController::class )->group(function(){
+        // Reject Itop Number
+        Route::patch('/itop-replace/{reject}/reject','numberReject')
+            ->name('itop-replace.numberReject');
+        // Accept Itop Number
+        Route::patch('/itop-replace/{accept}/accept', 'numberAccept')
+            ->name('itop-replace.numberAccept');
+        // Export Itop Replace Data
+        Route::get('/itop-replace/export', 'export')->name('itop-replace.export');
+    });
 
     //______Import________________________________________________//
     // Import BTS Data
@@ -83,14 +86,10 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/route/import', [ RouteController::class, 'import' ])->name('route.import');
 
     //______Export________________________________________________//
-    // Export Itop Replace Data
-    Route::get('/itop-replace/export', [ ItopReplaceController::class, 'export' ])->name('itop-replace.export');
     // Export BTS Data
     Route::get('/bts/export', [ BtsController::class, 'export' ])->name('bts.export');
     // Export Route Data
     Route::get('/route/export', [ RouteController::class, 'export' ])->name('route.export');
-    // Export Retailer Data
-    Route::get('/retailer/export', [ RetailerController::class, 'export' ])->name('retailer.export');
     // Export Competition Information Data
 //    Route::get('/competition-information/export', [ CompetitionInformationController::class, 'export' ])->name('competition.information.export');
 
@@ -135,14 +134,26 @@ Route::middleware(['auth'])->group(function(){
     // Route
     Route::get('/download-route-sample-file', [ RouteController::class, 'sampleFileDownload' ])->name('download.route.sample.file');
 
-    // Retailer additional routes
-    Route::prefix('retailer')->name('retailer.')->group( function() {
-        Route::get('/download-sample-file', [ RetailerController::class, 'sampleFileDownload' ])->name('sample.file.download');
-        Route::post('/import', [ RetailerController::class, 'import' ])->name('import');
-        Route::get('{retailer}/verify', [ RetailerController::class, 'verify' ])->name('verify');
-        Route::post('{retailer}/approve', [ RetailerController::class, 'approve' ])->name('approve');
-        Route::post('{retailer}/reject', [ RetailerController::class, 'reject' ])->name('reject');
+    // Retailer routes
+    Route::controller( RetailerController::class )->prefix('retailer')->name('retailer.')->group(function(){
+        Route::get('/all', 'index')->name('index');
+        Route::get('/show', 'show')->name('show');
+        Route::get('/edit', 'edit')->name('edit');
+        Route::delete('/delete/{retailer}', 'delete')->name('delete');
+        Route::delete('/delete/all', 'deleteAll')->name('delete.all');
+        Route::post('/import', 'import')->name('import');
+        Route::get('/export', 'export')->name('export');
+        Route::get('/sample-file', 'sampleFileDownload')->name('sample.file.download');
     });
+
+    // Retailer additional routes
+//    Route::controller(RetailerController::class)->prefix('retailer')->name('retailer.')->group( function() {
+//        Route::get('/download-sample-file', 'sampleFileDownload')->name('sample.file.download');
+//        Route::post('/import', 'import')->name('import');
+//        Route::get('{retailer}/verify', 'verify')->name('verify');
+//        Route::post('{retailer}/approve', 'approve')->name('approve');
+//        Route::post('{retailer}/reject', 'reject')->name('reject');
+//    });
 
     // Dd House additional routes
     Route::post('/house/import', [ DdHouseController::class, 'import' ])->name('house.import');
@@ -184,7 +195,6 @@ Route::middleware(['auth'])->group(function(){
         'itop-replace'      => ItopReplaceController::class,
         'permission'        => PermissionsController::class,
         'role'              => RolesController::class,
-        'retailer'          => RetailerController::class,
         'bts'               => BtsController::class,
         'route'             => RouteController::class,
         'rso'               => RsoController::class,

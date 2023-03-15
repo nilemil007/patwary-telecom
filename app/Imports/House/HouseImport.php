@@ -17,9 +17,19 @@ class HouseImport implements ToModel, WithHeadingRow
     public function model(array $row): Model|DdHouse|null
     {
         return new DdHouse([
-            'cluster_name' => $row['cluster'],
-            'region' => $row['region'],
-            'code' => $row['dd_code'],
+            'cluster_name'      => $row['cluster'],
+            'region'            => $row['region'],
+            'code'              => $row['dd_code'],
+            'name'              => $row['dd_name'],
+            'email'             => $row['email'],
+            'district'          => $row['district'],
+            'address'           => $row['address'],
+            'proprietor_name'   => $row['proprietor_name'],
+            'proprietor_number' => $row['proprietor_number'],
+            'latitude'          => $row['latitude'],
+            'longitude'         => $row['longitude'],
+            'bts_code'          => $row['bts_code'],
+            'established_year'  => $row['established_year'],
         ]);
     }
 }

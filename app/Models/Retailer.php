@@ -2,25 +2,14 @@
 
 namespace App\Models;
 
-use App\Models\Activation;
-use App\Models\C2C;
-use App\Models\LiveActivation;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Support\Str;
 
 /**
- * @method static latest()
- * @method static firstWhere(string $string, mixed $dd_house)
- * @method static where(string $string, string $string1)
- * @method static whereNotNull(string $string)
- * @method static truncate()
- * @property mixed user_id
- * @property mixed rso_id
+ * @method static where(string $string, $id)
+ * @method static latest(string $string)
  */
 class Retailer extends Model
 {
@@ -100,113 +89,12 @@ class Retailer extends Model
     }
 
 
-
-
-    //_______________________________________Accessor________________________________________________
-    // Retailer Name
-    protected function retailerName(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $retailerName ) => Str::title( $retailerName ),
-        );
-    }
-    // Retailer Type
-    protected function retailerType(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $retailerType ) => Str::upper( $retailerType ),
-        );
-    }
-    // Owner Name
-    protected function ownerName(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $ownerName ) => Str::title( $ownerName ),
-        );
-    }
-    // Address
-    protected function address(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $address ) => Str::title( $address ),
-        );
-    }
-    // Device Name
-    protected function device_name(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $device_name ) => Str::title( $device_name ),
-        );
-    }
-    // Device Serial No
-    protected function device(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $device ) => Str::title( $device ),
-        );
-    }
-    // Scanner Serial No
-    protected function scanner(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $scanner ) => Str::title( $scanner ),
-        );
-    }
-    // Enabled
-    protected function enabled(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
-        );
-    }
-    // Sim Seller
-    protected function simSeller(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
-        );
-    }
-    // Own Shop
-    protected function ownShop(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
-        );
-    }
-    // Others Operator
-    protected function othersOperator(): Attribute
-    {
-        return Attribute::make(
-            get: fn($othersOperator ) => json_decode( $othersOperator ),
-            set: fn($othersOperator ) => json_encode( $othersOperator ),
-        );
-    }
-    // BTS Id
-    protected function btsId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $btsId ) => Bts::firstWhere('bts_code', $btsId)->id,
-        );
-    }
-    // Route Id
-    protected function routeId(): Attribute
-    {
-        return Attribute::make(
-            set: fn( $routeId ) => Route::firstWhere('code', $routeId)->id,
-        );
-    }
-    //_______________________________________End Accessor___________________________________________
-
-
-
-
-
-
     //_______________________________________Relationship___________________________________________
     public function user(): BelongsTo
     {
         return $this->belongsTo( User::class );
     }
+
     public function rso(): BelongsTo
     {
         return $this->belongsTo( Rso::class );
@@ -226,23 +114,4 @@ class Retailer extends Model
     {
         return $this->belongsTo( DdHouse::class );
     }
-
-    public function activation(): HasMany
-    {
-        return $this->hasMany( Activation::class );
-    }
-
-    public function liveActivation(): HasMany
-    {
-        return $this->hasMany( LiveActivation::class );
-    }
-
-//    public function c2c(): HasMany
-//    {
-//        return $this->hasMany( C2c::class );
-//    }
-//    public function liveC2c(): HasMany
-//    {
-//        return $this->hasMany( LiveC2c::class );
-//    }
 }

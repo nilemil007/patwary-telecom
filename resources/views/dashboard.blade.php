@@ -2,12 +2,12 @@
 
     if ( auth()->user()->role == 'rso' )
     {
-        $id = \App\Models\Rso::firstWhere('user_id', auth()->id())->id;
-        $lso = \App\Models\Retailer::where('rso_id', $id)->get();
-        $sso = \App\Models\Retailer::where('rso_id', $id)->where('sim_seller', 'Y')->get();
+        //$id = \App\Models\Rso::firstWhere('user_id', auth()->id())->id;
+        //$lso = \App\Models\Retailer::where('rso_id', $id)->get();
+        //$sso = \App\Models\Retailer::where('rso_id', $id)->where('sim_seller', 'Y')->get();
     }elseif( auth()->user()->role == 'super-admin' ){
-        $lso = \App\Models\Retailer::all();
-        $sso = \App\Models\Retailer::where('sim_seller', 'Y')->get();
+        //$lso = \App\Models\Retailer::all();
+        //$sso = \App\Models\Retailer::where('sim_seller', 'Y')->get();
     }
 
 @endphp
