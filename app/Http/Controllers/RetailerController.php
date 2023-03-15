@@ -44,6 +44,14 @@ class RetailerController extends Controller
         return redirect()->route('retailer.index')->with('success', 'New retailer imported successfully.');
     }
 
+    // Delete all
+    public function deleteAll()
+    {
+        Retailer::truncate();
+
+        return redirect()->route('retailer.index')->with('success','All retailer deleted successfully.');
+    }
+
 
 
 

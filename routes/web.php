@@ -139,7 +139,6 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/all', 'index')->name('index');
         Route::get('/show', 'show')->name('show');
         Route::get('/edit', 'edit')->name('edit');
-        Route::delete('/delete/{retailer}', 'delete')->name('delete');
         Route::delete('/delete/all', 'deleteAll')->name('delete.all');
         Route::post('/import', 'import')->name('import');
         Route::get('/export', 'export')->name('export');
