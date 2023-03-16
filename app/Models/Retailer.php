@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 /**
  * @method static where(string $string, $id)
@@ -87,6 +89,115 @@ class Retailer extends Model
 //                });
         });
     }
+
+    //_______________________________________Accessor________________________________________________
+    // Retailer Name
+    protected function retailerName(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $retailerName ) => Str::title( $retailerName ),
+        );
+    }
+    // Retailer Type
+    protected function retailerType(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $retailerType ) => Str::upper( $retailerType ),
+        );
+    }
+    // Owner Name
+    protected function ownerName(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $ownerName ) => Str::title( $ownerName ),
+        );
+    }
+    // Address
+    protected function address(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $address ) => Str::title( $address ),
+        );
+    }
+    // Device Name
+    protected function device_name(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $device_name ) => Str::title( $device_name ),
+        );
+    }
+    // Device Serial No
+//    protected function device(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn( $device ) => Str::title( $device ),
+//        );
+//    }
+    // Scanner Serial No
+//    protected function scanner(): Attribute
+//    {
+//        return Attribute::make(
+//            set: fn( $scanner ) => Str::title( $scanner ),
+//        );
+//    }
+    // Enabled
+    protected function enabled(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Sim Seller
+    protected function simSeller(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Own Shop
+    protected function ownShop(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $on ) => $on == 'N' ? 'N' : 'Y',
+        );
+    }
+    // Others Operator
+    protected function othersOperator(): Attribute
+    {
+        return Attribute::make(
+            get: fn($othersOperator ) => json_decode( $othersOperator ),
+            set: fn($othersOperator ) => json_encode( $othersOperator ),
+        );
+    }
+    // BTS Id
+    protected function btsId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $btsId ) => Bts::firstWhere('bts_code', $btsId)->id,
+        );
+    }
+    // Route Id
+    protected function routeId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $routeCode ) => Route::firstWhere('code', $routeCode)->id,
+        );
+    }
+    // DD House Id
+    protected function ddHouseId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
+        );
+    }
+    // Rso Id
+    protected function rsoId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $itopNumber ) => Rso::firstWhere('itop_number', $itopNumber)->id,
+        );
+    }
+    //_______________________________________End Accessor___________________________________________
 
 
     //_______________________________________Relationship___________________________________________

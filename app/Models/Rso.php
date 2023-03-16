@@ -138,6 +138,12 @@ class Rso extends Model
             set: fn( $ddCode ) => DdHouse::firstWhere('code', $ddCode)->id,
         );
     }
+    protected function supervisorId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $number ) => Supervisor::firstWhere('pool_number', $number)->id,
+        );
+    }
     protected function routes(): Attribute
     {
         return Attribute::make(
