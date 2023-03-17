@@ -20,9 +20,9 @@ class FcdGa extends Model
         'activation',
     ];
 
-    protected $casts = [
-        'date' => 'datetime',
-    ];
+     protected $casts = [
+         'date' => 'datetime',
+     ];
 
     public function ddHouse(): BelongsTo
     {

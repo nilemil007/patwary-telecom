@@ -4,15 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Imports\Reports\ActivationImport;
 use App\Imports\Reports\C2cImport;
+use App\Imports\Reports\FcdGaImport;
 use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
 use App\Models\Activation;
 use App\Models\C2c;
+use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
 use App\Services\ActivationService;
 use App\Services\LiveActivationService;
-use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -35,6 +36,19 @@ class CoreDataImportController extends Controller
         return (new LiveActivationService)->index($request);
     }
 
+    // FCD GA Index
+    public function fcdGaIndex(Request $request): Application|Factory|View
+    {
+        if ( Auth::user()->role == 'super-admin' )
+            {
+                $activations = FcdGa::with('ddHouse','rso','supervisor','retailer')
+                    ->latest()
+                    ->paginate(5);
+            }
+
+            return view('reports.back.activation.fcd-ga', compact('activations'));
+    }
+
     // Activation Import
     public function activationImport(Request $request): RedirectResponse
     {
@@ -51,6 +65,14 @@ class CoreDataImportController extends Controller
         return redirect()->route('raw.live.activation')->with('success', 'Live activation imported successfully.');
     }
 
+    // FCD GA Import
+    public function fcdGaImport(Request $request): RedirectResponse
+    {
+        Excel::import(new FcdGaImport, $request->file('import_activation'));
+
+        return redirect()->route('raw.fcd.ga')->with('success', 'FCD GA imported successfully.');
+    }
+
     // Activation Delete All
     public function activationDestroy(): RedirectResponse
     {
@@ -65,6 +87,14 @@ class CoreDataImportController extends Controller
         LiveActivation::truncate();
 
         return redirect()->route('raw.live.activation')->with('success', 'Live activation deleted successfully.');
+    }
+
+    // FCD GA Delete All
+    public function fcdGaDestroy(): RedirectResponse
+    {
+        FcdGa::truncate();
+
+        return redirect()->route('raw.fcd.ga')->with('success', 'FCD GA deleted successfully.');
     }
 
 

@@ -12,8 +12,7 @@
     </x-slot:page-title>
 
     <!-- Page title actions -->
-    @if( auth()->user()->role == 'super-admin' )
-        <x-slot:button>
+    <x-slot:button>
             <!-- [Full Button]-->
             <form action="{{ route('raw.activation.import') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -28,7 +27,6 @@
                 </div>
             </form>
         </x-slot:button>
-    @endif
 
 
     <div class="page-body">

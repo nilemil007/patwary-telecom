@@ -9,8 +9,6 @@ use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
-//use App\Http\Controllers\PermissionsController;
-//use App\Http\Controllers\RolesController;
 use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
@@ -166,10 +164,13 @@ Route::middleware(['auth'])->group(function(){
         // Activation
         Route::get('/activation', 'activationIndex')->name('activation');
         Route::get('/live/activation', 'liveActivationIndex')->name('live.activation');
+        Route::get('/fcd/ga', 'fcdGaIndex')->name('fcd.ga');
         Route::post('/activation/import', 'activationImport')->name('activation.import');
         Route::post('/live/activation/import', 'liveActivationImport')->name('live.activation.import');
+        Route::post('/fcd/ga/import', 'fcdGaImport')->name('fcd.ga.import');
         Route::delete('/activation/destroy', 'activationDestroy')->name('activation.destroy');
         Route::delete('/live/activation/destroy', 'liveActivationDestroy')->name('live.activation.destroy');
+        Route::delete('/fcd/ga/destroy', 'fcdGaDestroy')->name('fcd.ga.destroy');
 
         // C2C
         Route::get('/c2c', 'c2cIndex')->name('c2c');
@@ -192,8 +193,8 @@ Route::middleware(['auth'])->group(function(){
         'dd-house'          => DdHouseController::class,
         'create-new-user'   => CreateNewUserController::class,
         'itop-replace'      => ItopReplaceController::class,
-        'permission'        => PermissionsController::class,
-        'role'              => RolesController::class,
+//        'permission'        => PermissionsController::class,
+//        'role'              => RolesController::class,
         'bts'               => BtsController::class,
         'route'             => RouteController::class,
         'rso'               => RsoController::class,

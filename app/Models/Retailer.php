@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 /**
  * @method static where(string $string, $id)
  * @method static latest(string $string)
+ * @method static firstWhere(string $string, mixed $retailer_code)
  */
 class Retailer extends Model
 {

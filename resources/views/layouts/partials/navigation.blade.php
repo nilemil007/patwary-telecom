@@ -177,6 +177,7 @@
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('raw.activation') }}" class="dropdown-item">Activation</a>
                                                 <a href="{{ route('raw.live.activation') }}" class="dropdown-item">Live Activation</a>
+                                                <a href="{{ route('raw.fcd.ga') }}" class="dropdown-item">FCD GA</a>
                                             </div>
                                         </div>
 
