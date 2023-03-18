@@ -190,6 +190,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/live/sim-issue', 'liveSimIssueIndex')->name('live.sim.issue');
         Route::post('/sim-issue/import', 'simIssueImport')->name('sim.issue.import');
         Route::post('/live/sim-issue/import', 'liveSimIssueImport')->name('live.sim.issue.import');
+        Route::delete('/sim-issue/destroy', 'simIssueDestroy')->name('sim.issue.destroy');
         Route::delete('/live/sim-issue/destroy', 'liveSimIssueDestroy')->name('live.sim.issue.destroy');
 
         // Balance

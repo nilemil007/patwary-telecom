@@ -213,8 +213,16 @@
                                                 Sim Issue
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="{{ route('raw.sim.issue') }}" class="dropdown-item">Sim Issue</a>
-                                                <a href="{{ route('raw.live.sim.issue') }}" class="dropdown-item">Live Sim Issue</a>
+                                                <a class="dropdown-item justify-content-between"
+                                                   href="{{ route('raw.sim.issue') }}">
+                                                    <span>Sim Issue</span>
+                                                    <span>({{ \App\Models\SimIssue::all()->count() }})</span>
+                                                </a>
+                                                <a class="dropdown-item justify-content-between"
+                                                   href="{{ route('raw.live.sim.issue') }}">
+                                                    <span>Live Sim Issue</span>
+                                                    <span>({{ \App\Models\LiveSimIssue::all()->count() }})</span>
+                                                </a>
                                             </div>
                                         </div>
 
