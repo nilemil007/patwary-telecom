@@ -8,12 +8,14 @@ use App\Imports\Reports\C2sImport;
 use App\Imports\Reports\FcdGaImport;
 use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
+use App\Imports\Reports\SimIssueImport;
 use App\Models\Activation;
 use App\Models\C2c;
 use App\Models\C2s;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
+use App\Models\SimIssue;
 use App\Services\ActivationService;
 use App\Services\LiveActivationService;
 use Illuminate\Contracts\Foundation\Application;
@@ -189,5 +191,30 @@ class CoreDataImportController extends Controller
 
 
     ######################################## Sim Issue ##################################################
+
+    // Sim Issue Index
+    public function simIssueIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.sim-issue.sim-issue', [
+            'simIssues' => SimIssue::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // Sim Issue Import
+    public function simIssueImport(Request $request): RedirectResponse
+    {
+        Excel::import(new SimIssueImport, $request->file('import_sim_issue'));
+
+        return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue imported successfully.');
+    }
+
+    // Sim Issue Delete All
+    public function simIssueDestroy(): RedirectResponse
+    {
+        SimIssue::truncate();
+        return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue deleted successfully.');
+    }
 
 }

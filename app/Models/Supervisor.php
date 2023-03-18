@@ -105,4 +105,5 @@ class Supervisor extends Model
     {
         return $this->hasMany( SimIssue::class );
     }
+
 }

@@ -184,6 +184,12 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/c2s', 'c2sIndex')->name('c2s');
         Route::post('/c2s/import', 'c2sImport')->name('c2s.import');
         Route::delete('/c2s/destroy', 'c2sDestroy')->name('c2s.destroy');
+
+        // Sim Issue
+        Route::get('/sim-issue', 'simIssueIndex')->name('sim.issue');
+        Route::post('/sim-issue/import', 'simIssueImport')->name('sim.issue.import');
+        Route::delete('/sim-issue/destroy', 'simIssueDestroy')->name('sim.issue.destroy');
+
     });
 
     // Others Operator Information

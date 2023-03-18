@@ -233,5 +233,10 @@ class Retailer extends Model
         return $this->hasMany( C2S::class );
     }
 
+    public function simIssue(): HasMany
+    {
+        return $this->hasMany( SimIssue::class );
+    }
+
 
 }

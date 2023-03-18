@@ -207,7 +207,7 @@
                                         <a class="dropdown-item" href="{{ route('raw.c2s') }}" >
                                             C2S
                                         </a>
-                                        <a class="dropdown-item" href="" >
+                                        <a class="dropdown-item" href="{{ route('raw.sim.issue') }}" >
                                             Sim Issue
                                         </a>
                                         <a class="dropdown-item" href="#" >
