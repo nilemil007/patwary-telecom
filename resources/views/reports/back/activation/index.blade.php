@@ -22,7 +22,7 @@
                            class="form-control" required>
 
                     <button class="btn btn-outline-google" type="submit">
-                        <x-icon.file-import></x-icon.file-import>Import Activation
+                        <x-icon.file-import></x-icon.file-import>Import
                     </button>
                 </div>
             </form>
@@ -34,74 +34,74 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body border-bottom py-3">
-                            <form class="row" autocomplete="off">
-                                <div class="col-md-6">
-                                    <!-- Date Search Large Screen -->
-                                    <div class="d-none d-md-block">
-                                        <div class="input-group input-group-sm">
-                                            <span class="input-group-text">Start Date</span>
-                                            <input type="text" id="from" name="from" value="{{ request()->get('from') }}" class="form-control">
-                                            <span class="input-group-text">End Date</span>
-                                            <input type="text" id="to" name="to" value="{{ request()->get('to') }}" class="form-control">
-                                            <x-button class="input-group-text btn-sm">
-                                                <x-icon.search></x-icon.search>Search
-                                            </x-button>
-                                        </div>
-                                    </div>
-                                </div>
+{{--                        <div class="card-body border-bottom py-3">--}}
+{{--                            <form class="row" autocomplete="off">--}}
+{{--                                <div class="col-md-6">--}}
+{{--                                    <!-- Date Search Large Screen -->--}}
+{{--                                    <div class="d-none d-md-block">--}}
+{{--                                        <div class="input-group input-group-sm">--}}
+{{--                                            <span class="input-group-text">Start Date</span>--}}
+{{--                                            <input type="text" id="from" name="from" value="{{ request()->get('from') }}" class="form-control">--}}
+{{--                                            <span class="input-group-text">End Date</span>--}}
+{{--                                            <input type="text" id="to" name="to" value="{{ request()->get('to') }}" class="form-control">--}}
+{{--                                            <x-button class="input-group-text btn-sm">--}}
+{{--                                                <x-icon.search></x-icon.search>Search--}}
+{{--                                            </x-button>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
 
-                                <div class="col-lg-4 col-md-5 offset-md-1 offset-lg-2">
-                                    <!-- Text Search Large Screen -->
-                                    <div class="d-none d-md-block">
-                                        <div class="input-group">
-                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>
-                                            <x-button class="btn-sm">
-                                                <x-icon.search></x-icon.search>Search
-                                            </x-button>
+{{--                                <div class="col-lg-4 col-md-5 offset-md-1 offset-lg-2">--}}
+{{--                                    <!-- Text Search Large Screen -->--}}
+{{--                                    <div class="d-none d-md-block">--}}
+{{--                                        <div class="input-group">--}}
+{{--                                            <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm" placeholder="Type something..."></x-input>--}}
+{{--                                            <x-button class="btn-sm">--}}
+{{--                                                <x-icon.search></x-icon.search>Search--}}
+{{--                                            </x-button>--}}
 
-                                            <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info">
-                                                <x-icon.refresh></x-icon.refresh>Reset
-                                            </x-link>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+{{--                                            <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info">--}}
+{{--                                                <x-icon.refresh></x-icon.refresh>Reset--}}
+{{--                                            </x-link>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
 
-                            <!-- Small Screen -->
-                            <form class="row" autocomplete="off">
-                                <!-- Date Search Small Screen -->
-                                <div class="d-md-none">
-                                    <div class="input-group input-group-sm mb-2">
-                                        <span class="input-group-text">Start Date</span>
-                                        <input type="text" id="from_ss" name="from" value="{{ request()->get('from') }}" class="form-control">
-                                    </div>
-                                    <div class="input-group input-group-sm mb-2">
-                                        <span class="input-group-text">End Date</span>
-                                        <input type="text" id="to_ss" name="to" value="{{ request()->get('to') }}" class="form-control">
-                                    </div>
-                                    <x-button class="input-group-text btn-sm w-100">
-                                        <x-icon.search></x-icon.search>Search
-                                    </x-button>
-                                </div>
+{{--                            <!-- Small Screen -->--}}
+{{--                            <form class="row" autocomplete="off">--}}
+{{--                                <!-- Date Search Small Screen -->--}}
+{{--                                <div class="d-md-none">--}}
+{{--                                    <div class="input-group input-group-sm mb-2">--}}
+{{--                                        <span class="input-group-text">Start Date</span>--}}
+{{--                                        <input type="text" id="from_ss" name="from" value="{{ request()->get('from') }}" class="form-control">--}}
+{{--                                    </div>--}}
+{{--                                    <div class="input-group input-group-sm mb-2">--}}
+{{--                                        <span class="input-group-text">End Date</span>--}}
+{{--                                        <input type="text" id="to_ss" name="to" value="{{ request()->get('to') }}" class="form-control">--}}
+{{--                                    </div>--}}
+{{--                                    <x-button class="input-group-text btn-sm w-100">--}}
+{{--                                        <x-icon.search></x-icon.search>Search--}}
+{{--                                    </x-button>--}}
+{{--                                </div>--}}
 
-                                <div class="hr d-md-none"></div>
+{{--                                <div class="hr d-md-none"></div>--}}
 
-                                <!-- Text Search Small Screen -->
-                                <div class="d-md-none">
-                                    <div class="input-group">
-                                        <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>
-                                    </div>
-                                    <x-button class="btn-sm w-100 mb-2">
-                                        <x-icon.search></x-icon.search>Search
-                                    </x-button>
+{{--                                <!-- Text Search Small Screen -->--}}
+{{--                                <div class="d-md-none">--}}
+{{--                                    <div class="input-group">--}}
+{{--                                        <x-input name="search" value="{{ request()->get('search') }}" class="form-control-sm mb-2" placeholder="Type something..."></x-input>--}}
+{{--                                    </div>--}}
+{{--                                    <x-button class="btn-sm w-100 mb-2">--}}
+{{--                                        <x-icon.search></x-icon.search>Search--}}
+{{--                                    </x-button>--}}
 
-                                    <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info w-100">
-                                        <x-icon.refresh></x-icon.refresh>Reset
-                                    </x-link>
-                                </div>
-                            </form>
-                        </div>
+{{--                                    <x-link href="{{ route('raw.activation') }}" class="btn btn-sm btn-info w-100">--}}
+{{--                                        <x-icon.refresh></x-icon.refresh>Reset--}}
+{{--                                    </x-link>--}}
+{{--                                </div>--}}
+{{--                            </form>--}}
+{{--                        </div>--}}
 
                         <div class="table-responsive">
                             <table class="table table-sm card-table table-vcenter text-nowrap datatable">
@@ -189,78 +189,78 @@
         </div>
     </div>
 
-    @push('js')
-        <script>
-            $( function() {
-                var to = $( "#to" ).datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    changeYear: true,
-                    numberOfMonths: 1
-                })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
-                    });
-                var dateFormat = "mm/dd/yy",
-                    from = $("#from")
-                        .datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 1
-                        })
-                        .on("change", function () {
-                            to.datepicker("option", "minDate", getDate(this));
-                        });
+{{--    @push('js')--}}
+{{--        <script>--}}
+{{--            $( function() {--}}
+{{--                var to = $( "#to" ).datepicker({--}}
+{{--                    defaultDate: "+1w",--}}
+{{--                    changeMonth: true,--}}
+{{--                    changeYear: true,--}}
+{{--                    numberOfMonths: 1--}}
+{{--                })--}}
+{{--                    .on( "change", function() {--}}
+{{--                        from.datepicker( "option", "maxDate", getDate( this ) );--}}
+{{--                    });--}}
+{{--                var dateFormat = "mm/dd/yy",--}}
+{{--                    from = $("#from")--}}
+{{--                        .datepicker({--}}
+{{--                            defaultDate: "+1w",--}}
+{{--                            changeMonth: true,--}}
+{{--                            changeYear: true,--}}
+{{--                            numberOfMonths: 1--}}
+{{--                        })--}}
+{{--                        .on("change", function () {--}}
+{{--                            to.datepicker("option", "minDate", getDate(this));--}}
+{{--                        });--}}
 
-                function getDate( element ) {
-                    var date;
-                    try {
-                        date = $.datepicker.parseDate( dateFormat, element.value );
-                    } catch( error ) {
-                        date = null;
-                    }
+{{--                function getDate( element ) {--}}
+{{--                    var date;--}}
+{{--                    try {--}}
+{{--                        date = $.datepicker.parseDate( dateFormat, element.value );--}}
+{{--                    } catch( error ) {--}}
+{{--                        date = null;--}}
+{{--                    }--}}
 
-                    return date;
-                }
-            } );
-        </script>
+{{--                    return date;--}}
+{{--                }--}}
+{{--            } );--}}
+{{--        </script>--}}
 
-        <!-- Small Screen -->
-        <script>
-            $( function() {
-                var to = $( "#to_ss" ).datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    changeYear: true,
-                    numberOfMonths: 1
-                })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
-                    });
-                var dateFormat = "mm/dd/yy",
-                    from = $("#from_ss")
-                        .datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 1
-                        })
-                        .on("change", function () {
-                            to.datepicker("option", "minDate", getDate(this));
-                        });
+{{--        <!-- Small Screen -->--}}
+{{--        <script>--}}
+{{--            $( function() {--}}
+{{--                var to = $( "#to_ss" ).datepicker({--}}
+{{--                    defaultDate: "+1w",--}}
+{{--                    changeMonth: true,--}}
+{{--                    changeYear: true,--}}
+{{--                    numberOfMonths: 1--}}
+{{--                })--}}
+{{--                    .on( "change", function() {--}}
+{{--                        from.datepicker( "option", "maxDate", getDate( this ) );--}}
+{{--                    });--}}
+{{--                var dateFormat = "mm/dd/yy",--}}
+{{--                    from = $("#from_ss")--}}
+{{--                        .datepicker({--}}
+{{--                            defaultDate: "+1w",--}}
+{{--                            changeMonth: true,--}}
+{{--                            changeYear: true,--}}
+{{--                            numberOfMonths: 1--}}
+{{--                        })--}}
+{{--                        .on("change", function () {--}}
+{{--                            to.datepicker("option", "minDate", getDate(this));--}}
+{{--                        });--}}
 
-                function getDate( element ) {
-                    var date;
-                    try {
-                        date = $.datepicker.parseDate( dateFormat, element.value );
-                    } catch( error ) {
-                        date = null;
-                    }
+{{--                function getDate( element ) {--}}
+{{--                    var date;--}}
+{{--                    try {--}}
+{{--                        date = $.datepicker.parseDate( dateFormat, element.value );--}}
+{{--                    } catch( error ) {--}}
+{{--                        date = null;--}}
+{{--                    }--}}
 
-                    return date;
-                }
-            } );
-        </script>
-    @endpush
+{{--                    return date;--}}
+{{--                }--}}
+{{--            } );--}}
+{{--        </script>--}}
+{{--    @endpush--}}
 </x-main>

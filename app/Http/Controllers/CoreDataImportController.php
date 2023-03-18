@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Imports\Reports\ActivationImport;
 use App\Imports\Reports\C2cImport;
+use App\Imports\Reports\C2sImport;
 use App\Imports\Reports\FcdGaImport;
 use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
 use App\Models\Activation;
 use App\Models\C2c;
+use App\Models\C2s;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
@@ -27,26 +29,31 @@ class CoreDataImportController extends Controller
     // Activation Index
     public function activationIndex(Request $request): Application|Factory|View
     {
-        return (new ActivationService)->index($request);
+        return view('reports.back.activation.index', [
+            'activations' => Activation::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5)
+        ]);
     }
 
     // Live Activation Index
     public function liveActivationIndex(Request $request): Application|Factory|View
     {
-        return (new LiveActivationService)->index($request);
+        return view('reports.back.activation.live-activation', [
+            'activations' => LiveActivation::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5)
+        ]);
     }
 
     // FCD GA Index
     public function fcdGaIndex(Request $request): Application|Factory|View
     {
-        if ( Auth::user()->role == 'super-admin' )
-            {
-                $activations = FcdGa::with('ddHouse','rso','supervisor','retailer')
-                    ->latest()
-                    ->paginate(5);
-            }
-
-            return view('reports.back.activation.fcd-ga', compact('activations'));
+        return view('reports.back.activation.fcd-ga', [
+            'activations' => FcdGa::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5)
+        ]);
     }
 
     // Activation Import
@@ -103,27 +110,21 @@ class CoreDataImportController extends Controller
     // C2C Index
     public function c2cIndex(Request $request): Application|Factory|View
     {
-        if ( Auth::user()->role == 'super-admin' )
-        {
-            $c2cs = C2c::with('ddHouse','rso','supervisor','retailer')
+        return view('reports.back.c2c.c2c', [
+            'c2cs' => C2c::with('ddHouse','rso','supervisor','retailer')
                 ->latest()
-                ->paginate(5);
-
-            return view('reports.back.c2c.c2c', compact('c2cs'));
-        }
+                ->paginate(5),
+        ]);
     }
 
     // Live C2C Index
     public function liveC2cIndex(Request $request): Application|Factory|View
     {
-        if ( Auth::user()->role == 'super-admin' )
-        {
-            $c2cs = LiveC2c::with('ddHouse','rso','supervisor','retailer')
+        return view('reports.back.c2c.live-c2c', [
+            'c2cs' => LiveC2c::with('ddHouse','rso','supervisor','retailer')
                 ->latest()
-                ->paginate(5);
-
-            return view('reports.back.c2c.live-c2c', compact('c2cs'));
-        }
+                ->paginate(5),
+        ]);
     }
 
     // C2C Import
@@ -154,6 +155,35 @@ class CoreDataImportController extends Controller
     {
         LiveC2c::truncate();
         return redirect()->route('raw.live.c2c')->with('success', 'Live C2C deleted successfully.');
+    }
+
+
+
+    ########################################## C2S #####################################################
+
+    // C2S Index
+    public function c2sIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.c2s.c2s', [
+            'c2s' => C2s::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // C2S Import
+    public function c2sImport(Request $request): RedirectResponse
+    {
+        Excel::import(new C2sImport, $request->file('import_c2s'));
+
+        return redirect()->route('raw.c2s')->with('success', 'C2S imported successfully.');
+    }
+
+    // C2S Delete All
+    public function c2sDestroy(): RedirectResponse
+    {
+        C2s::truncate();
+        return redirect()->route('raw.c2s')->with('success', 'C2S deleted successfully.');
     }
 
 

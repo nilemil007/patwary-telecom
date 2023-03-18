@@ -22,7 +22,7 @@
                        class="form-control" required>
 
                 <button class="btn btn-outline-google" type="submit">
-                    <x-icon.file-import></x-icon.file-import>Import C2C
+                    <x-icon.file-import></x-icon.file-import>Import
                 </button>
             </div>
         </form>
@@ -107,79 +107,4 @@
             </div>
         </div>
     </div>
-
-    @push('js')
-        <script>
-            $( function() {
-                var to = $( "#to" ).datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    changeYear: true,
-                    numberOfMonths: 1
-                })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
-                    });
-                var dateFormat = "mm/dd/yy",
-                    from = $("#from")
-                        .datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 1
-                        })
-                        .on("change", function () {
-                            to.datepicker("option", "minDate", getDate(this));
-                        });
-
-                function getDate( element ) {
-                    var date;
-                    try {
-                        date = $.datepicker.parseDate( dateFormat, element.value );
-                    } catch( error ) {
-                        date = null;
-                    }
-
-                    return date;
-                }
-            } );
-        </script>
-
-        <!-- Small Screen -->
-        <script>
-            $( function() {
-                var to = $( "#to_ss" ).datepicker({
-                    defaultDate: "+1w",
-                    changeMonth: true,
-                    changeYear: true,
-                    numberOfMonths: 1
-                })
-                    .on( "change", function() {
-                        from.datepicker( "option", "maxDate", getDate( this ) );
-                    });
-                var dateFormat = "mm/dd/yy",
-                    from = $("#from_ss")
-                        .datepicker({
-                            defaultDate: "+1w",
-                            changeMonth: true,
-                            changeYear: true,
-                            numberOfMonths: 1
-                        })
-                        .on("change", function () {
-                            to.datepicker("option", "minDate", getDate(this));
-                        });
-
-                function getDate( element ) {
-                    var date;
-                    try {
-                        date = $.datepicker.parseDate( dateFormat, element.value );
-                    } catch( error ) {
-                        date = null;
-                    }
-
-                    return date;
-                }
-            } );
-        </script>
-    @endpush
 </x-main>

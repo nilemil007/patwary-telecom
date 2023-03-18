@@ -175,9 +175,23 @@
                                                 Activation
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="{{ route('raw.activation') }}" class="dropdown-item">Activation</a>
-                                                <a href="{{ route('raw.live.activation') }}" class="dropdown-item">Live Activation</a>
-                                                <a href="{{ route('raw.fcd.ga') }}" class="dropdown-item">FCD GA</a>
+                                                <a class="dropdown-item justify-content-between"
+                                                   href="{{ route('raw.activation') }}">
+                                                    <span>Activation</span>
+                                                    <span>({{ \App\Models\Activation::all()->count() }})</span>
+                                                </a>
+
+                                                <a class="dropdown-item justify-content-between"
+                                                   href="{{ route('raw.live.activation') }}">
+                                                    <span>Live Activation</span>
+                                                    <span>({{ \App\Models\LiveActivation::all()->count() }})</span>
+                                                </a>
+
+                                                <a class="dropdown-item justify-content-between"
+                                                   href="{{ route('raw.fcd.ga') }}">
+                                                    <span>FCD GA</span>
+                                                    <span>({{ \App\Models\FcdGa::all()->count() }})</span>
+                                                </a>
                                             </div>
                                         </div>
 
@@ -190,7 +204,7 @@
                                                 <a href="{{ route('raw.live.c2c') }}" class="dropdown-item">Live C2C</a>
                                             </div>
                                         </div>
-                                        <a class="dropdown-item" href="" >
+                                        <a class="dropdown-item" href="{{ route('raw.c2s') }}" >
                                             C2S
                                         </a>
                                         <a class="dropdown-item" href="" >

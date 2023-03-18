@@ -179,6 +179,11 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/live/c2c/import', 'liveC2cImport')->name('live.c2c.import');
         Route::delete('/c2c/destroy', 'c2cDestroy')->name('c2c.destroy');
         Route::delete('/live/c2c/destroy', 'liveC2cDestroy')->name('live.c2c.destroy');
+
+        // C2S
+        Route::get('/c2s', 'c2sIndex')->name('c2s');
+        Route::post('/c2s/import', 'c2sImport')->name('c2s.import');
+        Route::delete('/c2s/destroy', 'c2sDestroy')->name('c2s.destroy');
     });
 
     // Others Operator Information

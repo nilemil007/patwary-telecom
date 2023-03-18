@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 
 /**
@@ -128,19 +129,19 @@ class Retailer extends Model
         );
     }
     // Device Serial No
-//    protected function device(): Attribute
-//    {
-//        return Attribute::make(
-//            set: fn( $device ) => Str::title( $device ),
-//        );
-//    }
+    protected function device(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $device ) => Str::title( $device ),
+        );
+    }
     // Scanner Serial No
-//    protected function scanner(): Attribute
-//    {
-//        return Attribute::make(
-//            set: fn( $scanner ) => Str::title( $scanner ),
-//        );
-//    }
+    protected function scanner(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $scanner ) => Str::title( $scanner ),
+        );
+    }
     // Enabled
     protected function enabled(): Attribute
     {
@@ -226,4 +227,11 @@ class Retailer extends Model
     {
         return $this->belongsTo( DdHouse::class );
     }
+
+    public function c2s(): HasMany
+    {
+        return $this->hasMany( C2S::class );
+    }
+
+
 }

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 /**
  * @method static truncate()
  * @method static distinct(string $string)
+ * @method static where(string $string, int $int)
  */
 class Activation extends Model
 {
