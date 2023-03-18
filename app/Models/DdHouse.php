@@ -99,4 +99,9 @@ class DdHouse extends Model
     {
         return $this->hasMany( Balance::class );
     }
+
+    public function bso(): HasMany
+    {
+        return $this->hasMany( Bso::class );
+    }
 }

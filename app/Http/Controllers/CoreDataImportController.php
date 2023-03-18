@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Imports\Reports\ActivationImport;
 use App\Imports\Reports\BalanceImport;
+use App\Imports\Reports\BsoImport;
 use App\Imports\Reports\C2cImport;
 use App\Imports\Reports\C2sImport;
 use App\Imports\Reports\FcdGaImport;
@@ -12,6 +13,7 @@ use App\Imports\Reports\LiveActivationImport;
 use App\Imports\Reports\SimIssueImport;
 use App\Models\Activation;
 use App\Models\Balance;
+use App\Models\Bso;
 use App\Models\C2c;
 use App\Models\C2s;
 use App\Models\FcdGa;
@@ -245,7 +247,38 @@ class CoreDataImportController extends Controller
     public function balanceDestroy(): RedirectResponse
     {
         Balance::truncate();
+
         return redirect()->route('raw.balance')->with('success', 'Balance deleted successfully.');
+    }
+
+
+
+    ########################################### Bso ####################################################
+
+    // Bso Index
+    public function bsoIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.bso.bso', [
+            'bsos' => Bso::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // Bso Import
+    public function bsoImport(Request $request): RedirectResponse
+    {
+        Excel::import(new BsoImport, $request->file('import_bso'));
+
+        return redirect()->route('raw.bso')->with('success', 'BSO imported successfully.');
+    }
+
+    // Bso Delete All
+    public function bsoDestroy(): RedirectResponse
+    {
+        Bso::truncate();
+
+        return redirect()->route('raw.bso')->with('success', 'BSO deleted successfully.');
     }
 
 }
