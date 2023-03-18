@@ -11,6 +11,7 @@ use App\Imports\Reports\DsoImport;
 use App\Imports\Reports\FcdGaImport;
 use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
+use App\Imports\Reports\LiveSimIssueImport;
 use App\Imports\Reports\SimIssueImport;
 use App\Models\Activation;
 use App\Models\Balance;
@@ -21,6 +22,7 @@ use App\Models\Dso;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
+use App\Models\LiveSimIssue;
 use App\Models\SimIssue;
 use App\Services\ActivationService;
 use App\Services\LiveActivationService;
@@ -208,6 +210,16 @@ class CoreDataImportController extends Controller
         ]);
     }
 
+    // Live Sim Issue Index
+    public function liveSimIssueIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.sim-issue.live-sim-issue', [
+            'simIssues' => LiveSimIssue::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
     // Sim Issue Import
     public function simIssueImport(Request $request): RedirectResponse
     {
@@ -216,11 +228,26 @@ class CoreDataImportController extends Controller
         return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue imported successfully.');
     }
 
+    // Live Sim Issue Import
+    public function liveSimIssueImport(Request $request): RedirectResponse
+    {
+        Excel::import(new LiveSimIssueImport, $request->file('import_sim_issue'));
+
+        return redirect()->route('raw.live.sim.issue')->with('success', 'Live Sim Issue imported successfully.');
+    }
+
     // Sim Issue Delete All
     public function simIssueDestroy(): RedirectResponse
     {
         SimIssue::truncate();
         return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue deleted successfully.');
+    }
+
+    // Live Sim Issue Delete All
+    public function liveSimIssueDestroy(): RedirectResponse
+    {
+        LiveSimIssue::truncate();
+        return redirect()->route('raw.live.sim.issue')->with('success', 'Live Sim Issue deleted successfully.');
     }
 
 

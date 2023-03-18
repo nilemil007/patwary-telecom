@@ -105,6 +105,10 @@ class Supervisor extends Model
     {
         return $this->hasMany( SimIssue::class );
     }
+    public function liveSimIssue(): HasMany
+    {
+        return $this->hasMany( LiveSimIssue::class );
+    }
 
     public function balance(): HasMany
     {

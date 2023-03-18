@@ -187,13 +187,18 @@ Route::middleware(['auth'])->group(function(){
 
         // Sim Issue
         Route::get('/sim-issue', 'simIssueIndex')->name('sim.issue');
+        Route::get('/live/sim-issue', 'liveSimIssueIndex')->name('live.sim.issue');
         Route::post('/sim-issue/import', 'simIssueImport')->name('sim.issue.import');
-        Route::delete('/sim-issue/destroy', 'simIssueDestroy')->name('sim.issue.destroy');
+        Route::post('/live/sim-issue/import', 'liveSimIssueImport')->name('live.sim.issue.import');
+        Route::delete('/live/sim-issue/destroy', 'liveSimIssueDestroy')->name('live.sim.issue.destroy');
 
         // Balance
         Route::get('/balance', 'balanceIndex')->name('balance');
+        Route::get('/live/balance', 'liveBalanceIndex')->name('live.balance');
         Route::post('/balance/import', 'balanceImport')->name('balance.import');
+        Route::post('/live/balance/import', 'liveBalanceImport')->name('live.balance.import');
         Route::delete('/balance/destroy', 'balanceDestroy')->name('balance.destroy');
+        Route::delete('/live/balance/destroy', 'liveBalanceDestroy')->name('live.balance.destroy');
 
         // Bso
         Route::get('/bso', 'bsoIndex')->name('bso');

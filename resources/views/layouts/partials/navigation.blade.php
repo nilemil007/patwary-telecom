@@ -207,12 +207,26 @@
                                         <a class="dropdown-item" href="{{ route('raw.c2s') }}" >
                                             C2S
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('raw.sim.issue') }}" >
-                                            Sim Issue
-                                        </a>
-                                        <a class="dropdown-item" href="{{ route('raw.balance') }}" >
-                                            Balance
-                                        </a>
+
+                                        <div class="dropend">
+                                            <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                                Sim Issue
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ route('raw.sim.issue') }}" class="dropdown-item">Sim Issue</a>
+                                                <a href="{{ route('raw.live.sim.issue') }}" class="dropdown-item">Live Sim Issue</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="dropend">
+                                            <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                                Balance
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ route('raw.balance') }}" class="dropdown-item">Balance</a>
+                                                <a href="{{ route('raw.live.balance') }}" class="dropdown-item">Live Balance</a>
+                                            </div>
+                                        </div>
                                         <a class="dropdown-item" href="{{ route('raw.bso') }}" >
                                             BSO
                                         </a>
