@@ -190,6 +190,11 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/sim-issue/import', 'simIssueImport')->name('sim.issue.import');
         Route::delete('/sim-issue/destroy', 'simIssueDestroy')->name('sim.issue.destroy');
 
+        // Balance
+        Route::get('/balance', 'balanceIndex')->name('balance');
+        Route::post('/balance/import', 'balanceImport')->name('balance.import');
+        Route::delete('/balance/destroy', 'balanceDestroy')->name('balance.destroy');
+
     });
 
     // Others Operator Information

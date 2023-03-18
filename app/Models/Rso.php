@@ -255,4 +255,8 @@ class Rso extends Model
     {
         return $this->hasMany( SimIssue::class );
     }
+    public function balance(): HasMany
+    {
+        return $this->hasMany( Balance::class );
+    }
 }

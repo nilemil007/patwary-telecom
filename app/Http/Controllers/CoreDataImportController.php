@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\Reports\ActivationImport;
+use App\Imports\Reports\BalanceImport;
 use App\Imports\Reports\C2cImport;
 use App\Imports\Reports\C2sImport;
 use App\Imports\Reports\FcdGaImport;
@@ -10,6 +11,7 @@ use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
 use App\Imports\Reports\SimIssueImport;
 use App\Models\Activation;
+use App\Models\Balance;
 use App\Models\C2c;
 use App\Models\C2s;
 use App\Models\FcdGa;
@@ -215,6 +217,35 @@ class CoreDataImportController extends Controller
     {
         SimIssue::truncate();
         return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue deleted successfully.');
+    }
+
+
+
+    ######################################## Balance ##################################################
+
+    // Balance Index
+    public function balanceIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.balance.balance', [
+            'balances' => Balance::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // Balance Import
+    public function balanceImport(Request $request): RedirectResponse
+    {
+        Excel::import(new BalanceImport, $request->file('import_balance'));
+
+        return redirect()->route('raw.balance')->with('success', 'Balance imported successfully.');
+    }
+
+    // Balance Delete All
+    public function balanceDestroy(): RedirectResponse
+    {
+        Balance::truncate();
+        return redirect()->route('raw.balance')->with('success', 'Balance deleted successfully.');
     }
 
 }

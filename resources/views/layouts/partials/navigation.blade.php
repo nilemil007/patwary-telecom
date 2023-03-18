@@ -210,7 +210,7 @@
                                         <a class="dropdown-item" href="{{ route('raw.sim.issue') }}" >
                                             Sim Issue
                                         </a>
-                                        <a class="dropdown-item" href="#" >
+                                        <a class="dropdown-item" href="{{ route('raw.balance') }}" >
                                             Balance
                                         </a>
                                         <a class="dropdown-item" href="#" >
