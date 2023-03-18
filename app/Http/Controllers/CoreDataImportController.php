@@ -7,6 +7,7 @@ use App\Imports\Reports\BalanceImport;
 use App\Imports\Reports\BsoImport;
 use App\Imports\Reports\C2cImport;
 use App\Imports\Reports\C2sImport;
+use App\Imports\Reports\DsoImport;
 use App\Imports\Reports\FcdGaImport;
 use App\Imports\Reports\LiveC2cImport;
 use App\Imports\Reports\LiveActivationImport;
@@ -16,6 +17,7 @@ use App\Models\Balance;
 use App\Models\Bso;
 use App\Models\C2c;
 use App\Models\C2s;
+use App\Models\Dso;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
@@ -279,6 +281,36 @@ class CoreDataImportController extends Controller
         Bso::truncate();
 
         return redirect()->route('raw.bso')->with('success', 'BSO deleted successfully.');
+    }
+
+
+
+    ########################################### Dso ####################################################
+
+    // Dso Index
+    public function dsoIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.dso.dso', [
+            'dsos' => Dso::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // Dso Import
+    public function dsoImport(Request $request): RedirectResponse
+    {
+        Excel::import(new DsoImport, $request->file('import_dso'));
+
+        return redirect()->route('raw.dso')->with('success', 'DSO imported successfully.');
+    }
+
+    // Dso Delete All
+    public function dsoDestroy(): RedirectResponse
+    {
+        Dso::truncate();
+
+        return redirect()->route('raw.dso')->with('success', 'DSO deleted successfully.');
     }
 
 }

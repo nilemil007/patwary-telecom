@@ -200,6 +200,11 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/bso/import', 'bsoImport')->name('bso.import');
         Route::delete('/bso/destroy', 'bsoDestroy')->name('bso.destroy');
 
+        // Dso
+        Route::get('/dso', 'dsoIndex')->name('dso');
+        Route::post('/dso/import', 'dsoImport')->name('dso.import');
+        Route::delete('/dso/destroy', 'dsoDestroy')->name('dso.destroy');
+
     });
 
     // Others Operator Information

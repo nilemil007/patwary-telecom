@@ -248,5 +248,10 @@ class Retailer extends Model
         return $this->hasMany( Bso::class );
     }
 
+    public function dso(): HasMany
+    {
+        return $this->hasMany( Dso::class );
+    }
+
 
 }

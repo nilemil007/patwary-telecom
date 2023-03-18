@@ -216,7 +216,7 @@
                                         <a class="dropdown-item" href="{{ route('raw.bso') }}" >
                                             BSO
                                         </a>
-                                        <a class="dropdown-item" href="#" >
+                                        <a class="dropdown-item" href="{{ route('raw.dso') }}" >
                                             DSO
                                         </a>
                                     </div>

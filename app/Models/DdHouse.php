@@ -104,4 +104,9 @@ class DdHouse extends Model
     {
         return $this->hasMany( Bso::class );
     }
+
+    public function dso(): HasMany
+    {
+        return $this->hasMany( Dso::class );
+    }
 }
