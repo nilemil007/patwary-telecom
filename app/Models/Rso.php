@@ -271,4 +271,8 @@ class Rso extends Model
     {
         return $this->hasMany( Dso::class );
     }
+    public function esaf(): HasMany
+    {
+        return $this->hasMany( Esaf::class );
+    }
 }

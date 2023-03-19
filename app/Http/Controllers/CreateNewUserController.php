@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\UserUpdateRequest;
-use App\Imports\User\UsersImport;
+use App\Imports\Reports\User\UsersImport;
 use App\Models\DdHouse;
 use App\Models\ItopReplace;
 use App\Models\User;

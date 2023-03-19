@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\BtsExport;
 use App\Http\Requests\BtsUpdateRequest;
-use App\Imports\BtsImport;
+use App\Imports\Reports\BtsImport;
 use App\Models\Bts;
 use App\Models\DdHouse;
 use import\BtsService;

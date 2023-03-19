@@ -6,7 +6,7 @@ use App\Exports\Rso\RsoListExport;
 use App\Http\Requests\Rso\AdditionalInfoUpdate;
 use App\Http\Requests\Rso\ProfileUpdate;
 use App\Http\Requests\Rso\Update;
-use App\Imports\Rso\RsosImport;
+use App\Imports\Reports\Rso\RsosImport;
 use App\Listeners\BrandPromoter\AdditionalInformationUpdate;
 use App\Models\Route;
 use App\Models\Rso;

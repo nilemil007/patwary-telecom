@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\Reports;
+namespace App\Imports\Reports\Reports;
 
 use App\Models\FcdGa;
 use App\Models\Retailer;

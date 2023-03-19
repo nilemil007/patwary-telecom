@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\Rso;
+namespace App\Imports\Reports\Rso;
 
 use App\Models\Rso;
 use Carbon\Carbon;

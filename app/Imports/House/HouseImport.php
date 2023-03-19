@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\House;
+namespace App\Imports\Reports\House;
 
 use App\Models\DdHouse;
 use Illuminate\Database\Eloquent\Model;

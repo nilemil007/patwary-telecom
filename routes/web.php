@@ -202,13 +202,16 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/dso/import', 'dsoImport')->name('dso.import');
         Route::delete('/dso/destroy', 'dsoDestroy')->name('dso.destroy');
 
+        // Esaf
+        Route::get('/esaf', 'esafIndex')->name('esaf');
+        Route::post('/esaf/import', 'esafImport')->name('esaf.import');
+        Route::delete('/esaf/destroy', 'esafDestroy')->name('esaf.destroy');
+
     });
 
     // Others Operator Information
     Route::get('/others-operator-information/export', [ OthersOperatorInformationController::class, 'export' ])->name('ooi.info.export');
     Route::delete('/others-operator-information/delete-all', [ OthersOperatorInformationController::class, 'deleteAll' ])->name('others-operator-information.delete.all');
-
-
 
 
     // Resource routes

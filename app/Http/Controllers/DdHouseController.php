@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DdHouseStoreRequest;
 use App\Http\Requests\DdHouseUpdateRequest;
-use App\Imports\House\HouseImport;
+use App\Imports\Reports\House\HouseImport;
 use App\Models\DdHouse;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\RouteExport;
 use App\Http\Requests\RouteUpdateRequest;
-use App\Imports\RouteImport;
+use App\Imports\Reports\RouteImport;
 use App\Models\Route;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\User;
+namespace App\Imports\Reports\User;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;

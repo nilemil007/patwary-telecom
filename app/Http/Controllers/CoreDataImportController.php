@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\Reports\ActivationImport;
-use App\Imports\Reports\BalanceImport;
-use App\Imports\Reports\BsoImport;
-use App\Imports\Reports\C2cImport;
-use App\Imports\Reports\C2sImport;
-use App\Imports\Reports\DsoImport;
-use App\Imports\Reports\FcdGaImport;
-use App\Imports\Reports\LiveC2cImport;
-use App\Imports\Reports\LiveActivationImport;
-use App\Imports\Reports\LiveSimIssueImport;
-use App\Imports\Reports\SimIssueImport;
+use App\Imports\Reports\EsafImport;
+use App\Imports\Reports\Reports\ActivationImport;
+use App\Imports\Reports\Reports\BalanceImport;
+use App\Imports\Reports\Reports\BsoImport;
+use App\Imports\Reports\Reports\C2cImport;
+use App\Imports\Reports\Reports\C2sImport;
+use App\Imports\Reports\Reports\DsoImport;
+use App\Imports\Reports\Reports\FcdGaImport;
+use App\Imports\Reports\Reports\LiveC2cImport;
+use App\Imports\Reports\Reports\LiveActivationImport;
+use App\Imports\Reports\Reports\LiveSimIssueImport;
+use App\Imports\Reports\Reports\SimIssueImport;
 use App\Models\Activation;
 use App\Models\Balance;
 use App\Models\Bso;
 use App\Models\C2c;
 use App\Models\C2s;
 use App\Models\Dso;
+use App\Models\Esaf;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
@@ -338,6 +340,36 @@ class CoreDataImportController extends Controller
         Dso::truncate();
 
         return redirect()->route('raw.dso')->with('success', 'DSO deleted successfully.');
+    }
+
+
+
+    ########################################### eSAF ###################################################
+
+    // Esaf Index
+    public function esafIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.esaf.esaf', [
+            'esafs' => Esaf::with('ddHouse','rso','supervisor','retailer')
+                ->latest()
+                ->paginate(5),
+        ]);
+    }
+
+    // Esaf Import
+    public function esafImport(Request $request): RedirectResponse
+    {
+        Excel::import(new EsafImport, $request->file('import_esaf'));
+
+        return redirect()->route('raw.esaf')->with('success', 'Esaf imported successfully.');
+    }
+
+    // Esaf Delete All
+    public function esafDestroy(): RedirectResponse
+    {
+        Esaf::truncate();
+
+        return redirect()->route('raw.esaf')->with('success', 'Esaf deleted successfully.');
     }
 
 }
