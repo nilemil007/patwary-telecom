@@ -134,23 +134,14 @@ Route::middleware(['auth'])->group(function(){
 
     // Retailer routes
     Route::controller( RetailerController::class )->prefix('retailer')->name('retailer.')->group(function(){
-        Route::get('/all', 'index')->name('index');
-        Route::get('/show', 'show')->name('show');
-        Route::get('/edit', 'edit')->name('edit');
-        Route::delete('/delete/all', 'deleteAll')->name('delete.all');
-        Route::post('/import', 'import')->name('import');
         Route::get('/export', 'export')->name('export');
+        Route::get('{retailer}/verify', 'verify')->name('verify');
         Route::get('/sample-file', 'sampleFileDownload')->name('sample.file.download');
+        Route::post('/import', 'import')->name('import');
+        Route::post('{retailer}/approve', 'approve')->name('approve');
+        Route::post('{retailer}/reject', 'reject')->name('reject');
+        Route::delete('/delete/all', 'deleteAll')->name('delete.all');
     });
-
-    // Retailer additional routes
-//    Route::controller(RetailerController::class)->prefix('retailer')->name('retailer.')->group( function() {
-//        Route::get('/download-sample-file', 'sampleFileDownload')->name('sample.file.download');
-//        Route::post('/import', 'import')->name('import');
-//        Route::get('{retailer}/verify', 'verify')->name('verify');
-//        Route::post('{retailer}/approve', 'approve')->name('approve');
-//        Route::post('{retailer}/reject', 'reject')->name('reject');
-//    });
 
     // Dd House additional routes
     Route::post('/house/import', [ DdHouseController::class, 'import' ])->name('house.import');
@@ -234,6 +225,7 @@ Route::middleware(['auth'])->group(function(){
         'supervisor'        => SupervisorController::class,
         'bp'                => BpController::class,
         'merchadiser'       => MerchandiserController::class,
+        'retailer'          => RetailerController::class,
         'others-operator-information' => OthersOperatorInformationController::class,
     ]);
 });

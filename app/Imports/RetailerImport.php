@@ -19,13 +19,14 @@ class RetailerImport implements ToModel, WithHeadingRow
      */
     public function model(array $row): Model|Retailer|null
     {
-//        dd($row);
+        $supId = Rso::firstWhere('itop_number', $row['i_top_up_sr_number'])->supervisor_id;
+
         return new Retailer([
             'dd_house_id'       => $row['distributor_code'],
             'rso_id'            => $row['i_top_up_sr_number'],
             'retailer_code'     => $row['retailer_code'],
             'itop_number'       => $row['i_top_up_number'],
-            'supervisor_id'     => Rso::firstWhere('itop_number', $row['i_top_up_sr_number'])->supervisor_id,
+            'supervisor_id'     => Supervisor::firstWhere('id', $supId)->pool_number,
             'route_id'          => $row['route'],
             'retailer_name'     => $row['retailer_name'],
             'retailer_type'     => $row['retailer_type'],

@@ -22,7 +22,7 @@
                                class="btn btn-danger w-100" data-bs-dismiss="modal">
                                 Delete entry
                             </a>
-                            <form action="{{ route('retailer.delete',$retailer->id) }}" method="POST"
+                            <form action="{{ route('retailer.destroy',$retailer->id) }}" method="POST"
                                   id="delRetailer{{ $retailer->id }}" class="d-none">
                                 @csrf
                                 @method('DELETE')

@@ -88,13 +88,13 @@ $rso = \App\Models\Rso::firstWhere('user_id', auth()->id())->id??'';
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-{{--                    <a href="#" class="dropdown-item">Set status</a>--}}
+                    <a href="#" class="dropdown-item">Set status</a>
 
-{{--                    <a href="{{ $role == 'bp' ? route('bp.show', $bp) : ( $role == 'rso' ? route('rso.profile', $rso) : '' ) }}"--}}
-{{--                       class="dropdown-item">--}}
-{{--                        Profile & account--}}
-{{--                    </a>--}}
-{{--                    <a href="#" class="dropdown-item">Feedback</a>--}}
+                    <a href="{{ $role == 'bp' ? route('bp.show', $bp) : ( $role == 'rso' ? route('rso.profile', $rso) : '' ) }}"
+                       class="dropdown-item">
+                        Profile & account
+                    </a>
+                    <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
 {{--                    <x-link href="#" class="dropdown-item">Settings</x-link>--}}
                     <x-link href="{{ route('logout') }}"

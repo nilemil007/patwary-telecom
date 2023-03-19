@@ -14,6 +14,9 @@ use Illuminate\Support\Str;
  * @method static where(string $string, $id)
  * @method static latest(string $string)
  * @method static firstWhere(string $string, mixed $retailer_code)
+ * @method static truncate()
+ * @method static whereNotNull(string $string)
+ * @property mixed rso_id
  */
 class Retailer extends Model
 {
@@ -197,6 +200,13 @@ class Retailer extends Model
     {
         return Attribute::make(
             set: fn( $itopNumber ) => Rso::firstWhere('itop_number', $itopNumber)->id,
+        );
+    }
+    // Supervisor Id
+    protected function supervisorId(): Attribute
+    {
+        return Attribute::make(
+            set: fn( $poolNumber ) => Supervisor::firstWhere('pool_number', $poolNumber)->id,
         );
     }
     //_______________________________________End Accessor___________________________________________
