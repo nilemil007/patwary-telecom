@@ -3,7 +3,7 @@ namespace App\Services;
 
 use App\Models\Rso;
 use App\Models\User;
-use App\Notifications\ApprovedNotification;
+use App\Notifications\RetailerApprovedNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
@@ -176,7 +176,7 @@ class ApproveService {
         {
             $userId = Rso::firstWhere('id', $retailer->rso_id)->user_id;
             $userRso = User::firstWhere('id', $userId);
-            $userRso->notify( new ApprovedNotification( $retailer, Auth::user() ) );
+            $userRso->notify( new RetailerApprovedNotification( $retailer, Auth::user() ) );
 
             return redirect()->route('retailer.index')->with('success','Approved successfully.');
         }
