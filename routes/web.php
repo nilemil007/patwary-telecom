@@ -208,6 +208,11 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/esaf/import', 'esafImport')->name('esaf.import');
         Route::delete('/esaf/destroy', 'esafDestroy')->name('esaf.destroy');
 
+        // Sim Inventory
+        Route::get('/sim-inventory', 'simInventoryIndex')->name('sim.inventory');
+        Route::post('/sim-inventory/import', 'simInventoryImport')->name('sim.inventory.import');
+        Route::delete('/sim-inventory/destroy', 'simInventoryDestroy')->name('sim.inventory.destroy');
+
     });
 
     // Reports routes

@@ -118,4 +118,9 @@ class DdHouse extends Model
     {
         return $this->hasMany( Esaf::class );
     }
+
+    public function simInventory(): HasMany
+    {
+        return $this->hasMany( SimInventory::class );
+    }
 }

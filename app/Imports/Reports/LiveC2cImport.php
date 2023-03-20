@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\Reports\Reports;
+namespace App\Imports\Reports;
 
 use App\Models\LiveC2c;
 use App\Models\Retailer;

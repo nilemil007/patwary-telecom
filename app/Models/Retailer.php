@@ -272,5 +272,4 @@ class Retailer extends Model
         return $this->hasMany( Esaf::class );
     }
 
-
 }

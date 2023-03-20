@@ -3,17 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Imports\Reports\EsafImport;
-use App\Imports\Reports\Reports\ActivationImport;
-use App\Imports\Reports\Reports\BalanceImport;
-use App\Imports\Reports\Reports\BsoImport;
-use App\Imports\Reports\Reports\C2cImport;
-use App\Imports\Reports\Reports\C2sImport;
-use App\Imports\Reports\Reports\DsoImport;
-use App\Imports\Reports\Reports\FcdGaImport;
-use App\Imports\Reports\Reports\LiveC2cImport;
-use App\Imports\Reports\Reports\LiveActivationImport;
-use App\Imports\Reports\Reports\LiveSimIssueImport;
-use App\Imports\Reports\Reports\SimIssueImport;
+use App\Imports\Reports\ActivationImport;
+use App\Imports\Reports\BalanceImport;
+use App\Imports\Reports\BsoImport;
+use App\Imports\Reports\C2cImport;
+use App\Imports\Reports\C2sImport;
+use App\Imports\Reports\DsoImport;
+use App\Imports\Reports\FcdGaImport;
+use App\Imports\Reports\LiveC2cImport;
+use App\Imports\Reports\LiveActivationImport;
+use App\Imports\Reports\LiveSimIssueImport;
+use App\Imports\Reports\SimIssueImport;
+use App\Imports\Reports\SimInventoryImport;
 use App\Models\Activation;
 use App\Models\Balance;
 use App\Models\Bso;
@@ -25,15 +26,13 @@ use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
 use App\Models\LiveSimIssue;
+use App\Models\SimInventory;
 use App\Models\SimIssue;
-use App\Services\ActivationService;
-use App\Services\LiveActivationService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class CoreDataImportController extends Controller
@@ -142,6 +141,9 @@ class CoreDataImportController extends Controller
     // C2C Import
     public function c2cImport(Request $request): RedirectResponse
     {
+        set_time_limit(600);
+//        ini_set('max_execution_time', 180); //3 minutes
+
         Excel::import(new C2cImport, $request->file('import_c2c'));
 
         return redirect()->route('raw.c2c')->with('success', 'C2C imported successfully.');
@@ -370,6 +372,34 @@ class CoreDataImportController extends Controller
         Esaf::truncate();
 
         return redirect()->route('raw.esaf')->with('success', 'Esaf deleted successfully.');
+    }
+
+
+
+    ########################################### Sim Inventory ###################################################
+
+    // Sim Inventory Index
+    public function simInventoryIndex(Request $request): Application|Factory|View
+    {
+        return view('reports.back.inventory.sim.sim', [
+            'inventory' => SimInventory::with('ddHouse')->latest()->paginate(5),
+        ]);
+    }
+
+    // Sim Inventory Import
+    public function simInventoryImport(Request $request): RedirectResponse
+    {
+        Excel::import(new SimInventoryImport, $request->file('import_sim_inventory'));
+
+        return redirect()->route('raw.sim.inventory')->with('success', 'Sim Inventory imported successfully.');
+    }
+
+    // Sim Inventory Delete All
+    public function simInventoryDestroy(): RedirectResponse
+    {
+        SimInventory::truncate();
+
+        return redirect()->route('raw.sim.inventory')->with('success', 'Sim Inventory deleted successfully.');
     }
 
 }

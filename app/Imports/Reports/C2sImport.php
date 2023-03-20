@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Imports\Reports\Reports;
+namespace App\Imports\Reports;
 
 use App\Models\C2s;
 use App\Models\Retailer;

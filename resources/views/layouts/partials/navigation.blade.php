@@ -223,7 +223,6 @@
                                                 </a>
                                             </div>
                                         </div>
-
                                         <div class="dropend">
                                             <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
                                                 Balance
@@ -231,6 +230,14 @@
                                             <div class="dropdown-menu">
                                                 <a href="{{ route('raw.balance') }}" class="dropdown-item">Balance</a>
                                                 <a href="{{ route('raw.live.balance') }}" class="dropdown-item">Live Balance</a>
+                                            </div>
+                                        </div>
+                                        <div class="dropend">
+                                            <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                                Inventory
+                                            </a>
+                                            <div class="dropdown-menu">
+                                                <a href="{{ route('raw.sim.inventory') }}" class="dropdown-item">Sim</a>
                                             </div>
                                         </div>
                                         <a class="dropdown-item" href="{{ route('raw.bso') }}" >
