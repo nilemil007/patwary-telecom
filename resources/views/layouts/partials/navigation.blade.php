@@ -305,6 +305,137 @@
                             </div>
                         </li>
                     @endif
+
+                    <!-- Reports -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"
+                           data-bs-auto-close="outside" role="button" aria-expanded="false" >
+                                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                                    <x-icon.report></x-icon.report>
+                                </span>
+                            <span class="nav-link-title">
+                                    Reports
+                                </span>
+                        </a>
+
+                        <div class="dropdown-menu">
+                            <div class="dropdown-menu-columns">
+                                <div class="dropdown-menu-column">
+
+                                    <!-- Active SSO -->
+                                    <a class="dropdown-item" href="{{ route('report.active.sso') }}" >
+                                        Active SSO
+                                    </a>
+
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            C2C
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('raw.c2c') }}" class="dropdown-item">C2C</a>
+                                            <a href="{{ route('raw.live.c2c') }}" class="dropdown-item">Live C2C</a>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="{{ route('raw.c2s') }}" >
+                                        C2S
+                                    </a>
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            Sim Issue
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item justify-content-between"
+                                               href="{{ route('raw.sim.issue') }}">
+                                                <span>Sim Issue</span>
+                                                <span>({{ \App\Models\SimIssue::all()->count() }})</span>
+                                            </a>
+                                            <a class="dropdown-item justify-content-between"
+                                               href="{{ route('raw.live.sim.issue') }}">
+                                                <span>Live Sim Issue</span>
+                                                <span>({{ \App\Models\LiveSimIssue::all()->count() }})</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="dropend">
+                                        <a class="dropdown-item dropdown-toggle" href="#" onclick="event.preventDefault()" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false">
+                                            Balance
+                                        </a>
+                                        <div class="dropdown-menu">
+                                            <a href="{{ route('raw.balance') }}" class="dropdown-item">Balance</a>
+                                            <a href="{{ route('raw.live.balance') }}" class="dropdown-item">Live Balance</a>
+                                        </div>
+                                    </div>
+                                    <a class="dropdown-item" href="{{ route('raw.bso') }}" >
+                                        BSO
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('raw.dso') }}" >
+                                        DSO
+                                    </a>
+                                    <a class="dropdown-item" href="{{ route('raw.esaf') }}" >
+                                        Esaf
+                                    </a>
+                                </div>
+
+                                {{--                                    <div class="dropdown-menu-column">--}}
+                                {{--                                        <a class="dropdown-item" href="./navigation.html" >--}}
+                                {{--                                            Navigation--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./charts.html" >--}}
+                                {{--                                            Charts--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./pagination.html" >--}}
+                                {{--                                            Pagination--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./skeleton.html" >--}}
+                                {{--                                            Skeleton--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./tabs.html" >--}}
+                                {{--                                            Tabs--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./tables.html" >--}}
+                                {{--                                            Tables--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./carousel.html" >--}}
+                                {{--                                            Carousel--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./lists.html" >--}}
+                                {{--                                            Lists--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./typography.html" >--}}
+                                {{--                                            Typography--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./offcanvas.html" >--}}
+                                {{--                                            Offcanvas--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <a class="dropdown-item" href="./markdown.html" >--}}
+                                {{--                                            Markdown--}}
+                                {{--                                        </a>--}}
+                                {{--                                        <div class="dropend">--}}
+                                {{--                                            <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
+                                {{--                                                Authentication--}}
+                                {{--                                            </a>--}}
+                                {{--                                            <div class="dropdown-menu">--}}
+                                {{--                                                <a href="./sign-in.html" class="dropdown-item">Sign in</a>--}}
+                                {{--                                                <a href="./sign-up.html" class="dropdown-item">Sign up</a>--}}
+                                {{--                                                <a href="./forgot-password.html" class="dropdown-item">Forgot password</a>--}}
+                                {{--                                                <a href="./terms-of-service.html" class="dropdown-item">Terms of service</a>--}}
+                                {{--                                                <a href="./auth-lock.html" class="dropdown-item">Lock screen</a>--}}
+                                {{--                                            </div>--}}
+                                {{--                                        </div>--}}
+                                {{--                                        <div class="dropend">--}}
+                                {{--                                            <a class="dropdown-item dropdown-toggle" href="#sidebar-error" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >--}}
+                                {{--                                                Error pages--}}
+                                {{--                                            </a>--}}
+                                {{--                                            <div class="dropdown-menu">--}}
+                                {{--                                                <a href="./error-404.html" class="dropdown-item">404 page</a>--}}
+                                {{--                                                <a href="./error-500.html" class="dropdown-item">500 page</a>--}}
+                                {{--                                                <a href="./error-maintenance.html" class="dropdown-item">Maintenance page</a>--}}
+                                {{--                                            </div>--}}
+                                {{--                                        </div>--}}
+                                {{--                                    </div>--}}
+                            </div>
+                        </div>
+                    </li>
                 </ul>
 
 {{--                <div class="my-2 my-md-0 flex-grow-1 flex-md-grow-0 order-first order-md-last">--}}

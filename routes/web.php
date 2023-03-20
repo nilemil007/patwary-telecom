@@ -9,6 +9,7 @@ use App\Http\Controllers\DdHouseController;
 use App\Http\Controllers\ItopReplaceController;
 use App\Http\Controllers\MerchandiserController;
 use App\Http\Controllers\Other\OthersOperatorInformationController;
+use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\RetailerController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\RsoController;
@@ -207,6 +208,12 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/esaf/import', 'esafImport')->name('esaf.import');
         Route::delete('/esaf/destroy', 'esafDestroy')->name('esaf.destroy');
 
+    });
+
+    // Reports routes
+    Route::controller( ReportsController::class )->prefix('report')->name('report.')->group(function(){
+        // Active SSO
+        Route::get('/active-sso', 'activeSso')->name('active.sso');
     });
 
     // Others Operator Information
