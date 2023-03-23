@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * @method static truncate()
+ * @method static create(array $array)
  */
 class Esaf extends Model
 {

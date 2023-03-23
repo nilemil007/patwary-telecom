@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static truncate()
  * @method static distinct(string $string)
  * @method static where(string $string, int $int)
+ * @method static create(array $rowProperties)
  */
 class Activation extends Model
 {
@@ -73,6 +74,12 @@ class Activation extends Model
                 });
         });
     }
+
+//    public function ddHouseId(){
+//        return Attribute::make(
+//            get: fn ($retCode) => dd($retCode), // Retailer::firstWhere('retailer_code', $retCode)->dd_house_id,
+//        );
+//    }
 
 
     public function ddHouse(): BelongsTo

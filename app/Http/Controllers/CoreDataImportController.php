@@ -2,38 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\Reports\EsafImport;
-use App\Imports\Reports\ActivationImport;
-use App\Imports\Reports\BalanceImport;
-use App\Imports\Reports\BsoImport;
-use App\Imports\Reports\C2cImport;
-use App\Imports\Reports\C2sImport;
-use App\Imports\Reports\DsoImport;
-use App\Imports\Reports\FcdGaImport;
-use App\Imports\Reports\LiveC2cImport;
-use App\Imports\Reports\LiveActivationImport;
-use App\Imports\Reports\LiveSimIssueImport;
-use App\Imports\Reports\SimIssueImport;
-use App\Imports\Reports\SimInventoryImport;
 use App\Models\Activation;
 use App\Models\Balance;
 use App\Models\Bso;
 use App\Models\C2c;
 use App\Models\C2s;
+use App\Models\DdHouse;
 use App\Models\Dso;
 use App\Models\Esaf;
 use App\Models\FcdGa;
 use App\Models\LiveActivation;
 use App\Models\LiveC2c;
 use App\Models\LiveSimIssue;
+use App\Models\Retailer;
 use App\Models\SimInventory;
 use App\Models\SimIssue;
+use Carbon\Carbon;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+use Spatie\SimpleExcel\SimpleExcelReader;
 
 class CoreDataImportController extends Controller
 {
@@ -67,10 +57,31 @@ class CoreDataImportController extends Controller
         ]);
     }
 
+    // Act Import (Common)
+    private function actImport( $filePath, $model ): void
+    {
+        SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
+            ->each(function(array $rowProperties) use ($model) {
+                $model->create([
+                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->dd_house_id,
+                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->supervisor_id,
+                    'rso_id'            => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->rso_id,
+                    'retailer_id'       => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->id,
+                    'product_code'      => $rowProperties['PRODUCTCODE'],
+                    'product_name'      => $rowProperties['PRODUCTNAME'],
+                    'sim_serial'        => $rowProperties['SIMNO'],
+                    'msisdn'            => $rowProperties['MSISDN'],
+                    'selling_price'     => $rowProperties['SELLINGPRICE'],
+                    'activation_date'   => $rowProperties['ACTIVATIONDATE'],
+                    'bio_date'          => $rowProperties['BIODATE'],
+                ]);
+            });
+    }
+
     // Activation Import
     public function activationImport(Request $request): RedirectResponse
     {
-        Excel::import(new ActivationImport, $request->file('import_activation'));
+        $this->actImport( $request->import_activation, new Activation );
 
         return redirect()->route('raw.activation')->with('success', 'Activation imported successfully.');
     }
@@ -78,7 +89,7 @@ class CoreDataImportController extends Controller
     // Live Activation Import
     public function liveActivationImport(Request $request): RedirectResponse
     {
-        Excel::import(new LiveActivationImport, $request->file('import_activation'));
+        $this->actImport( $request->import_activation, new LiveActivation );
 
         return redirect()->route('raw.live.activation')->with('success', 'Live activation imported successfully.');
     }
@@ -86,7 +97,18 @@ class CoreDataImportController extends Controller
     // FCD GA Import
     public function fcdGaImport(Request $request): RedirectResponse
     {
-        Excel::import(new FcdGaImport, $request->file('import_activation'));
+        SimpleExcelReader::create( $request->import_activation, 'xlsx' )->getRows()
+            ->each(function(array $rowProperties) {
+
+                FcdGa::create([
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties['Retailer Code'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties['Retailer Code'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties['Retailer Code'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties['Retailer Code'])->id,
+                    'date'          => Carbon::parse($rowProperties['Subscriber First Call Date (New RGA)'])->toDateString(),
+                    'activation'    => $rowProperties['Subscriber Count'],
+                ]);
+            });
 
         return redirect()->route('raw.fcd.ga')->with('success', 'FCD GA imported successfully.');
     }
@@ -141,10 +163,18 @@ class CoreDataImportController extends Controller
     // C2C Import
     public function c2cImport(Request $request): RedirectResponse
     {
-        set_time_limit(600);
-//        ini_set('max_execution_time', 180); //3 minutes
+        SimpleExcelReader::create( $request->import_c2c, 'xlsx' )->getRows()
+            ->each(function(array $rowProperties) {
 
-        Excel::import(new C2cImport, $request->file('import_c2c'));
+                C2c::create([
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->id,
+                    'date'          => $rowProperties['Date'],
+                    'amount'        => $rowProperties['Value'],
+                ]);
+            });
 
         return redirect()->route('raw.c2c')->with('success', 'C2C imported successfully.');
     }
@@ -152,7 +182,18 @@ class CoreDataImportController extends Controller
     // Live C2C Import
     public function liveC2cImport(Request $request): RedirectResponse
     {
-        Excel::import(new LiveC2cImport, $request->file('import_c2c'));
+        SimpleExcelReader::create( $request->import_c2c, 'xlsx' )->getRows()
+            ->each(function(array $rowProperties) {
+
+                LiveC2c::create([
+                    'dd_house_id'   => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->id,
+                    'date'          => now(),
+                    'amount'        => $rowProperties['Transfer Mrp'],
+                ]);
+            });
 
         return redirect()->route('raw.live.c2c')->with('success', 'Live C2C imported successfully.');
     }
@@ -188,7 +229,18 @@ class CoreDataImportController extends Controller
     // C2S Import
     public function c2sImport(Request $request): RedirectResponse
     {
-        Excel::import(new C2sImport, $request->file('import_c2s'));
+        SimpleExcelReader::create( $request->import_c2s, 'xlsx' )->getRows()
+            ->each(function(array $rowProperties) {
+
+                C2s::create([
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->id,
+                    'date'          => $rowProperties['Date'],
+                    'amount'        => $rowProperties['Value'],
+                ]);
+            });
 
         return redirect()->route('raw.c2s')->with('success', 'C2S imported successfully.');
     }
@@ -224,10 +276,29 @@ class CoreDataImportController extends Controller
         ]);
     }
 
+    // Sim Issue Import (Common)
+    private function issueSimImport( $filePath, $model ): void
+    {
+        SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
+            ->each(function(array $row) use ($model) {
+                $model->create([
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->id,
+                    'product_code'  => $row['PRODUCTCODE'],
+                    'product_name'  => $row['PRODUCTNAME'],
+                    'selling_price' => $row['SELLINGPRICE'],
+                    'sim_serial'    => $row['SIMNO'],
+                    'issue_date'    => $row['ISSUEDATE'],
+                ]);
+            });
+    }
+
     // Sim Issue Import
     public function simIssueImport(Request $request): RedirectResponse
     {
-        Excel::import(new SimIssueImport, $request->file('import_sim_issue'));
+        $this->issueSimImport( $request->import_sim_issue, new SimIssue);
 
         return redirect()->route('raw.sim.issue')->with('success', 'Sim Issue imported successfully.');
     }
@@ -235,7 +306,7 @@ class CoreDataImportController extends Controller
     // Live Sim Issue Import
     public function liveSimIssueImport(Request $request): RedirectResponse
     {
-        Excel::import(new LiveSimIssueImport, $request->file('import_sim_issue'));
+        $this->issueSimImport( $request->import_sim_issue, new LiveSimIssue());
 
         return redirect()->route('raw.live.sim.issue')->with('success', 'Live Sim Issue imported successfully.');
     }
@@ -271,7 +342,18 @@ class CoreDataImportController extends Controller
     // Balance Import
     public function balanceImport(Request $request): RedirectResponse
     {
-        Excel::import(new BalanceImport, $request->file('import_balance'));
+        SimpleExcelReader::create( $request->import_balance, 'xlsx' )->getRows()
+            ->each(function(array $row) {
+
+                Balance::create([
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->id,
+                    'date'          => $row['Date'],
+                    'amount'        => $row['Value'],
+                ]);
+            });
 
         return redirect()->route('raw.balance')->with('success', 'Balance imported successfully.');
     }
@@ -298,10 +380,27 @@ class CoreDataImportController extends Controller
         ]);
     }
 
+    // Bso Dso Import (Common)
+    private function bsoDsoImport( $filePath, $model ): void
+    {
+        SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
+            ->each(function(array $row) use ($model) {
+                $model->create([
+                    'dd_house_id'   => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->id,
+                    'day'           => $row['Txn'],
+                    'amount'        => $row['ToT'],
+                    'eligibility'   => $row['Eligibility'],
+                ]);
+            });
+    }
+
     // Bso Import
     public function bsoImport(Request $request): RedirectResponse
     {
-        Excel::import(new BsoImport, $request->file('import_bso'));
+        $this->bsoDsoImport($request->import_bso, new Bso());
 
         return redirect()->route('raw.bso')->with('success', 'BSO imported successfully.');
     }
@@ -331,7 +430,7 @@ class CoreDataImportController extends Controller
     // Dso Import
     public function dsoImport(Request $request): RedirectResponse
     {
-        Excel::import(new DsoImport, $request->file('import_dso'));
+        $this->bsoDsoImport($request->import_dso, new Dso());
 
         return redirect()->route('raw.dso')->with('success', 'DSO imported successfully.');
     }
@@ -361,7 +460,25 @@ class CoreDataImportController extends Controller
     // Esaf Import
     public function esafImport(Request $request): RedirectResponse
     {
-        Excel::import(new EsafImport, $request->file('import_esaf'));
+        SimpleExcelReader::create( $request->import_esaf, 'xlsx' )->getRows()
+            ->each(function(array $row) {
+
+                Esaf::create([
+                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->dd_house_id,
+                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->supervisor_id,
+                    'rso_id'            => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->rso_id,
+                    'retailer_id'       => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->id,
+                    'customer_name'     => $row['Customer Name'],
+                    'customer_number'   => $row['MSISDN'],
+                    'alternate_number'  => $row['Alternate Number'],
+                    'email'             => $row['Email'],
+                    'gender'            => $row['Gender'],
+                    'reason'            => $row['Reason'],
+                    'address'           => $row['Present Address'],
+                    'date'              => Carbon::parse( $row['Biometric Verification Date'] )->toDateString(),
+                    'status'            => $row['Status'],
+                ]);
+            });
 
         return redirect()->route('raw.esaf')->with('success', 'Esaf imported successfully.');
     }
@@ -389,7 +506,17 @@ class CoreDataImportController extends Controller
     // Sim Inventory Import
     public function simInventoryImport(Request $request): RedirectResponse
     {
-        Excel::import(new SimInventoryImport, $request->file('import_sim_inventory'));
+        SimpleExcelReader::create( $request->import_sim_inventory, 'xlsx' )->getRows()
+            ->each(function(array $row) {
+
+                SimInventory::create([
+                    'dd_house_id'   => DdHouse::firstWhere('code', $row['DistributorCode'])->id,
+                    'product_code'  => $row['ProductCode'],
+                    'product_name'  => $row['ProductName'],
+                    'lifting_price' => $row['LiftingPrice'],
+                    'sim_serial'    => $row['SimNo'],
+                ]);
+            });
 
         return redirect()->route('raw.sim.inventory')->with('success', 'Sim Inventory imported successfully.');
     }
