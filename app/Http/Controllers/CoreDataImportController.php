@@ -63,17 +63,17 @@ class CoreDataImportController extends Controller
         SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
             ->each(function(array $rowProperties) use ($model) {
                 $model->create([
-                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->dd_house_id,
-                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->supervisor_id,
-                    'rso_id'            => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->rso_id,
-                    'retailer_id'       => Retailer::firstWhere('retailer_code', $rowProperties['RETAILERCODE'])->id,
-                    'product_code'      => $rowProperties['PRODUCTCODE'],
-                    'product_name'      => $rowProperties['PRODUCTNAME'],
-                    'sim_serial'        => $rowProperties['SIMNO'],
-                    'msisdn'            => $rowProperties['MSISDN'],
-                    'selling_price'     => $rowProperties['SELLINGPRICE'],
-                    'activation_date'   => $rowProperties['ACTIVATIONDATE'],
-                    'bio_date'          => $rowProperties['BIODATE'],
+                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[2]])->dd_house_id,
+                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[2]])->supervisor_id,
+                    'rso_id'            => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[2]])->rso_id,
+                    'retailer_id'       => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[2]])->id,
+                    'product_code'      => $rowProperties[array_keys($rowProperties)[7]],
+                    'product_name'      => $rowProperties[array_keys($rowProperties)[8]],
+                    'sim_serial'        => $rowProperties[array_keys($rowProperties)[9]],
+                    'msisdn'            => $rowProperties[array_keys($rowProperties)[10]],
+                    'selling_price'     => $rowProperties[array_keys($rowProperties)[11]],
+                    'activation_date'   => $rowProperties[array_keys($rowProperties)[12]],
+                    'bio_date'          => $rowProperties[array_keys($rowProperties)[13]],
                 ]);
             });
     }
@@ -167,12 +167,12 @@ class CoreDataImportController extends Controller
             ->each(function(array $rowProperties) {
 
                 C2c::create([
-                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->id,
-                    'date'          => $rowProperties['Date'],
-                    'amount'        => $rowProperties['Value'],
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->id,
+                    'date'          => $rowProperties[array_keys($rowProperties)[11]],
+                    'amount'        => $rowProperties[array_keys($rowProperties)[12]],
                 ]);
             });
 
@@ -186,12 +186,12 @@ class CoreDataImportController extends Controller
             ->each(function(array $rowProperties) {
 
                 LiveC2c::create([
-                    'dd_house_id'   => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('itop_number', $rowProperties['To Msisdn'])->id,
+                    'dd_house_id'   => Retailer::firstWhere('itop_number', $rowProperties[array_keys($rowProperties)[5]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('itop_number', $rowProperties[array_keys($rowProperties)[5]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('itop_number', $rowProperties[array_keys($rowProperties)[5]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('itop_number', $rowProperties[array_keys($rowProperties)[5]])->id,
                     'date'          => now(),
-                    'amount'        => $rowProperties['Transfer Mrp'],
+                    'amount'        => $rowProperties[array_keys($rowProperties)[9]],
                 ]);
             });
 
@@ -233,12 +233,12 @@ class CoreDataImportController extends Controller
             ->each(function(array $rowProperties) {
 
                 C2s::create([
-                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties['RETAILER_CODE'])->id,
-                    'date'          => $rowProperties['Date'],
-                    'amount'        => $rowProperties['Value'],
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $rowProperties[array_keys($rowProperties)[3]])->id,
+                    'date'          => $rowProperties[array_keys($rowProperties)[13]],
+                    'amount'        => $rowProperties[array_keys($rowProperties)[14]],
                 ]);
             });
 
@@ -282,15 +282,15 @@ class CoreDataImportController extends Controller
         SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
             ->each(function(array $row) use ($model) {
                 $model->create([
-                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row['RETAILERCODE'])->id,
-                    'product_code'  => $row['PRODUCTCODE'],
-                    'product_name'  => $row['PRODUCTNAME'],
-                    'selling_price' => $row['SELLINGPRICE'],
-                    'sim_serial'    => $row['SIMNO'],
-                    'issue_date'    => $row['ISSUEDATE'],
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->id,
+                    'product_code'  => $row[array_keys($row)[7]],
+                    'product_name'  => $row[array_keys($row)[8]],
+                    'selling_price' => $row[array_keys($row)[9]],
+                    'sim_serial'    => $row[array_keys($row)[10]],
+                    'issue_date'    => $row[array_keys($row)[0]],
                 ]);
             });
     }
@@ -346,12 +346,12 @@ class CoreDataImportController extends Controller
             ->each(function(array $row) {
 
                 Balance::create([
-                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row['RETAILER_CODE'])->id,
-                    'date'          => $row['Date'],
-                    'amount'        => $row['Value'],
+                    'dd_house_id'   => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('retailer_code', $row[array_keys($row)[4]])->id,
+                    'date'          => $row[array_keys($row)[14]],
+                    'amount'        => $row[array_keys($row)[15]],
                 ]);
             });
 
@@ -386,13 +386,13 @@ class CoreDataImportController extends Controller
         SimpleExcelReader::create( $filePath, 'xlsx' )->getRows()
             ->each(function(array $row) use ($model) {
                 $model->create([
-                    'dd_house_id'   => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->dd_house_id,
-                    'supervisor_id' => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->supervisor_id,
-                    'rso_id'        => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->rso_id,
-                    'retailer_id'   => Retailer::firstWhere('itop_number', $row['Sender Service Number'])->id,
-                    'day'           => $row['Txn'],
-                    'amount'        => $row['ToT'],
-                    'eligibility'   => $row['Eligibility'],
+                    'dd_house_id'   => Retailer::firstWhere('itop_number', $row[array_keys($row)[3]])->dd_house_id,
+                    'supervisor_id' => Retailer::firstWhere('itop_number', $row[array_keys($row)[3]])->supervisor_id,
+                    'rso_id'        => Retailer::firstWhere('itop_number', $row[array_keys($row)[3]])->rso_id,
+                    'retailer_id'   => Retailer::firstWhere('itop_number', $row[array_keys($row)[3]])->id,
+                    'day'           => $row[array_keys($row)[4]],
+                    'amount'        => $row[array_keys($row)[5]],
+                    'eligibility'   => $row[array_keys($row)[6]],
                 ]);
             });
     }
@@ -464,19 +464,19 @@ class CoreDataImportController extends Controller
             ->each(function(array $row) {
 
                 Esaf::create([
-                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->dd_house_id,
-                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->supervisor_id,
-                    'rso_id'            => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->rso_id,
-                    'retailer_id'       => Retailer::firstWhere('retailer_code', $row['Bio Login User'])->id,
-                    'customer_name'     => $row['Customer Name'],
-                    'customer_number'   => $row['MSISDN'],
-                    'alternate_number'  => $row['Alternate Number'],
-                    'email'             => $row['Email'],
-                    'gender'            => $row['Gender'],
-                    'reason'            => $row['Reason'],
-                    'address'           => $row['Present Address'],
-                    'date'              => Carbon::parse( $row['Biometric Verification Date'] )->toDateString(),
-                    'status'            => $row['Status'],
+                    'dd_house_id'       => Retailer::firstWhere('retailer_code', $row[array_keys($row)[12]])->dd_house_id,
+                    'supervisor_id'     => Retailer::firstWhere('retailer_code', $row[array_keys($row)[12]])->supervisor_id,
+                    'rso_id'            => Retailer::firstWhere('retailer_code', $row[array_keys($row)[12]])->rso_id,
+                    'retailer_id'       => Retailer::firstWhere('retailer_code', $row[array_keys($row)[12]])->id,
+                    'customer_name'     => $row[array_keys($row)[2]],
+                    'customer_number'   => $row[array_keys($row)[0]],
+                    'alternate_number'  => $row[array_keys($row)[4]],
+                    'email'             => $row[array_keys($row)[3]],
+                    'gender'            => $row[array_keys($row)[1]],
+                    'reason'            => $row[array_keys($row)[7]],
+                    'address'           => $row[array_keys($row)[13]],
+                    'date'              => Carbon::parse( $row[array_keys($row)[11]] )->toDateString(),
+                    'status'            => $row[array_keys($row)[6]],
                 ]);
             });
 
@@ -511,10 +511,10 @@ class CoreDataImportController extends Controller
 
                 SimInventory::create([
                     'dd_house_id'   => DdHouse::firstWhere('code', $row['DistributorCode'])->id,
-                    'product_code'  => $row['ProductCode'],
-                    'product_name'  => $row['ProductName'],
-                    'lifting_price' => $row['LiftingPrice'],
-                    'sim_serial'    => $row['SimNo'],
+                    'product_code'  => $row[array_keys($row)[3]],
+                    'product_name'  => $row[array_keys($row)[4]],
+                    'lifting_price' => $row[array_keys($row)[5]],
+                    'sim_serial'    => $row[array_keys($row)[6]],
                 ]);
             });
 
