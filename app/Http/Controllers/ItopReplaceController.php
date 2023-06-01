@@ -7,7 +7,7 @@ use App\Http\Requests\ItopReplaceStoreRequest;
 use App\Http\Requests\ItopReplaceUpdateRequest;
 use App\Models\ItopReplace;
 use App\Models\User;
-use import\ItopReplaceService;
+use App\Services\ItopReplaceService;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\Foundation\Application;
