@@ -28,7 +28,14 @@
                 </span>
                     </label>
 
-                    <livewire:auth.login.show-hide-password/>
+                    <div class="input-group input-group-flat">
+                        <input id="showHidePassword" type="password" name="password" class="form-control"  placeholder="Password">
+                        <span class="input-group-text">
+                          <a href="javascript:void(0)" id="showHidePasswordBtn" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="2" /><path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7" /></svg>
+                          </a>
+                        </span>
+                    </div>
                     @error('password')
                     <small class="text-danger">{{ $message }}</small>
                     @enderror
@@ -45,46 +52,22 @@
             </div>
         </form>
     </div>
+
+    @push('scripts')
+    <script>
+    $(document).ready(function() {
+        $(document).on('click','#showHidePasswordBtn', function(){
+
+            const type = $('#showHidePassword').attr("type");
+
+            if(type == "password"){
+                $('#showHidePassword').attr("type","text");
+            }
+            else{
+                $('#showHidePassword').attr("type","password");
+            }
+        })
+    });
+    </script>
+    @endpush
 @endsection
-
-{{--            <!-- Email Address -->--}}
-{{--            <div>--}}
-{{--                <x-input-label for="login" :value="__('Email')" />--}}
-{{--                <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus />--}}
-{{--                <x-input-error :messages="$errors->get('login')" class="mt-2" />--}}
-{{--            </div>--}}
-
-{{--            <!-- Password -->--}}
-{{--            <div class="mt-4">--}}
-{{--                <x-input-label for="password" :value="__('Password')" />--}}
-
-{{--                <x-text-input id="password" class="block mt-1 w-full"--}}
-{{--                                type="password"--}}
-{{--                                name="password"--}}
-{{--                                autocomplete="current-password" />--}}
-
-{{--                <x-input-error :messages="$errors->get('password')" class="mt-2" />--}}
-{{--            </div>--}}
-
-{{--            <!-- Remember Me -->--}}
-{{--            <div class="block mt-4">--}}
-{{--                <label for="remember_me" class="inline-flex items-center">--}}
-{{--                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">--}}
-{{--                    <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>--}}
-{{--                </label>--}}
-{{--            </div>--}}
-
-{{--            <div class="flex items-center justify-end mt-4">--}}
-{{--                @if (Route::has('password.request'))--}}
-{{--                    <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">--}}
-{{--                        {{ __('Forgot your password?') }}--}}
-{{--                    </a>--}}
-{{--                @endif--}}
-
-{{--                <x-primary-button class="ml-3">--}}
-{{--                    {{ __('Log in') }}--}}
-{{--                </x-primary-button>--}}
-{{--            </div>--}}
-{{--        </form>--}}
-{{--    </x-auth-card>--}}
-{{--</x-guest-layout>--}}
