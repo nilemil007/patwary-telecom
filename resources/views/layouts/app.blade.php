@@ -16,6 +16,9 @@
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
 
+
+
+
     <style>
         input[type="date"] {
             position: relative;
@@ -79,11 +82,11 @@
 <script src="{{ asset('dist/js/tabler.min.js') }}"></script>
 <script src="{{ asset('dist/js/demo.min.js') }}"></script>
 
+
+
+
 <!-- Sweetalert -->
 @include('sweetalert::alert')
-
-<!-- Custom Scripts -->
-@stack('js')
 
 <!-- Livewire Scripts -->
 @livewireScripts

@@ -12,24 +12,22 @@
     <!-- Page title action button -->
     <x-slot:button>
         <!-- Import button -->
-        <form action="{{ route('house.import') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="input-group">
-                <input name="import_houses" type="file"
-                       accept=".xls,.xlsx"
-                       class="form-control"
-                       aria-label="Upload" required>
+{{--        <form action="{{ route('house.import') }}" method="POST" enctype="multipart/form-data">--}}
+{{--            @csrf--}}
+{{--            <div class="input-group">--}}
+{{--                <input name="import_houses" type="file"--}}
+{{--                       accept=".xls,.xlsx"--}}
+{{--                       class="form-control"--}}
+{{--                       aria-label="Upload" required>--}}
 
-                <button class="btn btn-outline-google" type="submit">
-                    <x-icon.file-import></x-icon.file-import>Import
-                </button>
-            </div>
-        </form>
+{{--                <button class="btn btn-outline-google" type="submit">--}}
+{{--                    <x-icon.file-import></x-icon.file-import>Import--}}
+{{--                </button>--}}
+{{--            </div>--}}
+{{--        </form>--}}
 
         <!-- Create new button -->
-        <x-link href="{{ route('dd-house.create') }}" class="btn btn-primary">
-            <x-icon.plus></x-icon.plus>Create new house
-        </x-link>
+        <x-link href="{{ route('dd-house.create') }}" class="btn btn-sm btn-primary">Create new house</x-link>
     </x-slot:button>
 
     <x-slot:icon-button>
@@ -42,30 +40,11 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        <div class="card-body border-bottom py-3">
-                            <div class="d-flex">
-                                <div class="text-muted">
-                                    Show
-                                    <div class="mx-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" value="8" size="3" aria-label="Invoices count">
-                                    </div>
-                                    entries
-                                </div>
-                                <div class="ms-auto text-muted">
-                                    Search:
-                                    <div class="ms-2 d-inline-block">
-                                        <input type="text" class="form-control form-control-sm" aria-label="Search invoice">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-sm card-table table-vcenter text-nowrap datatable">
-                                <thead>
+                    <div class="table-responsive">
+                        <table id="ddHouseTbl" class="table table-sm table-bordered table-vcenter text-nowrap">
+                            <thead>
                                 <tr>
-                                    <th class="w-1"><input class="form-check-input m-0 align-middle" type="checkbox" aria-label="Select all invoices"></th>
-                                    <th class="w-1">No.</th>
+                                    <th>No.</th>
                                     <th>Cluster|Region</th>
                                     <th>Email</th>
                                     <th>DD Name</th>
@@ -76,15 +55,11 @@
                                     <th>status</th>
                                     <th></th>
                                 </tr>
-                                </thead>
+                            </thead>
 
-                                <tbody>
-                                @forelse( $dds as $sl => $dd )
+                            <tbody>
+                                @foreach( $dds as $sl => $dd )
                                     <tr>
-                                        <td>
-                                            <input class="form-check-input m-0 align-middle" type="checkbox"
-                                                   aria-label="Select invoice">
-                                        </td>
                                         <td><span class="text-muted">{{ ++$sl }}</span></td>
                                         <td data-label="Title">
                                             <div>{{ $dd->cluster_name }}</div>
@@ -108,12 +83,12 @@
                                         <td>
                                             @switch( $dd->status )
                                                 @case( 1 )
-                                                <span class="badge bg-success me-1"></span> Active
-                                                @break
+                                                    <span class="badge bg-success me-1"></span> Active
+                                                    @break
 
                                                 @case( 0 )
-                                                <span class="badge bg-danger me-1"></span> Inactive
-                                                @break
+                                                    <span class="badge bg-danger me-1"></span> Inactive
+                                                    @break
                                             @endswitch
                                         </td>
                                         <td>
@@ -130,21 +105,21 @@
                                         </td>
                                         @include('dd-house.modals.delete')
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td>No data found</td>
-                                    </tr>
-                                @endforelse
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="card-footer d-flex align-items-center">
-                            {{ $dds->links('vendor.pagination.bootstrap-5') }}
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
+
+    @push('js')
+        <script>
+            new DataTable('#ddHouseTbl',{
+                ordering: false,
+            });
+        </script>
+    @endpush
 </x-main>

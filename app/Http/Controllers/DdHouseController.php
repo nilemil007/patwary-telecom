@@ -25,7 +25,7 @@ class DdHouseController extends Controller
     public function index(): View|Factory|Application
     {
         return view('dd-house.index',[
-            'dds' => DdHouse::latest()->paginate(3),
+            'dds' => DdHouse::latest()->get(),
         ]);
     }
 

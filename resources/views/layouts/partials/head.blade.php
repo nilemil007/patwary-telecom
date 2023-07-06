@@ -10,6 +10,9 @@
 <link href="{{ asset('dist/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
 <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- DataTable -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0-alpha3/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css" rel="stylesheet"/>
 
 <!-- Fontawesome kit -->
 {{--<script src="https://kit.fontawesome.com/cc2d6331a5.js" crossorigin="anonymous"></script>--}}
